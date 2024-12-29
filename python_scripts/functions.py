@@ -619,3 +619,228 @@ def plot_roc_curves(
             plt.savefig(os.path.join(image_path_svg, f"{file_name}.svg"))
 
         plt.show()
+
+
+################################################################################
+############################# Stratification Logic #############################
+################################################################################
+
+
+def create_stratified_other_column(
+    X,
+    stratify_list,
+    other_columns=None,
+    other_column=None,
+    patient_id=None,
+    age=None,
+    age_bin=None,
+    bin_ages=None,
+):
+    """
+    Create a dataframe with a combined 'Other' column and optionally stratify
+    based on the specified columns and age bins.
+
+    Parameters:
+    -----------
+    X : pd.DataFrame
+        The original dataframe containing patient data and binary race/ethnicity
+        columns.
+
+    stratify_list : list of str
+        List of column names in X to use for stratification.
+
+    other_columns : list of str, optional
+        List of column names in X to be combined into the specified 'Other'
+        column using bitwise OR operation. If None or empty, the 'Other' column
+        will not be modified.
+
+    other_column : str, optional (default=None)
+        Name of the column in X that will be used to store the combined result.
+        If None, no 'Other' column will be created.
+
+    patient_id : str, optional (default='patient_id')
+        Name of the column in X that represents the unique identifier for
+        joining the data.
+
+    age : str, optional (default=None)
+        The name of the column in X that contains age data.
+
+    age_bin : str, optional (default=None)
+        The name of the column that will store the age bins.
+
+    bin_ages : list of int, optional (default=None)
+        The bin edges to be used for age stratification. If None, age
+        stratification will not be performed.
+
+    Returns:
+    --------
+    pd.DataFrame
+        A dataframe with the specified stratification columns and the combined
+        'Other' column if applicable, and age bins if specified.
+    """
+    # Create a copy of the dataframe
+    X_copy = X.copy()
+
+    # If other_columns and other_column are provided, perform the bitwise OR operation
+    if other_columns and other_column:
+        # Ensure that the specified 'Other' column is initially binary (0 or 1)
+        X_copy[other_column] = X_copy[other_column].astype(int)
+
+        # Combine the specified columns into the 'Other' column using bitwise OR
+        for column in other_columns:
+            X_copy[other_column] |= X_copy[column]
+
+    # If age stratification is needed
+    if age and age_bin and bin_ages:
+        # Stratify based on age using the provided bins
+        stratify_df = (
+            pd.cut(
+                X_copy[age].fillna(
+                    X_copy[age].mean()
+                ),  # Fill missing ages with the mean
+                bins=bin_ages,  # Use the provided bin_ages
+                right=False,  # Bin intervals are left-inclusive
+                include_lowest=True,  # Include the lowest value in the first bin
+            )
+            .astype(str)
+            .to_frame(age_bin)
+        )
+    else:
+        # If no age stratification is needed, create an empty dataframe
+        stratify_df = pd.DataFrame(index=X_copy.index)
+
+    # Join the specified stratification columns to the stratify_df
+    if stratify_list:
+        stratify_df = stratify_df.join(
+            X_copy[stratify_list],
+            how="inner",
+            on=patient_id,
+        )
+
+    # If 'other_column' exists, join it as well
+    if other_column and other_column in X_copy.columns:
+        stratify_df = stratify_df.join(
+            X_copy[[other_column]],
+            how="inner",
+            on=patient_id,
+        )
+
+    return stratify_df
+
+
+################################################################################
+################################## MlFlow ######################################
+################################################################################
+
+
+def log_mlflow_experiment(
+    mlflow_data,
+    experiment_name,
+    model_name,
+    best_params,
+    metrics,
+    images={},
+):
+    """
+    Logs ML experiments, including metrics and parameters, to MLflow.
+
+    This function sets up an MLflow experiment with a given name, logs various
+    metrics, parameters, and prediction results for a list of models, and
+    handles both existing and new experiments. It also supports logging
+    additional results for a specific model.
+
+    Parameters:
+    - mlflow_data: The MLflow tracking URI or a location where MLflow tracking
+      server is running.
+    - experiment_name: The name of the experiment to log in MLflow.
+    - predictions_list: list of DataFrames containing predictions from ea. model.
+    - model_names: A list of names of the models corresponding to the predictions.
+    - best_params: A dictionary or a structure containing the best parameters of
+                   the models.
+    - results: A DataFrame containing metrics and other results for each model.
+    - results_ak (optional): Additional results to be logged for a specific
+                             model (model_name_ak).
+
+    It includes two nested helper functions:
+    - sanitize_metric_name(name): Sanitizes metric names by replacing
+                                  non-allowed characters with underscores.
+    - is_numeric(value): Checks if a given value is numeric.
+
+    The function handles the creation of new experiments or the retrieval of
+    existing ones, logs metrics, parameters, and prediction results as CSV
+    artifacts, and also ensures the cleanliness of the local file system by
+    removing temporary files.
+
+    Note:
+    - It is assumed that 'model_name_ak' is a global variable or is defined
+      elsewhere in the context where this function is used, as it is not
+      explicitly passed to the function.
+    - The function depends on the MLflow library and its proper configuration.
+
+    Returns:
+    None
+    """
+
+    def sanitize_metric_name(name):
+        """Replace any characters not allowed in MLflow metric names with an
+        underscore.
+        """
+        return "".join(
+            c if c.isalnum() or c in ["_", "-", ".", " ", "/"] else "_" for c in name
+        )
+
+    def is_numeric(value):
+        """Check if the value is numeric."""
+        try:
+            float(value)
+            return True
+        except ValueError:
+            return False
+
+    # Set the tracking URI to the specified mlflow_data location
+    mlflow.set_tracking_uri(mlflow_data)
+
+    # Check if the experiment already exists
+    existing_experiment = mlflow.get_experiment_by_name(experiment_name)
+
+    # If the experiment doesn't exist, create a new experiment
+    if existing_experiment is None:
+        experiment_id = mlflow.create_experiment(experiment_name)
+        print(f"New Experiment_ID: {experiment_id}")
+    else:
+        # If the experiment already exists, retrieve its ID
+        experiment_id = existing_experiment.experiment_id
+        print(f"Existing Experiment_ID: {experiment_id}")
+
+    # Iterate over the models and log their metrics and parameters
+    with mlflow.start_run(experiment_id=experiment_id, run_name=model_name):
+
+        # log model's best parameters
+        if isinstance(best_params, dict):
+            mlflow.log_params(best_params)
+        else:
+            mlflow.log_param("best_params_unavailable", str(best_params))
+
+        # Extract the row for the current model
+        result = metrics
+        if not result.empty:
+
+            # Log the parameters and metrics
+            for col in result.index:
+                # Sanitize the column name
+                sanitized_name = sanitize_metric_name(col)
+                value = result[col]
+
+                # Check if the value is numeric and not null
+                if is_numeric(value) and pd.notnull(value):
+                    # Log the metric
+                    mlflow.log_metric(sanitized_name, float(value))
+
+            # log model's best parameters
+            if isinstance(best_params, dict):
+                mlflow.log_params(best_params)
+            else:
+                mlflow.log_param("best_params_unavailable", str(best_params))
+
+            for name, image in images.items():
+                mlflow.log_figure(image, name)
