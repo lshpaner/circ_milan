@@ -43,7 +43,7 @@ df = pd.read_excel(os.path.join(data_path, filename)).set_index("ID")
 
 df = add_ids(
     df=df,
-    id_colname="patient_id",
+    id_colname=patient_id,
     num_digits=9,
     seed=222,
     set_as_index=True,
@@ -118,7 +118,6 @@ HealthMetrics.calculate_bmi(
     weight_unit="kg",
     height_unit="m",
 )
-
 
 # MAP calculation from systolic and diastolic blood pressure.
 
@@ -227,6 +226,6 @@ file_paths = [
 
 for dataframe, file_path in file_paths:
     print(f"File successfully saved to: {file_path}")
-    dataframe.to_csv(file_path, index=False)
+    dataframe.to_csv(file_path, index=True)
 
 print()
