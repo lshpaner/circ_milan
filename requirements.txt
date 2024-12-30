@@ -1,0 +1,4 @@
+eda_toolkit==0.0.15
+fastparquet==2024.11.0
+model_tuner==0.0.24a0
+openpyxl==3.1.5
