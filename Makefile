@@ -48,7 +48,9 @@ clean_dir:
 	rm -rf data_output/
 	rm -rf images/
 
-
 data_preprocessing:
 	$(PYTHON_INTERPRETER) -m python_scripts.data_preprocessing
+
+feature_outcome_generation:
+	$(PYTHON_INTERPRETER) -m python_scripts.feature_outcome_generation
 
