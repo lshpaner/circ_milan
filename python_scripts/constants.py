@@ -2,7 +2,7 @@
 ############################### Constants ######################################
 ################################################################################
 
-filename = "Laser Circumcision Excel 11.08.2024.xlsx"
+filename = "Laser Circumcision Excel 31.03.2024.xlsx"
 preproc_filename = "circ_preproc.csv"
 
 patient_id = "patient_id"
@@ -14,6 +14,5 @@ age = ["Age_years"]
 
 mlflow_data = "models/mlflow_exp"
 var_index = "patient_id"
-# , age_bin,
 
-outcomes = ["Surgical_Technique_Laser", "Surgical_Technique_Traditional"]
+outcome = "Functional_Outcomes_Bleeding"

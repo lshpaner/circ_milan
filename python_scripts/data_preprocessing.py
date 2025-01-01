@@ -179,7 +179,7 @@ low_variance_columns = shape_var[
     shape_var["Shape_Var"] < shape_var_thresh
 ].index.to_list()
 print()
-print(f"Dropping the following low variance column(s): {low_variance_columns}.")
+print(f"Dropping the following low variance column(s): {low_variance_columns}")
 
 # Now, drop these columns from df
 df.drop(columns=low_variance_columns, inplace=True)
@@ -194,6 +194,9 @@ cols_to_drop = [
     "Weight_kg",
     "Preop_Blood_Pressure_mmHg",
     "Intraop_Mean_Blood_Pressure_mmHg",
+    "Cost_of_Procedure_euros",
+    # "Functional_Outcomes_Bleeding",
+    "Birthday",
 ]
 
 # Prepare the string of columns to drop, each on a new line, in advance
@@ -203,7 +206,7 @@ df.drop(columns=cols_to_drop, inplace=True)
 
 # Then, use this string in the print statement without directly embedding it in
 # an f-string
-print("Dropping the following additional columns:\n\n" + columns_to_drop_str + ".")
+print("Dropping the following additional columns:\n\n" + columns_to_drop_str)
 print()
 print("*" * terminal_width)
 print()

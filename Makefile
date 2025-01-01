@@ -38,7 +38,7 @@ venv_dep_setup_local: venv requirements_local	# for local set-up
 venv_dep_setup_gpu: venv requirements_gpu     # for server/gpu set-up
 
 ################################################################################
-#################### Adult Income Dataset Script Generation ####################
+###########################  Dataset Script Generation #########################
 ################################################################################
 # clean directories
 clean_dir:
@@ -54,3 +54,36 @@ data_preprocessing:
 feature_outcome_generation:
 	$(PYTHON_INTERPRETER) -m python_scripts.feature_outcome_generation
 
+################################################################################
+##########################  Modeling Script Generation #########################
+################################################################################
+
+## Make Logistic Regression
+.PHONY: logistic_regression
+logistic_regression: 
+	$(PYTHON_INTERPRETER) \
+	python_scripts/train.py \
+	--model-type lr \
+	--exp-name logistic_regression \
+	2>&1 | tee models/results/logistic_regression.txt
+
+## Make Support Vector Machines
+.PHONY: svm
+svm: 
+	$(PYTHON_INTERPRETER) \
+	python_scripts/train.py \
+	--model-type svm \
+	--exp-name svm \
+	2>&1 | tee models/results/svm.txt
+		
+
+## Make Random Forest
+.PHONY: random_forest
+random_forest: 
+	$(PYTHON_INTERPRETER) \
+	python_scripts/train.py \
+	--model-type rf \
+	--exp-name random_forest \
+	2>&1 | tee models/results/random_forest.txt
+	
+all_models: logistic_regression svm random_forest

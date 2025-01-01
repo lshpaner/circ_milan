@@ -1,0 +1,1562 @@
+..
+y:            Functional_Outcomes_Bleeding
+patient_id                              
+738111507                              0
+424123959                              0
+390469576                              0
+633173792                              0
+784928164                              0
+...                                  ...
+412065385                              1
+769873868                              0
+140411083                              0
+773951452                              1
+404354815                              1
+
+[202 rows x 1 columns]
+
+Sampler None
+
+Circumcision Outcome Columns:
+['Functional_Outcomes_Bleeding']
+********************************************************************************
+
+
+============================================================
+Functional_Outcomes_Bleeding
+============================================================
+
+Pipeline Steps:
+
+┌────────────────────────────────────────────┐
+│ Step 1: preprocess_scaler_StandardScalar   │
+│ StandardScaler                             │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 2: preprocess_imputer_Preprocessor    │
+│ SimpleImputer                              │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 3: svm                                │
+│ SVC                                        │
+└────────────────────────────────────────────┘
+
+# Tuning hyper-parameters for average_precision
+Fitting 10 folds for each of 120 candidates, totalling 1200 fits
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0002782559402207126, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.000774263682681127, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.002154434690031882, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.005994842503189409, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.016681005372000592, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.046415888336127774, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.12915496650148828, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+Best score/param set found on development set:
+{0.9793333333333333: {'svm__C': 0.002154434690031882,
+                      'svm__gamma': 0.001,
+                      'svm__kernel': 'linear'}}
+
+Grid scores on development set:
+0.932 (+/-0.108) for {'svm__C': 0.0001, 'svm__gamma': 0.001, 'svm__kernel': 'linear'}
+0.934 (+/-0.114) for {'svm__C': 0.0001, 'svm__gamma': 0.001, 'svm__kernel': 'rbf'}
+0.932 (+/-0.108) for {'svm__C': 0.0001, 'svm__gamma': 0.01, 'svm__kernel': 'linear'}
+0.935 (+/-0.089) for {'svm__C': 0.0001, 'svm__gamma': 0.01, 'svm__kernel': 'rbf'}
+0.932 (+/-0.108) for {'svm__C': 0.0001, 'svm__gamma': 0.1, 'svm__kernel': 'linear'}
+0.841 (+/-0.211) for {'svm__C': 0.0001, 'svm__gamma': 0.1, 'svm__kernel': 'rbf'}
+0.932 (+/-0.108) for {'svm__C': 0.0001, 'svm__gamma': 0.5, 'svm__kernel': 'linear'}
+0.733 (+/-0.293) for {'svm__C': 0.0001, 'svm__gamma': 0.5, 'svm__kernel': 'rbf'}
+0.932 (+/-0.108) for {'svm__C': 0.0001, 'svm__gamma': 'scale', 'svm__kernel': 'linear'}
+0.882 (+/-0.171) for {'svm__C': 0.0001, 'svm__gamma': 'scale', 'svm__kernel': 'rbf'}
+0.932 (+/-0.108) for {'svm__C': 0.0001, 'svm__gamma': 'auto', 'svm__kernel': 'linear'}
+0.882 (+/-0.171) for {'svm__C': 0.0001, 'svm__gamma': 'auto', 'svm__kernel': 'rbf'}
+0.932 (+/-0.108) for {'svm__C': 0.0002782559402207126, 'svm__gamma': 0.001, 'svm__kernel': 'linear'}
+0.934 (+/-0.114) for {'svm__C': 0.0002782559402207126, 'svm__gamma': 0.001, 'svm__kernel': 'rbf'}
+0.932 (+/-0.108) for {'svm__C': 0.0002782559402207126, 'svm__gamma': 0.01, 'svm__kernel': 'linear'}
+0.935 (+/-0.089) for {'svm__C': 0.0002782559402207126, 'svm__gamma': 0.01, 'svm__kernel': 'rbf'}
+0.932 (+/-0.108) for {'svm__C': 0.0002782559402207126, 'svm__gamma': 0.1, 'svm__kernel': 'linear'}
+0.841 (+/-0.211) for {'svm__C': 0.0002782559402207126, 'svm__gamma': 0.1, 'svm__kernel': 'rbf'}
+0.932 (+/-0.108) for {'svm__C': 0.0002782559402207126, 'svm__gamma': 0.5, 'svm__kernel': 'linear'}
+0.733 (+/-0.293) for {'svm__C': 0.0002782559402207126, 'svm__gamma': 0.5, 'svm__kernel': 'rbf'}
+0.932 (+/-0.108) for {'svm__C': 0.0002782559402207126, 'svm__gamma': 'scale', 'svm__kernel': 'linear'}
+0.882 (+/-0.171) for {'svm__C': 0.0002782559402207126, 'svm__gamma': 'scale', 'svm__kernel': 'rbf'}
+0.932 (+/-0.108) for {'svm__C': 0.0002782559402207126, 'svm__gamma': 'auto', 'svm__kernel': 'linear'}
+0.882 (+/-0.171) for {'svm__C': 0.0002782559402207126, 'svm__gamma': 'auto', 'svm__kernel': 'rbf'}
+0.936 (+/-0.114) for {'svm__C': 0.000774263682681127, 'svm__gamma': 0.001, 'svm__kernel': 'linear'}
+0.934 (+/-0.114) for {'svm__C': 0.000774263682681127, 'svm__gamma': 0.001, 'svm__kernel': 'rbf'}
+0.936 (+/-0.114) for {'svm__C': 0.000774263682681127, 'svm__gamma': 0.01, 'svm__kernel': 'linear'}
+0.935 (+/-0.089) for {'svm__C': 0.000774263682681127, 'svm__gamma': 0.01, 'svm__kernel': 'rbf'}
+0.936 (+/-0.114) for {'svm__C': 0.000774263682681127, 'svm__gamma': 0.1, 'svm__kernel': 'linear'}
+0.841 (+/-0.211) for {'svm__C': 0.000774263682681127, 'svm__gamma': 0.1, 'svm__kernel': 'rbf'}
+0.936 (+/-0.114) for {'svm__C': 0.000774263682681127, 'svm__gamma': 0.5, 'svm__kernel': 'linear'}
+0.733 (+/-0.293) for {'svm__C': 0.000774263682681127, 'svm__gamma': 0.5, 'svm__kernel': 'rbf'}
+0.936 (+/-0.114) for {'svm__C': 0.000774263682681127, 'svm__gamma': 'scale', 'svm__kernel': 'linear'}
+0.882 (+/-0.171) for {'svm__C': 0.000774263682681127, 'svm__gamma': 'scale', 'svm__kernel': 'rbf'}
+0.936 (+/-0.114) for {'svm__C': 0.000774263682681127, 'svm__gamma': 'auto', 'svm__kernel': 'linear'}
+0.882 (+/-0.171) for {'svm__C': 0.000774263682681127, 'svm__gamma': 'auto', 'svm__kernel': 'rbf'}
+0.979 (+/-0.065) for {'svm__C': 0.002154434690031882, 'svm__gamma': 0.001, 'svm__kernel': 'linear'}
+0.934 (+/-0.114) for {'svm__C': 0.002154434690031882, 'svm__gamma': 0.001, 'svm__kernel': 'rbf'}
+0.979 (+/-0.065) for {'svm__C': 0.002154434690031882, 'svm__gamma': 0.01, 'svm__kernel': 'linear'}
+0.935 (+/-0.089) for {'svm__C': 0.002154434690031882, 'svm__gamma': 0.01, 'svm__kernel': 'rbf'}
+0.979 (+/-0.065) for {'svm__C': 0.002154434690031882, 'svm__gamma': 0.1, 'svm__kernel': 'linear'}
+0.841 (+/-0.211) for {'svm__C': 0.002154434690031882, 'svm__gamma': 0.1, 'svm__kernel': 'rbf'}
+0.979 (+/-0.065) for {'svm__C': 0.002154434690031882, 'svm__gamma': 0.5, 'svm__kernel': 'linear'}
+0.733 (+/-0.293) for {'svm__C': 0.002154434690031882, 'svm__gamma': 0.5, 'svm__kernel': 'rbf'}
+0.979 (+/-0.065) for {'svm__C': 0.002154434690031882, 'svm__gamma': 'scale', 'svm__kernel': 'linear'}
+0.882 (+/-0.171) for {'svm__C': 0.002154434690031882, 'svm__gamma': 'scale', 'svm__kernel': 'rbf'}
+0.979 (+/-0.065) for {'svm__C': 0.002154434690031882, 'svm__gamma': 'auto', 'svm__kernel': 'linear'}
+0.882 (+/-0.171) for {'svm__C': 0.002154434690031882, 'svm__gamma': 'auto', 'svm__kernel': 'rbf'}
+0.970 (+/-0.080) for {'svm__C': 0.005994842503189409, 'svm__gamma': 0.001, 'svm__kernel': 'linear'}
+0.934 (+/-0.114) for {'svm__C': 0.005994842503189409, 'svm__gamma': 0.001, 'svm__kernel': 'rbf'}
+0.970 (+/-0.080) for {'svm__C': 0.005994842503189409, 'svm__gamma': 0.01, 'svm__kernel': 'linear'}
+0.935 (+/-0.089) for {'svm__C': 0.005994842503189409, 'svm__gamma': 0.01, 'svm__kernel': 'rbf'}
+0.970 (+/-0.080) for {'svm__C': 0.005994842503189409, 'svm__gamma': 0.1, 'svm__kernel': 'linear'}
+0.841 (+/-0.211) for {'svm__C': 0.005994842503189409, 'svm__gamma': 0.1, 'svm__kernel': 'rbf'}
+0.970 (+/-0.080) for {'svm__C': 0.005994842503189409, 'svm__gamma': 0.5, 'svm__kernel': 'linear'}
+0.733 (+/-0.293) for {'svm__C': 0.005994842503189409, 'svm__gamma': 0.5, 'svm__kernel': 'rbf'}
+0.970 (+/-0.080) for {'svm__C': 0.005994842503189409, 'svm__gamma': 'scale', 'svm__kernel': 'linear'}
+0.882 (+/-0.171) for {'svm__C': 0.005994842503189409, 'svm__gamma': 'scale', 'svm__kernel': 'rbf'}
+0.970 (+/-0.080) for {'svm__C': 0.005994842503189409, 'svm__gamma': 'auto', 'svm__kernel': 'linear'}
+0.882 (+/-0.171) for {'svm__C': 0.005994842503189409, 'svm__gamma': 'auto', 'svm__kernel': 'rbf'}
+0.963 (+/-0.089) for {'svm__C': 0.016681005372000592, 'svm__gamma': 0.001, 'svm__kernel': 'linear'}
+0.934 (+/-0.114) for {'svm__C': 0.016681005372000592, 'svm__gamma': 0.001, 'svm__kernel': 'rbf'}
+0.963 (+/-0.089) for {'svm__C': 0.016681005372000592, 'svm__gamma': 0.01, 'svm__kernel': 'linear'}
+0.935 (+/-0.089) for {'svm__C': 0.016681005372000592, 'svm__gamma': 0.01, 'svm__kernel': 'rbf'}
+0.963 (+/-0.089) for {'svm__C': 0.016681005372000592, 'svm__gamma': 0.1, 'svm__kernel': 'linear'}
+0.841 (+/-0.211) for {'svm__C': 0.016681005372000592, 'svm__gamma': 0.1, 'svm__kernel': 'rbf'}
+0.963 (+/-0.089) for {'svm__C': 0.016681005372000592, 'svm__gamma': 0.5, 'svm__kernel': 'linear'}
+0.733 (+/-0.293) for {'svm__C': 0.016681005372000592, 'svm__gamma': 0.5, 'svm__kernel': 'rbf'}
+0.963 (+/-0.089) for {'svm__C': 0.016681005372000592, 'svm__gamma': 'scale', 'svm__kernel': 'linear'}
+0.882 (+/-0.171) for {'svm__C': 0.016681005372000592, 'svm__gamma': 'scale', 'svm__kernel': 'rbf'}
+0.963 (+/-0.089) for {'svm__C': 0.016681005372000592, 'svm__gamma': 'auto', 'svm__kernel': 'linear'}
+0.882 (+/-0.171) for {'svm__C': 0.016681005372000592, 'svm__gamma': 'auto', 'svm__kernel': 'rbf'}
+0.949 (+/-0.103) for {'svm__C': 0.046415888336127774, 'svm__gamma': 0.001, 'svm__kernel': 'linear'}
+0.934 (+/-0.114) for {'svm__C': 0.046415888336127774, 'svm__gamma': 0.001, 'svm__kernel': 'rbf'}
+0.949 (+/-0.103) for {'svm__C': 0.046415888336127774, 'svm__gamma': 0.01, 'svm__kernel': 'linear'}
+0.935 (+/-0.089) for {'svm__C': 0.046415888336127774, 'svm__gamma': 0.01, 'svm__kernel': 'rbf'}
+0.949 (+/-0.103) for {'svm__C': 0.046415888336127774, 'svm__gamma': 0.1, 'svm__kernel': 'linear'}
+0.841 (+/-0.211) for {'svm__C': 0.046415888336127774, 'svm__gamma': 0.1, 'svm__kernel': 'rbf'}
+0.949 (+/-0.103) for {'svm__C': 0.046415888336127774, 'svm__gamma': 0.5, 'svm__kernel': 'linear'}
+0.733 (+/-0.293) for {'svm__C': 0.046415888336127774, 'svm__gamma': 0.5, 'svm__kernel': 'rbf'}
+0.949 (+/-0.103) for {'svm__C': 0.046415888336127774, 'svm__gamma': 'scale', 'svm__kernel': 'linear'}
+0.882 (+/-0.171) for {'svm__C': 0.046415888336127774, 'svm__gamma': 'scale', 'svm__kernel': 'rbf'}
+0.949 (+/-0.103) for {'svm__C': 0.046415888336127774, 'svm__gamma': 'auto', 'svm__kernel': 'linear'}
+0.882 (+/-0.171) for {'svm__C': 0.046415888336127774, 'svm__gamma': 'auto', 'svm__kernel': 'rbf'}
+0.950 (+/-0.108) for {'svm__C': 0.12915496650148828, 'svm__gamma': 0.001, 'svm__kernel': 'linear'}
+0.934 (+/-0.114) for {'svm__C': 0.12915496650148828, 'svm__gamma': 0.001, 'svm__kernel': 'rbf'}
+0.950 (+/-0.108) for {'svm__C': 0.12915496650148828, 'svm__gamma': 0.01, 'svm__kernel': 'linear'}
+0.951 (+/-0.079) for {'svm__C': 0.12915496650148828, 'svm__gamma': 0.01, 'svm__kernel': 'rbf'}
+0.950 (+/-0.108) for {'svm__C': 0.12915496650148828, 'svm__gamma': 0.1, 'svm__kernel': 'linear'}
+0.861 (+/-0.197) for {'svm__C': 0.12915496650148828, 'svm__gamma': 0.1, 'svm__kernel': 'rbf'}
+0.950 (+/-0.108) for {'svm__C': 0.12915496650148828, 'svm__gamma': 0.5, 'svm__kernel': 'linear'}
+0.733 (+/-0.293) for {'svm__C': 0.12915496650148828, 'svm__gamma': 0.5, 'svm__kernel': 'rbf'}
+0.950 (+/-0.108) for {'svm__C': 0.12915496650148828, 'svm__gamma': 'scale', 'svm__kernel': 'linear'}
+0.879 (+/-0.182) for {'svm__C': 0.12915496650148828, 'svm__gamma': 'scale', 'svm__kernel': 'rbf'}
+0.950 (+/-0.108) for {'svm__C': 0.12915496650148828, 'svm__gamma': 'auto', 'svm__kernel': 'linear'}
+0.879 (+/-0.182) for {'svm__C': 0.12915496650148828, 'svm__gamma': 'auto', 'svm__kernel': 'rbf'}
+0.946 (+/-0.123) for {'svm__C': 0.3593813663804626, 'svm__gamma': 0.001, 'svm__kernel': 'linear'}
+0.934 (+/-0.114) for {'svm__C': 0.3593813663804626, 'svm__gamma': 0.001, 'svm__kernel': 'rbf'}
+0.946 (+/-0.123) for {'svm__C': 0.3593813663804626, 'svm__gamma': 0.01, 'svm__kernel': 'linear'}
+0.945 (+/-0.116) for {'svm__C': 0.3593813663804626, 'svm__gamma': 0.01, 'svm__kernel': 'rbf'}
+0.946 (+/-0.123) for {'svm__C': 0.3593813663804626, 'svm__gamma': 0.1, 'svm__kernel': 'linear'}
+0.884 (+/-0.179) for {'svm__C': 0.3593813663804626, 'svm__gamma': 0.1, 'svm__kernel': 'rbf'}
+0.946 (+/-0.123) for {'svm__C': 0.3593813663804626, 'svm__gamma': 0.5, 'svm__kernel': 'linear'}
+0.734 (+/-0.294) for {'svm__C': 0.3593813663804626, 'svm__gamma': 0.5, 'svm__kernel': 'rbf'}
+0.946 (+/-0.123) for {'svm__C': 0.3593813663804626, 'svm__gamma': 'scale', 'svm__kernel': 'linear'}
+0.912 (+/-0.200) for {'svm__C': 0.3593813663804626, 'svm__gamma': 'scale', 'svm__kernel': 'rbf'}
+0.946 (+/-0.123) for {'svm__C': 0.3593813663804626, 'svm__gamma': 'auto', 'svm__kernel': 'linear'}
+0.912 (+/-0.200) for {'svm__C': 0.3593813663804626, 'svm__gamma': 'auto', 'svm__kernel': 'rbf'}
+0.948 (+/-0.132) for {'svm__C': 1.0, 'svm__gamma': 0.001, 'svm__kernel': 'linear'}
+0.979 (+/-0.065) for {'svm__C': 1.0, 'svm__gamma': 0.001, 'svm__kernel': 'rbf'}
+0.948 (+/-0.132) for {'svm__C': 1.0, 'svm__gamma': 0.01, 'svm__kernel': 'linear'}
+0.944 (+/-0.114) for {'svm__C': 1.0, 'svm__gamma': 0.01, 'svm__kernel': 'rbf'}
+0.948 (+/-0.132) for {'svm__C': 1.0, 'svm__gamma': 0.1, 'svm__kernel': 'linear'}
+0.865 (+/-0.257) for {'svm__C': 1.0, 'svm__gamma': 0.1, 'svm__kernel': 'rbf'}
+0.948 (+/-0.132) for {'svm__C': 1.0, 'svm__gamma': 0.5, 'svm__kernel': 'linear'}
+0.703 (+/-0.329) for {'svm__C': 1.0, 'svm__gamma': 0.5, 'svm__kernel': 'rbf'}
+0.948 (+/-0.132) for {'svm__C': 1.0, 'svm__gamma': 'scale', 'svm__kernel': 'linear'}
+0.900 (+/-0.185) for {'svm__C': 1.0, 'svm__gamma': 'scale', 'svm__kernel': 'rbf'}
+0.948 (+/-0.132) for {'svm__C': 1.0, 'svm__gamma': 'auto', 'svm__kernel': 'linear'}
+0.900 (+/-0.185) for {'svm__C': 1.0, 'svm__gamma': 'auto', 'svm__kernel': 'rbf'}
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.53it/s]100%|██████████| 2/2 [00:00<00:00,  4.62it/s]100%|██████████| 2/2 [00:00<00:00,  4.73it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.54it/s]100%|██████████| 2/2 [00:00<00:00,  4.73it/s]100%|██████████| 2/2 [00:00<00:00,  4.70it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.81it/s]100%|██████████| 2/2 [00:00<00:00,  4.79it/s]100%|██████████| 2/2 [00:00<00:00,  4.79it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.08it/s]100%|██████████| 2/2 [00:00<00:00,  3.76it/s]100%|██████████| 2/2 [00:00<00:00,  3.80it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.21it/s]100%|██████████| 2/2 [00:00<00:00,  4.60it/s]100%|██████████| 2/2 [00:00<00:00,  4.54it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.76it/s]100%|██████████| 2/2 [00:00<00:00,  4.76it/s]100%|██████████| 2/2 [00:00<00:00,  4.76it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.22it/s]100%|██████████| 2/2 [00:00<00:00,  4.41it/s]100%|██████████| 2/2 [00:00<00:00,  4.37it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.08it/s]100%|██████████| 2/2 [00:00<00:00,  4.42it/s]100%|██████████| 2/2 [00:00<00:00,  4.37it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.51it/s]100%|██████████| 2/2 [00:00<00:00,  4.44it/s]100%|██████████| 2/2 [00:00<00:00,  4.44it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.75it/s]100%|██████████| 2/2 [00:00<00:00,  4.67it/s]100%|██████████| 2/2 [00:00<00:00,  4.68it/s]
+
+Detailed classification report for svm:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  3 (tp)   1 (fn)
+        Neg  0 (fp)  15 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.90      0.97      0.94       156
+           1       0.88      0.65      0.75        46
+
+    accuracy                           0.90       202
+   macro avg       0.89      0.81      0.84       202
+weighted avg       0.90      0.90      0.90       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+--------------------------------------------------------------------------------
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  3 (tp)   1 (fn)
+        Neg  0 (fp)  15 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.91      0.96      0.94       156
+           1       0.84      0.70      0.76        46
+
+    accuracy                           0.90       202
+   macro avg       0.88      0.83      0.85       202
+weighted avg       0.90      0.90      0.90       202
+
+--------------------------------------------------------------------------------
+
+Detailed classification report for svm:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  3 (tp)   1 (fn)
+        Neg  0 (fp)  15 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.90      0.97      0.94       156
+           1       0.88      0.65      0.75        46
+
+    accuracy                           0.90       202
+   macro avg       0.89      0.81      0.84       202
+weighted avg       0.90      0.90      0.90       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+
+Running k-fold model metrics...
+
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:01,  8.39it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:00,  8.54it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:00,  7.70it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00,  7.96it/s]Processing Folds:  50%|█████     | 5/10 [00:00<00:00,  7.57it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00,  7.80it/s]Processing Folds:  70%|███████   | 7/10 [00:00<00:00,  8.03it/s]Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  8.00it/s]Processing Folds:  90%|█████████ | 9/10 [00:01<00:00,  7.88it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  7.84it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  7.90it/s]
+
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.3593813663804626, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=1.0, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.1s
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.1s
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.1s
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.1s
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.1s
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.1s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.1s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.1s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.1s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.1s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.1s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.1s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.1s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.1s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=  -1.4s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.1s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.1s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.1s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.1s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.1s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.5, svm__kernel=rbf; total time=   0.1s
+[CV] END .....svm__C=0.0001, svm__gamma=0.5, svm__kernel=rbf; total time=   0.1s
+[CV] END .....svm__C=0.0001, svm__gamma=0.5, svm__kernel=rbf; total time=   0.1s
+[CV] END .....svm__C=0.0001, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=1.0, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END ........svm__C=1.0, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ......svm__C=1.0, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END ....svm__C=1.0, svm__gamma=auto, svm__kernel=linear; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END .......svm__C=1.0, svm__gamma=auto, svm__kernel=rbf; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.1s
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.1s
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.1s
+[CV] END svm__C=0.0001, svm__gamma=0.001, svm__kernel=linear; total time=   0.1s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.1s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=0.001, svm__kernel=rbf; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.1s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.1s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.0s
+[CV] END .svm__C=0.0001, svm__gamma=0.01, svm__kernel=linear; total time=   0.1s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.1s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END ....svm__C=0.0001, svm__gamma=0.01, svm__kernel=rbf; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.1s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.1s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.1s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=   0.1s
+[CV] END ..svm__C=0.0001, svm__gamma=0.1, svm__kernel=linear; total time=  -1.4s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.1s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.1s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.1s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.1s
+[CV] END .....svm__C=0.0001, svm__gamma=0.1, svm__kernel=rbf; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.1s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.1s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.1s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END ..svm__C=0.0001, svm__gamma=0.5, svm__kernel=linear; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.5, svm__kernel=rbf; total time=   0.0s
+[CV] END .....svm__C=0.0001, svm__gamma=0.5, svm__kernel=rbf; total time=   0.1s
+[CV] END svm__C=0.0001, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=scale, svm__kernel=linear; total time=   0.1s
+[CV] END svm__C=0.0001, svm__gamma=scale, svm__kernel=linear; total time=   0.1s
+[CV] END svm__C=0.0001, svm__gamma=scale, svm__kernel=linear; total time=   0.0s
+[CV] END svm__C=0.0001, svm__gamma=scale, svm__kernel=linear; total time=   0.1s
+[CV] END svm__C=0.0001, svm__gamma=scale, svm__kernel=linear; total time=   0.1s
+[CV] END svm__C=0.0001, svm__gamma=scale, svm__kernel=linear; total time=   0.1s
+[CV] END svm__C=0.0001, svm__gamma=scale, svm__kernel=linear; total time=   0.1s
+[CV] END ...svm__C=0.0001, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=scale, svm__kernel=rbf; total time=   0.1s
+[CV] END ...svm__C=0.0001, svm__gamma=scale, svm__kernel=rbf; total time=   0.0s
+[CV] END ...svm__C=0.0001, svm__gamma=scale, svm__kernel=rbf; total time=   0.1s

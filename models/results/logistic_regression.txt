@@ -1,0 +1,728 @@
+..
+y:            Functional_Outcomes_Bleeding
+patient_id                              
+738111507                              0
+424123959                              0
+390469576                              0
+633173792                              0
+784928164                              0
+...                                  ...
+412065385                              1
+769873868                              0
+140411083                              0
+773951452                              1
+404354815                              1
+
+[202 rows x 1 columns]
+
+Sampler None
+
+Circumcision Outcome Columns:
+['Functional_Outcomes_Bleeding']
+********************************************************************************
+
+
+============================================================
+Functional_Outcomes_Bleeding
+============================================================
+
+Pipeline Steps:
+
+┌────────────────────────────────────────────┐
+│ Step 1: preprocess_scaler_StandardScalar   │
+│ StandardScaler                             │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 2: preprocess_imputer_Preprocessor    │
+│ SimpleImputer                              │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 3: lr                                 │
+│ LogisticRegression                         │
+└────────────────────────────────────────────┘
+
+# Tuning hyper-parameters for average_precision
+Fitting 10 folds for each of 1 candidates, totalling 10 fits
+
+Best score/param set found on development set:
+{0.9072976190476192: {'lr__C': 0.0001, 'lr__penalty': 'l2'}}
+
+Grid scores on development set:
+0.907 (+/-0.158) for {'lr__C': 0.0001, 'lr__penalty': 'l2'}
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.00it/s]100%|██████████| 2/2 [00:00<00:00,  7.27it/s]100%|██████████| 2/2 [00:00<00:00,  7.21it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.11it/s]100%|██████████| 2/2 [00:00<00:00,  7.51it/s]100%|██████████| 2/2 [00:00<00:00,  7.44it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.81it/s]100%|██████████| 2/2 [00:00<00:00,  6.20it/s]100%|██████████| 2/2 [00:00<00:00,  6.13it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.96it/s]100%|██████████| 2/2 [00:00<00:00,  6.81it/s]100%|██████████| 2/2 [00:00<00:00,  6.82it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.01it/s]100%|██████████| 2/2 [00:00<00:00,  6.95it/s]100%|██████████| 2/2 [00:00<00:00,  6.78it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.95it/s]100%|██████████| 2/2 [00:00<00:00,  7.29it/s]100%|██████████| 2/2 [00:00<00:00,  7.23it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.00it/s]100%|██████████| 2/2 [00:00<00:00,  7.30it/s]100%|██████████| 2/2 [00:00<00:00,  7.24it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.65it/s]100%|██████████| 2/2 [00:00<00:00,  5.54it/s]100%|██████████| 2/2 [00:00<00:00,  5.55it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.25it/s]100%|██████████| 2/2 [00:00<00:00,  7.02it/s]100%|██████████| 2/2 [00:00<00:00,  7.05it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.30it/s]100%|██████████| 2/2 [00:00<00:00,  7.43it/s]100%|██████████| 2/2 [00:00<00:00,  7.41it/s]
+
+Detailed classification report for lr:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  3 (tp)   1 (fn)
+        Neg  0 (fp)  14 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.93      0.95      0.94       156
+           1       0.81      0.76      0.79        46
+
+    accuracy                           0.91       202
+   macro avg       0.87      0.85      0.86       202
+weighted avg       0.90      0.91      0.90       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+--------------------------------------------------------------------------------
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  2 (tp)   1 (fn)
+        Neg  0 (fp)  15 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.90      0.97      0.93       156
+           1       0.85      0.63      0.72        46
+
+    accuracy                           0.89       202
+   macro avg       0.88      0.80      0.83       202
+weighted avg       0.89      0.89      0.88       202
+
+--------------------------------------------------------------------------------
+
+Detailed classification report for lr:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  3 (tp)   1 (fn)
+        Neg  0 (fp)  14 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.93      0.95      0.94       156
+           1       0.81      0.76      0.79        46
+
+    accuracy                           0.91       202
+   macro avg       0.87      0.85      0.86       202
+weighted avg       0.90      0.91      0.90       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+
+Running k-fold model metrics...
+
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:02,  3.92it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:01,  4.13it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:01,  4.22it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:01,  4.22it/s]Processing Folds:  50%|█████     | 5/10 [00:01<00:01,  4.15it/s]Processing Folds:  60%|██████    | 6/10 [00:01<00:00,  4.19it/s]Processing Folds:  70%|███████   | 7/10 [00:01<00:00,  4.20it/s]Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  4.20it/s]Processing Folds:  90%|█████████ | 9/10 [00:02<00:00,  4.11it/s]Processing Folds: 100%|██████████| 10/10 [00:02<00:00,  4.08it/s]Processing Folds: 100%|██████████| 10/10 [00:02<00:00,  4.13it/s]
+
+Average Metrics Across All Folds:
+              Metric     Value
+0      Precision/PPV  0.858571
+1  Average Precision  0.907298
+2        Sensitivity  0.765000
+3        Specificity  0.949167
+4            AUC ROC  0.957458
+5        Brier Score  0.245134
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+Optimal threshold used: 0.5
+
+================================================================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lr_Functional_Outcomes_Bleeding
+Precision/PPV        0.841
+Average Precision    0.897
+Sensitivity          0.804
+Specificity          0.955
+AUC ROC              0.970
+Brier Score          0.245
+Name: lr, dtype: float64
+<function log_mlflow_experiment at 0x7f5252c42020>
+Existing Experiment_ID: 206759633120806456
+
+Sampler SMOTE(random_state=222)
+
+Circumcision Outcome Columns:
+['Functional_Outcomes_Bleeding']
+********************************************************************************
+
+
+============================================================
+Functional_Outcomes_Bleeding
+============================================================
+
+Pipeline Steps:
+
+┌────────────────────────────────────────────┐
+│ Step 1: preprocess_scaler_StandardScalar   │
+│ StandardScaler                             │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 2: preprocess_imputer_Preprocessor    │
+│ SimpleImputer                              │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 3: resampler                          │
+│ SMOTE                                      │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 4: lr                                 │
+│ LogisticRegression                         │
+└────────────────────────────────────────────┘
+
+# Tuning hyper-parameters for average_precision
+Fitting 10 folds for each of 1 candidates, totalling 10 fits
+
+Best score/param set found on development set:
+{0.8953885281385281: {'lr__C': 0.0001, 'lr__penalty': 'l2'}}
+
+Grid scores on development set:
+0.895 (+/-0.159) for {'lr__C': 0.0001, 'lr__penalty': 'l2'}
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.16it/s]100%|██████████| 2/2 [00:00<00:00,  6.33it/s]100%|██████████| 2/2 [00:00<00:00,  6.29it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.21it/s]100%|██████████| 2/2 [00:00<00:00,  6.45it/s]100%|██████████| 2/2 [00:00<00:00,  6.41it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.47it/s]100%|██████████| 2/2 [00:00<00:00,  7.15it/s]100%|██████████| 2/2 [00:00<00:00,  7.03it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.57it/s]100%|██████████| 2/2 [00:00<00:00,  7.35it/s]100%|██████████| 2/2 [00:00<00:00,  7.22it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.81it/s]100%|██████████| 2/2 [00:00<00:00,  6.16it/s]100%|██████████| 2/2 [00:00<00:00,  6.24it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.56it/s]100%|██████████| 2/2 [00:00<00:00,  6.84it/s]100%|██████████| 2/2 [00:00<00:00,  6.93it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.62it/s]100%|██████████| 2/2 [00:00<00:00,  5.59it/s]100%|██████████| 2/2 [00:00<00:00,  5.59it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.07it/s]100%|██████████| 2/2 [00:00<00:00,  5.95it/s]100%|██████████| 2/2 [00:00<00:00,  5.80it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.37it/s]100%|██████████| 2/2 [00:00<00:00,  7.24it/s]100%|██████████| 2/2 [00:00<00:00,  7.25it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.90it/s]100%|██████████| 2/2 [00:00<00:00,  7.22it/s]100%|██████████| 2/2 [00:00<00:00,  7.16it/s]
+
+Detailed classification report for lr:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  3 (tp)   1 (fn)
+        Neg  0 (fp)  14 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.93      0.95      0.94       156
+           1       0.81      0.76      0.79        46
+
+    accuracy                           0.91       202
+   macro avg       0.87      0.85      0.86       202
+weighted avg       0.90      0.91      0.90       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+--------------------------------------------------------------------------------
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  3 (tp)   1 (fn)
+        Neg  0 (fp)  15 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.91      0.96      0.94       156
+           1       0.84      0.70      0.76        46
+
+    accuracy                           0.90       202
+   macro avg       0.88      0.83      0.85       202
+weighted avg       0.90      0.90      0.90       202
+
+--------------------------------------------------------------------------------
+
+Detailed classification report for lr:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  3 (tp)   1 (fn)
+        Neg  0 (fp)  14 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.93      0.95      0.94       156
+           1       0.81      0.76      0.79        46
+
+    accuracy                           0.91       202
+   macro avg       0.87      0.85      0.86       202
+weighted avg       0.90      0.91      0.90       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+
+Running k-fold model metrics...
+
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:02,  3.14it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:02,  3.31it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:02,  3.38it/s]Processing Folds:  40%|████      | 4/10 [00:01<00:01,  3.42it/s]Processing Folds:  50%|█████     | 5/10 [00:01<00:01,  2.93it/s]Processing Folds:  60%|██████    | 6/10 [00:01<00:01,  3.03it/s]Processing Folds:  70%|███████   | 7/10 [00:02<00:00,  3.15it/s]Processing Folds:  80%|████████  | 8/10 [00:02<00:00,  3.27it/s]Processing Folds:  90%|█████████ | 9/10 [00:02<00:00,  3.29it/s]Processing Folds: 100%|██████████| 10/10 [00:03<00:00,  3.35it/s]Processing Folds: 100%|██████████| 10/10 [00:03<00:00,  3.25it/s]
+
+Average Metrics Across All Folds:
+              Metric     Value
+0      Precision/PPV  0.850000
+1  Average Precision  0.895389
+2        Sensitivity  0.845000
+3        Specificity  0.942917
+4            AUC ROC  0.941646
+5        Brier Score  0.242535
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+Optimal threshold used: 0.49800000000000005
+
+================================================================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lr_Functional_Outcomes_Bleeding
+Precision/PPV        0.804
+Average Precision    0.887
+Sensitivity          0.804
+Specificity          0.942
+AUC ROC              0.957
+Brier Score          0.242
+Name: lr, dtype: float64
+<function log_mlflow_experiment at 0x7f5252c42020>
+Existing Experiment_ID: 206759633120806456
+
+Sampler ADASYN(random_state=222)
+
+Circumcision Outcome Columns:
+['Functional_Outcomes_Bleeding']
+********************************************************************************
+
+
+============================================================
+Functional_Outcomes_Bleeding
+============================================================
+
+Pipeline Steps:
+
+┌────────────────────────────────────────────┐
+│ Step 1: preprocess_scaler_StandardScalar   │
+│ StandardScaler                             │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 2: preprocess_imputer_Preprocessor    │
+│ SimpleImputer                              │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 3: resampler                          │
+│ ADASYN                                     │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 4: lr                                 │
+│ LogisticRegression                         │
+└────────────────────────────────────────────┘
+
+# Tuning hyper-parameters for average_precision
+Fitting 10 folds for each of 1 candidates, totalling 10 fits
+
+Best score/param set found on development set:
+{0.9367619047619048: {'lr__C': 0.0001, 'lr__penalty': 'l2'}}
+
+Grid scores on development set:
+0.937 (+/-0.125) for {'lr__C': 0.0001, 'lr__penalty': 'l2'}
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.30it/s]100%|██████████| 2/2 [00:00<00:00,  6.63it/s]100%|██████████| 2/2 [00:00<00:00,  6.39it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.38it/s]100%|██████████| 2/2 [00:00<00:00,  7.46it/s]100%|██████████| 2/2 [00:00<00:00,  7.27it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.80it/s]100%|██████████| 2/2 [00:00<00:00,  5.93it/s]100%|██████████| 2/2 [00:00<00:00,  5.90it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.93it/s]100%|██████████| 2/2 [00:00<00:00,  6.52it/s]100%|██████████| 2/2 [00:00<00:00,  6.42it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.03it/s]100%|██████████| 2/2 [00:00<00:00,  6.65it/s]100%|██████████| 2/2 [00:00<00:00,  6.82it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.67it/s]100%|██████████| 2/2 [00:00<00:00,  5.93it/s]100%|██████████| 2/2 [00:00<00:00,  5.89it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.79it/s]100%|██████████| 2/2 [00:00<00:00,  5.82it/s]100%|██████████| 2/2 [00:00<00:00,  5.82it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.12it/s]100%|██████████| 2/2 [00:00<00:00,  6.20it/s]100%|██████████| 2/2 [00:00<00:00,  6.00it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.43it/s]100%|██████████| 2/2 [00:00<00:00,  6.82it/s]100%|██████████| 2/2 [00:00<00:00,  6.76it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.00it/s]100%|██████████| 2/2 [00:00<00:00,  6.86it/s]100%|██████████| 2/2 [00:00<00:00,  6.71it/s]
+
+Detailed classification report for lr:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  4 (tp)   0 (fn)
+        Neg  1 (fp)  14 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.97      0.91      0.94       156
+           1       0.75      0.91      0.82        46
+
+    accuracy                           0.91       202
+   macro avg       0.86      0.91      0.88       202
+weighted avg       0.92      0.91      0.91       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+--------------------------------------------------------------------------------
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  3 (tp)   1 (fn)
+        Neg  0 (fp)  15 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.91      0.96      0.94       156
+           1       0.84      0.70      0.76        46
+
+    accuracy                           0.90       202
+   macro avg       0.88      0.83      0.85       202
+weighted avg       0.90      0.90      0.90       202
+
+--------------------------------------------------------------------------------
+
+Detailed classification report for lr:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  4 (tp)   0 (fn)
+        Neg  1 (fp)  14 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.97      0.91      0.94       156
+           1       0.75      0.91      0.82        46
+
+    accuracy                           0.91       202
+   macro avg       0.86      0.91      0.88       202
+weighted avg       0.92      0.91      0.91       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+
+Running k-fold model metrics...
+
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:02,  3.22it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:02,  3.00it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:02,  3.13it/s]Processing Folds:  40%|████      | 4/10 [00:01<00:01,  3.27it/s]Processing Folds:  50%|█████     | 5/10 [00:01<00:01,  3.46it/s]Processing Folds:  60%|██████    | 6/10 [00:01<00:01,  3.58it/s]Processing Folds:  70%|███████   | 7/10 [00:02<00:00,  3.59it/s]Processing Folds:  80%|████████  | 8/10 [00:02<00:00,  3.41it/s]Processing Folds:  90%|█████████ | 9/10 [00:02<00:00,  3.38it/s]Processing Folds: 100%|██████████| 10/10 [00:02<00:00,  3.32it/s]Processing Folds: 100%|██████████| 10/10 [00:02<00:00,  3.35it/s]
+
+Average Metrics Across All Folds:
+              Metric     Value
+0      Precision/PPV  0.788929
+1  Average Precision  0.936762
+2        Sensitivity  0.915000
+3        Specificity  0.911250
+4            AUC ROC  0.968083
+5        Brier Score  0.245124
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+Optimal threshold used: 0.5
+
+================================================================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lr_Functional_Outcomes_Bleeding
+Precision/PPV        0.782
+Average Precision    0.920
+Sensitivity          0.935
+Specificity          0.923
+AUC ROC              0.976
+Brier Score          0.245
+Name: lr, dtype: float64
+<function log_mlflow_experiment at 0x7f5252c42020>
+Existing Experiment_ID: 206759633120806456
+
+Sampler RandomOverSampler(random_state=222)
+
+Circumcision Outcome Columns:
+['Functional_Outcomes_Bleeding']
+********************************************************************************
+
+
+============================================================
+Functional_Outcomes_Bleeding
+============================================================
+
+Pipeline Steps:
+
+┌────────────────────────────────────────────┐
+│ Step 1: preprocess_scaler_StandardScalar   │
+│ StandardScaler                             │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 2: preprocess_imputer_Preprocessor    │
+│ SimpleImputer                              │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 3: resampler                          │
+│ RandomOverSampler                          │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 4: lr                                 │
+│ LogisticRegression                         │
+└────────────────────────────────────────────┘
+
+# Tuning hyper-parameters for average_precision
+Fitting 10 folds for each of 1 candidates, totalling 10 fits
+
+Best score/param set found on development set:
+{0.9225753968253969: {'lr__C': 0.0001, 'lr__penalty': 'l2'}}
+
+Grid scores on development set:
+0.923 (+/-0.140) for {'lr__C': 0.0001, 'lr__penalty': 'l2'}
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.71it/s]100%|██████████| 2/2 [00:00<00:00,  6.74it/s]100%|██████████| 2/2 [00:00<00:00,  6.55it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.25it/s]100%|██████████| 2/2 [00:00<00:00,  7.42it/s]100%|██████████| 2/2 [00:00<00:00,  7.38it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.58it/s]100%|██████████| 2/2 [00:00<00:00,  7.07it/s]100%|██████████| 2/2 [00:00<00:00,  7.13it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.54it/s]100%|██████████| 2/2 [00:00<00:00,  6.70it/s]100%|██████████| 2/2 [00:00<00:00,  6.67it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.55it/s]100%|██████████| 2/2 [00:00<00:00,  6.91it/s]100%|██████████| 2/2 [00:00<00:00,  6.84it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.90it/s]100%|██████████| 2/2 [00:00<00:00,  6.62it/s]100%|██████████| 2/2 [00:00<00:00,  6.50it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.43it/s]100%|██████████| 2/2 [00:00<00:00,  6.90it/s]100%|██████████| 2/2 [00:00<00:00,  6.82it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.07it/s]100%|██████████| 2/2 [00:00<00:00,  7.45it/s]100%|██████████| 2/2 [00:00<00:00,  7.38it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.70it/s]100%|██████████| 2/2 [00:00<00:00,  7.16it/s]100%|██████████| 2/2 [00:00<00:00,  7.23it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.49it/s]100%|██████████| 2/2 [00:00<00:00,  6.54it/s]100%|██████████| 2/2 [00:00<00:00,  6.66it/s]
+
+Detailed classification report for lr:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  3 (tp)   1 (fn)
+        Neg  0 (fp)  14 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.94      0.95      0.94       156
+           1       0.82      0.78      0.80        46
+
+    accuracy                           0.91       202
+   macro avg       0.88      0.87      0.87       202
+weighted avg       0.91      0.91      0.91       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+--------------------------------------------------------------------------------
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  2 (tp)   1 (fn)
+        Neg  0 (fp)  15 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.90      0.96      0.93       156
+           1       0.83      0.63      0.72        46
+
+    accuracy                           0.89       202
+   macro avg       0.86      0.80      0.82       202
+weighted avg       0.88      0.89      0.88       202
+
+--------------------------------------------------------------------------------
+
+Detailed classification report for lr:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  3 (tp)   1 (fn)
+        Neg  0 (fp)  14 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.94      0.95      0.94       156
+           1       0.82      0.78      0.80        46
+
+    accuracy                           0.91       202
+   macro avg       0.88      0.87      0.87       202
+weighted avg       0.91      0.91      0.91       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+
+Running k-fold model metrics...
+
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:02,  4.07it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:02,  3.99it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:01,  4.06it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:01,  4.07it/s]Processing Folds:  50%|█████     | 5/10 [00:01<00:01,  3.93it/s]Processing Folds:  60%|██████    | 6/10 [00:01<00:01,  3.85it/s]Processing Folds:  70%|███████   | 7/10 [00:01<00:00,  3.92it/s]Processing Folds:  80%|████████  | 8/10 [00:02<00:00,  3.95it/s]Processing Folds:  90%|█████████ | 9/10 [00:02<00:00,  3.79it/s]Processing Folds: 100%|██████████| 10/10 [00:02<00:00,  3.72it/s]Processing Folds: 100%|██████████| 10/10 [00:02<00:00,  3.87it/s]
+
+Average Metrics Across All Folds:
+              Metric     Value
+0      Precision/PPV  0.841905
+1  Average Precision  0.922575
+2        Sensitivity  0.805000
+3        Specificity  0.942917
+4            AUC ROC  0.960979
+5        Brier Score  0.242501
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+Optimal threshold used: 0.499
+
+================================================================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lr_Functional_Outcomes_Bleeding
+Precision/PPV        0.872
+Average Precision    0.885
+Sensitivity          0.739
+Specificity          0.968
+AUC ROC              0.964
+Brier Score          0.242
+Name: lr, dtype: float64
+<function log_mlflow_experiment at 0x7f5252c42020>
+Existing Experiment_ID: 206759633120806456
+/home/lshpaner/Python_Projects/circ_milan
+Object saved!
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.1s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.1s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.1s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.1s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.2s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.2s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.2s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.2s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.1s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.1s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.1s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.1s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.1s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.2s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.2s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.1s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.2s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.1s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
