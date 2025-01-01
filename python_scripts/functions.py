@@ -9,6 +9,7 @@ import seaborn as sns
 import textwrap
 import sys
 import os
+import mlflow
 import warnings
 
 
@@ -23,11 +24,13 @@ from sklearn.metrics import (
     f1_score,
     classification_report,
     confusion_matrix,
+    ConfusionMatrixDisplay,
     roc_auc_score,
     roc_curve,
     precision_recall_curve,
     brier_score_loss,
 )
+
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 from sklearn.svm import SVC
@@ -120,102 +123,108 @@ class HealthMetrics:
 
 
 ################################################################################
-######################### Stratified KFold Split ###############################
-################################################################################
-
-
-def stratified_kfold_split(
-    df,
-    target_col,
-    data_path,
-    n_splits=5,
-    random_state=222,
-):
-    """
-    Perform stratified K-fold splitting of a dataframe, save the splits to files,
-    print the size and percentage of each fold, and return the splits.
-
-    Parameters:
-    - df : pandas.DataFrame
-        The DataFrame to split.
-    - target_col : str
-        The name of the column to use as the target for stratification.
-    - data_path : str
-        The directory path where the splits will be saved.
-    - n_splits : int, default 5
-        The number of folds.
-    - random_state : int, default 222
-        The random seed for reproducibility.
-
-    Returns:
-    - List of dictionaries: Each dictionary contains 'X_train', 'X_test',
-    'y_train', 'y_test' for each fold.
-    """
-    np.random.seed(random_state)  # For reproducibility
-    skf = StratifiedKFold(
-        n_splits=n_splits,
-        shuffle=True,
-        random_state=random_state,
-    )
-    total_size = len(df)  # Total size of the dataset
-    fold_counter = 1
-    splits = []  # Initialize the list to store results from each fold
-
-    for train_index, test_index in skf.split(
-        df.drop(target_col, axis=1), df[target_col]
-    ):
-        X_train, X_test = (
-            df.drop(target_col, axis=1).iloc[train_index],
-            df.drop(target_col, axis=1).iloc[test_index],
-        )
-        y_train, y_test = (
-            df[target_col].iloc[train_index],
-            df[target_col].iloc[test_index],
-        )
-
-        # Define file paths for train and test sets
-        train_filename = os.path.join(
-            data_path,
-            f"train_split_{fold_counter}.parquet",
-        )
-        test_filename = os.path.join(
-            data_path,
-            f"test_split_{fold_counter}.parquet",
-        )
-
-        # Save the training set
-        X_train.join(y_train).to_parquet(train_filename)
-        # Save the testing set
-        X_test.join(y_test).to_parquet(test_filename)
-
-        # Print fold details
-        train_percent = 100 * len(train_index) / total_size
-        test_percent = 100 * len(test_index) / total_size
-        print(f"Fold {fold_counter}:")
-        print(f"Train Set Size: {len(train_index)}, {train_percent:.2f}% of total")
-        print(f"Test Set Size: {len(test_index)}, {test_percent:.2f}% of total")
-        print(f"Saved fold {fold_counter} to {train_filename} and {test_filename}")
-        print("---")  # Separator for clarity
-
-        # Append the split information to the list
-        splits.append(
-            {
-                "X_train": X_train,
-                "X_test": X_test,
-                "y_train": y_train,
-                "y_test": y_test,
-            }
-        )
-
-        fold_counter += 1
-
-    print("All splits have been saved successfully.")
-    return splits
-
-
-################################################################################
 ################### Modeling Fit, Predict, and Evaluation ######################
 ################################################################################
+
+
+def metrics_report(
+    df=None,
+    outcome_cols=None,
+    pred_cols=None,
+    models=None,
+    X_valid=None,
+    y_valid=None,
+    pred_probs_df=None,
+):
+    """
+    Generate a DataFrame of model metrics for given models or predictions.
+
+    Parameters:
+    df (DataFrame, optional): DataFrame containing outcome and prediction cols.
+    outcome_cols (list, optional): List of outcome column names in df.
+    pred_cols (list, optional): List of prediction column names in df.
+    models (dict, optional): Dict where key is model name and value is model.
+    X_valid (DataFrame, optional): DataFrame with validation data.
+    y_valid (Series, optional): Series with outcome data for validation set.
+    pred_probs_df (DataFrame, optional): DataFrame with predicted probabilities.
+
+    Returns:
+    metrics_df (DataFrame): DataFrame containing model metrics.
+    """
+    metrics = {}
+
+    # Calculate metrics for each outcome_col-pred_col pair in df
+    if outcome_cols is not None and pred_cols is not None and df is not None:
+        for outcome_col, pred_col in zip(outcome_cols, pred_cols):
+            y_true = df[outcome_col]
+            y_pred_proba = df[pred_col]
+            y_pred = [1 if prob > 0.5 else 0 for prob in y_pred_proba]
+            tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
+            precision = precision_score(y_true, y_pred)
+            recall = recall_score(y_true, y_pred)
+            roc_auc = roc_auc_score(y_true, y_pred_proba)
+            brier_score = brier_score_loss(y_true, y_pred_proba)
+            avg_precision = average_precision_score(y_true, y_pred_proba)
+            specificity = tn / (tn + fp)
+            metrics[pred_col] = {
+                "Precision/PPV": precision,
+                "Average Precision": avg_precision,
+                "Sensitivity": recall,
+                "Specificity": specificity,
+                "AUC ROC": roc_auc,
+                "Brier Score": brier_score,
+            }
+
+    if models is not None and X_valid is not None and y_valid is not None:
+        for name, model in models.items():
+            y_pred = model.predict(X_valid)
+            # Attempt to use the predict_proba method if available
+            try:
+                y_pred_proba = model.predict_proba(X_valid)[:, 1]
+            except AttributeError:
+                # Fallback for models without predict_proba method
+                y_pred_proba = model.predict(X_valid)
+
+            tn, fp, fn, tp = confusion_matrix(y_valid, y_pred).ravel()
+            precision = precision_score(y_valid, y_pred)
+            recall = recall_score(y_valid, y_pred)
+            roc_auc = roc_auc_score(y_valid, y_pred_proba)
+            brier_score = brier_score_loss(y_valid, y_pred_proba)
+            avg_precision = average_precision_score(y_valid, y_pred_proba)
+            specificity = tn / (tn + fp)
+            metrics[name] = {
+                "Precision/PPV": precision,
+                "Average Precision": avg_precision,
+                "Sensitivity": recall,
+                "Specificity": specificity,
+                "AUC ROC": roc_auc,
+                "Brier Score": brier_score,
+            }
+
+    # Calculate metrics for each column in pred_probs_df
+    if pred_probs_df is not None:
+        for col in pred_probs_df.columns:
+            y_pred_proba = pred_probs_df[col]
+            y_pred = [1 if prob > 0.5 else 0 for prob in y_pred_proba]
+            tn, fp, fn, tp = confusion_matrix(y_valid, y_pred).ravel()
+            precision = precision_score(y_valid, y_pred)
+            recall = recall_score(y_valid, y_pred)
+            roc_auc = roc_auc_score(y_valid, y_pred_proba)
+            brier_score = brier_score_loss(y_valid, y_pred_proba)
+            avg_precision = average_precision_score(y_valid, y_pred_proba)
+            specificity = tn / (tn + fp)
+            metrics[col] = {
+                "Precision/PPV": precision,
+                "Average Precision": avg_precision,
+                "Sensitivity": recall,
+                "Specificity": specificity,
+                "AUC ROC": roc_auc,
+                "Brier Score": brier_score,
+            }
+
+    metrics_df = pd.DataFrame(metrics).round(3)
+    metrics_df["Mean"] = metrics_df.mean(axis=1).round(3)
+    return metrics_df
 
 
 def evaluate_model_pipelines(splits, pipelines, param_grids=None):
@@ -492,240 +501,387 @@ def plot_aggregated_confusion_matrices(
 
 
 ################################################################################
-############################### ROC AUC per KFold ##############################
+######################### Create Custom Stratification #########################
 ################################################################################
 
 
-def plot_roc_curves(
-    roc_data,
-    true_values,
-    prob_predictions,
-    plot_type="both",  # Options: 'individual', 'aggregated', 'both'
-    individual_line_style="-",  # Default to solid line for individual curves
-    aggregated_line_style="-",  # Always solid for aggregated curves
-    pipeline_labels=None,  # Mapping of pipeline_name to custom labels
-    aggregate_on_one_plot=False,  # Plot all aggregated curves on one plot
-    image_path_png=None,
-    image_path_svg=None,
+# def create_stratified_other_column(
+#     X,
+#     stratify_list,
+#     other_columns=None,
+#     other_column=None,
+#     patient_id=var_index,
+#     age=None,
+#     age_bin=None,
+#     bin_ages=None,
+# ):
+#     """
+#     Create a dataframe with a combined 'Other' column and optionally stratify
+#     based on the specified columns and age bins.
+
+#     Parameters:
+#     -----------
+#     X : pd.DataFrame
+#         The original dataframe containing patient data and binary race/ethnicity
+#         columns.
+
+#     stratify_list : list of str
+#         List of column names in X to use for stratification.
+
+#     other_columns : list of str, optional
+#         List of column names in X to be combined into the specified 'Other'
+#         column using bitwise OR operation. If None or empty, the 'Other' column
+#         will not be modified.
+
+#     other_column : str, optional (default=None)
+#         Name of the column in X that will be used to store the combined result.
+#         If None, no 'Other' column will be created.
+
+#     patient_id : str, optional (default='patient_id')
+#         Name of the column in X that represents the unique identifier for
+#         joining the data.
+
+#     age : str, optional (default=None)
+#         The name of the column in X that contains age data.
+
+#     age_bin : str, optional (default=None)
+#         The name of the column that will store the age bins.
+
+#     bin_ages : list of int, optional (default=None)
+#         The bin edges to be used for age stratification. If None, age
+#         stratification will not be performed.
+
+#     Returns:
+#     --------
+#     pd.DataFrame
+#         A dataframe with the specified stratification columns and the combined
+#         'Other' column if applicable, and age bins if specified.
+#     """
+#     # Create a copy of the dataframe
+#     X_copy = X.copy()
+
+#     # If other_columns and other_column are provided, perform the bitwise OR operation
+#     if other_columns and other_column:
+#         # Ensure that the specified 'Other' column is initially binary (0 or 1)
+#         X_copy[other_column] = X_copy[other_column].astype(int)
+
+#         # Combine the specified columns into the 'Other' column using bitwise OR
+#         for column in other_columns:
+#             X_copy[other_column] |= X_copy[column]
+
+#     # If age stratification is needed
+#     if age and age_bin and bin_ages:
+#         # Stratify based on age using the provided bins
+#         stratify_df = (
+#             pd.cut(
+#                 X_copy[age].fillna(
+#                     X_copy[age].mean()
+#                 ),  # Fill missing ages with the mean
+#                 bins=bin_ages,  # Use the provided bin_ages
+#                 right=False,  # Bin intervals are left-inclusive
+#                 include_lowest=True,  # Include the lowest value in the first bin
+#             )
+#             .astype(str)
+#             .to_frame(age_bin)
+#         )
+#     else:
+#         # If no age stratification is needed, create an empty dataframe
+#         stratify_df = pd.DataFrame(index=X_copy.index)
+
+#     # Join the specified stratification columns to the stratify_df
+#     if stratify_list:
+#         stratify_df = stratify_df.join(
+#             X_copy[stratify_list],
+#             how="inner",
+#             on=patient_id,
+#         )
+
+#     # If 'other_column' exists, join it as well
+#     if other_column and other_column in X_copy.columns:
+#         stratify_df = stratify_df.join(
+#             X_copy[[other_column]],
+#             how="inner",
+#             on=patient_id,
+#         )
+
+#     return stratify_df
+
+
+################################################################################
+###########################  Model-Specific  Curves ############################
+################################################################################
+
+################################ ROC AUC Curves ################################
+
+
+def plot_roc(
+    df=None,
+    outcome_cols=None,
+    pred_cols=None,
+    custom_name=None,
+    models=None,
+    X_valid=None,
+    y_valid=None,
+    pred_probs_df=None,
+    model_name=None,
+    images_path=None,
+    show=True,
 ):
-    if pipeline_labels is None:
-        pipeline_labels = {}
+    """
+    Plots ROC curves for various input types.
 
-    # Container to store information for aggregated plot
-    aggregated_data = []
+    df: DataFrame that contains outcome and predicted probabilities.
+    outcome_cols: List of columns in df which represent the true labels.
+    pred_cols: List of columns in df which represent the predicted probabilities.
+    models: Dictionary of models for predictions. Key is the model name.
+    X_valid: Validation features for the model predictions.
+    y_valid: Validation targets for the model predictions.
+    pred_probs_df: DataFrame with predicted probabilities from models.
+    model_name: Name of the model if only one model needs to be plotted.
+    images_path: Directory path to save the ROC plot.
+    """
 
-    for pipeline_name, data in roc_data.items():
-        display_name = pipeline_labels.get(pipeline_name, pipeline_name)
-        individual_aucs = [
-            roc_auc_score(
-                true_values[pipeline_name][i], prob_predictions[pipeline_name][i]
-            )
-            for i in range(len(data))
-        ]
-        average_auc = np.mean(individual_aucs)
+    fig, ax = plt.subplots(figsize=(8, 8))
+    title = None  # Initialize title
 
-        # Collect all true values and predictions if aggregated curves are required
-        if plot_type in ["aggregated", "both"]:
-            all_y_test = np.concatenate(
-                [true_values[pipeline_name][i] for i in range(len(data))]
-            )
-            all_y_prob = np.concatenate(
-                [prob_predictions[pipeline_name][i] for i in range(len(data))]
-            )
-            if aggregate_on_one_plot:
-                aggregated_data.append(
-                    (all_y_test, all_y_prob, display_name, average_auc)
-                )
+    # If outcome_cols, pred_cols, and df provided
+    if outcome_cols is not None and pred_cols is not None and df is not None:
+        for outcome_col, pred_col in zip(outcome_cols, pred_cols):
+            y_prob = df[pred_col]
+            fpr, tpr, _ = roc_curve(df[outcome_col], y_prob)
+            auc_score = roc_auc_score(df[outcome_col], y_prob)
+            plt.plot(fpr, tpr, label=f"{outcome_col} (AUC={auc_score:.2f})")
+            num_var = re.findall(r"\d+", pred_col)[0] if "var" in pred_col else None
+            title = f"AUC ROC: {num_var}-Variable KFRE"
 
-        # Plotting individual or both (without combined aggregation)
-        if not aggregate_on_one_plot or plot_type == "individual":
-            plt.figure()
-            plt.plot([0, 1], [0, 1], "k--")  # No effect line
+    # If models, X_valid, and y_valid are provided
+    if models is not None and X_valid is not None and y_valid is not None:
+        if model_name is not None:  # If a specific model name is given
+            y_score = models[model_name].predict_proba(X_valid)[:, 1]
+            fpr, tpr, _ = roc_curve(y_valid, y_score)
+            auc_score = roc_auc_score(y_valid, y_score)
+            plt.plot(fpr, tpr, label=f"{model_name} (AUC={auc_score:.2f})")
+        else:  # If a dictionary of models is given
+            for name, model in models.items():
+                y_score = model.predict_proba(X_valid)[:, 1]
+                fpr, tpr, _ = roc_curve(y_valid, y_score)
+                auc_score = roc_auc_score(y_valid, y_score)
+                plt.plot(fpr, tpr, label=f"{name} (AUC={auc_score:.2f})")
+            if title is None:  # Check if title is not set yet
+                if y_valid is not None:
+                    title = f"AUC ROC - {custom_name}: {outcome_cols}"
 
-            title = ""
-            if plot_type in ["individual", "both"]:
-                title = f"AUC ROC for {display_name} by Fold"
-                for fold_index, (fold_fpr, fold_tpr, _) in enumerate(data):
-                    plt.plot(
-                        fold_fpr,
-                        fold_tpr,
-                        linestyle=individual_line_style,
-                        label=(
-                            f"{display_name} Fold {fold_index + 1} "
-                            f"(AUC = {individual_aucs[fold_index]:.3f})"
-                        ),
-                    )
+    # For pred_probs_df
+    if pred_probs_df is not None:
+        for col in pred_probs_df.columns:
+            y_score = pred_probs_df[col].values
+            fpr, tpr, _ = roc_curve(y_valid, y_score)
+            auc_score = roc_auc_score(y_valid, y_score)
+            plt.plot(fpr, tpr, label=f"{col} (AUC={auc_score:.2f})")
 
-            if plot_type in ["aggregated", "both"]:
-                title = (
-                    f"AUC ROC by Fold with Aggregated {display_name}"
-                    if plot_type == "both"
-                    else f"AUC ROC for {display_name}"
-                )
-                fpr_aggregated, tpr_aggregated, _ = roc_curve(all_y_test, all_y_prob)
-                plt.plot(
-                    fpr_aggregated,
-                    tpr_aggregated,
-                    linestyle=aggregated_line_style,
-                    label=f"{display_name} (AUC = {average_auc:.3f})",
-                )
+    plt.plot([0, 1], [0, 1], color="navy", linestyle="--")  # Diagonal line
+    plt.xlim([0.0, 1.0])  # Set the x limits of the current plot
+    plt.ylim([0.0, 1.05])  # Set the y limits of the current plot
+    plt.xlabel("False Positive Rate")  # X-axis label
+    plt.ylabel("True Positive Rate")  # Y-axis label
+    plt.legend(loc="lower right")  # Location of legend on the plot
 
-            plt.xlabel("False Positive Rate")
-            plt.ylabel("True Positive Rate")
-            plt.title(title)
-            plt.legend(loc="lower right")
+    # If title is still not set, use a default title
+    if title is None:
+        title = "Receiver Operating Characteristic"
 
-            # Determine file name for saving the plot
-            file_name = (
-                title.replace(" ", "_")
-                .replace("{", "")
-                .replace("}", "")
-                .replace("__", "_")
-                .lower()
-            )
+    plt.title(title)
 
-            # Save to image files if paths are provided
-            if image_path_png:
-                plt.savefig(os.path.join(image_path_png, f"{file_name}.png"))
-            if image_path_svg:
-                plt.savefig(os.path.join(image_path_svg, f"{file_name}.svg"))
-
-            plt.show()
-
-    # Aggregated curves on a single plot
-    if aggregate_on_one_plot and plot_type in ["aggregated", "both"]:
-        plt.figure()
-        plt.plot([0, 1], [0, 1], "k--")  # No effect line
-        for all_y_test, all_y_prob, display_name, average_auc in aggregated_data:
-            fpr_aggregated, tpr_aggregated, _ = roc_curve(all_y_test, all_y_prob)
-            plt.plot(
-                fpr_aggregated,
-                tpr_aggregated,
-                linestyle=aggregated_line_style,
-                label=f"{display_name} (AUC = {average_auc:.3f})",
-            )
-        plt.title("Aggregated ROC Curves Comparison")
-        plt.xlabel("False Positive Rate")
-        plt.ylabel("True Positive Rate")
-        plt.legend(loc="lower right")
-
-        # Determine file name for saving the plot
-        file_name = "aggregated_roc_curves_comparison".replace(" ", "_").lower()
-
-        # Save to image files if paths are provided
-        if image_path_png:
-            plt.savefig(os.path.join(image_path_png, f"{file_name}.png"))
-        if image_path_svg:
-            plt.savefig(os.path.join(image_path_svg, f"{file_name}.svg"))
-
+    # Save the plot to the specified path
+    if images_path is not None:
+        filename = f"{title.replace(' ', '_').replace(':', '')}.png"
+        plt.savefig(os.path.join(images_path, filename), format="png")
+    if show:
         plt.show()
 
-
-################################################################################
-############################# Stratification Logic #############################
-################################################################################
+    return fig
 
 
-def create_stratified_other_column(
-    X,
-    stratify_list,
-    other_columns=None,
-    other_column=None,
-    patient_id=None,
-    age=None,
-    age_bin=None,
-    bin_ages=None,
+########################### Precision - Recall Curves ##########################
+
+
+def plot_precision_recall(
+    df=None,
+    outcome_cols=None,
+    pred_cols=None,
+    custom_name=None,
+    models=None,
+    X_valid=None,
+    y_valid=None,
+    pred_probs_df=None,
+    model_name=None,
+    images_path=None,
+    show=True,
 ):
     """
-    Create a dataframe with a combined 'Other' column and optionally stratify
-    based on the specified columns and age bins.
+    Plots Precision-Recall curves for various input types.
 
-    Parameters:
-    -----------
-    X : pd.DataFrame
-        The original dataframe containing patient data and binary race/ethnicity
-        columns.
-
-    stratify_list : list of str
-        List of column names in X to use for stratification.
-
-    other_columns : list of str, optional
-        List of column names in X to be combined into the specified 'Other'
-        column using bitwise OR operation. If None or empty, the 'Other' column
-        will not be modified.
-
-    other_column : str, optional (default=None)
-        Name of the column in X that will be used to store the combined result.
-        If None, no 'Other' column will be created.
-
-    patient_id : str, optional (default='patient_id')
-        Name of the column in X that represents the unique identifier for
-        joining the data.
-
-    age : str, optional (default=None)
-        The name of the column in X that contains age data.
-
-    age_bin : str, optional (default=None)
-        The name of the column that will store the age bins.
-
-    bin_ages : list of int, optional (default=None)
-        The bin edges to be used for age stratification. If None, age
-        stratification will not be performed.
-
-    Returns:
-    --------
-    pd.DataFrame
-        A dataframe with the specified stratification columns and the combined
-        'Other' column if applicable, and age bins if specified.
+    df: DataFrame that contains outcome and predicted probabilities.
+    outcome_cols: List of columns in df which represent the true labels.
+    pred_cols: List of columns in df which represent the predicted probabilities.
+    models: Dictionary of models for predictions. Key is the model name.
+    X_valid: Validation features for the model predictions.
+    y_valid: Validation targets for the model predictions.
+    pred_probs_df: DataFrame with predicted probabilities from models.
+    model_name: Name of the model if only one model needs to be plotted.
+    images_path: Directory path to save the Precision-Recall plot.
     """
-    # Create a copy of the dataframe
-    X_copy = X.copy()
 
-    # If other_columns and other_column are provided, perform the bitwise OR operation
-    if other_columns and other_column:
-        # Ensure that the specified 'Other' column is initially binary (0 or 1)
-        X_copy[other_column] = X_copy[other_column].astype(int)
+    fig, ax = plt.subplots(figsize=(8, 8))
+    title = None  # Initialize title
 
-        # Combine the specified columns into the 'Other' column using bitwise OR
-        for column in other_columns:
-            X_copy[other_column] |= X_copy[column]
+    # If outcome_cols, pred_cols, and df provided
+    if outcome_cols is not None and pred_cols is not None and df is not None:
+        for outcome_col, pred_col in zip(outcome_cols, pred_cols):
+            y_prob = df[pred_col]
+            precision, recall, _ = precision_recall_curve(df[outcome_col], y_prob)
+            avg_precision = average_precision_score(df[outcome_col], y_prob)
+            plt.plot(recall, precision, label=f"{outcome_col} (AP={avg_precision:.2f})")
+            num_var = re.findall(r"\d+", pred_col)[0] if "var" in pred_col else None
+            title = f"Precision-Recall: {num_var}-Variable KFRE"
 
-    # If age stratification is needed
-    if age and age_bin and bin_ages:
-        # Stratify based on age using the provided bins
-        stratify_df = (
-            pd.cut(
-                X_copy[age].fillna(
-                    X_copy[age].mean()
-                ),  # Fill missing ages with the mean
-                bins=bin_ages,  # Use the provided bin_ages
-                right=False,  # Bin intervals are left-inclusive
-                include_lowest=True,  # Include the lowest value in the first bin
-            )
-            .astype(str)
-            .to_frame(age_bin)
+    # If models, X_valid, and y_valid are provided
+    if models is not None and X_valid is not None and y_valid is not None:
+        if model_name is not None:  # If a specific model name is given
+            y_score = models[model_name].predict_proba(X_valid)[:, 1]
+            precision, recall, _ = precision_recall_curve(y_valid, y_score)
+            avg_precision = average_precision_score(y_valid, y_score)
+            plt.plot(recall, precision, label=f"{model_name} (AP={avg_precision:.2f})")
+        else:  # If a dictionary of models is given
+            for name, model in models.items():
+                y_score = model.predict_proba(X_valid)[:, 1]
+                precision, recall, _ = precision_recall_curve(y_valid, y_score)
+                avg_precision = average_precision_score(y_valid, y_score)
+                plt.plot(recall, precision, label=f"{name} (AP={avg_precision:.2f})")
+            if title is None:  # Check if title is not set yet
+                if y_valid is not None:
+                    title = f"Precision-Recall - {custom_name}: {outcome_cols}"
+
+    # For pred_probs_df
+    if pred_probs_df is not None:
+        for col in pred_probs_df.columns:
+            y_score = pred_probs_df[col].values
+            precision, recall, _ = precision_recall_curve(y_valid, y_score)
+            avg_precision = average_precision_score(y_valid, y_score)
+            plt.plot(recall, precision, label=f"{col} (AP={avg_precision:.2f})")
+
+    plt.xlabel("Recall")  # X-axis label
+    plt.ylabel("Precision")  # Y-axis label
+    plt.legend(loc="lower left")  # Location of legend on the plot
+
+    # If title is still not set, use a default title
+    if title is None:
+        title = "Precision-Recall Curve"
+
+    plt.title(title)
+
+    # Save the plot to the specified path
+    if images_path is not None:
+        filename = f"{title.replace(' ', '_').replace(':', '')}.png"
+        plt.savefig(os.path.join(images_path, filename), format="png")
+    if show:
+        plt.show()
+
+    return fig
+
+
+############################### Confusion Matrices #############################
+
+
+def plot_confusion_matrix(
+    df=None,
+    outcome_cols=None,
+    pred_cols=None,
+    models=None,
+    X_valid=None,
+    y_valid=None,
+    threshold=0.5,
+    custom_name=None,
+    model_name=None,
+    images_path=None,
+    normalize=None,
+    show=True,
+):
+    """
+    Plots confusion matrices for various input types.
+
+    df: DataFrame that contains outcome and predicted probabilities.
+    outcome_cols: List of columns in df which represent the true labels.
+    pred_cols: List of columns in df which represent the predicted probabilities.
+    models: Dictionary of models for predictions. Key is the model name.
+    X_valid: Validation features for the model predictions.
+    y_valid: Validation targets for the model predictions.
+    threshold: Threshold for converting probabilities to binary predictions.
+    custom_name: Custom name for the plot title.
+    model_name: Name of the model if only one model needs to be plotted.
+    images_path: Directory path to save the confusion matrix plot.
+    normalize: {'true', 'pred', 'all'}, default=None. Normalizes confusion matrix.
+    show: Whether to display the plot.
+    """
+
+    fig, ax = plt.subplots(figsize=(8, 8))
+    title = None  # Initialize title
+
+    # If outcome_cols, pred_cols, and df provided
+    if outcome_cols is not None and pred_cols is not None and df is not None:
+        for outcome_col, pred_col in zip(outcome_cols, pred_cols):
+            y_true = df[outcome_col]
+            y_pred = (df[pred_col] >= threshold).astype(int)
+            cm = confusion_matrix(y_true, y_pred, normalize=normalize)
+            disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=[0, 1])
+            disp.plot(ax=ax, cmap="Blues", colorbar=False)
+            if custom_name:
+                title = f"{custom_name} - Confusion Matrix: {outcome_col} vs {pred_col}"
+            else:
+                title = f"Confusion Matrix: {outcome_col} vs {pred_col}"
+
+    # If models, X_valid, and y_valid are provided
+    if models is not None and X_valid is not None and y_valid is not None:
+        if model_name is not None:  # If a specific model name is given
+            y_pred = (
+                models[model_name].predict_proba(X_valid)[:, 1] >= threshold
+            ).astype(int)
+            cm = confusion_matrix(y_valid, y_pred, normalize=normalize)
+            disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=[0, 1])
+            disp.plot(ax=ax, cmap="Blues", colorbar=False)
+            if custom_name:
+                title = f"{custom_name} - Confusion Matrix: {model_name}"
+            else:
+                title = f"Confusion Matrix: {model_name}"
+        else:  # If a dictionary of models is given
+            for name, model in models.items():
+                y_pred = (model.predict_proba(X_valid)[:, 1] >= threshold).astype(int)
+                cm = confusion_matrix(y_valid, y_pred, normalize=normalize)
+                disp = ConfusionMatrixDisplay(
+                    confusion_matrix=cm, display_labels=[0, 1]
+                )
+                disp.plot(ax=ax, cmap="Blues", colorbar=False)
+                if custom_name:
+                    title = f"{custom_name} - Confusion Matrix: {name}"
+                else:
+                    title = f"Confusion Matrix: {name}"
+
+    # If title is still not set, use a default title
+    if title is None:
+        title = (
+            f"{custom_name} - Confusion Matrix" if custom_name else "Confusion Matrix"
         )
-    else:
-        # If no age stratification is needed, create an empty dataframe
-        stratify_df = pd.DataFrame(index=X_copy.index)
 
-    # Join the specified stratification columns to the stratify_df
-    if stratify_list:
-        stratify_df = stratify_df.join(
-            X_copy[stratify_list],
-            how="inner",
-            on=patient_id,
-        )
+    plt.title(title)
 
-    # If 'other_column' exists, join it as well
-    if other_column and other_column in X_copy.columns:
-        stratify_df = stratify_df.join(
-            X_copy[[other_column]],
-            how="inner",
-            on=patient_id,
-        )
+    # Save the plot to the specified path
+    if images_path is not None:
+        filename = f"{title.replace(' ', '_').replace(':', '')}.png"
+        plt.savefig(os.path.join(images_path, filename), format="png")
+    if show:
+        plt.show()
 
-    return stratify_df
+    return fig
 
 
 ################################################################################

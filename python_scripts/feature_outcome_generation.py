@@ -35,7 +35,16 @@ ensure_directory(data_path)
 # read in the data, set index to "ID"
 df = pd.read_csv(os.path.join(data_path, preproc_filename)).set_index("patient_id")
 
+print()
+print("DataFrame (First 5 Rows): \n")
 print(df.head())
+print()
+print("*" * terminal_width)
+print("DataFrame Columns: \n")
+for col in df.columns:
+    print(col)
+print()
+print("*" * terminal_width)
 
 ############################ Save DataFrames to Excel ##########################
 
@@ -71,12 +80,7 @@ summarize_all_combinations(
 # one hot encode insurance categories (break them out as separate cols of 0, 1)
 df = df.assign(
     **pd.get_dummies(
-        df[
-            [
-                "Surgical_Technique",
-                "Anesthesia_Type",
-            ]
-        ],
+        df[["Surgical_Technique", "Anesthesia_Type"]],
         dtype=int,
     )
 )
@@ -95,14 +99,6 @@ print("*" * terminal_width)
 
 df = df.select_dtypes(np.number)  # select only numeric datatypes for modeling
 
-df = df[
-    [
-        col
-        for col in df.columns
-        if col == dependent_var or ("Functional" not in col and "Intraop" not in col)
-    ]
-]
-
 print()
 print("Preop Columns in Dataset:")
 print()
@@ -120,30 +116,34 @@ print()
 
 ######################### Feature and Outcome Generation #######################
 
-X = df[
-    [
-        col
-        for col in df.columns
-        if "Surgical_Technique_Laser" not in col
-        and "Surgical_Technique_Traditional" not in col
-    ]
-]
+X = df[[col for col in df.columns if col != outcome]]
 
 print(f"Feature List: {X.columns.to_list()}")
 print()
-y = df[outcomes]
+y = df[[outcome]]
 
-print(f"Outcomes: {outcomes}")
+print(f"Outcome: {outcome}")
 
 ################################# Save out X and y #############################
 # File paths and names
-file_paths = [
+file_paths_parquet = [
     (X, os.path.join(data_path, "X.parquet")),
     (y, os.path.join(data_path, "y.parquet")),
 ]
 
-for dataframe, file_path in file_paths:
+for dataframe, file_path in file_paths_parquet:
     print(f"File successfully saved to: {file_path}")
     dataframe.to_parquet(file_path, index=True)
+
+
+# File paths and names
+file_paths_csv = [
+    (X, os.path.join(data_path, "X.csv")),
+    (y, os.path.join(data_path, "y.csv")),
+]
+
+for dataframe, file_path in file_paths_csv:
+    print(f"File successfully saved to: {file_path}")
+    dataframe.to_csv(file_path, index=True)
 
 print()
