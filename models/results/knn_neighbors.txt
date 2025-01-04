@@ -1,0 +1,1762 @@
+..
+            Age_years    BMI  ...  SBP  DBP
+patient_id                    ...          
+738111507           5  31.40  ...  120   80
+424123959          22  26.17  ...  130   90
+390469576          50  31.14  ...  120   70
+633173792          70  23.88  ...  110   80
+784928164          68  27.64  ...  120   90
+...               ...    ...  ...  ...  ...
+412065385          22  19.27  ...  130   90
+769873868          56  26.84  ...  110   80
+140411083          19  24.22  ...  120   90
+773951452          21  25.17  ...  140   90
+404354815          23  22.78  ...  130   90
+
+[202 rows x 11 columns]
+y:            Functional_Outcomes_Bleeding
+patient_id                              
+738111507                              0
+424123959                              0
+390469576                              0
+633173792                              0
+784928164                              0
+...                                  ...
+412065385                              1
+769873868                              0
+140411083                              0
+773951452                              1
+404354815                              1
+
+[202 rows x 1 columns]
+
+Sampler None
+
+Circumcision Outcome Columns:
+['Functional_Outcomes_Bleeding']
+********************************************************************************
+
+
+============================================================
+Functional_Outcomes_Bleeding
+============================================================
+
+Pipeline Steps:
+
+┌────────────────────────────────────────────┐
+│ Step 1: preprocess_scaler_StandardScalar   │
+│ StandardScaler                             │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 2: preprocess_imputer_Preprocessor    │
+│ SimpleImputer                              │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 3: knn                                │
+│ KNeighborsClassifier                       │
+└────────────────────────────────────────────┘
+
+# Tuning hyper-parameters for average_precision
+Fitting 10 folds for each of 24 candidates, totalling 240 fits
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+Best score/param set found on development set:
+{0.4258072752410988: {'knn__metric': 'manhattan',
+                      'knn__n_neighbors': 9,
+                      'knn__weights': 'distance'}}
+
+Grid scores on development set:
+0.344 (+/-0.178) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 3, 'knn__weights': 'uniform'}
+0.404 (+/-0.205) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 3, 'knn__weights': 'distance'}
+0.328 (+/-0.168) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 5, 'knn__weights': 'uniform'}
+0.357 (+/-0.184) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 5, 'knn__weights': 'distance'}
+0.342 (+/-0.093) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 7, 'knn__weights': 'uniform'}
+0.362 (+/-0.157) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 7, 'knn__weights': 'distance'}
+0.369 (+/-0.191) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 9, 'knn__weights': 'uniform'}
+0.366 (+/-0.178) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 9, 'knn__weights': 'distance'}
+0.357 (+/-0.168) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 3, 'knn__weights': 'uniform'}
+0.367 (+/-0.207) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 3, 'knn__weights': 'distance'}
+0.371 (+/-0.184) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'uniform'}
+0.418 (+/-0.237) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance'}
+0.377 (+/-0.180) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'uniform'}
+0.408 (+/-0.223) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'distance'}
+0.389 (+/-0.218) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 9, 'knn__weights': 'uniform'}
+0.426 (+/-0.221) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 9, 'knn__weights': 'distance'}
+0.344 (+/-0.178) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 3, 'knn__weights': 'uniform'}
+0.404 (+/-0.205) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 3, 'knn__weights': 'distance'}
+0.328 (+/-0.168) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 5, 'knn__weights': 'uniform'}
+0.357 (+/-0.184) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 5, 'knn__weights': 'distance'}
+0.342 (+/-0.093) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 7, 'knn__weights': 'uniform'}
+0.362 (+/-0.157) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 7, 'knn__weights': 'distance'}
+0.369 (+/-0.191) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 9, 'knn__weights': 'uniform'}
+0.366 (+/-0.178) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 9, 'knn__weights': 'distance'}
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.56it/s]100%|██████████| 2/2 [00:00<00:00,  6.93it/s]100%|██████████| 2/2 [00:00<00:00,  6.86it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.74it/s]100%|██████████| 2/2 [00:00<00:00,  6.15it/s]100%|██████████| 2/2 [00:00<00:00,  6.23it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.08it/s]100%|██████████| 2/2 [00:00<00:00,  7.70it/s]100%|██████████| 2/2 [00:00<00:00,  7.60it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.87it/s]100%|██████████| 2/2 [00:00<00:00,  8.62it/s]100%|██████████| 2/2 [00:00<00:00,  8.49it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.44it/s]100%|██████████| 2/2 [00:00<00:00,  7.70it/s]100%|██████████| 2/2 [00:00<00:00,  7.66it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.38it/s]100%|██████████| 2/2 [00:00<00:00,  9.17it/s]100%|██████████| 2/2 [00:00<00:00,  9.04it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.17it/s]100%|██████████| 2/2 [00:00<00:00,  7.62it/s]100%|██████████| 2/2 [00:00<00:00,  7.54it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.53it/s]100%|██████████| 2/2 [00:00<00:00,  7.04it/s]100%|██████████| 2/2 [00:00<00:00,  6.96it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.93it/s]100%|██████████| 2/2 [00:00<00:00,  6.68it/s]100%|██████████| 2/2 [00:00<00:00,  6.55it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.02it/s]100%|██████████| 2/2 [00:00<00:00,  8.08it/s]100%|██████████| 2/2 [00:00<00:00,  7.89it/s]
+
+Detailed classification report for knn:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  0 (tp)   4 (fn)
+        Neg  1 (fp)  14 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.77      0.90      0.83       156
+           1       0.24      0.11      0.15        46
+
+    accuracy                           0.72       202
+   macro avg       0.51      0.50      0.49       202
+weighted avg       0.65      0.72      0.68       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+--------------------------------------------------------------------------------
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  0 (tp)   3 (fn)
+        Neg  2 (fp)  12 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.78      0.82      0.80       156
+           1       0.24      0.20      0.22        46
+
+    accuracy                           0.68       202
+   macro avg       0.51      0.51      0.51       202
+weighted avg       0.65      0.68      0.67       202
+
+--------------------------------------------------------------------------------
+
+Detailed classification report for knn:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  0 (tp)   4 (fn)
+        Neg  1 (fp)  14 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.77      0.90      0.83       156
+           1       0.24      0.11      0.15        46
+
+    accuracy                           0.72       202
+   macro avg       0.51      0.50      0.49       202
+weighted avg       0.65      0.72      0.68       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+
+Running k-fold model metrics...
+
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:04,  2.23it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:03,  2.27it/s]Processing Folds:  30%|███       | 3/10 [00:01<00:03,  2.27it/s]Processing Folds:  40%|████      | 4/10 [00:01<00:02,  2.27it/s]Processing Folds:  50%|█████     | 5/10 [00:02<00:02,  2.26it/s]Processing Folds:  60%|██████    | 6/10 [00:02<00:01,  2.27it/s]Processing Folds:  70%|███████   | 7/10 [00:03<00:01,  2.29it/s]Processing Folds:  80%|████████  | 8/10 [00:03<00:00,  2.28it/s]Processing Folds:  90%|█████████ | 9/10 [00:03<00:00,  2.28it/s]Processing Folds: 100%|██████████| 10/10 [00:04<00:00,  2.28it/s]Processing Folds: 100%|██████████| 10/10 [00:04<00:00,  2.28it/s]
+
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.1s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/numpy/ma/core.py:2820: RuntimeWarning: invalid value encountered in cast
+  _data = np.array(data, dtype=dtype, copy=copy,
+
+Average Metrics Across All Folds:
+              Metric     Value
+0      Precision/PPV  0.314444
+1  Average Precision  0.425807
+2        Sensitivity  0.700000
+3        Specificity  0.545833
+4            AUC ROC  0.688813
+5        Brier Score  0.172886
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+Optimal threshold used: 0.233
+
+================================================================================
+knn_Functional_Outcomes_Bleeding
+Precision/PPV        0.933
+Average Precision    0.989
+Sensitivity          0.913
+Specificity          0.981
+AUC ROC              0.997
+Brier Score          0.018
+Name: knn, dtype: float64
+<function log_mlflow_experiment at 0x7f7401418180>
+Existing Experiment_ID: 319710463857148384
+
+Sampler SMOTE(random_state=222)
+
+Circumcision Outcome Columns:
+['Functional_Outcomes_Bleeding']
+********************************************************************************
+
+
+============================================================
+Functional_Outcomes_Bleeding
+============================================================
+
+Pipeline Steps:
+
+┌────────────────────────────────────────────┐
+│ Step 1: preprocess_scaler_StandardScalar   │
+│ StandardScaler                             │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 2: preprocess_imputer_Preprocessor    │
+│ SimpleImputer                              │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 3: resampler                          │
+│ SMOTE                                      │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 4: knn                                │
+│ KNeighborsClassifier                       │
+└────────────────────────────────────────────┘
+
+# Tuning hyper-parameters for average_precision
+Fitting 10 folds for each of 24 candidates, totalling 240 fits
+
+Best score/param set found on development set:
+{0.4618389241477477: {'knn__metric': 'euclidean',
+                      'knn__n_neighbors': 7,
+                      'knn__weights': 'distance'}}
+
+Grid scores on development set:
+0.358 (+/-0.213) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 3, 'knn__weights': 'uniform'}
+0.376 (+/-0.189) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 3, 'knn__weights': 'distance'}
+0.412 (+/-0.228) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 5, 'knn__weights': 'uniform'}
+0.431 (+/-0.254) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 5, 'knn__weights': 'distance'}
+0.395 (+/-0.235) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 7, 'knn__weights': 'uniform'}
+0.462 (+/-0.292) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 7, 'knn__weights': 'distance'}
+0.386 (+/-0.188) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 9, 'knn__weights': 'uniform'}
+0.414 (+/-0.245) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 9, 'knn__weights': 'distance'}
+0.348 (+/-0.123) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 3, 'knn__weights': 'uniform'}
+0.359 (+/-0.159) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 3, 'knn__weights': 'distance'}
+0.394 (+/-0.159) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'uniform'}
+0.418 (+/-0.217) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance'}
+0.425 (+/-0.209) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'uniform'}
+0.431 (+/-0.230) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'distance'}
+0.403 (+/-0.182) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 9, 'knn__weights': 'uniform'}
+0.435 (+/-0.252) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 9, 'knn__weights': 'distance'}
+0.358 (+/-0.213) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 3, 'knn__weights': 'uniform'}
+0.376 (+/-0.189) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 3, 'knn__weights': 'distance'}
+0.412 (+/-0.228) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 5, 'knn__weights': 'uniform'}
+0.431 (+/-0.254) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 5, 'knn__weights': 'distance'}
+0.395 (+/-0.235) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 7, 'knn__weights': 'uniform'}
+0.462 (+/-0.292) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 7, 'knn__weights': 'distance'}
+0.386 (+/-0.188) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 9, 'knn__weights': 'uniform'}
+0.414 (+/-0.245) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 9, 'knn__weights': 'distance'}
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.25it/s]100%|██████████| 2/2 [00:00<00:00,  7.39it/s]100%|██████████| 2/2 [00:00<00:00,  7.36it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.94it/s]100%|██████████| 2/2 [00:00<00:00,  6.63it/s]100%|██████████| 2/2 [00:00<00:00,  6.51it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.35it/s]100%|██████████| 2/2 [00:00<00:00,  8.04it/s]100%|██████████| 2/2 [00:00<00:00,  7.92it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.79it/s]100%|██████████| 2/2 [00:00<00:00, 10.78it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.71it/s]100%|██████████| 2/2 [-1:59:59<00:00, -1.17it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.53it/s]100%|██████████| 2/2 [00:00<00:00, 11.52it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.33it/s]100%|██████████| 2/2 [00:00<00:00,  7.81it/s]100%|██████████| 2/2 [00:00<00:00,  7.73it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.55it/s]100%|██████████| 2/2 [00:00<00:00,  6.76it/s]100%|██████████| 2/2 [00:00<00:00,  6.72it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.92it/s]100%|██████████| 2/2 [00:00<00:00,  7.89it/s]100%|██████████| 2/2 [00:00<00:00,  7.72it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  9.56it/s]100%|██████████| 2/2 [00:00<00:00,  9.63it/s]100%|██████████| 2/2 [00:00<00:00,  9.62it/s]
+
+Detailed classification report for knn:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  3 (tp)   1 (fn)
+        Neg  7 (fp)   8 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.85      0.55      0.67       156
+           1       0.31      0.67      0.42        46
+
+    accuracy                           0.58       202
+   macro avg       0.58      0.61      0.55       202
+weighted avg       0.73      0.58      0.61       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+--------------------------------------------------------------------------------
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  1 (tp)   3 (fn)
+        Neg  3 (fp)  12 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.78      0.78      0.78       156
+           1       0.26      0.26      0.26        46
+
+    accuracy                           0.66       202
+   macro avg       0.52      0.52      0.52       202
+weighted avg       0.66      0.66      0.66       202
+
+--------------------------------------------------------------------------------
+
+Detailed classification report for knn:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  3 (tp)   1 (fn)
+        Neg  7 (fp)   8 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.85      0.55      0.67       156
+           1       0.31      0.67      0.42        46
+
+    accuracy                           0.58       202
+   macro avg       0.58      0.61      0.55       202
+weighted avg       0.73      0.58      0.61       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+
+Running k-fold model metrics...
+
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:04,  2.07it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:03,  2.05it/s]Processing Folds:  30%|███       | 3/10 [00:01<00:03,  2.07it/s]Processing Folds:  40%|████      | 4/10 [00:01<00:02,  2.07it/s]Processing Folds:  50%|█████     | 5/10 [00:02<00:02,  2.04it/s]Processing Folds:  60%|██████    | 6/10 [00:02<00:01,  2.03it/s]Processing Folds:  70%|███████   | 7/10 [00:03<00:01,  2.03it/s]Processing Folds:  80%|████████  | 8/10 [00:03<00:00,  2.03it/s]Processing Folds:  90%|█████████ | 9/10 [00:04<00:00,  2.04it/s]Processing Folds: 100%|██████████| 10/10 [00:04<00:00,  2.03it/s]Processing Folds: 100%|██████████| 10/10 [00:04<00:00,  2.04it/s]
+
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.1s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/numpy/ma/core.py:2820: RuntimeWarning: invalid value encountered in cast
+  _data = np.array(data, dtype=dtype, copy=copy,
+
+Average Metrics Across All Folds:
+              Metric     Value
+0      Precision/PPV  0.320491
+1  Average Precision  0.461839
+2        Sensitivity  0.675000
+3        Specificity  0.550833
+4            AUC ROC  0.698500
+5        Brier Score  0.252111
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+Optimal threshold used: 0.493
+
+================================================================================
+knn_Functional_Outcomes_Bleeding
+Precision/PPV        0.849
+Average Precision    0.966
+Sensitivity          0.978
+Specificity          0.949
+AUC ROC              0.993
+Brier Score          0.029
+Name: knn, dtype: float64
+<function log_mlflow_experiment at 0x7f7401418180>
+Existing Experiment_ID: 319710463857148384
+
+Sampler ADASYN(random_state=222)
+
+Circumcision Outcome Columns:
+['Functional_Outcomes_Bleeding']
+********************************************************************************
+
+
+============================================================
+Functional_Outcomes_Bleeding
+============================================================
+
+Pipeline Steps:
+
+┌────────────────────────────────────────────┐
+│ Step 1: preprocess_scaler_StandardScalar   │
+│ StandardScaler                             │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 2: preprocess_imputer_Preprocessor    │
+│ SimpleImputer                              │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 3: resampler                          │
+│ ADASYN                                     │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 4: knn                                │
+│ KNeighborsClassifier                       │
+└────────────────────────────────────────────┘
+
+# Tuning hyper-parameters for average_precision
+Fitting 10 folds for each of 24 candidates, totalling 240 fits
+
+Best score/param set found on development set:
+{0.42015588496470857: {'knn__metric': 'euclidean',
+                       'knn__n_neighbors': 5,
+                       'knn__weights': 'distance'}}
+
+Grid scores on development set:
+0.396 (+/-0.253) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 3, 'knn__weights': 'uniform'}
+0.402 (+/-0.249) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 3, 'knn__weights': 'distance'}
+0.400 (+/-0.203) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 5, 'knn__weights': 'uniform'}
+0.420 (+/-0.199) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 5, 'knn__weights': 'distance'}
+0.356 (+/-0.120) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 7, 'knn__weights': 'uniform'}
+0.414 (+/-0.201) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 7, 'knn__weights': 'distance'}
+0.346 (+/-0.157) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 9, 'knn__weights': 'uniform'}
+0.367 (+/-0.148) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 9, 'knn__weights': 'distance'}
+0.362 (+/-0.158) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 3, 'knn__weights': 'uniform'}
+0.373 (+/-0.218) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 3, 'knn__weights': 'distance'}
+0.381 (+/-0.163) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'uniform'}
+0.400 (+/-0.213) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance'}
+0.387 (+/-0.169) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'uniform'}
+0.390 (+/-0.177) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'distance'}
+0.396 (+/-0.202) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 9, 'knn__weights': 'uniform'}
+0.396 (+/-0.179) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 9, 'knn__weights': 'distance'}
+0.396 (+/-0.253) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 3, 'knn__weights': 'uniform'}
+0.402 (+/-0.249) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 3, 'knn__weights': 'distance'}
+0.400 (+/-0.203) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 5, 'knn__weights': 'uniform'}
+0.420 (+/-0.199) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 5, 'knn__weights': 'distance'}
+0.356 (+/-0.120) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 7, 'knn__weights': 'uniform'}
+0.414 (+/-0.201) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 7, 'knn__weights': 'distance'}
+0.346 (+/-0.157) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 9, 'knn__weights': 'uniform'}
+0.367 (+/-0.148) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 9, 'knn__weights': 'distance'}
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.50it/s]100%|██████████| 2/2 [00:00<00:00,  3.94it/s]100%|██████████| 2/2 [00:00<00:00,  3.87it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.66it/s]100%|██████████| 2/2 [00:00<00:00,  4.12it/s]100%|██████████| 2/2 [00:00<00:00,  4.04it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.76it/s]100%|██████████| 2/2 [00:00<00:00,  5.03it/s]100%|██████████| 2/2 [00:00<00:00,  4.99it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.44it/s]100%|██████████| 2/2 [00:00<00:00,  8.25it/s]100%|██████████| 2/2 [00:00<00:00,  8.11it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.32it/s]100%|██████████| 2/2 [00:00<00:00,  4.59it/s]100%|██████████| 2/2 [00:00<00:00,  4.54it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.59it/s]100%|██████████| 2/2 [00:00<00:00,  9.00it/s]100%|██████████| 2/2 [00:00<00:00,  8.93it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.11it/s]100%|██████████| 2/2 [00:00<00:00,  8.10it/s]100%|██████████| 2/2 [00:00<00:00,  7.93it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.25it/s]100%|██████████| 2/2 [00:00<00:00,  5.50it/s]100%|██████████| 2/2 [00:00<00:00,  5.46it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.14it/s]100%|██████████| 2/2 [00:00<00:00,  6.33it/s]100%|██████████| 2/2 [00:00<00:00,  6.28it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.06it/s]100%|██████████| 2/2 [00:00<00:00,  7.22it/s]100%|██████████| 2/2 [00:00<00:00,  7.19it/s]
+
+Detailed classification report for knn:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  3 (tp)   1 (fn)
+        Neg  6 (fp)   8 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.87      0.57      0.69       156
+           1       0.33      0.72      0.45        46
+
+    accuracy                           0.60       202
+   macro avg       0.60      0.64      0.57       202
+weighted avg       0.75      0.60      0.64       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+--------------------------------------------------------------------------------
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  0 (tp)   3 (fn)
+        Neg  2 (fp)  13 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.78      0.87      0.82       156
+           1       0.29      0.17      0.22        46
+
+    accuracy                           0.71       202
+   macro avg       0.53      0.52      0.52       202
+weighted avg       0.67      0.71      0.69       202
+
+--------------------------------------------------------------------------------
+
+Detailed classification report for knn:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  3 (tp)   1 (fn)
+        Neg  6 (fp)   8 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.87      0.57      0.69       156
+           1       0.33      0.72      0.45        46
+
+    accuracy                           0.60       202
+   macro avg       0.60      0.64      0.57       202
+weighted avg       0.75      0.60      0.64       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+
+Running k-fold model metrics...
+
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:04,  1.86it/s]Processing Folds:  20%|██        | 2/10 [00:01<00:04,  1.82it/s]Processing Folds:  30%|███       | 3/10 [00:01<00:03,  1.82it/s]Processing Folds:  40%|████      | 4/10 [00:02<00:03,  1.82it/s]Processing Folds:  50%|█████     | 5/10 [00:02<00:02,  1.82it/s]Processing Folds:  60%|██████    | 6/10 [00:03<00:02,  1.82it/s]Processing Folds:  70%|███████   | 7/10 [00:03<00:01,  1.79it/s]Processing Folds: 100%|██████████| 10/10 [00:03<00:00,  2.89it/s]
+
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.1s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=euclidean, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+Average Metrics Across All Folds:
+              Metric     Value
+0      Precision/PPV  0.331187
+1  Average Precision  0.420156
+2        Sensitivity  0.715000
+3        Specificity  0.557500
+4            AUC ROC  0.703833
+5        Brier Score  0.253424
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+Optimal threshold used: 0.46699999999999997
+
+================================================================================
+knn_Functional_Outcomes_Bleeding
+Precision/PPV        0.849
+Average Precision    0.989
+Sensitivity          0.978
+Specificity          0.949
+AUC ROC              0.996
+Brier Score          0.025
+Name: knn, dtype: float64
+<function log_mlflow_experiment at 0x7f7401418180>
+Existing Experiment_ID: 319710463857148384
+
+Sampler RandomOverSampler(random_state=222)
+
+Circumcision Outcome Columns:
+['Functional_Outcomes_Bleeding']
+********************************************************************************
+
+
+============================================================
+Functional_Outcomes_Bleeding
+============================================================
+
+Pipeline Steps:
+
+┌────────────────────────────────────────────┐
+│ Step 1: preprocess_scaler_StandardScalar   │
+│ StandardScaler                             │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 2: preprocess_imputer_Preprocessor    │
+│ SimpleImputer                              │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 3: resampler                          │
+│ RandomOverSampler                          │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 4: knn                                │
+│ KNeighborsClassifier                       │
+└────────────────────────────────────────────┘
+
+# Tuning hyper-parameters for average_precision
+Fitting 10 folds for each of 24 candidates, totalling 240 fits
+
+Best score/param set found on development set:
+{0.42697997753880107: {'knn__metric': 'euclidean',
+                       'knn__n_neighbors': 7,
+                       'knn__weights': 'distance'}}
+
+Grid scores on development set:
+0.366 (+/-0.251) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 3, 'knn__weights': 'uniform'}
+0.385 (+/-0.272) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 3, 'knn__weights': 'distance'}
+0.384 (+/-0.204) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 5, 'knn__weights': 'uniform'}
+0.403 (+/-0.214) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 5, 'knn__weights': 'distance'}
+0.353 (+/-0.184) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 7, 'knn__weights': 'uniform'}
+0.427 (+/-0.195) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 7, 'knn__weights': 'distance'}
+0.340 (+/-0.130) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 9, 'knn__weights': 'uniform'}
+0.374 (+/-0.135) for {'knn__metric': 'euclidean', 'knn__n_neighbors': 9, 'knn__weights': 'distance'}
+0.338 (+/-0.113) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 3, 'knn__weights': 'uniform'}
+0.356 (+/-0.140) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 3, 'knn__weights': 'distance'}
+0.371 (+/-0.195) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'uniform'}
+0.388 (+/-0.204) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance'}
+0.381 (+/-0.211) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'uniform'}
+0.407 (+/-0.202) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'distance'}
+0.398 (+/-0.167) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 9, 'knn__weights': 'uniform'}
+0.415 (+/-0.197) for {'knn__metric': 'manhattan', 'knn__n_neighbors': 9, 'knn__weights': 'distance'}
+0.366 (+/-0.251) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 3, 'knn__weights': 'uniform'}
+0.385 (+/-0.272) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 3, 'knn__weights': 'distance'}
+0.384 (+/-0.204) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 5, 'knn__weights': 'uniform'}
+0.403 (+/-0.214) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 5, 'knn__weights': 'distance'}
+0.353 (+/-0.184) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 7, 'knn__weights': 'uniform'}
+0.427 (+/-0.195) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 7, 'knn__weights': 'distance'}
+0.340 (+/-0.130) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 9, 'knn__weights': 'uniform'}
+0.374 (+/-0.135) for {'knn__metric': 'minkowski', 'knn__n_neighbors': 9, 'knn__weights': 'distance'}
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.16it/s]100%|██████████| 2/2 [00:00<00:00,  4.35it/s]100%|██████████| 2/2 [00:00<00:00,  4.32it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.95it/s]100%|██████████| 2/2 [00:00<00:00,  4.15it/s]100%|██████████| 2/2 [00:00<00:00,  4.12it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.56it/s]100%|██████████| 2/2 [00:00<00:00,  5.10it/s]100%|██████████| 2/2 [00:00<00:00,  5.01it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.20it/s]100%|██████████| 2/2 [00:00<00:00,  6.85it/s]100%|██████████| 2/2 [00:00<00:00,  6.74it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.71it/s]100%|██████████| 2/2 [00:00<00:00,  4.87it/s]100%|██████████| 2/2 [00:00<00:00,  4.85it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  9.20it/s]100%|██████████| 2/2 [00:00<00:00,  9.30it/s]100%|██████████| 2/2 [00:00<00:00,  9.27it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.46it/s]100%|██████████| 2/2 [00:00<00:00,  6.56it/s]100%|██████████| 2/2 [00:00<00:00,  6.54it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.16it/s]100%|██████████| 2/2 [00:00<00:00,  5.41it/s]100%|██████████| 2/2 [00:00<00:00,  5.37it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.32it/s]100%|██████████| 2/2 [00:00<00:00,  6.46it/s]100%|██████████| 2/2 [00:00<00:00,  6.43it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.53it/s]100%|██████████| 2/2 [00:00<00:00,  8.27it/s]100%|██████████| 2/2 [00:00<00:00,  8.15it/s]
+
+Detailed classification report for knn:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  2 (tp)   1 (fn)
+        Neg  6 (fp)   8 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.82      0.56      0.67       156
+           1       0.28      0.59      0.38        46
+
+    accuracy                           0.57       202
+   macro avg       0.55      0.58      0.53       202
+weighted avg       0.70      0.57      0.60       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+--------------------------------------------------------------------------------
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  0 (tp)   3 (fn)
+        Neg  1 (fp)  13 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.78      0.88      0.83       156
+           1       0.27      0.15      0.19        46
+
+    accuracy                           0.71       202
+   macro avg       0.52      0.52      0.51       202
+weighted avg       0.66      0.71      0.68       202
+
+--------------------------------------------------------------------------------
+
+Detailed classification report for knn:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  2 (tp)   1 (fn)
+        Neg  6 (fp)   8 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.82      0.56      0.67       156
+           1       0.28      0.59      0.38        46
+
+    accuracy                           0.57       202
+   macro avg       0.55      0.58      0.53       202
+weighted avg       0.70      0.57      0.60       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+
+Running k-fold model metrics...
+
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:04,  1.94it/s]Processing Folds:  20%|██        | 2/10 [00:01<00:04,  1.93it/s]Processing Folds:  30%|███       | 3/10 [00:01<00:03,  1.94it/s]Processing Folds:  40%|████      | 4/10 [00:02<00:03,  1.95it/s]Processing Folds:  50%|█████     | 5/10 [00:02<00:02,  1.95it/s]Processing Folds:  60%|██████    | 6/10 [00:03<00:02,  1.81it/s]Processing Folds:  70%|███████   | 7/10 [00:03<00:01,  1.87it/s]Processing Folds:  80%|████████  | 8/10 [00:04<00:01,  1.90it/s]Processing Folds:  90%|█████████ | 9/10 [00:04<00:00,  1.89it/s]Processing Folds: 100%|██████████| 10/10 [00:05<00:00,  1.91it/s]Processing Folds: 100%|██████████| 10/10 [00:05<00:00,  1.90it/s]
+
+Average Metrics Across All Folds:
+              Metric     Value
+0      Precision/PPV  0.280422
+1  Average Precision  0.426980
+2        Sensitivity  0.580000
+3        Specificity  0.539167
+4            AUC ROC  0.683667
+5        Brier Score  0.254055
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+Optimal threshold used: 0.44699999999999995
+
+================================================================================
+knn_Functional_Outcomes_Bleeding
+Precision/PPV        0.846
+Average Precision    0.989
+Sensitivity          0.957
+Specificity          0.949
+AUC ROC              0.997
+Brier Score          0.029
+Name: knn, dtype: float64
+<function log_mlflow_experiment at 0x7f7401418180>
+Existing Experiment_ID: 319710463857148384
+Object saved!
+
+[CV] END knn__metric=manhattan, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.1s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=3, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=5, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=7, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=uniform; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s
+[CV] END knn__metric=minkowski, knn__n_neighbors=9, knn__weights=distance; total time=   0.0s

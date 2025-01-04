@@ -1,0 +1,1046 @@
+..
+            Age_years    BMI  ...  SBP  DBP
+patient_id                    ...          
+738111507           5  31.40  ...  120   80
+424123959          22  26.17  ...  130   90
+390469576          50  31.14  ...  120   70
+633173792          70  23.88  ...  110   80
+784928164          68  27.64  ...  120   90
+...               ...    ...  ...  ...  ...
+412065385          22  19.27  ...  130   90
+769873868          56  26.84  ...  110   80
+140411083          19  24.22  ...  120   90
+773951452          21  25.17  ...  140   90
+404354815          23  22.78  ...  130   90
+
+[202 rows x 11 columns]
+y:            Functional_Outcomes_Bleeding
+patient_id                              
+738111507                              0
+424123959                              0
+390469576                              0
+633173792                              0
+784928164                              0
+...                                  ...
+412065385                              1
+769873868                              0
+140411083                              0
+773951452                              1
+404354815                              1
+
+[202 rows x 1 columns]
+
+Sampler None
+
+Circumcision Outcome Columns:
+['Functional_Outcomes_Bleeding']
+********************************************************************************
+
+
+============================================================
+Functional_Outcomes_Bleeding
+============================================================
+
+Pipeline Steps:
+
+┌────────────────────────────────────────────┐
+│ Step 1: preprocess_scaler_StandardScalar   │
+│ StandardScaler                             │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 2: preprocess_imputer_Preprocessor    │
+│ SimpleImputer                              │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 3: lda                                │
+│ LinearDiscriminantAnalysis                 │
+└────────────────────────────────────────────┘
+
+# Tuning hyper-parameters for average_precision
+Fitting 10 folds for each of 8 candidates, totalling 80 fits
+
+Best score/param set found on development set:
+{0.3893965478965479: {'lda__shrinkage': 0.1, 'lda__solver': 'lsqr'}}
+
+Grid scores on development set:
+0.361 (+/-0.197) for {'lda__shrinkage': None, 'lda__solver': 'lsqr'}
+0.361 (+/-0.197) for {'lda__shrinkage': None, 'lda__solver': 'eigen'}
+0.374 (+/-0.182) for {'lda__shrinkage': 'auto', 'lda__solver': 'lsqr'}
+0.374 (+/-0.182) for {'lda__shrinkage': 'auto', 'lda__solver': 'eigen'}
+0.389 (+/-0.220) for {'lda__shrinkage': 0.1, 'lda__solver': 'lsqr'}
+0.389 (+/-0.220) for {'lda__shrinkage': 0.1, 'lda__solver': 'eigen'}
+0.379 (+/-0.180) for {'lda__shrinkage': 0.5, 'lda__solver': 'lsqr'}
+0.379 (+/-0.180) for {'lda__shrinkage': 0.5, 'lda__solver': 'eigen'}
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.45it/s]100%|██████████| 2/2 [00:00<00:00,  8.41it/s]100%|██████████| 2/2 [00:00<00:00,  8.41it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.11it/s]100%|██████████| 2/2 [00:00<00:00,  8.13it/s]100%|██████████| 2/2 [00:00<00:00,  8.12it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.07it/s]100%|██████████| 2/2 [00:00<00:00,  8.28it/s]100%|██████████| 2/2 [00:00<00:00,  8.24it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  9.46it/s]100%|██████████| 2/2 [00:00<00:00,  9.36it/s]100%|██████████| 2/2 [00:00<00:00,  9.37it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.13it/s]100%|██████████| 2/2 [00:00<00:00,  8.47it/s]100%|██████████| 2/2 [00:00<00:00,  8.41it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00,  9.77it/s]100%|██████████| 2/2 [00:00<00:00,  9.76it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.79it/s]100%|██████████| 2/2 [00:00<00:00,  7.66it/s]100%|██████████| 2/2 [00:00<00:00,  7.67it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.58it/s]100%|██████████| 2/2 [00:00<00:00,  7.59it/s]100%|██████████| 2/2 [00:00<00:00,  7.58it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.84it/s]100%|██████████| 2/2 [00:00<00:00,  8.87it/s]100%|██████████| 2/2 [00:00<00:00,  8.86it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.00it/s]100%|██████████| 2/2 [00:00<00:00,  8.50it/s]100%|██████████| 2/2 [00:00<00:00,  8.41it/s]
+
+Detailed classification report for lda:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  0 (tp)   4 (fn)
+        Neg  0 (fp)  15 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.77      0.98      0.86       156
+           1       0.00      0.00      0.00        46
+
+    accuracy                           0.76       202
+   macro avg       0.38      0.49      0.43       202
+weighted avg       0.59      0.76      0.67       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+--------------------------------------------------------------------------------
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  0 (tp)   4 (fn)
+        Neg  2 (fp)  13 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.77      0.87      0.82       156
+           1       0.23      0.13      0.17        46
+
+    accuracy                           0.70       202
+   macro avg       0.50      0.50      0.49       202
+weighted avg       0.65      0.70      0.67       202
+
+--------------------------------------------------------------------------------
+
+Detailed classification report for lda:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  0 (tp)   4 (fn)
+        Neg  0 (fp)  15 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.77      0.98      0.86       156
+           1       0.00      0.00      0.00        46
+
+    accuracy                           0.76       202
+   macro avg       0.38      0.49      0.43       202
+weighted avg       0.59      0.76      0.67       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+
+Running k-fold model metrics...
+
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:00, 15.20it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00, 15.10it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00, 14.88it/s]Processing Folds:  80%|████████  | 8/10 [00:00<00:00, 15.23it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 15.63it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 15.38it/s]
+
+Average Metrics Across All Folds:
+              Metric     Value
+0      Precision/PPV  0.348333
+1  Average Precision  0.389397
+2        Sensitivity  0.805000
+3        Specificity  0.545833
+4            AUC ROC  0.680396
+5        Brier Score  0.165034
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+Optimal threshold used: 0.23900000000000002
+
+================================================================================
+lda_Functional_Outcomes_Bleeding
+Precision/PPV        0.500
+Average Precision    0.426
+Sensitivity          0.022
+Specificity          0.994
+AUC ROC              0.771
+Brier Score          0.146
+Name: lda, dtype: float64
+<function log_mlflow_experiment at 0x7f8c6d10c180>
+Existing Experiment_ID: 462377359373805389
+
+Sampler SMOTE(random_state=222)
+
+Circumcision Outcome Columns:
+['Functional_Outcomes_Bleeding']
+********************************************************************************
+
+
+============================================================
+Functional_Outcomes_Bleeding
+============================================================
+
+Pipeline Steps:
+
+┌────────────────────────────────────────────┐
+│ Step 1: preprocess_scaler_StandardScalar   │
+│ StandardScaler                             │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 2: preprocess_imputer_Preprocessor    │
+│ SimpleImputer                              │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 3: resampler                          │
+│ SMOTE                                      │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 4: lda                                │
+│ LinearDiscriminantAnalysis                 │
+└────────────────────────────────────────────┘
+
+# Tuning hyper-parameters for average_precision
+Fitting 10 folds for each of 8 candidates, totalling 80 fits
+
+Best score/param set found on development set:
+{0.3976829281829282: {'lda__shrinkage': None, 'lda__solver': 'lsqr'}}
+
+Grid scores on development set:
+0.398 (+/-0.247) for {'lda__shrinkage': None, 'lda__solver': 'lsqr'}
+0.398 (+/-0.247) for {'lda__shrinkage': None, 'lda__solver': 'eigen'}
+0.376 (+/-0.139) for {'lda__shrinkage': 'auto', 'lda__solver': 'lsqr'}
+0.376 (+/-0.139) for {'lda__shrinkage': 'auto', 'lda__solver': 'eigen'}
+0.383 (+/-0.172) for {'lda__shrinkage': 0.1, 'lda__solver': 'lsqr'}
+0.383 (+/-0.172) for {'lda__shrinkage': 0.1, 'lda__solver': 'eigen'}
+0.377 (+/-0.147) for {'lda__shrinkage': 0.5, 'lda__solver': 'lsqr'}
+0.377 (+/-0.147) for {'lda__shrinkage': 0.5, 'lda__solver': 'eigen'}
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.62it/s]100%|██████████| 2/2 [00:00<00:00,  8.55it/s]100%|██████████| 2/2 [00:00<00:00,  8.55it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.41it/s]100%|██████████| 2/2 [00:00<00:00, 10.40it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  9.82it/s]100%|██████████| 2/2 [00:00<00:00,  9.94it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 13.66it/s]100%|██████████| 2/2 [00:00<00:00, 13.64it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  9.60it/s]100%|██████████| 2/2 [00:00<00:00,  9.56it/s]100%|██████████| 2/2 [00:00<00:00,  9.56it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 14.35it/s]100%|██████████| 2/2 [00:00<00:00, 14.33it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.70it/s]100%|██████████| 2/2 [00:00<00:00,  7.21it/s]100%|██████████| 2/2 [00:00<00:00,  7.28it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.84it/s]100%|██████████| 2/2 [00:00<00:00,  6.60it/s]100%|██████████| 2/2 [00:00<00:00,  6.64it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  9.25it/s]100%|██████████| 2/2 [00:00<00:00,  9.43it/s]100%|██████████| 2/2 [00:00<00:00,  9.40it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.99it/s]100%|██████████| 2/2 [00:00<00:00,  7.95it/s]100%|██████████| 2/2 [00:00<00:00,  8.08it/s]
+
+Detailed classification report for lda:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  4 (tp)   0 (fn)
+        Neg  7 (fp)   8 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.93      0.55      0.69       156
+           1       0.36      0.87      0.51        46
+
+    accuracy                           0.62       202
+   macro avg       0.65      0.71      0.60       202
+weighted avg       0.80      0.62      0.65       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+--------------------------------------------------------------------------------
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  1 (tp)   3 (fn)
+        Neg  3 (fp)  11 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.79      0.76      0.77       156
+           1       0.28      0.33      0.30        46
+
+    accuracy                           0.66       202
+   macro avg       0.54      0.54      0.54       202
+weighted avg       0.68      0.66      0.67       202
+
+--------------------------------------------------------------------------------
+
+Detailed classification report for lda:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  4 (tp)   0 (fn)
+        Neg  7 (fp)   8 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.93      0.55      0.69       156
+           1       0.36      0.87      0.51        46
+
+    accuracy                           0.62       202
+   macro avg       0.65      0.71      0.60       202
+weighted avg       0.80      0.62      0.65       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+
+Running k-fold model metrics...
+
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:00, 13.20it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00, 13.08it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00, 13.20it/s]Processing Folds:  80%|████████  | 8/10 [00:00<00:00, 13.35it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 12.85it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 13.01it/s]
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+Average Metrics Across All Folds:
+              Metric     Value
+0      Precision/PPV  0.379231
+1  Average Precision  0.397683
+2        Sensitivity  0.935000
+3        Specificity  0.540000
+4            AUC ROC  0.691958
+5        Brier Score  0.238512
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+Optimal threshold used: 0.41100000000000003
+
+================================================================================
+lda_Functional_Outcomes_Bleeding
+Precision/PPV        0.385
+Average Precision    0.435
+Sensitivity          0.913
+Specificity          0.571
+AUC ROC              0.771
+Brier Score          0.216
+Name: lda, dtype: float64
+<function log_mlflow_experiment at 0x7f8c6d10c180>
+Existing Experiment_ID: 462377359373805389
+
+Sampler ADASYN(random_state=222)
+
+Circumcision Outcome Columns:
+['Functional_Outcomes_Bleeding']
+********************************************************************************
+
+
+============================================================
+Functional_Outcomes_Bleeding
+============================================================
+
+Pipeline Steps:
+
+┌────────────────────────────────────────────┐
+│ Step 1: preprocess_scaler_StandardScalar   │
+│ StandardScaler                             │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 2: preprocess_imputer_Preprocessor    │
+│ SimpleImputer                              │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 3: resampler                          │
+│ ADASYN                                     │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 4: lda                                │
+│ LinearDiscriminantAnalysis                 │
+└────────────────────────────────────────────┘
+
+# Tuning hyper-parameters for average_precision
+Fitting 10 folds for each of 8 candidates, totalling 80 fits
+
+Best score/param set found on development set:
+{0.4201454378954379: {'lda__shrinkage': 0.1, 'lda__solver': 'lsqr'}}
+
+Grid scores on development set:
+0.399 (+/-0.243) for {'lda__shrinkage': None, 'lda__solver': 'lsqr'}
+0.399 (+/-0.243) for {'lda__shrinkage': None, 'lda__solver': 'eigen'}
+0.415 (+/-0.254) for {'lda__shrinkage': 'auto', 'lda__solver': 'lsqr'}
+0.415 (+/-0.254) for {'lda__shrinkage': 'auto', 'lda__solver': 'eigen'}
+0.420 (+/-0.243) for {'lda__shrinkage': 0.1, 'lda__solver': 'lsqr'}
+0.420 (+/-0.243) for {'lda__shrinkage': 0.1, 'lda__solver': 'eigen'}
+0.406 (+/-0.237) for {'lda__shrinkage': 0.5, 'lda__solver': 'lsqr'}
+0.406 (+/-0.237) for {'lda__shrinkage': 0.5, 'lda__solver': 'eigen'}
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  9.33it/s]100%|██████████| 2/2 [00:00<00:00,  9.34it/s]100%|██████████| 2/2 [00:00<00:00,  9.33it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00,  9.48it/s]100%|██████████| 2/2 [00:00<00:00,  9.48it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.31it/s]100%|██████████| 2/2 [00:00<00:00, 10.30it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 14.13it/s]100%|██████████| 2/2 [00:00<00:00, 14.12it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.32it/s]100%|██████████| 2/2 [00:00<00:00, 10.32it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 14.17it/s]100%|██████████| 2/2 [00:00<00:00, 14.16it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.51it/s]100%|██████████| 2/2 [00:00<00:00,  7.80it/s]100%|██████████| 2/2 [00:00<00:00,  7.76it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.80it/s]100%|██████████| 2/2 [00:00<00:00,  7.82it/s]100%|██████████| 2/2 [00:00<00:00,  7.81it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.32it/s]100%|██████████| 2/2 [00:00<00:00,  8.99it/s]100%|██████████| 2/2 [00:00<00:00,  8.88it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.50it/s]100%|██████████| 2/2 [00:00<00:00,  9.42it/s]
+
+Detailed classification report for lda:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  4 (tp)   0 (fn)
+        Neg  7 (fp)   8 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.96      0.54      0.69       156
+           1       0.37      0.91      0.53        46
+
+    accuracy                           0.63       202
+   macro avg       0.66      0.73      0.61       202
+weighted avg       0.82      0.63      0.66       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+--------------------------------------------------------------------------------
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  1 (tp)   3 (fn)
+        Neg  3 (fp)  11 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.80      0.75      0.77       156
+           1       0.29      0.35      0.32        46
+
+    accuracy                           0.66       202
+   macro avg       0.54      0.55      0.54       202
+weighted avg       0.68      0.66      0.67       202
+
+--------------------------------------------------------------------------------
+
+Detailed classification report for lda:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  4 (tp)   0 (fn)
+        Neg  7 (fp)   8 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.96      0.54      0.69       156
+           1       0.37      0.91      0.53        46
+
+    accuracy                           0.63       202
+   macro avg       0.66      0.73      0.61       202
+weighted avg       0.82      0.63      0.66       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+
+Running k-fold model metrics...
+
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:00, 11.54it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00, 10.89it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00, 11.51it/s]Processing Folds:  80%|████████  | 8/10 [00:00<00:00, 11.80it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 11.89it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 11.69it/s]
+
+Average Metrics Across All Folds:
+              Metric     Value
+0      Precision/PPV  0.370466
+1  Average Precision  0.420145
+2        Sensitivity  0.890000
+3        Specificity  0.545833
+4            AUC ROC  0.702667
+5        Brier Score  0.238085
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+Optimal threshold used: 0.5050000000000001
+
+================================================================================
+lda_Functional_Outcomes_Bleeding
+Precision/PPV        0.381
+Average Precision    0.416
+Sensitivity          0.935
+Specificity          0.551
+AUC ROC              0.769
+Brier Score          0.215
+Name: lda, dtype: float64
+<function log_mlflow_experiment at 0x7f8c6d10c180>
+Existing Experiment_ID: 462377359373805389
+
+Sampler RandomOverSampler(random_state=222)
+
+Circumcision Outcome Columns:
+['Functional_Outcomes_Bleeding']
+********************************************************************************
+
+
+============================================================
+Functional_Outcomes_Bleeding
+============================================================
+
+Pipeline Steps:
+
+┌────────────────────────────────────────────┐
+│ Step 1: preprocess_scaler_StandardScalar   │
+│ StandardScaler                             │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 2: preprocess_imputer_Preprocessor    │
+│ SimpleImputer                              │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 3: resampler                          │
+│ RandomOverSampler                          │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 4: lda                                │
+│ LinearDiscriminantAnalysis                 │
+└────────────────────────────────────────────┘
+
+# Tuning hyper-parameters for average_precision
+Fitting 10 folds for each of 8 candidates, totalling 80 fits
+
+Best score/param set found on development set:
+{0.40819197469197466: {'lda__shrinkage': None, 'lda__solver': 'lsqr'}}
+
+Grid scores on development set:
+0.408 (+/-0.198) for {'lda__shrinkage': None, 'lda__solver': 'lsqr'}
+0.408 (+/-0.198) for {'lda__shrinkage': None, 'lda__solver': 'eigen'}
+0.380 (+/-0.178) for {'lda__shrinkage': 'auto', 'lda__solver': 'lsqr'}
+0.380 (+/-0.178) for {'lda__shrinkage': 'auto', 'lda__solver': 'eigen'}
+0.403 (+/-0.200) for {'lda__shrinkage': 0.1, 'lda__solver': 'lsqr'}
+0.403 (+/-0.200) for {'lda__shrinkage': 0.1, 'lda__solver': 'eigen'}
+0.375 (+/-0.189) for {'lda__shrinkage': 0.5, 'lda__solver': 'lsqr'}
+0.375 (+/-0.189) for {'lda__shrinkage': 0.5, 'lda__solver': 'eigen'}
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.24it/s]100%|██████████| 2/2 [00:00<00:00, 10.24it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.84it/s]100%|██████████| 2/2 [00:00<00:00,  8.80it/s]100%|██████████| 2/2 [00:00<00:00,  8.80it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.80it/s]100%|██████████| 2/2 [00:00<00:00,  8.21it/s]100%|██████████| 2/2 [00:00<00:00,  8.14it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.21it/s]100%|██████████| 2/2 [00:00<00:00, 11.20it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  9.71it/s]100%|██████████| 2/2 [00:00<00:00,  9.24it/s]100%|██████████| 2/2 [00:00<00:00,  9.30it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.70it/s]100%|██████████| 2/2 [00:00<00:00, 11.69it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.22it/s]100%|██████████| 2/2 [00:00<00:00,  6.47it/s]100%|██████████| 2/2 [00:00<00:00,  6.43it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.12it/s]100%|██████████| 2/2 [00:00<00:00,  6.10it/s]100%|██████████| 2/2 [00:00<00:00,  6.10it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.94it/s]100%|██████████| 2/2 [00:00<00:00, 11.93it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [-1:59:59<00:00, -1.05it/s]
+
+Detailed classification report for lda:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  4 (tp)   0 (fn)
+        Neg  7 (fp)   7 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.93      0.50      0.65       156
+           1       0.34      0.87      0.49        46
+
+    accuracy                           0.58       202
+   macro avg       0.63      0.68      0.57       202
+weighted avg       0.79      0.58      0.61       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+--------------------------------------------------------------------------------
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  1 (tp)   3 (fn)
+        Neg  3 (fp)  12 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.77      0.78      0.78       156
+           1       0.23      0.22      0.22        46
+
+    accuracy                           0.65       202
+   macro avg       0.50      0.50      0.50       202
+weighted avg       0.65      0.65      0.65       202
+
+--------------------------------------------------------------------------------
+
+Detailed classification report for lda:
+
+Confusion Matrix Average Across 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+            Pos  Neg
+--------------------------------------------------------------------------------
+Actual: Pos  4 (tp)   0 (fn)
+        Neg  7 (fp)   7 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.93      0.50      0.65       156
+           1       0.34      0.87      0.49        46
+
+    accuracy                           0.58       202
+   macro avg       0.63      0.68      0.57       202
+weighted avg       0.79      0.58      0.61       202
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+
+Running k-fold model metrics...
+
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:00, 13.35it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00, 13.40it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00, 13.42it/s]Processing Folds:  80%|████████  | 8/10 [00:00<00:00, 12.80it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 12.88it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 13.01it/s]
+
+Average Metrics Across All Folds:
+              Metric     Value
+0      Precision/PPV  0.341538
+1  Average Precision  0.408192
+2        Sensitivity  0.820000
+3        Specificity  0.513750
+4            AUC ROC  0.694583
+5        Brier Score  0.239895
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+Optimal threshold used: 0.5269999999999999
+
+================================================================================
+lda_Functional_Outcomes_Bleeding
+Precision/PPV        0.373
+Average Precision    0.388
+Sensitivity          0.957
+Specificity          0.526
+AUC ROC              0.767
+Brier Score          0.216
+Name: lda, dtype: float64
+<function log_mlflow_experiment at 0x7f8c6d10c180>
+Existing Experiment_ID: 462377359373805389
+Object saved!
+
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.1, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=None, lda__solver=lsqr; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=None, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=auto, lda__solver=lsqr; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END .............lda__shrinkage=auto, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.1, lda__solver=eigen; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ...............lda__shrinkage=0.5, lda__solver=lsqr; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s
+[CV] END ..............lda__shrinkage=0.5, lda__solver=eigen; total time=   0.0s

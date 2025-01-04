@@ -8,7 +8,10 @@ from eda_toolkit import ensure_directory, dataframe_columns, add_ids
 from tqdm import tqdm
 
 from python_scripts.constants import *
-from python_scripts.functions import HealthMetrics  # import custom functions
+from python_scripts.functions import (
+    count_comorbidities,
+    HealthMetrics,
+)
 
 print()
 print(f"This project uses Python {sys.version.split()[0]}.")
@@ -124,16 +127,41 @@ HealthMetrics.calculate_bmi(
 # health_metrics.calculate_map(systolic_col="SystolicBP", diastolic_col="DiastolicBP")
 HealthMetrics.calculate_map(
     df=df,
-    map_col_name="MAP_Preop",
+    map_col_name="Preop_MAP",
     combined_bp_col="Preop_Blood_Pressure_mmHg",
 )
 
 HealthMetrics.calculate_map(
     df=df,
-    map_col_name="MAP_Intraop",
+    map_col_name="Intraop_MAP",
     combined_bp_col="Intraop_Mean_Blood_Pressure_mmHg",
 )
 
+################################# One-Hot Encoding #############################
+
+# one hot encode insurance categories (break them out as separate cols of 0, 1)
+df = df.assign(
+    **pd.get_dummies(
+        df[
+            [
+                "Anesthesia_Type",
+            ]
+        ],
+        dtype=int,
+    )
+)
+
+############################### Intraop SBP and DBP ############################
+
+# Split the BP values into two columns: Systolic (SBP) and Diastolic (DBP)
+df[["SBP", "DBP"]] = df["Intraop_Mean_Blood_Pressure_mmHg"].str.split(
+    "/",
+    expand=True,
+)
+
+# Convert the new columns to numeric
+df["SBP"] = pd.to_numeric(df["SBP"])
+df["DBP"] = pd.to_numeric(df["DBP"])
 
 ############################### Comorbidities ##################################
 
@@ -141,11 +169,40 @@ HealthMetrics.calculate_map(
 df["Comorbidity_Flag"] = df["Comorbidities"].apply(lambda x: 0 if x == 0 else 1)
 
 # replace 0 inside "Comorbidities" column with "None"
-df["Comorbidities"] = df["Comorbidities"].replace({0: "None Present"})
+df["Comorbidities"] = (
+    df["Comorbidities"].replace({0: "None Present"}).apply(count_comorbidities)
+)
 
+print("*" * terminal_width)
+print("Number of Comorbidities and their prevalance: \n")
+
+# Calculate value counts and percentages
+value_counts = df["Comorbidities"].value_counts()
+percentages = df["Comorbidities"].value_counts(1) * 100
+
+# Combine into a DataFrame
+combined_counts = pd.DataFrame(
+    {"Count": value_counts, "Percentage": percentages}
+).reset_index()
+
+combined_counts.columns = ["Comorbidity", "Count", "Percentage"]
+
+print(combined_counts)
+print()
+print("*" * terminal_width)
+############################ Surgical Techniques ###############################
+df["Surgical_Technique"] = df["Surgical_Technique"].apply(
+    lambda x: 0 if x == "Traditional" else 1
+)
+
+############################ Antibiotic Grouping ###############################
+
+df["Preop_drugs_antibiotic"] = df["Preop_drugs_antibiotic"].apply(
+    lambda x: 1 if x == "Cefazolina" else 0
+)
 
 ########################## Check for Missing Values ############################
-
+print("DataFrame Analysis Report (`dataframe_columns`) \n")
 df_columns = dataframe_columns(df, return_df=True)
 
 print(f"DataFrame Analysis:\n {df_columns}")
@@ -183,21 +240,39 @@ print(f"Dropping the following low variance column(s): {low_variance_columns}")
 
 # Now, drop these columns from df
 df.drop(columns=low_variance_columns, inplace=True)
+########################### Join Cost to EDA Column ############################
+#### Cost will be dropped, so making a copy of df to join it later
 
+circ_eda = df.copy()
 
 ######################### Dropping Additional Columns ##########################
 
-# Dropping uninformative features like "Birthday"
+# Dropping uninformative features like "Birthday"make sv
 # Dropping Weight since Height was dropped, and BMI will be used instead
 # Dropping "Preoperative Blood Pressure (mmHg)" because it is converted to MAP
-cols_to_drop = [
-    "Weight_kg",
-    "Preop_Blood_Pressure_mmHg",
-    "Intraop_Mean_Blood_Pressure_mmHg",
-    "Cost_of_Procedure_euros",
-    # "Functional_Outcomes_Bleeding",
-    "Birthday",
-]
+cols_to_drop = (
+    [
+        "Weight_kg",
+        "Comorbidity_Flag",
+        # "Preop_Blood_Pressure_mmHg",
+        "Intraoperative_Blood_Loss_ml",
+        "Cost_of_Procedure_euros",
+        "Birthday",
+        # "Anesthesia_Type_lidocaine",
+        "Intraop_MAP",
+    ]
+    + [
+        col
+        for col in df.columns
+        if "Functional" in col and "Functional_Outcomes_Bleeding" not in col
+    ]
+    + [
+        col
+        for col in df.columns
+        if "Preop_" in col and "Preop_drugs_antibiotic" not in col
+    ]
+)
+
 
 # Prepare the string of columns to drop, each on a new line, in advance
 columns_to_drop_str = "\n".join(cols_to_drop)
@@ -211,10 +286,10 @@ print()
 print("*" * terminal_width)
 print()
 # Prepare the column names as a stacked list string
-columns_listed = "\n".join(df.columns.to_list())
+columns_listed = "\n".join(circ_eda.columns.to_list())
 
 print(
-    f"Below is the DataFrame in a cleaner state than the original.\n"
+    f"The DataFrame is in a cleaner state than the original.\n"
     f"It is now ready for exploratory data analysis with the columns listed below:\n\n"
     f"{columns_listed}"
 )
@@ -223,7 +298,7 @@ print()
 
 # File paths and names
 file_paths = [
-    (df, os.path.join(data_path, "circ_eda.csv")),
+    (circ_eda, os.path.join(data_path, "circ_eda.csv")),
     (df, os.path.join(data_path, "circ_preproc.csv")),
 ]
 

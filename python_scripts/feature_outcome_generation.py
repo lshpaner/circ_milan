@@ -68,22 +68,13 @@ save_dataframes_to_excel(
 ############################ Summarize All Combinations ########################
 
 print()
-summarize_all_combinations(
-    df=df,
-    variables=["Age_years", "Preop_Heart_Rate_bpm"],
-    data_path=data_path,
-    data_name="new_test.xlsx",
-)
+# summarize_all_combinations(
+#     df=df,
+#     variables=["Age_years", "Preop_Heart_Rate_bpm"],
+#     data_path=data_path,
+#     data_name="new_test.xlsx",
+# )
 
-################################# One-Hot Encoding #############################
-
-# one hot encode insurance categories (break them out as separate cols of 0, 1)
-df = df.assign(
-    **pd.get_dummies(
-        df[["Surgical_Technique", "Anesthesia_Type"]],
-        dtype=int,
-    )
-)
 
 print("*" * terminal_width)
 print()
@@ -118,11 +109,12 @@ print()
 
 X = df[[col for col in df.columns if col != outcome]]
 
-print(f"Feature List: {X.columns.to_list()}")
+print(f"Feature List: {X.columns.to_list()}\n")
+print(f"Number of Features = {X.shape[1]}")
 print()
 y = df[[outcome]]
 
-print(f"Outcome: {outcome}")
+print(f"Outcome: {outcome}\n")
 
 ################################# Save out X and y #############################
 # File paths and names
