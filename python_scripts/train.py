@@ -16,6 +16,8 @@ print(os.path.join(os.pardir))
 sys.path.append(os.path.join(os.pardir))
 sys.path.append(".")
 
+from python_scripts.constants import *
+
 from python_scripts.model_params import (
     model_definitions,
     stratify_list,
@@ -26,9 +28,7 @@ from python_scripts.functions import (
     # create_stratified_other_column,
     metrics_report,
     log_mlflow_experiment,
-    plot_roc,
-    plot_precision_recall,
-    plot_confusion_matrix,
+    PlotMetrics,
 )
 from python_scripts.constants import age, mlflow_data
 
@@ -44,12 +44,35 @@ def main(
     model_type: str = "lr",
     exp_name: str = "logistic_regression",
     features_path: Path = PROCESSED_DATA_DIR / "X.parquet",
+    data_path: Path = PROCESSED_DATA_DIR / "X.csv",
+    eda_path: Path = PROCESSED_DATA_DIR / "circ_eda.csv",
     labels_path: Path = PROCESSED_DATA_DIR / "y.parquet",
     results: Path = MODELS_DIR / "results",
 ):
 
     X = pd.read_parquet(features_path)
     y = pd.read_parquet(labels_path)
+    circ_eda = pd.read_csv(eda_path).set_index(patient_id)
+
+    circ_eda = circ_eda.assign(
+        **pd.get_dummies(
+            circ_eda[
+                [
+                    "Geographical_Origin",
+                ]
+            ],
+            dtype=int,
+        )
+    )
+    X = pd.read_csv(data_path).set_index(patient_id)
+
+    print(X)
+
+    circ_eda = circ_eda[
+        [col for col in circ_eda.columns if "Geographical_Origin_" in col]
+    ]
+
+    circ_eda = circ_eda.join(X["Age_years"], on=patient_id, how="inner")
 
     print(f"y:{y}")
 
@@ -116,7 +139,7 @@ def main(
                 randomized_grid=False,
                 scoring=["average_precision"],
                 random_state=rstate,
-                # stratify_cols=stratify_df,
+                stratify_cols=circ_eda,
                 stratify_y=True,
                 boost_early=early_stop,
                 imbalance_sampler=sampler,
@@ -165,7 +188,13 @@ def main(
             ####################################################################
 
             for m in model_dict:
-                fig_1 = plot_roc(
+
+                # Initialize the PlotMetrics class, optionally specifying the
+                # path to save images
+                plotter = PlotMetrics()
+
+                # Generate the plots using the methods in the class
+                fig_1 = plotter.plot_roc(
                     models={estimator_name: model_dict[m]},
                     X_valid=X,
                     y_valid=y[m],
@@ -173,7 +202,7 @@ def main(
                     show=False,
                 )
 
-                fig_2 = plot_precision_recall(
+                fig_2 = plotter.plot_precision_recall(
                     models={estimator_name: model_dict[m]},
                     X_valid=X,
                     y_valid=y[m],
@@ -181,7 +210,7 @@ def main(
                     show=False,
                 )
 
-                fig_3 = plot_confusion_matrix(
+                fig_3 = plotter.plot_confusion_matrix(
                     models={estimator_name: model_dict[m]},
                     X_valid=X,
                     y_valid=y[m],
@@ -189,10 +218,6 @@ def main(
                     custom_name=estimator_name,
                     show=False,
                 )
-
-            print("^^^" * 30)
-            # print(model_dict[m][estimator_name])
-            # quit()
 
             print(f"{estimator_name}_{m}")
             print(metrics[m][estimator_name])
@@ -216,7 +241,6 @@ def main(
             best_score = metrics[m].loc["AUC ROC", estimator_name]
             best_model = model_dict.copy()
 
-    print(os.getcwd())
     dumpObjects(
         {
             "model": model_dict,  # Trained model

@@ -9,9 +9,10 @@ import seaborn as sns
 import textwrap
 import sys
 import os
+import re
 import mlflow
+import textwrap
 import warnings
-
 
 from tqdm import tqdm  # to show progress bar during model training and tuning
 
@@ -31,6 +32,8 @@ from sklearn.metrics import (
     brier_score_loss,
 )
 
+from sklearn.calibration import calibration_curve
+
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 from sklearn.svm import SVC
@@ -39,6 +42,24 @@ from sklearn.svm import SVC
 ################################################################################
 ############################## Data Conversions ################################
 ################################################################################
+
+
+# Function to count comorbidities
+def count_comorbidities(row):
+    """
+    Counts the number of comorbidities in a given string.
+
+    Parameters:
+        row (str): A string of comma-separated comorbidities or a placeholder
+        for none.
+
+    Returns:
+        int: Count of comorbidities. Returns 0 if no comorbidities are present.
+    """
+
+    if row == "0" or row == "None Present" or row.strip() == "":
+        return 0
+    return len(row.split(", "))
 
 
 class HealthMetrics:
@@ -227,279 +248,6 @@ def metrics_report(
     return metrics_df
 
 
-def evaluate_model_pipelines(splits, pipelines, param_grids=None):
-    results = {pipeline_name: [] for pipeline_name, _ in pipelines}
-    predictions = {pipeline_name: [] for pipeline_name, _ in pipelines}
-    true_values = {pipeline_name: [] for pipeline_name, _ in pipelines}
-    roc_data = {pipeline_name: [] for pipeline_name, _ in pipelines}
-    aggregated_conf_matrices = {pipeline_name: None for pipeline_name, _ in pipelines}
-    best_params = {
-        pipeline_name: [] for pipeline_name, _ in pipelines
-    }  # Store best parameters for each pipeline
-
-    for fold_index, (X_train, X_test, y_train, y_test) in enumerate(splits, start=1):
-        fold_progress = tqdm(
-            total=len(pipelines), desc=f"Fold {fold_index}/{len(splits)}"
-        )
-        for pipeline_name, pipeline in pipelines:
-            if param_grids and pipeline_name in param_grids:
-                grid_search = GridSearchCV(
-                    pipeline,
-                    param_grids[pipeline_name],
-                    cv=5,
-                    scoring="roc_auc",
-                    n_jobs=-1,
-                    verbose=0,
-                )
-                grid_search.fit(X_train, y_train)
-                best_pipeline = grid_search.best_estimator_
-                best_params[pipeline_name].append(
-                    grid_search.best_params_
-                )  # Collect the best parameters for each fold
-                y_pred = best_pipeline.predict(X_test)
-                y_prob = best_pipeline.predict_proba(X_test)[:, 1]
-                fold_progress.update(1)
-            else:
-                pipeline.fit(X_train, y_train)
-                y_pred = pipeline.predict(X_test)
-                y_prob = pipeline.predict_proba(X_test)[:, 1]
-                fold_progress.update(1)
-
-            fpr, tpr, _ = roc_curve(y_test, y_prob)
-            roc_data[pipeline_name].append((fpr, tpr, _))
-            accuracy = accuracy_score(y_test, y_pred)
-            precision = precision_score(y_test, y_pred, zero_division=0)
-            recall = recall_score(y_test, y_pred, zero_division=0)
-            f1 = f1_score(y_test, y_pred, zero_division=0)
-            auc_roc = roc_auc_score(y_test, y_prob)
-            pr_auc = average_precision_score(y_test, y_prob)
-            avg_precision = average_precision_score(y_test, y_prob)
-            tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
-            specificity = tn / (tn + fp) if (tn + fp) != 0 else 0
-            brier = brier_score_loss(y_test, y_prob)
-            conf_matrix = confusion_matrix(y_test, y_pred)
-
-            if aggregated_conf_matrices[pipeline_name] is None:
-                aggregated_conf_matrices[pipeline_name] = conf_matrix
-            else:
-                aggregated_conf_matrices[pipeline_name] += conf_matrix
-
-            detailed_report = classification_report(y_test, y_pred, zero_division=0)
-            formatted_conf_matrix = (
-                f"[ TN = {tn:3d} , FP = {fp:3d} ]\n[ FN = {fn:3d} , TP = {tp:3d} ]"
-            )
-
-            predictions[pipeline_name].append(y_prob)
-            true_values[pipeline_name].append(y_test)
-            results[pipeline_name].append(
-                {
-                    "fold": fold_index,
-                    "accuracy": accuracy,
-                    "precision": precision,
-                    "recall": recall,
-                    "f1_score": f1,
-                    "auc_roc": auc_roc,
-                    "pr_auc": pr_auc,
-                    "avg_precision": avg_precision,
-                    "specificity": specificity,
-                    "brier_score": brier,
-                    "confusion_matrix": formatted_conf_matrix,
-                    "detailed_report": detailed_report,
-                    "conf_matrix": conf_matrix,
-                }
-            )
-
-            print(f"\nResults for {pipeline_name} - Fold {fold_index}")
-            print(
-                f"Accuracy: {accuracy:.3f}, Precision: {precision:.3f}, Recall: {recall:.3f}, F1-Score: {f1:.3f}"
-            )
-            print(
-                f"AUC ROC: {auc_roc:.3f}, PR AUC: {pr_auc:.3f}, Avg Precision: {avg_precision:.3f}, Specificity: {specificity:.3f}"
-            )
-            print(f"Brier Score: {brier:.3f}")
-            print("Classification Report:")
-            print(detailed_report)
-            print("Confusion Matrix:")
-            print(formatted_conf_matrix)
-            print("-" * 60)
-
-        fold_progress.close()
-
-    # After all folds are processed, print the best parameters for each model
-    for pipeline_name, params in best_params.items():
-        print(f"\nOverall best parameters for {pipeline_name} after all folds:")
-        print(params)
-
-    return results, roc_data, true_values, predictions, aggregated_conf_matrices
-
-
-################################################################################
-
-
-def summarize_evaluation(
-    results,
-    model_labels=None,  # Mapping of internal model names to descriptive labels
-    display_metrics=True,
-    display_confusion_matrices=True,
-    include_std=True,  # Control the display of standard deviation
-    print_results=False,  # New parameter to control the printing of results
-):
-
-    if model_labels is None:
-        model_labels = {}
-
-    summary = {
-        model_labels.get(pipeline_name, pipeline_name): {
-            "accuracy": [],
-            "precision": [],
-            "recall": [],
-            "f1_score": [],
-            "auc_roc": [],
-            "pr_auc": [],
-            "avg_precision": [],
-            "specificity": [],
-            "brier_score": [],
-            "conf_matrix": np.zeros((2, 2), dtype=int),
-        }
-        for pipeline_name in results
-    }
-
-    for pipeline_name, folds in results.items():
-        # Use custom label if available
-        display_name = model_labels.get(pipeline_name, pipeline_name)
-        for fold in folds:
-            summary[display_name]["accuracy"].append(fold["accuracy"])
-            summary[display_name]["precision"].append(fold["precision"])
-            summary[display_name]["recall"].append(fold["recall"])
-            summary[display_name]["f1_score"].append(fold["f1_score"])
-            summary[display_name]["auc_roc"].append(fold["auc_roc"])
-            summary[display_name]["pr_auc"].append(fold["pr_auc"])
-            summary[display_name]["avg_precision"].append(fold["avg_precision"])
-            summary[display_name]["specificity"].append(fold["specificity"])
-            summary[display_name]["brier_score"].append(fold["brier_score"])
-            summary[display_name]["conf_matrix"] += fold["conf_matrix"]
-
-    # Create a list of tuples for each metric and statistic
-    metrics_data = []
-    statistics = ["Mean"]
-    if include_std:
-        statistics.append("Standard Deviation")
-
-    for model_name, metrics in summary.items():
-        for stat in statistics:
-            metric_values = []
-            for metric in [
-                "accuracy",
-                "precision",
-                "recall",
-                "f1_score",
-                "auc_roc",
-                "pr_auc",
-                "avg_precision",
-                "specificity",
-                "brier_score",
-            ]:
-                if metric != "conf_matrix":
-                    if stat == "Mean":
-                        metric_values.append(round(np.mean(metrics[metric]), 3))
-                    elif stat == "Standard Deviation":
-                        metric_values.append(round(np.std(metrics[metric]), 3))
-            metrics_data.append([stat, model_name] + metric_values)
-
-    # Create the DataFrame without setting an index
-    metrics_df = pd.DataFrame(
-        metrics_data,
-        columns=["Metric", "Model_Name"]
-        + [
-            "Accuracy",
-            "Precision",
-            "Recall",
-            "F1 Score",
-            "AUC ROC",
-            "PR AUC",
-            "Average Precision",
-            "Specificity",
-            "Brier Score",
-        ],
-    )
-
-    # Remove the default integer index
-    metrics_df.reset_index(drop=True, inplace=True)
-
-    # Create DataFrame for confusion matrices, if needed
-    confusion_matrices = {}
-    if display_confusion_matrices:
-        for model_name in summary:
-            cm = summary[model_name]["conf_matrix"]
-            cm_df = pd.DataFrame(
-                cm,
-                columns=["Predicted Negative", "Predicted Positive"],
-                index=["Actual Negative", "Actual Positive"],
-            )
-            confusion_matrices[model_name] = cm_df
-
-            # Optional printing of confusion matrix
-            if print_results:
-                print(f"{model_name} Confusion Matrix:")
-                print(cm_df.to_string(index=False))
-                print()
-
-    # Optional printing of metrics DataFrame
-    if print_results:
-        print("Evaluation Metrics:")
-        print(metrics_df.to_string(index=False))
-        print()
-
-    return metrics_df, cm_df
-
-
-################################################################################
-########################## Aggregated Confusion Matrix #########################
-################################################################################
-
-
-def plot_aggregated_confusion_matrices(
-    aggregated_conf_matrices,
-    model_labels=None,
-    image_path_png=None,
-    image_path_svg=None,
-):
-    if model_labels is None:
-        model_labels = {}
-
-    num_models = len(aggregated_conf_matrices)
-
-    # Check if there's only one model and adjust layout accordingly
-    if num_models == 1:
-        fig, ax = plt.subplots(
-            figsize=(5, 4)
-        )  # You can set the desired single figsize here
-        axes = [ax]  # Wrap ax in a list to make it iterable
-    else:
-        fig, axes = plt.subplots(
-            1, num_models, figsize=(10 * num_models, 8)
-        )  # Horizontal layout for multiple models
-
-    for ax, (model_name, cm) in zip(axes, aggregated_conf_matrices.items()):
-        display_name = model_labels.get(
-            model_name, model_name
-        )  # Use custom label if available
-        sns.heatmap(
-            cm, annot=True, fmt="d", cmap="viridis", ax=ax
-        )  # 'viridis' is a good choice for visibility
-        ax.set_title(f"{display_name}: Confusion Matrix")
-        ax.set_xlabel("Predicted labels")
-        ax.set_ylabel("True labels")
-
-    plt.tight_layout()
-    # Check if image paths are provided and save the figures accordingly
-    if image_path_png:
-        plt.savefig(os.path.join(image_path_png, "aggregated_confusion_matrix.png"))
-    if image_path_svg:
-        plt.savefig(os.path.join(image_path_svg, "aggregated_confusion_matrix.svg"))
-    plt.show()
-
-
 ################################################################################
 ######################### Create Custom Stratification #########################
 ################################################################################
@@ -608,280 +356,224 @@ def plot_aggregated_confusion_matrices(
 
 
 ################################################################################
-###########################  Model-Specific  Curves ############################
+###########################  Model-Specific Curves ############################
 ################################################################################
 
-################################ ROC AUC Curves ################################
 
+class PlotMetrics:
+    def __init__(self, images_path=None):
+        """
+        Initialize the PlotMetrics class.
 
-def plot_roc(
-    df=None,
-    outcome_cols=None,
-    pred_cols=None,
-    custom_name=None,
-    models=None,
-    X_valid=None,
-    y_valid=None,
-    pred_probs_df=None,
-    model_name=None,
-    images_path=None,
-    show=True,
-):
-    """
-    Plots ROC curves for various input types.
+        Parameters:
+        -----------
+        images_path : str, optional
+            Path to save the generated plots.
+        """
+        self.images_path = images_path
 
-    df: DataFrame that contains outcome and predicted probabilities.
-    outcome_cols: List of columns in df which represent the true labels.
-    pred_cols: List of columns in df which represent the predicted probabilities.
-    models: Dictionary of models for predictions. Key is the model name.
-    X_valid: Validation features for the model predictions.
-    y_valid: Validation targets for the model predictions.
-    pred_probs_df: DataFrame with predicted probabilities from models.
-    model_name: Name of the model if only one model needs to be plotted.
-    images_path: Directory path to save the ROC plot.
-    """
+    def _save_plot(self, title, extension="png"):
+        """
+        Save the plot to the specified path if images_path is provided.
 
-    fig, ax = plt.subplots(figsize=(8, 8))
-    title = None  # Initialize title
+        Parameters:
+        -----------
+        title : str
+            Title of the plot.
+        extension : str, optional (default="png")
+            File extension for the saved plot.
+        """
+        if self.images_path:
+            filename = f"{title.replace(' ', '_').replace(':', '')}.{extension}"
+            plt.savefig(os.path.join(self.images_path, filename), format=extension)
 
-    # If outcome_cols, pred_cols, and df provided
-    if outcome_cols is not None and pred_cols is not None and df is not None:
-        for outcome_col, pred_col in zip(outcome_cols, pred_cols):
-            y_prob = df[pred_col]
-            fpr, tpr, _ = roc_curve(df[outcome_col], y_prob)
-            auc_score = roc_auc_score(df[outcome_col], y_prob)
-            plt.plot(fpr, tpr, label=f"{outcome_col} (AUC={auc_score:.2f})")
-            num_var = re.findall(r"\d+", pred_col)[0] if "var" in pred_col else None
-            title = f"AUC ROC: {num_var}-Variable KFRE"
+    def plot_roc(
+        self,
+        df=None,
+        outcome_cols=None,
+        pred_cols=None,
+        models=None,
+        X_valid=None,
+        y_valid=None,
+        pred_probs_df=None,
+        model_name=None,
+        custom_name=None,
+        show=True,
+    ):
+        fig, ax = plt.subplots(figsize=(8, 8))
+        title = None
 
-    # If models, X_valid, and y_valid are provided
-    if models is not None and X_valid is not None and y_valid is not None:
-        if model_name is not None:  # If a specific model name is given
-            y_score = models[model_name].predict_proba(X_valid)[:, 1]
-            fpr, tpr, _ = roc_curve(y_valid, y_score)
-            auc_score = roc_auc_score(y_valid, y_score)
-            plt.plot(fpr, tpr, label=f"{model_name} (AUC={auc_score:.2f})")
-        else:  # If a dictionary of models is given
-            for name, model in models.items():
-                y_score = model.predict_proba(X_valid)[:, 1]
+        if outcome_cols and pred_cols and df is not None:
+            for outcome_col, pred_col in zip(outcome_cols, pred_cols):
+                y_prob = df[pred_col]
+                fpr, tpr, _ = roc_curve(df[outcome_col], y_prob)
+                auc_score = roc_auc_score(df[outcome_col], y_prob)
+                plt.plot(fpr, tpr, label=f"{outcome_col} (AUC={auc_score:.2f})")
+                num_var = re.findall(r"\d+", pred_col)[0] if "var" in pred_col else None
+                title = f"AUC ROC: {num_var}-Variable KFRE"
+
+        if models and X_valid is not None and y_valid is not None:
+            if model_name:
+                y_score = models[model_name].predict_proba(X_valid)[:, 1]
                 fpr, tpr, _ = roc_curve(y_valid, y_score)
                 auc_score = roc_auc_score(y_valid, y_score)
-                plt.plot(fpr, tpr, label=f"{name} (AUC={auc_score:.2f})")
-            if title is None:  # Check if title is not set yet
-                if y_valid is not None:
-                    title = f"AUC ROC - {custom_name}: {outcome_cols}"
+                plt.plot(fpr, tpr, label=f"{model_name} (AUC={auc_score:.2f})")
+            else:
+                for name, model in models.items():
+                    y_score = model.predict_proba(X_valid)[:, 1]
+                    fpr, tpr, _ = roc_curve(y_valid, y_score)
+                    auc_score = roc_auc_score(y_valid, y_score)
+                    plt.plot(fpr, tpr, label=f"{name} (AUC={auc_score:.2f})")
 
-    # For pred_probs_df
-    if pred_probs_df is not None:
-        for col in pred_probs_df.columns:
-            y_score = pred_probs_df[col].values
-            fpr, tpr, _ = roc_curve(y_valid, y_score)
-            auc_score = roc_auc_score(y_valid, y_score)
-            plt.plot(fpr, tpr, label=f"{col} (AUC={auc_score:.2f})")
+        if pred_probs_df is not None:
+            for col in pred_probs_df.columns:
+                y_score = pred_probs_df[col].values
+                fpr, tpr, _ = roc_curve(y_valid, y_score)
+                auc_score = roc_auc_score(y_valid, y_score)
+                plt.plot(fpr, tpr, label=f"{col} (AUC={auc_score:.2f})")
 
-    plt.plot([0, 1], [0, 1], color="navy", linestyle="--")  # Diagonal line
-    plt.xlim([0.0, 1.0])  # Set the x limits of the current plot
-    plt.ylim([0.0, 1.05])  # Set the y limits of the current plot
-    plt.xlabel("False Positive Rate")  # X-axis label
-    plt.ylabel("True Positive Rate")  # Y-axis label
-    plt.legend(loc="lower right")  # Location of legend on the plot
+        plt.plot([0, 1], [0, 1], color="navy", linestyle="--")
+        plt.xlim([0.0, 1.0])
+        plt.ylim([0.0, 1.05])
+        plt.xlabel("False Positive Rate")
+        plt.ylabel("True Positive Rate")
+        plt.legend(loc="lower right")
 
-    # If title is still not set, use a default title
-    if title is None:
-        title = "Receiver Operating Characteristic"
+        if title is None:
+            title = "Receiver Operating Characteristic"
 
-    plt.title(title)
+        plt.title(title)
+        self._save_plot(title)
+        if show:
+            plt.show()
 
-    # Save the plot to the specified path
-    if images_path is not None:
-        filename = f"{title.replace(' ', '_').replace(':', '')}.png"
-        plt.savefig(os.path.join(images_path, filename), format="png")
-    if show:
-        plt.show()
+        return fig
 
-    return fig
+    def plot_precision_recall(
+        self,
+        df=None,
+        outcome_cols=None,
+        pred_cols=None,
+        models=None,
+        X_valid=None,
+        y_valid=None,
+        pred_probs_df=None,
+        model_name=None,
+        custom_name=None,
+        show=True,
+    ):
+        fig, ax = plt.subplots(figsize=(8, 8))
+        title = None
 
+        if outcome_cols and pred_cols and df is not None:
+            for outcome_col, pred_col in zip(outcome_cols, pred_cols):
+                y_prob = df[pred_col]
+                precision, recall, _ = precision_recall_curve(df[outcome_col], y_prob)
+                avg_precision = average_precision_score(df[outcome_col], y_prob)
+                plt.plot(
+                    recall, precision, label=f"{outcome_col} (AP={avg_precision:.2f})"
+                )
 
-########################### Precision - Recall Curves ##########################
-
-
-def plot_precision_recall(
-    df=None,
-    outcome_cols=None,
-    pred_cols=None,
-    custom_name=None,
-    models=None,
-    X_valid=None,
-    y_valid=None,
-    pred_probs_df=None,
-    model_name=None,
-    images_path=None,
-    show=True,
-):
-    """
-    Plots Precision-Recall curves for various input types.
-
-    df: DataFrame that contains outcome and predicted probabilities.
-    outcome_cols: List of columns in df which represent the true labels.
-    pred_cols: List of columns in df which represent the predicted probabilities.
-    models: Dictionary of models for predictions. Key is the model name.
-    X_valid: Validation features for the model predictions.
-    y_valid: Validation targets for the model predictions.
-    pred_probs_df: DataFrame with predicted probabilities from models.
-    model_name: Name of the model if only one model needs to be plotted.
-    images_path: Directory path to save the Precision-Recall plot.
-    """
-
-    fig, ax = plt.subplots(figsize=(8, 8))
-    title = None  # Initialize title
-
-    # If outcome_cols, pred_cols, and df provided
-    if outcome_cols is not None and pred_cols is not None and df is not None:
-        for outcome_col, pred_col in zip(outcome_cols, pred_cols):
-            y_prob = df[pred_col]
-            precision, recall, _ = precision_recall_curve(df[outcome_col], y_prob)
-            avg_precision = average_precision_score(df[outcome_col], y_prob)
-            plt.plot(recall, precision, label=f"{outcome_col} (AP={avg_precision:.2f})")
-            num_var = re.findall(r"\d+", pred_col)[0] if "var" in pred_col else None
-            title = f"Precision-Recall: {num_var}-Variable KFRE"
-
-    # If models, X_valid, and y_valid are provided
-    if models is not None and X_valid is not None and y_valid is not None:
-        if model_name is not None:  # If a specific model name is given
-            y_score = models[model_name].predict_proba(X_valid)[:, 1]
-            precision, recall, _ = precision_recall_curve(y_valid, y_score)
-            avg_precision = average_precision_score(y_valid, y_score)
-            plt.plot(recall, precision, label=f"{model_name} (AP={avg_precision:.2f})")
-        else:  # If a dictionary of models is given
-            for name, model in models.items():
-                y_score = model.predict_proba(X_valid)[:, 1]
+        if models and X_valid is not None and y_valid is not None:
+            if model_name:
+                y_score = models[model_name].predict_proba(X_valid)[:, 1]
                 precision, recall, _ = precision_recall_curve(y_valid, y_score)
                 avg_precision = average_precision_score(y_valid, y_score)
-                plt.plot(recall, precision, label=f"{name} (AP={avg_precision:.2f})")
-            if title is None:  # Check if title is not set yet
-                if y_valid is not None:
-                    title = f"Precision-Recall - {custom_name}: {outcome_cols}"
-
-    # For pred_probs_df
-    if pred_probs_df is not None:
-        for col in pred_probs_df.columns:
-            y_score = pred_probs_df[col].values
-            precision, recall, _ = precision_recall_curve(y_valid, y_score)
-            avg_precision = average_precision_score(y_valid, y_score)
-            plt.plot(recall, precision, label=f"{col} (AP={avg_precision:.2f})")
-
-    plt.xlabel("Recall")  # X-axis label
-    plt.ylabel("Precision")  # Y-axis label
-    plt.legend(loc="lower left")  # Location of legend on the plot
-
-    # If title is still not set, use a default title
-    if title is None:
-        title = "Precision-Recall Curve"
-
-    plt.title(title)
-
-    # Save the plot to the specified path
-    if images_path is not None:
-        filename = f"{title.replace(' ', '_').replace(':', '')}.png"
-        plt.savefig(os.path.join(images_path, filename), format="png")
-    if show:
-        plt.show()
-
-    return fig
-
-
-############################### Confusion Matrices #############################
-
-
-def plot_confusion_matrix(
-    df=None,
-    outcome_cols=None,
-    pred_cols=None,
-    models=None,
-    X_valid=None,
-    y_valid=None,
-    threshold=0.5,
-    custom_name=None,
-    model_name=None,
-    images_path=None,
-    normalize=None,
-    show=True,
-):
-    """
-    Plots confusion matrices for various input types.
-
-    df: DataFrame that contains outcome and predicted probabilities.
-    outcome_cols: List of columns in df which represent the true labels.
-    pred_cols: List of columns in df which represent the predicted probabilities.
-    models: Dictionary of models for predictions. Key is the model name.
-    X_valid: Validation features for the model predictions.
-    y_valid: Validation targets for the model predictions.
-    threshold: Threshold for converting probabilities to binary predictions.
-    custom_name: Custom name for the plot title.
-    model_name: Name of the model if only one model needs to be plotted.
-    images_path: Directory path to save the confusion matrix plot.
-    normalize: {'true', 'pred', 'all'}, default=None. Normalizes confusion matrix.
-    show: Whether to display the plot.
-    """
-
-    fig, ax = plt.subplots(figsize=(8, 8))
-    title = None  # Initialize title
-
-    # If outcome_cols, pred_cols, and df provided
-    if outcome_cols is not None and pred_cols is not None and df is not None:
-        for outcome_col, pred_col in zip(outcome_cols, pred_cols):
-            y_true = df[outcome_col]
-            y_pred = (df[pred_col] >= threshold).astype(int)
-            cm = confusion_matrix(y_true, y_pred, normalize=normalize)
-            disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=[0, 1])
-            disp.plot(ax=ax, cmap="Blues", colorbar=False)
-            if custom_name:
-                title = f"{custom_name} - Confusion Matrix: {outcome_col} vs {pred_col}"
+                plt.plot(
+                    recall, precision, label=f"{model_name} (AP={avg_precision:.2f})"
+                )
             else:
-                title = f"Confusion Matrix: {outcome_col} vs {pred_col}"
+                for name, model in models.items():
+                    y_score = model.predict_proba(X_valid)[:, 1]
+                    precision, recall, _ = precision_recall_curve(y_valid, y_score)
+                    avg_precision = average_precision_score(y_valid, y_score)
+                    plt.plot(
+                        recall, precision, label=f"{name} (AP={avg_precision:.2f})"
+                    )
 
-    # If models, X_valid, and y_valid are provided
-    if models is not None and X_valid is not None and y_valid is not None:
-        if model_name is not None:  # If a specific model name is given
-            y_pred = (
-                models[model_name].predict_proba(X_valid)[:, 1] >= threshold
-            ).astype(int)
-            cm = confusion_matrix(y_valid, y_pred, normalize=normalize)
-            disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=[0, 1])
-            disp.plot(ax=ax, cmap="Blues", colorbar=False)
-            if custom_name:
-                title = f"{custom_name} - Confusion Matrix: {model_name}"
-            else:
-                title = f"Confusion Matrix: {model_name}"
-        else:  # If a dictionary of models is given
-            for name, model in models.items():
-                y_pred = (model.predict_proba(X_valid)[:, 1] >= threshold).astype(int)
+        if pred_probs_df is not None:
+            for col in pred_probs_df.columns:
+                y_score = pred_probs_df[col].values
+                precision, recall, _ = precision_recall_curve(y_valid, y_score)
+                avg_precision = average_precision_score(y_valid, y_score)
+                plt.plot(recall, precision, label=f"{col} (AP={avg_precision:.2f})")
+
+        plt.xlabel("Recall")
+        plt.ylabel("Precision")
+        plt.legend(loc="lower left")
+
+        if title is None:
+            title = "Precision-Recall Curve"
+
+        plt.title(title)
+        self._save_plot(title)
+        if show:
+            plt.show()
+
+        return fig
+
+    def plot_confusion_matrix(
+        self,
+        df=None,
+        outcome_cols=None,
+        pred_cols=None,
+        models=None,
+        X_valid=None,
+        y_valid=None,
+        threshold=0.5,
+        custom_name=None,
+        model_name=None,
+        normalize=None,
+        cmap="Blues",
+        show=True,
+    ):
+        fig, ax = plt.subplots(figsize=(8, 8))
+        title = None
+
+        if outcome_cols and pred_cols and df is not None:
+            for outcome_col, pred_col in zip(outcome_cols, pred_cols):
+                y_true = df[outcome_col]
+                y_pred = (df[pred_col] >= threshold).astype(int)
+                cm = confusion_matrix(y_true, y_pred, normalize=normalize)
+                disp = ConfusionMatrixDisplay(
+                    confusion_matrix=cm, display_labels=[0, 1]
+                )
+                disp.plot(ax=ax, cmap=cmap, colorbar=False)
+
+        if models and X_valid is not None and y_valid is not None:
+            if model_name:
+                y_pred = (
+                    models[model_name].predict_proba(X_valid)[:, 1] >= threshold
+                ).astype(int)
                 cm = confusion_matrix(y_valid, y_pred, normalize=normalize)
                 disp = ConfusionMatrixDisplay(
                     confusion_matrix=cm, display_labels=[0, 1]
                 )
-                disp.plot(ax=ax, cmap="Blues", colorbar=False)
-                if custom_name:
-                    title = f"{custom_name} - Confusion Matrix: {name}"
-                else:
-                    title = f"Confusion Matrix: {name}"
+                disp.plot(ax=ax, cmap=cmap, colorbar=False)
+            else:
+                for name, model in models.items():
+                    y_pred = (model.predict_proba(X_valid)[:, 1] >= threshold).astype(
+                        int
+                    )
+                    cm = confusion_matrix(y_valid, y_pred, normalize=normalize)
+                    disp = ConfusionMatrixDisplay(
+                        confusion_matrix=cm, display_labels=[0, 1]
+                    )
+                    disp.plot(ax=ax, cmap=cmap, colorbar=False)
 
-    # If title is still not set, use a default title
-    if title is None:
-        title = (
-            f"{custom_name} - Confusion Matrix" if custom_name else "Confusion Matrix"
-        )
+        if title is None:
+            title = (
+                f"{custom_name} - Confusion Matrix"
+                if custom_name
+                else "Confusion Matrix"
+            )
 
-    plt.title(title)
+        plt.title(title)
+        self._save_plot(title)
+        if show:
+            plt.show()
 
-    # Save the plot to the specified path
-    if images_path is not None:
-        filename = f"{title.replace(' ', '_').replace(':', '')}.png"
-        plt.savefig(os.path.join(images_path, filename), format="png")
-    if show:
-        plt.show()
-
-    return fig
+        return fig
 
 
 ################################################################################
@@ -1000,3 +692,1078 @@ def log_mlflow_experiment(
 
             for name, image in images.items():
                 mlflow.log_figure(image, name)
+
+
+################################################################################
+################################################################################
+################################################################################
+
+
+class ModelEvaluationMetrics:
+    def __init__(self):
+        """
+        Initialize the ModelEvaluationPlots class.
+        """
+        pass
+
+    def summarize_model_performance(
+        self,
+        pipelines_or_models,
+        X,
+        y_true,
+        model_threshold=None,
+        model_titles=None,
+        custom_threshold=None,
+        return_df=False,
+    ):
+        """
+        Summarize key performance metrics for multiple models.
+
+        Parameters:
+        - pipelines_or_models: list
+            A list of models or pipelines to evaluate.
+            Each pipeline should either end with a classifier or contain one.
+        - X: array-like
+            The input features for generating predictions.
+        - y_true: array-like
+            The true labels corresponding to the input features.
+        - model_threshold: dict or None, optional
+            A dictionary mapping model names to predefined thresholds for binary
+            classification. If provided, these thresholds will be displayed in
+            the table but not used for metric recalculations when `custom_threshold`
+            is set.
+        - model_titles: list or None, optional
+            A list of custom titles for individual models. If not provided, the
+            names of the models will be extracted automatically.
+        - custom_threshold: float or None, optional
+            A custom threshold to apply for recalculating metrics. If set, this
+            threshold will override the default threshold of 0.5 and any thresholds
+            from `model_threshold` for all models.
+            When specified, the "Model Threshold" row is omitted from the table.
+        - return_df: bool, optional
+            Whether to return the metrics as a pandas DataFrame instead of printing
+            them to the console. Default is False.
+
+        Returns:
+        - pd.DataFrame or None
+            If `return_df` is True, returns a DataFrame summarizing model performance
+            metrics, including precision, recall, specificity, F1-Score, AUC ROC,
+            and Brier Score. Otherwise, prints the metrics in a formatted table.
+
+        Notes:
+        - If `model_threshold` is provided and `custom_threshold` is not set, the
+        "Model Threshold" row will display the values from `model_threshold`.
+        - If `custom_threshold` is set, it applies to all models for metric
+        recalculations, and the "Model Threshold" row is excluded from the table.
+        - Automatically extracts model names if `model_titles` is not provided.
+        - Models must support `predict_proba` or `decision_function` for predictions.
+        """
+
+        if not isinstance(pipelines_or_models, list):
+            pipelines_or_models = [pipelines_or_models]
+
+        metrics_data = []
+
+        for i, model in enumerate(pipelines_or_models):
+            # Determine the model name
+            if model_titles:
+                name = model_titles[i]
+            else:
+                name = self._extract_model_name(model)  # Extract detailed name
+
+            # Retrieve the threshold if provided
+            current_threshold = None
+            if model_threshold:
+                current_threshold = (
+                    model_threshold.get(name.strip().lower(), None)
+                    or list(model_threshold.values())[i]
+                    if len(model_threshold) > i
+                    else None
+                )
+            # Determine the threshold to use for metric calculation
+            applied_threshold = (
+                custom_threshold if custom_threshold is not None else 0.5
+            )
+
+            # Get model probabilities
+            if hasattr(model, "predict_proba"):
+                y_proba = model.predict_proba(X)[:, 1]
+            elif hasattr(model, "decision_function"):
+                y_scores = model.decision_function(X)
+                y_proba = 1 / (1 + np.exp(-y_scores))
+            else:
+                raise ValueError(
+                    f"Model {name} does not support probability-based prediction."
+                )
+
+            # Use model's default threshold (0.5) for predictions
+            y_pred = (y_proba >= applied_threshold).astype(int)
+
+            # Compute metrics
+            precision = precision_score(y_true, y_pred)
+            recall = recall_score(y_true, y_pred)  # Sensitivity
+            cm = confusion_matrix(y_true, y_pred)
+            tn, fp, fn, tp = cm.ravel()
+            specificity = tn / (tn + fp) if (tn + fp) > 0 else 0
+            auc_roc = roc_auc_score(y_true, y_proba)
+            brier = brier_score_loss(y_true, y_proba)
+            avg_precision = average_precision_score(y_true, y_proba)
+            f1 = f1_score(y_true, y_pred)
+
+            # Append metrics for this model
+            model_metrics = {
+                "Model": name,
+                "Precision/PPV": precision,
+                "Average Precision": avg_precision,
+                "Sensitivity/Recall": recall,
+                "Specificity": specificity,
+                "F1-Score": f1,
+                "AUC ROC": auc_roc,
+                "Brier Score": brier,
+            }
+
+            # Only add the threshold if it's provided and no custom_threshold is set
+            if current_threshold is not None and not custom_threshold:
+                model_metrics["Model Threshold"] = current_threshold
+
+            metrics_data.append(model_metrics)
+
+        # Create a DataFrame
+        metrics_df = pd.DataFrame(metrics_data)
+        metrics_df.set_index("Model", inplace=True)
+        metrics_df = metrics_df.T
+
+        # Return the DataFrame if requested
+        if return_df:
+            return metrics_df
+
+        # Adjust column widths for center alignment
+        col_widths = {col: max(len(col), 8) + 2 for col in metrics_df.columns}
+        row_name_width = max(len(row) for row in metrics_df.index) + 2
+
+        # Center-align headers
+        headers = [
+            f"{'Metric'.center(row_name_width)}"
+            + "".join(f"{col.center(col_widths[col])}" for col in metrics_df.columns)
+        ]
+
+        # Separator line
+        separator = "-" * (row_name_width + sum(col_widths.values()))
+
+        # Print table header
+        print("Model Performance Metrics:")
+        print("\n".join(headers))
+        print(separator)
+
+        # Center-align rows
+        for row_name, row_data in metrics_df.iterrows():
+            row = f"{row_name.center(row_name_width)}" + "".join(
+                (
+                    f"{f'{value:.4f}'.center(col_widths[col])}"
+                    if isinstance(value, float)
+                    else f"{str(value).center(col_widths[col])}"
+                )
+                for col, value in zip(metrics_df.columns, row_data)
+            )
+            print(row)
+
+    def _save_plot(self, filename, save_plot, image_path_png, image_path_svg):
+        """
+        Save the plot to specified directories.
+        """
+        if save_plot:
+            if not (image_path_png or image_path_svg):
+                raise ValueError(
+                    "save_plot is set to True, but no image path is provided. "
+                    "Please specify at least one of `image_path_png` or `image_path_svg`."
+                )
+            if image_path_png:
+                os.makedirs(image_path_png, exist_ok=True)
+                plt.savefig(
+                    os.path.join(image_path_png, f"{filename}.png"),
+                    bbox_inches="tight",
+                )
+            if image_path_svg:
+                os.makedirs(image_path_svg, exist_ok=True)
+                plt.savefig(
+                    os.path.join(image_path_svg, f"{filename}.svg"),
+                    bbox_inches="tight",
+                )
+
+    def _get_model_probabilities(self, model, X, name):
+        """
+        Extract probabilities for the positive class from the model.
+        """
+        if hasattr(model, "predict_proba"):  # Direct model with predict_proba
+            return model.predict_proba(X)[:, 1]
+        elif hasattr(model, "named_steps"):  # Pipeline
+            final_model = list(model.named_steps.values())[-1]
+            if hasattr(final_model, "predict_proba"):
+                return model.predict_proba(X)[:, 1]
+            elif hasattr(final_model, "decision_function"):
+                y_scores = final_model.decision_function(X)
+                return 1 / (1 + np.exp(-y_scores))  # Convert to probabilities
+        elif hasattr(
+            model, "decision_function"
+        ):  # Standalone model with decision_function
+            y_scores = model.decision_function(X)
+            return 1 / (1 + np.exp(-y_scores))  # Convert to probabilities
+        else:
+            raise ValueError(
+                f"Model {name} does not support probability-based prediction."
+            )
+
+    def _extract_model_titles(self, models_or_pipelines):
+        """
+        Extract titles from models or pipelines.
+        """
+        titles = []
+        for model in models_or_pipelines:
+            if hasattr(model, "named_steps"):  # Pipeline
+                final_model = list(model.named_steps.values())[-1]
+                title = getattr(final_model, "__class__", type(final_model)).__name__
+            else:
+                title = getattr(model, "__class__", type(model)).__name__
+            titles.append(title)
+        return titles
+
+    # Helper function to extract detailed model names from pipelines or models
+    def _extract_model_name(self, pipeline_or_model):
+        if hasattr(pipeline_or_model, "steps"):  # It's a pipeline
+            return pipeline_or_model.steps[-1][
+                1
+            ].__class__.__name__  # Final estimator's class name
+        return pipeline_or_model.__class__.__name__  # Individual model class name
+
+    def plot_confusion_matrix(
+        self,
+        pipelines_or_models,
+        X,
+        y_true,
+        model_titles=None,
+        model_threshold=None,
+        custom_threshold=None,
+        class_labels=None,
+        cmap="Blues",
+        save_plot=False,
+        image_path_png=None,
+        image_path_svg=None,
+        text_wrap=None,
+        figsize=(8, 6),
+        labels=True,
+        label_fontsize=12,
+        tick_fontsize=10,
+        inner_fontsize=10,
+        grid=False,  # Added grid option
+        **kwargs,
+    ):
+        """
+        Compute and plot confusion matrices for multiple pipelines or models.
+
+        Parameters:
+        (Documentation remains unchanged...)
+
+        Returns:
+        - None
+        """
+        if not isinstance(pipelines_or_models, list):
+            pipelines_or_models = [pipelines_or_models]
+
+        if model_titles is None:
+            model_titles = [
+                self._extract_model_name(model) for model in pipelines_or_models
+            ]
+
+        if class_labels is None:
+            class_labels = ["Class 0", "Class 1"]
+
+        # Setup grid if enabled
+        if grid:
+            n_cols = kwargs.get("n_cols", 2)
+            n_rows = (len(pipelines_or_models) + n_cols - 1) // n_cols
+            fig, axes = plt.subplots(
+                n_rows, n_cols, figsize=(figsize[0] * n_cols, figsize[1] * n_rows)
+            )
+            axes = axes.flatten()
+        else:
+            axes = [None] * len(pipelines_or_models)
+
+        for idx, (model, ax) in enumerate(zip(pipelines_or_models, axes)):
+            # Determine the model name
+            if model_titles:
+                name = model_titles[idx]
+            else:
+                name = self._extract_model_name(model)
+
+            # Retrieve the threshold if provided
+            current_threshold = None
+            if model_threshold:
+                current_threshold = (
+                    model_threshold.get(name.strip().lower(), None)
+                    or list(model_threshold.values())[idx]
+                    if len(model_threshold) > idx
+                    else None
+                )
+            # Determine the threshold to use for metric calculation
+            applied_threshold = (
+                custom_threshold  # First priority: custom_threshold
+                if custom_threshold is not None
+                else (
+                    current_threshold  # Second priority: model-specific threshold from model_threshold
+                    if current_threshold is not None
+                    else 0.5
+                )  # Default threshold if neither custom nor model-specific thresholds are provided
+            )
+            if applied_threshold is None:
+                applied_threshold = 0.5
+
+            # Generate predictions
+            if hasattr(model, "predict_proba"):
+                y_proba = model.predict_proba(X)[:, 1]
+            elif hasattr(model, "decision_function"):
+                y_scores = model.decision_function(X)
+                y_proba = 1 / (1 + np.exp(-y_scores))
+            else:
+                raise ValueError(
+                    f"Model {name} does not support probability-based prediction."
+                )
+            y_pred_threshold = (y_proba >= applied_threshold).astype(int)
+
+            # Compute confusion matrix
+            cm = confusion_matrix(y_true, y_pred_threshold)
+            print(f"Confusion Matrix for {name}:")
+            print(cm)
+
+            # Plot the confusion matrix
+            disp = ConfusionMatrixDisplay(
+                confusion_matrix=cm, display_labels=class_labels
+            )
+            if grid:
+                disp.plot(cmap=cmap, ax=ax, colorbar=kwargs.get("show_colorbar", True))
+            else:
+                fig, ax = plt.subplots(figsize=figsize)
+                disp.plot(cmap=cmap, ax=ax, colorbar=kwargs.get("show_colorbar", True))
+
+            # Adjust title wrapping
+            title = f"Confusion Matrix: {name} (Threshold = {applied_threshold:.2f})"
+            if text_wrap is not None and isinstance(text_wrap, int):
+                title = "\n".join(textwrap.wrap(title, width=text_wrap))
+            ax.set_title(title, fontsize=label_fontsize)
+
+            # Adjust font sizes for axis labels and tick labels
+            ax.xaxis.label.set_size(label_fontsize)
+            ax.yaxis.label.set_size(label_fontsize)
+            ax.tick_params(axis="both", labelsize=tick_fontsize)
+
+            # Adjust the font size for the numeric values directly
+            if disp.text_ is not None:
+                for text in disp.text_.ravel():
+                    text.set_fontsize(inner_fontsize)  # Apply inner_fontsize here
+
+            # Add labels (TN, FP, FN, TP) only if `labels` is True
+            if labels:
+                for i in range(cm.shape[0]):
+                    for j in range(cm.shape[1]):
+                        label_text = (
+                            "TN"
+                            if i == 0 and j == 0
+                            else (
+                                "FP"
+                                if i == 0 and j == 1
+                                else "FN" if i == 1 and j == 0 else "TP"
+                            )
+                        )
+                        rgba_color = disp.im_.cmap(disp.im_.norm(cm[i, j]))
+                        luminance = (
+                            0.2126 * rgba_color[0]
+                            + 0.7152 * rgba_color[1]
+                            + 0.0722 * rgba_color[2]
+                        )
+                        ax.text(
+                            j,
+                            i - 0.3,  # Slight offset above numeric value
+                            label_text,
+                            ha="center",
+                            va="center",
+                            fontsize=inner_fontsize,
+                            color="white" if luminance < 0.5 else "black",
+                        )
+
+            # Always display numeric values (confusion matrix counts)
+            for i in range(cm.shape[0]):
+                for j in range(cm.shape[1]):
+                    rgba_color = disp.im_.cmap(disp.im_.norm(cm[i, j]))
+                    luminance = (
+                        0.2126 * rgba_color[0]
+                        + 0.7152 * rgba_color[1]
+                        + 0.0722 * rgba_color[2]
+                    )
+                    ax.text(
+                        j,
+                        i,  # Exact position for numeric value
+                        f"{cm[i, j]}",
+                        ha="center",
+                        va="center",
+                        fontsize=inner_fontsize,
+                        color="white" if luminance < 0.5 else "black",
+                    )
+
+            if not grid:
+                self._save_plot(
+                    f"Confusion_Matrix_{name}",
+                    save_plot,
+                    image_path_png,
+                    image_path_svg,
+                )
+                plt.show()
+
+        if grid:
+            for ax in axes[len(pipelines_or_models) :]:
+                ax.axis("off")
+            plt.tight_layout()
+            self._save_plot(
+                "Grid_Confusion_Matrix", save_plot, image_path_png, image_path_svg
+            )
+            plt.show()
+
+    def plot_roc_auc(
+        self,
+        pipelines_or_models,
+        X,
+        y,
+        xlabel="False Positive Rate",
+        ylabel="True Positive Rate",
+        model_titles=None,
+        decimal_places=2,
+        overlay=False,
+        title=None,
+        save_plot=False,
+        image_path_png=None,
+        image_path_svg=None,
+        text_wrap=None,
+        curve_kwgs=None,
+        linestyle_kwgs=None,
+        grid=False,  # Grid layout option
+        n_cols=2,  # Number of columns for the grid
+        figsize=None,  # User-defined figure size
+        label_fontsize=12,  # Font size for title and axis labels
+        tick_fontsize=10,  # Font size for tick labels and legend
+        gridlines=True,
+    ):
+        """
+        Plot ROC curves for models or pipelines with optional styling and grid layout.
+
+        Parameters:
+        - pipelines_or_models: list
+            List of models or pipelines to plot.
+        - X: array-like
+            Features for prediction.
+        - y: array-like
+            True labels.
+        - model_titles: list of str, optional
+            Titles for individual models. Required when providing a nested dictionary for
+            `curve_kwgs`.
+        - overlay: bool
+            Whether to overlay multiple models on a single plot.
+        - title: str, optional
+            Custom title for the plot when `overlay=True`.
+        - save_plot: bool
+            Whether to save the plot.
+        - image_path_png: str, optional
+            Path to save PNG images.
+        - image_path_svg: str, optional
+            Path to save SVG images.
+        - text_wrap: int, optional
+            Max width for wrapping titles.
+        - curve_kwgs: list or dict, optional
+            Styling for individual model curves. If `model_titles` is specified as a list
+            of titles, `curve_kwgs` must be a nested dictionary with model titles as keys
+            and their respective style dictionaries as values. Otherwise, `curve_kwgs`
+            must be a list of style dictionaries corresponding to the models.
+        - linestyle_kwgs: dict, optional
+            Styling for the random guess diagonal line.
+        - grid: bool, optional
+            Whether to organize plots in a grid layout (default: False).
+        - n_cols: int, optional
+            Number of columns in the grid layout (default: 2).
+        - figsize: tuple, optional
+            Custom figure size (width, height) for the plot(s).
+        - label_fontsize: int, optional
+            Font size for title and axis labels.
+        - tick_fontsize: int, optional
+            Font size for tick labels and legend.
+
+        Raises:
+        - ValueError: If `grid=True` and `overlay=True` are both set.
+        """
+        if overlay and grid:
+            raise ValueError("`grid` cannot be set to True when `overlay` is True.")
+
+        if overlay and model_titles is not None:
+            raise ValueError(
+                "`model_titles` can only be provided when plotting models as "
+                "separate plots (when `overlay=False`). If you want to specify "
+                "a custom title for this plot, use the `title` input."
+            )
+
+        if not isinstance(pipelines_or_models, list):
+            pipelines_or_models = [pipelines_or_models]
+
+        if model_titles is None:
+            model_titles = self._extract_model_titles(pipelines_or_models)
+
+        if isinstance(curve_kwgs, dict):
+            curve_styles = [curve_kwgs.get(name, {}) for name in model_titles]
+        elif isinstance(curve_kwgs, list):
+            curve_styles = curve_kwgs
+        else:
+            curve_styles = [{}] * len(pipelines_or_models)
+
+        if len(curve_styles) != len(pipelines_or_models):
+            raise ValueError(
+                "The length of `curve_kwgs` must match the number of models."
+            )
+
+        if overlay:
+            plt.figure(figsize=figsize or (8, 6))
+
+        if grid and not overlay:
+            import math
+
+            n_rows = math.ceil(len(pipelines_or_models) / n_cols)
+            fig, axes = plt.subplots(
+                n_rows, n_cols, figsize=figsize or (n_cols * 6, n_rows * 4)
+            )
+            axes = axes.flatten()
+
+        for idx, (model, name, curve_style) in enumerate(
+            zip(pipelines_or_models, model_titles, curve_styles)
+        ):
+            y_proba = self._get_model_probabilities(model, X, name)
+            fpr, tpr, _ = roc_curve(y, y_proba)
+            roc_auc = roc_auc_score(y, y_proba)
+
+            print(f"AUC for {name}: {roc_auc:.{decimal_places}f}")
+
+            if overlay:
+                plt.plot(
+                    fpr,
+                    tpr,
+                    label=f"{name} (AUC = {roc_auc:.{decimal_places}f})",
+                    **curve_style,
+                )
+            elif grid:
+                ax = axes[idx]
+                ax.plot(
+                    fpr,
+                    tpr,
+                    label=f"ROC Curve (AUC = {roc_auc:.{decimal_places}f})",
+                    **curve_style,
+                )
+                linestyle_kwgs = linestyle_kwgs or {}
+                linestyle_kwgs.setdefault("color", "gray")
+                linestyle_kwgs.setdefault("linestyle", "--")
+                ax.plot(
+                    [0, 1],
+                    [0, 1],
+                    label="Random Guess",
+                    **linestyle_kwgs,
+                )
+                ax.set_xlabel(xlabel, fontsize=label_fontsize)
+                ax.set_ylabel(ylabel, fontsize=label_fontsize)
+                ax.tick_params(axis="both", labelsize=tick_fontsize)
+                if text_wrap:
+                    grid_title = "\n".join(
+                        textwrap.wrap(f"ROC Curve: {name}", width=text_wrap)
+                    )
+                else:
+                    grid_title = f"ROC Curve: {name}"
+                if grid_title != "":
+                    ax.set_title(grid_title, fontsize=label_fontsize)
+                ax.legend(loc="lower right", fontsize=tick_fontsize)
+                ax.grid(visible=gridlines)
+            else:
+                plt.figure(figsize=figsize or (8, 6))
+                plt.plot(
+                    fpr,
+                    tpr,
+                    label=f"ROC Curve (AUC = {roc_auc:.{decimal_places}f})",
+                    **curve_style,
+                )
+                linestyle_kwgs = linestyle_kwgs or {}
+                linestyle_kwgs.setdefault("color", "gray")
+                linestyle_kwgs.setdefault("linestyle", "--")
+                plt.plot(
+                    [0, 1],
+                    [0, 1],
+                    label="Random Guess",
+                    **linestyle_kwgs,
+                )
+                plt.xlabel(xlabel, fontsize=label_fontsize)
+                plt.ylabel(ylabel, fontsize=label_fontsize)
+                plt.tick_params(axis="both", labelsize=tick_fontsize)
+                if text_wrap:
+                    title = "\n".join(
+                        textwrap.wrap(f"ROC Curve: {name}", width=text_wrap)
+                    )
+                else:
+                    title = f"ROC Curve: {name}"
+                if title != "":
+                    plt.title(title, fontsize=label_fontsize)
+                plt.legend(loc="lower right", fontsize=tick_fontsize)
+                plt.grid()
+                self._save_plot(
+                    f"{name}_ROC", save_plot, image_path_png, image_path_svg
+                )
+                plt.show()
+
+        if overlay:
+            linestyle_kwgs = linestyle_kwgs or {}
+            linestyle_kwgs.setdefault("color", "gray")
+            linestyle_kwgs.setdefault("linestyle", "--")
+            plt.plot(
+                [0, 1],
+                [0, 1],
+                label="Random Guess",
+                **linestyle_kwgs,
+            )
+            plt.xlabel(xlabel, fontsize=label_fontsize)
+            plt.ylabel(ylabel, fontsize=label_fontsize)
+            plt.tick_params(axis="both", labelsize=tick_fontsize)
+            if text_wrap:
+                title = "\n".join(
+                    textwrap.wrap(title or "ROC Curves: Overlay", width=text_wrap)
+                )
+            else:
+                title = title or "ROC Curves: Overlay"
+            if title != "":
+                plt.title(title, fontsize=label_fontsize)
+            plt.legend(loc="lower right", fontsize=tick_fontsize)
+            plt.grid(visible=gridlines)
+            self._save_plot("Overlay_ROC", save_plot, image_path_png, image_path_svg)
+            plt.show()
+        elif grid:
+            for ax in axes[len(pipelines_or_models) :]:
+                ax.axis("off")
+            plt.tight_layout()
+            self._save_plot("Grid_ROC", save_plot, image_path_png, image_path_svg)
+            plt.show()
+
+    def plot_pr_auc(
+        self,
+        pipelines_or_models,
+        X,
+        y,
+        xlabel="Recall",
+        ylabel="Precision",
+        model_titles=None,
+        decimal_places=2,
+        overlay=False,
+        title=None,
+        save_plot=False,
+        image_path_png=None,
+        image_path_svg=None,
+        text_wrap=None,
+        curve_kwgs=None,
+        grid=False,  # Grid layout option
+        n_cols=2,  # Number of columns for the grid
+        figsize=None,  # User-defined figure size
+        label_fontsize=12,  # Font size for title and axis labels
+        tick_fontsize=10,  # Font size for tick labels and legend
+        gridlines=True,
+    ):
+        """
+        Plot PR curves for models or pipelines with optional styling and grid layout.
+
+        Parameters:
+        - pipelines_or_models: list
+            List of models or pipelines to plot.
+        - X: array-like
+            Features for prediction.
+        - y: array-like
+            True labels.
+        - model_titles: list of str, optional
+            Titles for individual models.
+        - overlay: bool
+            Whether to overlay multiple models on a single plot.
+        - title: str, optional
+            Custom title for the plot.
+        - save_plot: bool
+            Whether to save the plot.
+        - image_path_png: str, optional
+            Path to save PNG images.
+        - image_path_svg: str, optional
+            Path to save SVG images.
+        - text_wrap: int, optional
+            Max width for wrapping titles.
+        - curve_kwgs: list or dict, optional
+            Styling for individual model curves.
+        - grid: bool, optional
+            Whether to organize plots in a grid layout (default: False).
+        - n_cols: int, optional
+            Number of columns in the grid layout (default: 2).
+        - figsize: tuple, optional
+            Custom figure size (width, height) for the plot(s).
+        - label_fontsize: int, optional
+            Font size for title and axis labels.
+        - tick_fontsize: int, optional
+            Font size for tick labels and legend.
+
+        Raises:
+        - ValueError: If `grid=True` and `overlay=True` are both set.
+        """
+        if overlay and grid:
+            raise ValueError("`grid` cannot be set to True when `overlay` is True.")
+
+        if overlay and model_titles is not None:
+            raise ValueError(
+                "`model_titles` can only be provided when plotting models as "
+                "separate plots (when `overlay=False`). If you want to specify "
+                "a custom title for this plot, use the `title` input."
+            )
+
+        if not isinstance(pipelines_or_models, list):
+            pipelines_or_models = [pipelines_or_models]
+
+        if model_titles is None:
+            model_titles = self._extract_model_titles(pipelines_or_models)
+
+        if isinstance(curve_kwgs, dict):
+            curve_styles = [curve_kwgs.get(name, {}) for name in model_titles]
+        elif isinstance(curve_kwgs, list):
+            curve_styles = curve_kwgs
+        else:
+            curve_styles = [{}] * len(pipelines_or_models)
+
+        if len(curve_styles) != len(pipelines_or_models):
+            raise ValueError(
+                "The length of `curve_kwgs` must match the number of models."
+            )
+
+        if overlay:
+            plt.figure(figsize=figsize or (8, 6))  # Use figsize if provided
+
+        if grid and not overlay:
+            import math
+
+            n_rows = math.ceil(len(pipelines_or_models) / n_cols)
+            fig, axes = plt.subplots(
+                n_rows, n_cols, figsize=figsize or (n_cols * 6, n_rows * 4)
+            )
+            axes = axes.flatten()  # Flatten axes for easy iteration
+
+        for idx, (model, name, curve_style) in enumerate(
+            zip(pipelines_or_models, model_titles, curve_styles)
+        ):
+            y_proba = self._get_model_probabilities(model, X, name)
+            precision, recall, _ = precision_recall_curve(y, y_proba)
+            avg_precision = average_precision_score(y, y_proba)
+
+            print(f"Average Precision for {name}: {avg_precision:.{decimal_places}f}")
+
+            if overlay:
+                plt.plot(
+                    recall,
+                    precision,
+                    label=f"{name} (AP = {avg_precision:.{decimal_places}f})",
+                    **curve_style,
+                )
+            elif grid:
+                ax = axes[idx]
+                ax.plot(
+                    recall,
+                    precision,
+                    label=f"PR Curve (AP = {avg_precision:.{decimal_places}f})",
+                    **curve_style,
+                )
+                ax.set_xlabel(xlabel, fontsize=label_fontsize)
+                ax.set_ylabel(ylabel, fontsize=label_fontsize)
+                ax.tick_params(axis="both", labelsize=tick_fontsize)
+                if text_wrap:
+                    grid_title = "\n".join(
+                        textwrap.wrap(f"PR Curve: {name}", width=text_wrap)
+                    )
+                else:
+                    grid_title = f"PR Curve: {name}"
+                if grid_title != "":
+                    ax.set_title(grid_title, fontsize=label_fontsize)
+                ax.legend(loc="lower left", fontsize=tick_fontsize)
+                ax.grid(visible=gridlines)
+            else:
+                plt.figure(figsize=figsize or (8, 6))  # Use figsize if provided
+                plt.plot(
+                    recall,
+                    precision,
+                    label=f"PR Curve (AP = {avg_precision:.{decimal_places}f})",
+                    **curve_style,
+                )
+                plt.xlabel(xlabel, fontsize=label_fontsize)
+                plt.ylabel(ylabel, fontsize=label_fontsize)
+                plt.tick_params(axis="both", labelsize=tick_fontsize)
+                if text_wrap:
+                    title = "\n".join(
+                        textwrap.wrap(f"PR Curve: {name}", width=text_wrap)
+                    )
+                else:
+                    title = f"PR Curve: {name}"
+                if title != "":
+                    plt.title(title, fontsize=label_fontsize)
+                plt.legend(loc="lower left", fontsize=tick_fontsize)
+                plt.grid(visible=gridlines)
+                self._save_plot(f"{name}_PR", save_plot, image_path_png, image_path_svg)
+                plt.show()
+
+        if overlay:
+            plt.xlabel(xlabel, fontsize=label_fontsize)
+            plt.ylabel(ylabel, fontsize=label_fontsize)
+            plt.tick_params(axis="both", labelsize=tick_fontsize)
+            if text_wrap:
+                title = "\n".join(
+                    textwrap.wrap(title or "PR Curves: Overlay", width=text_wrap)
+                )
+            else:
+                title = title or "PR Curves: Overlay"
+            if title != "":
+                plt.title(title, fontsize=label_fontsize)
+            plt.legend(loc="lower left", fontsize=tick_fontsize)
+            plt.grid()
+            self._save_plot("Overlay_PR", save_plot, image_path_png, image_path_svg)
+            plt.show()
+        elif grid:
+            for ax in axes[len(pipelines_or_models) :]:
+                ax.axis("off")
+            plt.tight_layout()
+            self._save_plot("Grid_PR", save_plot, image_path_png, image_path_svg)
+            plt.show()
+
+    def plot_calibration_curve(
+        self,
+        pipelines_or_models,
+        X,
+        y,
+        xlabel="Mean Predicted Probability",
+        ylabel="Fraction of Positives",
+        model_titles=None,
+        overlay=False,
+        title=None,
+        save_plot=False,
+        image_path_png=None,
+        image_path_svg=None,
+        text_wrap=None,
+        curve_kwgs=None,
+        grid=False,  # Grid layout option
+        n_cols=2,  # Number of columns for the grid
+        figsize=None,  # User-defined figure size
+        label_fontsize=12,
+        tick_fontsize=10,
+        bins=10,  # Number of bins for calibration curve
+        marker="o",  # Marker style for the calibration points
+        show_brier_score=True,
+        gridlines=True,
+        linestyle_kwgs=None,
+        **kwargs,
+    ):
+        """
+        Plot calibration curves for models or pipelines with optional styling and
+        grid layout.
+
+        Parameters:
+        - pipelines_or_models: list
+            List of models or pipelines to plot.
+        - X: array-like
+            Features for prediction.
+        - y: array-like
+            True labels.
+        - model_titles: list of str, optional
+            Titles for individual models.
+        - overlay: bool
+            Whether to overlay multiple models on a single plot.
+        - title: str, optional
+            Custom title for the plot when `overlay=True`.
+        - save_plot: bool
+            Whether to save the plot.
+        - image_path_png: str, optional
+            Path to save PNG images.
+        - image_path_svg: str, optional
+            Path to save SVG images.
+        - text_wrap: int, optional
+            Max width for wrapping titles.
+        - curve_kwgs: list or dict, optional
+            Styling for individual model curves.
+        - grid: bool, optional
+            Whether to organize plots in a grid layout (default: False).
+        - n_cols: int, optional
+            Number of columns in the grid layout (default: 2).
+        - figsize: tuple, optional
+            Custom figure size (width, height) for the plot(s).
+        - label_fontsize: int, optional
+            Font size for axis labels and title.
+        - tick_fontsize: int, optional
+            Font size for tick labels and legend.
+        - bins: int, optional
+            Number of bins for the calibration curve (default: 10).
+        - marker: str, optional
+            Marker style for calibration curve points (default: "o").
+
+        Raises:
+        - ValueError: If `grid=True` and `overlay=True` are both set.
+        """
+        if overlay and grid:
+            raise ValueError("`grid` cannot be set to True when `overlay` is True.")
+
+        if not isinstance(pipelines_or_models, list):
+            pipelines_or_models = [pipelines_or_models]
+
+        if model_titles is None:
+            model_titles = self._extract_model_titles(pipelines_or_models)
+
+        if isinstance(curve_kwgs, dict):
+            curve_styles = [curve_kwgs.get(name, {}) for name in model_titles]
+        elif isinstance(curve_kwgs, list):
+            curve_styles = curve_kwgs
+        else:
+            curve_styles = [{}] * len(pipelines_or_models)
+
+        if len(curve_styles) != len(pipelines_or_models):
+            raise ValueError(
+                "The length of `curve_kwgs` must match the number of models."
+            )
+
+        if overlay:
+            plt.figure(figsize=figsize or (8, 6))
+
+        if grid and not overlay:
+            import math
+
+            n_rows = math.ceil(len(pipelines_or_models) / n_cols)
+            fig, axes = plt.subplots(
+                n_rows, n_cols, figsize=figsize or (n_cols * 6, n_rows * 4)
+            )
+            axes = axes.flatten()
+
+        for idx, (model, name, curve_style) in enumerate(
+            zip(pipelines_or_models, model_titles, curve_styles)
+        ):
+            y_proba = self._get_model_probabilities(model, X, name)
+            prob_true, prob_pred = calibration_curve(y, y_proba, n_bins=bins)
+
+            # Calculate Brier score if enabled
+            brier_score = brier_score_loss(y, y_proba) if show_brier_score else None
+
+            legend_label = f"{name}"
+            if show_brier_score:
+                legend_label += f" $\Rightarrow$ (Brier score: {brier_score:.4f})"
+
+            if overlay:
+                plt.plot(
+                    prob_pred,
+                    prob_true,
+                    marker=marker,
+                    label=legend_label,
+                    **curve_style,
+                    **kwargs,
+                )
+            elif grid:
+                ax = axes[idx]
+                ax.plot(
+                    prob_pred,
+                    prob_true,
+                    marker=marker,
+                    label=legend_label,
+                    **curve_style,
+                    **kwargs,
+                )
+                linestyle_kwgs = linestyle_kwgs or {}
+                linestyle_kwgs.setdefault("color", "gray")
+                linestyle_kwgs.setdefault("linestyle", "--")
+                ax.plot(
+                    [0, 1],
+                    [0, 1],
+                    label="Perfectly Calibrated",
+                    **linestyle_kwgs,
+                )
+                ax.set_xlabel(xlabel, fontsize=label_fontsize)
+                ax.set_ylabel(ylabel, fontsize=label_fontsize)
+                if text_wrap:
+                    grid_title = "\n".join(
+                        textwrap.wrap(f"Calibration Curve: {name}", width=text_wrap)
+                    )
+                else:
+                    grid_title = f"Calibration Curve: {name}"
+                if grid_title:
+                    ax.set_title(grid_title, fontsize=label_fontsize)
+                ax.legend(loc="upper left", fontsize=tick_fontsize)
+                ax.tick_params(axis="both", labelsize=tick_fontsize)
+                ax.grid(visible=gridlines)
+            else:
+                plt.figure(figsize=figsize or (8, 6))
+                plt.plot(
+                    prob_pred,
+                    prob_true,
+                    marker=marker,
+                    label=legend_label,
+                    **curve_style,
+                    **kwargs,
+                )
+                linestyle_kwgs = linestyle_kwgs or {}
+                linestyle_kwgs.setdefault("color", "gray")
+                linestyle_kwgs.setdefault("linestyle", "--")
+                plt.plot(
+                    [0, 1],
+                    [0, 1],
+                    label="Perfectly Calibrated",
+                    **linestyle_kwgs,
+                )
+                plt.xlabel(xlabel, fontsize=label_fontsize)
+                plt.ylabel(ylabel, fontsize=label_fontsize)
+                if text_wrap:
+                    title = "\n".join(
+                        textwrap.wrap(f"Calibration Curve: {name}", width=text_wrap)
+                    )
+                else:
+                    title = f"Calibration Curve: {name}"
+                if title:
+                    plt.title(title, fontsize=label_fontsize)
+                plt.legend(loc="upper left", fontsize=tick_fontsize)
+                plt.grid(visible=gridlines)
+                self._save_plot(
+                    f"{name}_Calibration", save_plot, image_path_png, image_path_svg
+                )
+                plt.show()
+
+        if overlay:
+            linestyle_kwgs = linestyle_kwgs or {}
+            linestyle_kwgs.setdefault("color", "gray")
+            linestyle_kwgs.setdefault("linestyle", "--")
+            plt.plot(
+                [0, 1],
+                [0, 1],
+                label="Perfectly Calibrated",
+                **linestyle_kwgs,
+            )
+            plt.xlabel(xlabel, fontsize=label_fontsize)
+            plt.ylabel(ylabel, fontsize=label_fontsize)
+            if text_wrap:
+                title = "\n".join(
+                    textwrap.wrap(
+                        title or "Calibration Curves: Overlay", width=text_wrap
+                    )
+                )
+            else:
+                title = title or "Calibration Curves: Overlay"
+            if title:
+                plt.title(title, fontsize=label_fontsize)
+            plt.legend(loc="upper left", fontsize=tick_fontsize)
+            plt.grid(visible=gridlines)
+            self._save_plot(
+                "Overlay_Calibration", save_plot, image_path_png, image_path_svg
+            )
+            plt.show()
+        elif grid:
+            for ax in axes[len(pipelines_or_models) :]:
+                ax.axis("off")
+            plt.tight_layout()
+            self._save_plot(
+                "Grid_Calibration", save_plot, image_path_png, image_path_svg
+            )
+            plt.show()

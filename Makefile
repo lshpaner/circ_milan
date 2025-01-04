@@ -67,6 +67,24 @@ logistic_regression:
 	--exp-name logistic_regression \
 	2>&1 | tee models/results/logistic_regression.txt
 
+## Make Decision Tree Classifier
+.PHONY: knn_neighbors
+knn_neighbors: 
+	$(PYTHON_INTERPRETER) \
+	python_scripts/train.py \
+	--model-type knn \
+	--exp-name knn_neighbors \
+	2>&1 | tee models/results/knn_neighbors.txt
+
+## Make Naive Bayes
+.PHONY: naive_bayes
+naive_bayes: 
+	$(PYTHON_INTERPRETER) \
+	python_scripts/train.py \
+	--model-type nb \
+	--exp-name naive_bayes \
+	2>&1 | tee models/results/naive_bayes.txt
+
 ## Make Support Vector Machines
 .PHONY: svm
 svm: 
@@ -75,15 +93,34 @@ svm:
 	--model-type svm \
 	--exp-name svm \
 	2>&1 | tee models/results/svm.txt
-		
 
-## Make Random Forest
-.PHONY: random_forest
-random_forest: 
+## Make Support Vector Machines
+.PHONY: lda
+lda: 
 	$(PYTHON_INTERPRETER) \
 	python_scripts/train.py \
-	--model-type rf \
-	--exp-name random_forest \
-	2>&1 | tee models/results/random_forest.txt
-	
-all_models: logistic_regression svm random_forest
+	--model-type lda \
+	--exp-name lda \
+	2>&1 | tee models/results/lda.txt
+
+## Make Support Vector Machines
+.PHONY: qda
+qda: 
+	$(PYTHON_INTERPRETER) \
+	python_scripts/train.py \
+	--model-type qda \
+	--exp-name qda \
+	2>&1 | tee models/results/qda.txt
+		
+
+## Make Support Vector Machines
+.PHONY: mlp
+mlp: 
+	$(PYTHON_INTERPRETER) \
+	python_scripts/train.py \
+	--model-type mlp \
+	--exp-name mlp \
+	2>&1 | tee models/results/mlp.txt
+		
+
+all_models: logistic_regression lda svm 

@@ -2,10 +2,12 @@ import pandas as pd
 import numpy as np
 
 from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.neural_network import MLPClassifier
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
-from xgboost import XGBClassifier
-from catboost import CatBoostClassifier
 
 
 ################################################################################
@@ -102,41 +104,147 @@ lr_definition = {
     "early": False,
 }
 
-################################################################################
-########################## Random Forest Classifier ############################
-################################################################################
 
-# Define the hyperparameters for Random Forest
-rf_name = "rf"
+# ################################################################################
+# ############################# KNeighborsClassifier #############################
+# ################################################################################
 
-rf_n_estimators = [100, 200, 300]
-rf_max_depths = [None, 5, 10]
-rf_criterions = ["gini", "entropy"]
-rf_parameters = [
+# Define the hyperparameters for K-Nearest Neighbors
+knn_name = "knn"
+
+knn_neighbors = [3, 5, 7, 9]  # Number of neighbors to consider
+knn_weights = ["uniform", "distance"]  # Uniform weights or distance-based weights
+knn_metrics = ["euclidean", "manhattan", "minkowski"]  # Distance metrics
+
+knn_parameters = [
     {
-        "rf__n_estimators": rf_n_estimators,
-        "rf__max_depth": rf_max_depths,
-        "rf__criterion": rf_criterions,
+        "knn__n_neighbors": knn_neighbors,
+        "knn__weights": knn_weights,
+        "knn__metric": knn_metrics,
     }
 ]
 
-rf = RandomForestClassifier(
-    class_weight="balanced",
-    random_state=rstate,
-    n_jobs=2,
-)
+# Initialize the k-NN Classifier
+knn = KNeighborsClassifier(n_jobs=-1)  # Use all available cores for faster computation
 
-rf_definition = {
-    "clc": rf,
-    "estimator_name": rf_name,
-    "tuned_parameters": rf_parameters,
+# Define the k-NN model setup
+knn_definition = {
+    "clc": knn,
+    "estimator_name": knn_name,
+    "tuned_parameters": knn_parameters,
     "randomized_grid": False,
     "early": False,
 }
 
 
+################################################################################
+############################ Gaussian Naive Bayes ##############################
+################################################################################
+
+# Define the hyperparameters for Naive Bayes
+nb_name = "nb"
+
+# Naive Bayes doesn't have many hyperparameters, but we can tune prior probabilities
+nb_priors = [None]  # Default is None; this can be extended if needed
+
+nb_parameters = [
+    {
+        "nb__priors": nb_priors,
+    }
+]
+
+# Initialize the Naive Bayes classifier
+nb = GaussianNB()
+
+# Define the Naive Bayes model setup
+nb_definition = {
+    "clc": nb,
+    "estimator_name": nb_name,
+    "tuned_parameters": nb_parameters,
+    "randomized_grid": False,
+    "early": False,
+}
+
+
+################################################################################
+######################### Quadratic Discriminant Analysis ######################
+################################################################################
+
+# Define the hyperparameters for LDA
+lda_name = "lda"
+
+# Hyperparameters for tuning (if needed, e.g., solver selection or shrinkage)
+lda_parameters = [
+    {
+        "lda__solver": [
+            "lsqr",
+            "eigen",
+        ],  # SVD is default; lsqr/eigen support shrinkage
+        "lda__shrinkage": [
+            None,
+            "auto",
+            0.1,
+            0.5,
+        ],  # Only applicable for lsqr/eigen solvers
+    }
+]
+
+# Initialize the LDA Classifier
+lda = LinearDiscriminantAnalysis(solver="svd")  # SVD is robust and avoids shrinkage
+
+# Define the LDA model setup
+lda_definition = {
+    "clc": lda,
+    "estimator_name": lda_name,
+    "tuned_parameters": lda_parameters,
+    "randomized_grid": False,
+    "early": False,
+}
+
+
+################################################################################
+
+# Define the hyperparameters for MLP
+mlp_name = "mlp"
+
+# MLP hyperparameters
+mlp_hidden_layer_sizes = [(32,), (64,), (32, 16)]  # Lightweight hidden layers
+mlp_activation = ["relu", "tanh"]  # Common activation functions
+mlp_solver = ["adam", "sgd"]  # Solvers for optimization
+mlp_alpha = [0.0001, 0.001, 0.01]  # Regularization parameter
+mlp_learning_rate_init = [0.001, 0.01]  # Initial learning rate
+
+# Create a list of hyperparameter combinations
+mlp_parameters = [
+    {
+        "mlp__hidden_layer_sizes": mlp_hidden_layer_sizes,
+        "mlp__activation": mlp_activation,
+        "mlp__solver": mlp_solver,
+        "mlp__alpha": mlp_alpha,
+        "mlp__learning_rate_init": mlp_learning_rate_init,
+    }
+]
+
+# Initialize the MLP classifier
+mlp = MLPClassifier(max_iter=1000, random_state=rstate, early_stopping=True)
+
+# Define the MLP model setup
+mlp_definition = {
+    "clc": mlp,
+    "estimator_name": mlp_name,
+    "tuned_parameters": mlp_parameters,
+    "randomized_grid": False,  # Set to True for randomized search if desired
+    "early": False,  # Enable early stopping to prevent overfitting
+}
+
+
+#################
+
 model_definitions = {
     svm_name: svm_definition,
     lr_name: lr_definition,
-    rf_name: rf_definition,
+    nb_name: nb_definition,
+    knn_name: knn_definition,
+    lda_name: lda_definition,
+    mlp_name: mlp_definition,
 }
