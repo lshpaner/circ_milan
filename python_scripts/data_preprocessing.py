@@ -224,6 +224,13 @@ df["Functional_Outcomes_Cosmetic_Satisfaction"] = df[
     "Functional_Outcomes_Cosmetic_Satisfaction"
 ].fillna(0)
 
+
+########################## Correct Blood Loss Logic ############################
+df["Functional_Outcomes_Bleeding"] = df["Intraoperative_Blood_Loss_ml"].apply(
+    lambda x: 1 if x > 0 else 0
+)
+print(df["Functional_Outcomes_Bleeding"].value_counts())
+
 ##################### Zero Variance Inspection and Drops #######################
 
 ## check for variance
@@ -250,28 +257,20 @@ circ_eda = df.copy()
 # Dropping uninformative features like "Birthday"make sv
 # Dropping Weight since Height was dropped, and BMI will be used instead
 # Dropping "Preoperative Blood Pressure (mmHg)" because it is converted to MAP
-cols_to_drop = (
-    [
-        "Weight_kg",
-        "Comorbidity_Flag",
-        # "Preop_Blood_Pressure_mmHg",
-        "Intraoperative_Blood_Loss_ml",
-        "Cost_of_Procedure_euros",
-        "Birthday",
-        # "Anesthesia_Type_lidocaine",
-        "Intraop_MAP",
-    ]
-    + [
-        col
-        for col in df.columns
-        if "Functional" in col and "Functional_Outcomes_Bleeding" not in col
-    ]
-    + [
-        col
-        for col in df.columns
-        if "Preop_" in col and "Preop_drugs_antibiotic" not in col
-    ]
-)
+cols_to_drop = [
+    "Weight_kg",
+    "Comorbidity_Flag",
+    # "Preop_Blood_Pressure_mmHg",
+    "Intraoperative_Blood_Loss_ml",
+    "Cost_of_Procedure_euros",
+    "Birthday",
+    # "Anesthesia_Type_lidocaine",
+    "Intraop_MAP",
+] + [
+    col
+    for col in df.columns
+    if "Functional" in col and "Functional_Outcomes_Bleeding" not in col
+]
 
 
 # Prepare the string of columns to drop, each on a new line, in advance

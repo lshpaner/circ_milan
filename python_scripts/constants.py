@@ -16,3 +16,5 @@ mlflow_data = "models/mlflow_exp"
 var_index = "patient_id"
 
 outcome = "Functional_Outcomes_Bleeding"
+
+model_svm = "SVC.pkl"

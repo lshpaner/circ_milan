@@ -8,6 +8,7 @@ from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
+from sklearn.svm import NuSVC
 
 
 ################################################################################
@@ -42,36 +43,6 @@ stratify_list = [
 ]
 
 ################################################################################
-######################### Support Vector Machinbe ##############################
-################################################################################
-
-# Define SVM parameters
-svm_name = "svm"
-
-svc_kernel = ["linear", "rbf"]
-svc_cost = np.logspace(-4, 0, 10).tolist()
-svc_gamma = [0.001, 0.01, 0.1, 0.5, "scale", "auto"]
-
-# Correct parameter name: 'C' instead of 'cost'
-tuned_parameters_svm = [
-    {"svm__kernel": svc_kernel, "svm__C": svc_cost, "svm__gamma": svc_gamma}
-]
-
-# Define the SVM model
-svm = SVC(
-    class_weight="balanced",
-    probability=True,
-)
-
-# Define the SVM model configuration
-svm_definition = {
-    "clc": svm,
-    "estimator_name": svm_name,
-    "tuned_parameters": tuned_parameters_svm,
-    "randomized_grid": False,
-    "early": False,
-}
-################################################################################
 ########################## Logistic Regression #################################
 ################################################################################
 
@@ -105,69 +76,8 @@ lr_definition = {
 }
 
 
-# ################################################################################
-# ############################# KNeighborsClassifier #############################
-# ################################################################################
-
-# Define the hyperparameters for K-Nearest Neighbors
-knn_name = "knn"
-
-knn_neighbors = [3, 5, 7, 9]  # Number of neighbors to consider
-knn_weights = ["uniform", "distance"]  # Uniform weights or distance-based weights
-knn_metrics = ["euclidean", "manhattan", "minkowski"]  # Distance metrics
-
-knn_parameters = [
-    {
-        "knn__n_neighbors": knn_neighbors,
-        "knn__weights": knn_weights,
-        "knn__metric": knn_metrics,
-    }
-]
-
-# Initialize the k-NN Classifier
-knn = KNeighborsClassifier(n_jobs=-1)  # Use all available cores for faster computation
-
-# Define the k-NN model setup
-knn_definition = {
-    "clc": knn,
-    "estimator_name": knn_name,
-    "tuned_parameters": knn_parameters,
-    "randomized_grid": False,
-    "early": False,
-}
-
-
 ################################################################################
-############################ Gaussian Naive Bayes ##############################
-################################################################################
-
-# Define the hyperparameters for Naive Bayes
-nb_name = "nb"
-
-# Naive Bayes doesn't have many hyperparameters, but we can tune prior probabilities
-nb_priors = [None]  # Default is None; this can be extended if needed
-
-nb_parameters = [
-    {
-        "nb__priors": nb_priors,
-    }
-]
-
-# Initialize the Naive Bayes classifier
-nb = GaussianNB()
-
-# Define the Naive Bayes model setup
-nb_definition = {
-    "clc": nb,
-    "estimator_name": nb_name,
-    "tuned_parameters": nb_parameters,
-    "randomized_grid": False,
-    "early": False,
-}
-
-
-################################################################################
-######################### Quadratic Discriminant Analysis ######################
+########################### Linear Discriminant Analysis #######################
 ################################################################################
 
 # Define the hyperparameters for LDA
@@ -238,13 +148,80 @@ mlp_definition = {
 }
 
 
-#################
+################################################################################
+######################### Support Vector Machines ##############################
+################################################################################
+
+# Define SVM parameters
+svm_name = "svm"
+
+svc_kernel = ["linear", "rbf"][:1]
+# svc_cost = np.logspace(-4, 0, 10).tolist()
+svc_cost = np.logspace(-4, 0, 1).tolist()
+svc_gamma = [0.001, 0.01, 0.1, 0.5, "scale", "auto"][:1]
+
+# Correct parameter name: 'C' instead of 'cost'
+tuned_parameters_svm = [
+    {"svm__kernel": svc_kernel, "svm__C": svc_cost, "svm__gamma": svc_gamma}
+][:1]
+
+# Define the SVM model
+svm = SVC(
+    class_weight="balanced",
+    probability=True,
+    random_state=rstate,
+)
+
+# Define the SVM model configuration
+svm_definition = {
+    "clc": svm,
+    "estimator_name": svm_name,
+    "tuned_parameters": tuned_parameters_svm,
+    "randomized_grid": False,
+    "early": False,
+}
+
+
+######################### Nu Support Vector Machines ###########################
+
+# Define NuSVC parameters
+nusvc_name = "nusvc"
+
+nusvc_kernel = ["linear", "rbf", "poly", "sigmoid"]  # Common kernels
+nusvc_nu = [0.1, 0.3, 0.5, 0.7, 0.9]  # Fraction of errors and SVs
+nusvc_gamma = [0.001, 0.01, 0.1, 0.5, "scale", "auto"]  # Gamma values
+
+# Parameter grid for NuSVC
+tuned_parameters_nusvc = [
+    {
+        "nusvc__kernel": nusvc_kernel,
+        "nusvc__nu": nusvc_nu,
+        "nusvc__gamma": nusvc_gamma,
+    }
+]
+
+# Define the NuSVC model
+nusvc = NuSVC(
+    class_weight="balanced",  # Balance classes if necessary
+    probability=True,  # Enable probability estimates
+    random_state=rstate,
+)
+
+# Define the NuSVC model configuration
+nusvc_definition = {
+    "clc": nusvc,
+    "estimator_name": nusvc_name,
+    "tuned_parameters": tuned_parameters_nusvc,
+    "randomized_grid": False,  # Use full grid search
+    "early": False,  # No early stopping for NuSVC
+}
+
+################################################################################
 
 model_definitions = {
     svm_name: svm_definition,
+    nusvc_name: nusvc_definition,
     lr_name: lr_definition,
-    nb_name: nb_definition,
-    knn_name: knn_definition,
     lda_name: lda_definition,
     mlp_name: mlp_definition,
 }

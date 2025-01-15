@@ -13,7 +13,7 @@ patient_id                    ...
 773951452          21  25.17  ...  140   90
 404354815          23  22.78  ...  130   90
 
-[202 rows x 11 columns]
+[202 rows x 14 columns]
 y:            Functional_Outcomes_Bleeding
 patient_id                              
 738111507                              0
@@ -31,11 +31,6 @@ patient_id
 [202 rows x 1 columns]
 
 Sampler None
-
-Circumcision Outcome Columns:
-['Functional_Outcomes_Bleeding']
-********************************************************************************
-
 
 ============================================================
 Functional_Outcomes_Bleeding
@@ -64,99 +59,51 @@ Pipeline Steps:
 Fitting 10 folds for each of 1 candidates, totalling 10 fits
 
 Best score/param set found on development set:
-{0.36922728660228665: {'lr__C': 0.0001, 'lr__penalty': 'l2'}}
+{0.44945058596374377: {'lr__C': 0.0001, 'lr__penalty': 'l2'}}
 
 Grid scores on development set:
-0.369 (+/-0.114) for {'lr__C': 0.0001, 'lr__penalty': 'l2'}
+0.449 (+/-0.281) for {'lr__C': 0.0001, 'lr__penalty': 'l2'}
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.05it/s]100%|██████████| 2/2 [00:00<00:00, 11.04it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  9.69it/s]100%|██████████| 2/2 [00:00<00:00,  9.62it/s]100%|██████████| 2/2 [00:00<00:00,  9.62it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.40it/s]100%|██████████| 2/2 [00:00<00:00,  9.66it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  9.65it/s]100%|██████████| 2/2 [00:00<00:00,  9.83it/s]100%|██████████| 2/2 [00:00<00:00,  9.79it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.46it/s]100%|██████████| 2/2 [00:00<00:00, 10.45it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  9.39it/s]100%|██████████| 2/2 [00:00<00:00,  9.55it/s]100%|██████████| 2/2 [00:00<00:00,  9.51it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.89it/s]100%|██████████| 2/2 [00:00<00:00, 10.88it/s]
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00,  8.05it/s]100%|██████████| 2/2 [00:00<00:00,  8.04it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.45it/s]100%|██████████| 2/2 [00:00<00:00, 11.44it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.26it/s]100%|██████████| 2/2 [00:00<00:00,  5.17it/s]100%|██████████| 2/2 [00:00<00:00,  5.18it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.52it/s]100%|██████████| 2/2 [00:00<00:00, 11.51it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.97it/s]100%|██████████| 2/2 [00:00<00:00,  4.93it/s]100%|██████████| 2/2 [00:00<00:00,  4.93it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.17it/s]100%|██████████| 2/2 [00:00<00:00, 11.15it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.23it/s]100%|██████████| 2/2 [00:00<00:00,  5.17it/s]100%|██████████| 2/2 [00:00<00:00,  5.17it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.56it/s]100%|██████████| 2/2 [00:00<00:00, 11.55it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.21it/s]100%|██████████| 2/2 [00:00<00:00,  5.06it/s]100%|██████████| 2/2 [00:00<00:00,  5.08it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.44it/s]100%|██████████| 2/2 [00:00<00:00, 11.43it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.54it/s]100%|██████████| 2/2 [00:00<00:00,  5.33it/s]100%|██████████| 2/2 [00:00<00:00,  5.35it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.16it/s]100%|██████████| 2/2 [00:00<00:00, 11.14it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.27it/s]100%|██████████| 2/2 [00:00<00:00,  5.54it/s]100%|██████████| 2/2 [00:00<00:00,  5.50it/s]
 
 Detailed classification report for lr:
 
-Confusion Matrix Average Across 10 Folds for average_precision:
+Confusion Matrix Across All 10 Folds for average_precision:
 --------------------------------------------------------------------------------
           Predicted:
-            Pos  Neg
+             Pos   Neg
 --------------------------------------------------------------------------------
-Actual: Pos  3 (tp)   0 (fn)
-        Neg  7 (fp)   8 (tn)
+Actual: Pos   0 (tp)   51 (fn)
+        Neg   0 (fp)  151 (tn)
 --------------------------------------------------------------------------------
 
 Classification Report Averaged Across All Folds for average_precision:
               precision    recall  f1-score   support
 
-           0       0.90      0.53      0.67       156
-           1       0.34      0.80      0.47        46
+           0       0.75      1.00      0.86       151
+           1       0.00      0.00      0.00        51
 
-    accuracy                           0.59       202
-   macro avg       0.62      0.67      0.57       202
-weighted avg       0.77      0.59      0.62       202
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
---------------------------------------------------------------------------------
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  1 (tp)   3 (fn)
-        Neg  3 (fp)  11 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.79      0.75      0.77       156
-           1       0.28      0.33      0.30        46
-
-    accuracy                           0.65       202
-   macro avg       0.53      0.54      0.53       202
-weighted avg       0.67      0.65      0.66       202
-
---------------------------------------------------------------------------------
-
-Detailed classification report for lr:
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  3 (tp)   0 (fn)
-        Neg  7 (fp)   8 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.90      0.53      0.67       156
-           1       0.34      0.80      0.47        46
-
-    accuracy                           0.59       202
-   macro avg       0.62      0.67      0.57       202
-weighted avg       0.77      0.59      0.62       202
+    accuracy                           0.75       202
+   macro avg       0.37      0.50      0.43       202
+weighted avg       0.56      0.75      0.64       202
 
 --------------------------------------------------------------------------------
 The model is trained on the full development set.
@@ -165,643 +112,27 @@ The scores are computed on the full evaluation set.
 
 Running k-fold model metrics...
 
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+HEREREERERE
+threshold 0.5029999999999999
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:00, 17.31it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00, 18.65it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00, 18.99it/s]Processing Folds:  80%|████████  | 8/10 [00:00<00:00, 19.23it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 19.47it/s]
+/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
   _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  10%|█         | 1/10 [00:00<00:01,  5.17it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  20%|██        | 2/10 [00:00<00:01,  5.34it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  30%|███       | 3/10 [00:00<00:01,  5.43it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  40%|████      | 4/10 [00:00<00:01,  5.36it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  50%|█████     | 5/10 [00:00<00:00,  5.27it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  60%|██████    | 6/10 [00:01<00:00,  5.28it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  70%|███████   | 7/10 [00:01<00:00,  5.25it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  5.30it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  90%|█████████ | 9/10 [00:01<00:00,  5.37it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  5.38it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  5.33it/s]
 
 Average Metrics Across All Folds:
               Metric     Value
 0      Precision/PPV  0.000000
-1  Average Precision  0.369227
+1  Average Precision  0.346329
 2        Sensitivity  0.000000
 3        Specificity  1.000000
-4            AUC ROC  0.671292
-5        Brier Score  0.249404
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-Optimal threshold used: 0.505
-
-================================================================================
-lr_Functional_Outcomes_Bleeding
-Precision/PPV        0.358
-Average Precision    0.394
-Sensitivity          0.848
-Specificity          0.551
-AUC ROC              0.743
-Brier Score          0.249
-Name: lr, dtype: float64
-<function log_mlflow_experiment at 0x7f19f54a4180>
-Existing Experiment_ID: 263780167110129349
-
-Sampler SMOTE(random_state=222)
-
-Circumcision Outcome Columns:
-['Functional_Outcomes_Bleeding']
-********************************************************************************
-
-
-============================================================
-Functional_Outcomes_Bleeding
-============================================================
-
-Pipeline Steps:
-
-┌────────────────────────────────────────────┐
-│ Step 1: preprocess_scaler_StandardScalar   │
-│ StandardScaler                             │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 2: preprocess_imputer_Preprocessor    │
-│ SimpleImputer                              │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 3: resampler                          │
-│ SMOTE                                      │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 4: lr                                 │
-│ LogisticRegression                         │
-└────────────────────────────────────────────┘
-
-# Tuning hyper-parameters for average_precision
-Fitting 10 folds for each of 1 candidates, totalling 10 fits
-
-Best score/param set found on development set:
-{0.41510093990976343: {'lr__C': 0.0001, 'lr__penalty': 'l2'}}
-
-Grid scores on development set:
-0.415 (+/-0.213) for {'lr__C': 0.0001, 'lr__penalty': 'l2'}
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.91it/s]100%|██████████| 2/2 [00:00<00:00,  9.44it/s]100%|██████████| 2/2 [00:00<00:00,  9.35it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.95it/s]100%|██████████| 2/2 [00:00<00:00, 10.03it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  9.53it/s]100%|██████████| 2/2 [00:00<00:00,  8.87it/s]100%|██████████| 2/2 [00:00<00:00,  8.96it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.10it/s]100%|██████████| 2/2 [00:00<00:00, 10.10it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.54it/s]100%|██████████| 2/2 [00:00<00:00, 10.53it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.37it/s]100%|██████████| 2/2 [00:00<00:00, 10.36it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  9.41it/s]100%|██████████| 2/2 [00:00<00:00,  9.74it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.84it/s]100%|██████████| 2/2 [00:00<00:00,  8.87it/s]100%|██████████| 2/2 [00:00<00:00,  8.86it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.94it/s]100%|██████████| 2/2 [00:00<00:00, 10.94it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.51it/s]100%|██████████| 2/2 [00:00<00:00, 10.50it/s]
-
-Detailed classification report for lr:
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  3 (tp)   1 (fn)
-        Neg  7 (fp)   8 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.89      0.55      0.68       156
-           1       0.33      0.76      0.46        46
-
-    accuracy                           0.60       202
-   macro avg       0.61      0.66      0.57       202
-weighted avg       0.76      0.60      0.63       202
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
---------------------------------------------------------------------------------
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  1 (tp)   3 (fn)
-        Neg  2 (fp)  13 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.80      0.85      0.82       156
-           1       0.37      0.30      0.33        46
-
-    accuracy                           0.72       202
-   macro avg       0.59      0.58      0.58       202
-weighted avg       0.71      0.72      0.71       202
-
---------------------------------------------------------------------------------
-
-Detailed classification report for lr:
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  3 (tp)   1 (fn)
-        Neg  7 (fp)   8 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.89      0.55      0.68       156
-           1       0.33      0.76      0.46        46
-
-    accuracy                           0.60       202
-   macro avg       0.61      0.66      0.57       202
-weighted avg       0.76      0.60      0.63       202
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
-
-Running k-fold model metrics...
-
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  10%|█         | 1/10 [00:00<00:01,  4.89it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  20%|██        | 2/10 [00:00<00:01,  4.80it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  30%|███       | 3/10 [00:00<00:01,  4.83it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  40%|████      | 4/10 [00:00<00:01,  4.77it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  50%|█████     | 5/10 [00:01<00:01,  4.86it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  60%|██████    | 6/10 [00:01<00:00,  4.95it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  70%|███████   | 7/10 [00:01<00:00,  4.98it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  4.96it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  90%|█████████ | 9/10 [00:01<00:00,  5.01it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds: 100%|██████████| 10/10 [00:02<00:00,  5.03it/s]Processing Folds: 100%|██████████| 10/10 [00:02<00:00,  4.94it/s]
-
-Average Metrics Across All Folds:
-              Metric     Value
-0      Precision/PPV  0.000000
-1  Average Precision  0.415101
-2        Sensitivity  0.000000
-3        Specificity  1.000000
-4            AUC ROC  0.685438
-5        Brier Score  0.248959
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-Optimal threshold used: 0.505
-
-================================================================================
-lr_Functional_Outcomes_Bleeding
-Precision/PPV        0.350
-Average Precision    0.418
-Sensitivity          0.783
-Specificity          0.571
-AUC ROC              0.739
-Brier Score          0.249
-Name: lr, dtype: float64
-<function log_mlflow_experiment at 0x7f19f54a4180>
-Existing Experiment_ID: 263780167110129349
-
-Sampler ADASYN(random_state=222)
-
-Circumcision Outcome Columns:
-['Functional_Outcomes_Bleeding']
-********************************************************************************
-
-
-============================================================
-Functional_Outcomes_Bleeding
-============================================================
-
-Pipeline Steps:
-
-┌────────────────────────────────────────────┐
-│ Step 1: preprocess_scaler_StandardScalar   │
-│ StandardScaler                             │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 2: preprocess_imputer_Preprocessor    │
-│ SimpleImputer                              │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 3: resampler                          │
-│ ADASYN                                     │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 4: lr                                 │
-│ LogisticRegression                         │
-└────────────────────────────────────────────┘
-
-# Tuning hyper-parameters for average_precision
-Fitting 10 folds for each of 1 candidates, totalling 10 fits
-
-Best score/param set found on development set:
-{0.41577109002109003: {'lr__C': 0.0001, 'lr__penalty': 'l2'}}
-
-Grid scores on development set:
-0.416 (+/-0.273) for {'lr__C': 0.0001, 'lr__penalty': 'l2'}
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.80it/s]100%|██████████| 2/2 [00:00<00:00,  6.75it/s]100%|██████████| 2/2 [00:00<00:00,  6.36it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00,  9.62it/s]100%|██████████| 2/2 [00:00<00:00,  9.62it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.42it/s]100%|██████████| 2/2 [00:00<00:00, 10.41it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.63it/s]100%|██████████| 2/2 [00:00<00:00, 10.62it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  9.94it/s]100%|██████████| 2/2 [00:00<00:00,  9.06it/s]100%|██████████| 2/2 [00:00<00:00,  9.18it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.32it/s]100%|██████████| 2/2 [00:00<00:00, 11.31it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00,  9.75it/s]100%|██████████| 2/2 [00:00<00:00,  9.74it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.34it/s]100%|██████████| 2/2 [00:00<00:00, 10.34it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  9.31it/s]100%|██████████| 2/2 [00:00<00:00,  9.71it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  9.90it/s]100%|██████████| 2/2 [00:00<00:00, 10.34it/s]
-
-Detailed classification report for lr:
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  3 (tp)   1 (fn)
-        Neg  7 (fp)   8 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.89      0.54      0.68       156
-           1       0.34      0.78      0.47        46
-
-    accuracy                           0.60       202
-   macro avg       0.62      0.66      0.57       202
-weighted avg       0.77      0.60      0.63       202
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
---------------------------------------------------------------------------------
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  2 (tp)   2 (fn)
-        Neg  3 (fp)  12 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.82      0.77      0.79       156
-           1       0.36      0.43      0.39        46
-
-    accuracy                           0.69       202
-   macro avg       0.59      0.60      0.59       202
-weighted avg       0.72      0.69      0.70       202
-
---------------------------------------------------------------------------------
-
-Detailed classification report for lr:
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  3 (tp)   1 (fn)
-        Neg  7 (fp)   8 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.89      0.54      0.68       156
-           1       0.34      0.78      0.47        46
-
-    accuracy                           0.60       202
-   macro avg       0.62      0.66      0.57       202
-weighted avg       0.77      0.60      0.63       202
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
-
-Running k-fold model metrics...
-
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  10%|█         | 1/10 [00:00<00:01,  4.87it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  20%|██        | 2/10 [00:00<00:01,  4.81it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  30%|███       | 3/10 [00:00<00:01,  4.91it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  40%|████      | 4/10 [00:00<00:01,  4.85it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  50%|█████     | 5/10 [00:01<00:01,  4.88it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  60%|██████    | 6/10 [00:01<00:00,  4.85it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  70%|███████   | 7/10 [00:01<00:00,  4.86it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  4.84it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  90%|█████████ | 9/10 [00:01<00:00,  4.78it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds: 100%|██████████| 10/10 [00:02<00:00,  4.72it/s]Processing Folds: 100%|██████████| 10/10 [00:02<00:00,  4.80it/s]
-
-Average Metrics Across All Folds:
-              Metric     Value
-0      Precision/PPV  0.000000
-1  Average Precision  0.415771
-2        Sensitivity  0.000000
-3        Specificity  1.000000
-4            AUC ROC  0.689333
-5        Brier Score  0.249005
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-Optimal threshold used: 0.505
-
-================================================================================
-lr_Functional_Outcomes_Bleeding
-Precision/PPV        0.362
-Average Precision    0.411
-Sensitivity          0.826
-Specificity          0.571
-AUC ROC              0.744
-Brier Score          0.249
-Name: lr, dtype: float64
-<function log_mlflow_experiment at 0x7f19f54a4180>
-Existing Experiment_ID: 263780167110129349
-
-Sampler RandomOverSampler(random_state=222)
-
-Circumcision Outcome Columns:
-['Functional_Outcomes_Bleeding']
-********************************************************************************
-
-
-============================================================
-Functional_Outcomes_Bleeding
-============================================================
-
-Pipeline Steps:
-
-┌────────────────────────────────────────────┐
-│ Step 1: preprocess_scaler_StandardScalar   │
-│ StandardScaler                             │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 2: preprocess_imputer_Preprocessor    │
-│ SimpleImputer                              │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 3: resampler                          │
-│ RandomOverSampler                          │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 4: lr                                 │
-│ LogisticRegression                         │
-└────────────────────────────────────────────┘
-
-# Tuning hyper-parameters for average_precision
-Fitting 10 folds for each of 1 candidates, totalling 10 fits
-
-Best score/param set found on development set:
-{0.3865509474185945: {'lr__C': 0.0001, 'lr__penalty': 'l2'}}
-
-Grid scores on development set:
-0.387 (+/-0.184) for {'lr__C': 0.0001, 'lr__penalty': 'l2'}
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.55it/s]100%|██████████| 2/2 [00:00<00:00, 10.54it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.82it/s]100%|██████████| 2/2 [00:00<00:00,  9.79it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.92it/s]100%|██████████| 2/2 [00:00<00:00, 10.91it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.10it/s]100%|██████████| 2/2 [00:00<00:00, 11.09it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.13it/s]100%|██████████| 2/2 [00:00<00:00, 11.12it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.70it/s]100%|██████████| 2/2 [00:00<00:00, 10.68it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.88it/s]100%|██████████| 2/2 [00:00<00:00, 10.86it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.69it/s]100%|██████████| 2/2 [00:00<00:00, 10.68it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.32it/s]100%|██████████| 2/2 [00:00<00:00, 10.31it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.94it/s]100%|██████████| 2/2 [00:00<00:00, 10.92it/s]
-
-Detailed classification report for lr:
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  3 (tp)   1 (fn)
-        Neg  7 (fp)   8 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.89      0.53      0.66       156
-           1       0.33      0.78      0.46        46
-
-    accuracy                           0.58       202
-   macro avg       0.61      0.65      0.56       202
-weighted avg       0.76      0.58      0.62       202
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
---------------------------------------------------------------------------------
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  1 (tp)   3 (fn)
-        Neg  3 (fp)  12 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.80      0.80      0.80       156
-           1       0.33      0.33      0.33        46
-
-    accuracy                           0.69       202
-   macro avg       0.56      0.56      0.56       202
-weighted avg       0.69      0.69      0.69       202
-
---------------------------------------------------------------------------------
-
-Detailed classification report for lr:
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  3 (tp)   1 (fn)
-        Neg  7 (fp)   8 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.89      0.53      0.66       156
-           1       0.33      0.78      0.46        46
-
-    accuracy                           0.58       202
-   macro avg       0.61      0.65      0.56       202
-weighted avg       0.76      0.58      0.62       202
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
-
-Running k-fold model metrics...
-
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:01,  5.25it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  20%|██        | 2/10 [00:00<00:01,  5.18it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  30%|███       | 3/10 [00:00<00:01,  5.16it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  40%|████      | 4/10 [00:00<00:01,  5.18it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  50%|█████     | 5/10 [00:00<00:00,  5.13it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  60%|██████    | 6/10 [00:01<00:00,  5.16it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  70%|███████   | 7/10 [00:01<00:00,  5.07it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  5.07it/s]/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-Processing Folds:  90%|█████████ | 9/10 [00:01<00:00,  5.09it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  5.07it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  5.11it/s]
-
-Average Metrics Across All Folds:
-              Metric     Value
-0      Precision/PPV  0.000000
-1  Average Precision  0.386551
-2        Sensitivity  0.000000
-3        Specificity  0.987083
-4            AUC ROC  0.665438
-5        Brier Score  0.249096
+4            AUC ROC  0.679652
+5        Brier Score  0.252475
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 Optimal threshold used: 0.5029999999999999
 
 ================================================================================
-lr_Functional_Outcomes_Bleeding
-Precision/PPV        0.345
-Average Precision    0.384
-Sensitivity          0.826
-Specificity          0.538
-AUC ROC              0.740
-Brier Score          0.249
-Name: lr, dtype: float64
-<function log_mlflow_experiment at 0x7f19f54a4180>
-Existing Experiment_ID: 263780167110129349
 Object saved!
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
 [CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
 [CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
 [CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s

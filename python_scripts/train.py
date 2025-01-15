@@ -95,7 +95,7 @@ def main(
         SMOTE(random_state=rstate),
         ADASYN(random_state=rstate),
         RandomOverSampler(random_state=rstate),
-    ]:
+    ][:1]:
         print()
         print("Sampler", sampler)
 
@@ -109,11 +109,11 @@ def main(
         #     bin_ages=bin_ages,
         # )
 
-        print()
-        print(f"Circumcision Outcome Columns:")
-        print(y.columns.to_list())
-        print("*" * 80)
-        print()
+        # print()
+        # print(f"Circumcision Outcome Columns:")
+        # print(y.columns.to_list())
+        # print("*" * 80)
+        # print()
 
         pipeline = [
             ("StandardScalar", StandardScaler()),
@@ -132,14 +132,15 @@ def main(
                 model_type="classification",
                 estimator_name=estimator_name,
                 calibrate=True,
-                estimator=clone(clc),
+                # estimator=clone(clc),
+                estimator=clc,
                 kfold=True,
                 grid=tuned_parameters,
                 n_jobs=2,
                 randomized_grid=False,
                 scoring=["average_precision"],
                 random_state=rstate,
-                stratify_cols=circ_eda,
+                # stratify_cols=circ_eda,
                 stratify_y=True,
                 boost_early=early_stop,
                 imbalance_sampler=sampler,
@@ -159,7 +160,7 @@ def main(
                 score="average_precision",
             )
 
-            model_dict[m].return_metrics(X, y[m])
+            # model_dict[m].return_metrics(X, y[m])
 
             if model_dict[m].calibrate:
                 model_dict[m].calibrateModel(X, y[m], score="average_precision")
@@ -170,18 +171,29 @@ def main(
                 optimal_threshold=True,
                 print_threshold=True,
                 model_metrics=True,
+                # return_dict=True,
             )
+
+            # metrics[m] = return_metrics_dict.set_index("Metric")
+            # metrics[m].columns = [estimator_name]
+            # print("=" * 80)
+            # print(metrics[m])
+            # quit()
 
             ####################################################################
             print("=" * 80)
             cur_model = {}
             cur_model[estimator_name] = model_dict[m]
 
-            metrics[m] = metrics_report(
-                models=cur_model,
-                X_valid=X,
-                y_valid=y[m],
-            )
+            # metrics[m] = metrics_report(
+            #     models=cur_model,
+            #     X_valid=X,
+            #     y_valid=y[m],
+            # )
+
+            # print("*" * 120)
+            # print(metrics[m])
+            # print("*" * 120)
 
             ####################################################################
             ########################### MLFlow #################################
@@ -219,27 +231,23 @@ def main(
                     show=False,
                 )
 
-            print(f"{estimator_name}_{m}")
-            print(metrics[m][estimator_name])
-            # print(f"roc_auc_{m}_year.png")
-            print(log_mlflow_experiment)
+            # log_mlflow_experiment(
+            #     mlflow_data=mlflow_data,
+            #     experiment_name=f"Circ_Milan_{exp_name}",
+            #     model_name=f"{estimator_name}_{sampler}_{m}_{'Original'}",
+            #     best_params=model_dict[m].best_params_per_score,
+            #     metrics=metrics[m][estimator_name],
+            #     images={
+            #         f"roc_auc_{m}.png": fig_1,
+            #         f"pr_{m}.png": fig_2,
+            #         f"cm_{m}.png": fig_3,
+            #     },
+            # )
 
-            log_mlflow_experiment(
-                mlflow_data=mlflow_data,
-                experiment_name=f"Circ_Milan_{exp_name}",
-                model_name=f"{estimator_name}_{sampler}_{m}_{'Original'}",
-                best_params=model_dict[m].best_params_per_score,
-                metrics=metrics[m][estimator_name],
-                images={
-                    f"roc_auc_{m}.png": fig_1,
-                    f"pr_{m}.png": fig_2,
-                    f"cm_{m}.png": fig_3,
-                },
-            )
-
-        if metrics[m].loc["AUC ROC", estimator_name] > best_score:
-            best_score = metrics[m].loc["AUC ROC", estimator_name]
-            best_model = model_dict.copy()
+        # print(f"METRICS{metrics}")
+        # if metrics[m].loc["AUC ROC", estimator_name] > best_score:
+        #     best_score = metrics[m].loc["AUC ROC", estimator_name]
+        #     best_model = model_dict.copy()
 
     dumpObjects(
         {
