@@ -115,6 +115,7 @@ print()
 y = df[[outcome]]
 
 print(f"Outcome: {outcome}\n")
+print(f"Outcome Prevalance: {y.value_counts()}\n")
 
 ################################# Save out X and y #############################
 # File paths and names

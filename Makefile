@@ -67,24 +67,25 @@ logistic_regression:
 	--exp-name logistic_regression \
 	2>&1 | tee models/results/logistic_regression.txt
 
-## Make Decision Tree Classifier
-.PHONY: knn_neighbors
-knn_neighbors: 
+## Make Linear Discriminant Analysis
+.PHONY: lda
+lda: 
 	$(PYTHON_INTERPRETER) \
 	python_scripts/train.py \
-	--model-type knn \
-	--exp-name knn_neighbors \
-	2>&1 | tee models/results/knn_neighbors.txt
+	--model-type lda \
+	--exp-name lda \
+	2>&1 | tee models/results/lda.txt
 
-## Make Naive Bayes
-.PHONY: naive_bayes
-naive_bayes: 
+
+## Make Multi-Layer Perceptron
+.PHONY: mlp
+mlp: 
 	$(PYTHON_INTERPRETER) \
 	python_scripts/train.py \
-	--model-type nb \
-	--exp-name naive_bayes \
-	2>&1 | tee models/results/naive_bayes.txt
-
+	--model-type mlp \
+	--exp-name mlp \
+	2>&1 | tee models/results/mlp.txt
+		
 ## Make Support Vector Machines
 .PHONY: svm
 svm: 
@@ -94,33 +95,28 @@ svm:
 	--exp-name svm \
 	2>&1 | tee models/results/svm.txt
 
-## Make Support Vector Machines
-.PHONY: lda
-lda: 
-	$(PYTHON_INTERPRETER) \
-	python_scripts/train.py \
-	--model-type lda \
-	--exp-name lda \
-	2>&1 | tee models/results/lda.txt
 
 ## Make Support Vector Machines
-.PHONY: qda
-qda: 
+.PHONY: nusvc
+nusvc: 
 	$(PYTHON_INTERPRETER) \
 	python_scripts/train.py \
-	--model-type qda \
-	--exp-name qda \
-	2>&1 | tee models/results/qda.txt
-		
+	--model-type nusvc \
+	--exp-name nusvc \
+	2>&1 | tee models/results/nusvc.txt
 
-## Make Support Vector Machines
-.PHONY: mlp
-mlp: 
+
+all_models: logistic_regression lda mlp svm nusvc
+
+################################################################################
+
+.PHONY: model_explainer_svm
+model_explainer_svm: 
 	$(PYTHON_INTERPRETER) \
-	python_scripts/train.py \
-	--model-type mlp \
-	--exp-name mlp \
-	2>&1 | tee models/results/mlp.txt
-		
-
-all_models: logistic_regression lda svm 
+	python_scripts/explainer.py \
+	models/results/ \
+	./data/ \
+	model_svm \
+	SVC.pkl \
+	svm_feat_imp_per_patient.csv \
+	svm_feat_imp_overall.csv
