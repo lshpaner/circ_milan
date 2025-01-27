@@ -1,10 +1,12 @@
 import typer
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import os
 import sys
 from model_tuner import Model, dumpObjects
 from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.impute import SimpleImputer
 
 from imblearn.over_sampling import SMOTE, ADASYN, RandomOverSampler
@@ -52,29 +54,26 @@ def main(
 
     X = pd.read_parquet(features_path)
     y = pd.read_parquet(labels_path)
-    circ_eda = pd.read_csv(eda_path).set_index(patient_id)
 
-    circ_eda = circ_eda.assign(
-        **pd.get_dummies(
-            circ_eda[
-                [
-                    "Geographical_Origin",
-                ]
-            ],
-            dtype=int,
-        )
-    )
-    X = pd.read_csv(data_path).set_index(patient_id)
+    # circ_eda = pd.read_csv(eda_path).set_index(patient_id)
 
-    print(X)
+    # circ_eda = circ_eda.assign(
+    #     **pd.get_dummies(
+    #         circ_eda[
+    #             [
+    #                 "Geographical_Origin",
+    #             ]
+    #         ],
+    #         dtype=int,
+    #     )
+    # )
+    # X = pd.read_csv(data_path).set_index(patient_id)
 
-    circ_eda = circ_eda[
-        [col for col in circ_eda.columns if "Geographical_Origin_" in col]
-    ]
+    # circ_eda = circ_eda[
+    #     [col for col in circ_eda.columns if "Geographical_Origin_" in col]
+    # ]
 
-    circ_eda = circ_eda.join(X["Age_years"], on=patient_id, how="inner")
-
-    print(f"y:{y}")
+    # circ_eda = circ_eda.join(X["Age_years"], on=patient_id, how="inner")
 
     clc = model_definitions[model_type]["clc"]
     estimator_name = model_definitions[model_type]["estimator_name"]
@@ -95,7 +94,7 @@ def main(
         SMOTE(random_state=rstate),
         ADASYN(random_state=rstate),
         RandomOverSampler(random_state=rstate),
-    ][:1]:
+    ]:
         print()
         print("Sampler", sampler)
 
@@ -116,11 +115,11 @@ def main(
         # print()
 
         pipeline = [
-            ("StandardScalar", StandardScaler()),
+            ("StandardScalar", MinMaxScaler()),
             ("Preprocessor", SimpleImputer()),
         ]
 
-        for m in y.columns[:2]:
+        for m in y.columns:
             print()
             print("=" * 60)
             print(f"{m}")
@@ -132,16 +131,15 @@ def main(
                 model_type="classification",
                 estimator_name=estimator_name,
                 calibrate=True,
-                # estimator=clone(clc),
-                estimator=clc,
+                estimator=clone(clc),
                 kfold=True,
                 grid=tuned_parameters,
                 n_jobs=2,
                 randomized_grid=False,
                 scoring=["average_precision"],
                 random_state=rstate,
-                # stratify_cols=circ_eda,
                 stratify_y=True,
+                # kfold_group=X["Age_group"],
                 boost_early=early_stop,
                 imbalance_sampler=sampler,
             )
@@ -165,20 +163,19 @@ def main(
             if model_dict[m].calibrate:
                 model_dict[m].calibrateModel(X, y[m], score="average_precision")
 
-            model_dict[m].return_metrics(
+            return_metrics_dict = model_dict[m].return_metrics(
                 X,
                 y[m],
                 optimal_threshold=True,
                 print_threshold=True,
                 model_metrics=True,
-                # return_dict=True,
+                return_dict=True,
             )
 
-            # metrics[m] = return_metrics_dict.set_index("Metric")
-            # metrics[m].columns = [estimator_name]
-            # print("=" * 80)
+            metrics[m] = pd.Series(return_metrics_dict).to_frame(estimator_name)
+            metrics[m] = round(metrics[m], 3)
+            print("=" * 80)
             # print(metrics[m])
-            # quit()
 
             ####################################################################
             print("=" * 80)
@@ -231,27 +228,26 @@ def main(
                     show=False,
                 )
 
-            # log_mlflow_experiment(
-            #     mlflow_data=mlflow_data,
-            #     experiment_name=f"Circ_Milan_{exp_name}",
-            #     model_name=f"{estimator_name}_{sampler}_{m}_{'Original'}",
-            #     best_params=model_dict[m].best_params_per_score,
-            #     metrics=metrics[m][estimator_name],
-            #     images={
-            #         f"roc_auc_{m}.png": fig_1,
-            #         f"pr_{m}.png": fig_2,
-            #         f"cm_{m}.png": fig_3,
-            #     },
-            # )
+            log_mlflow_experiment(
+                mlflow_data=mlflow_data,
+                experiment_name=f"Circ_Milan_{exp_name}",
+                model_name=f"{estimator_name}_{sampler}_{m}_{'Original'}",
+                best_params=model_dict[m].best_params_per_score,
+                metrics=metrics[m][estimator_name],
+                images={
+                    f"roc_auc_{m}.png": fig_1,
+                    f"pr_{m}.png": fig_2,
+                    f"cm_{m}.png": fig_3,
+                },
+            )
 
-        # print(f"METRICS{metrics}")
-        # if metrics[m].loc["AUC ROC", estimator_name] > best_score:
-        #     best_score = metrics[m].loc["AUC ROC", estimator_name]
-        #     best_model = model_dict.copy()
+        if metrics[m].loc["AUC ROC", estimator_name] > best_score:
+            best_score = metrics[m].loc["AUC ROC", estimator_name]
+            best_model = model_dict.copy()
 
     dumpObjects(
         {
-            "model": model_dict,  # Trained model
+            "model": best_model,  # Trained model
         },
         results / f"{str(clc).split('(')[0]}.pkl",
     )

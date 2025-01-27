@@ -74,6 +74,36 @@ class HealthMetrics:
         pass  # Not storing state in the instance.
 
     @staticmethod
+    def calculate_bmi_category(
+        df,
+        bmi_col="BMI",
+        bmi_category_col="BMI_Category",
+    ):
+        """
+        Categorize BMI based on the WHO BMI classifications and add the
+        categories as a new column.
+
+        Parameters:
+            df (DataFrame): DataFrame containing the BMI data.
+            bmi_col (str): Column name containing BMI values. Default is "BMI".
+            bmi_category_col (str): Column name for BMI categories.
+            Default is "BMI_Category".
+        """
+
+        def classify_bmi(bmi):
+            if bmi < 18.5:
+                return "Underweight"
+            elif 18.5 <= bmi < 24.9:
+                return "Normal weight"
+            elif 25 <= bmi < 29.9:
+                return "Overweight"
+            else:
+                return "Obese"
+
+        # Apply the classification function to the BMI column
+        df[bmi_category_col] = df[bmi_col].apply(classify_bmi)
+
+    @staticmethod
     def calculate_bmi(
         df,
         weight_col,
@@ -731,11 +761,52 @@ class ModelEvaluationMetrics:
                     bbox_inches="tight",
                 )
 
+    def get_predictions(self, model, X, y, model_threshold, custom_threshold, score):
+
+        test_model = model.test_model
+        threshold = 0.5
+        if custom_threshold:
+            threshold = custom_threshold
+        else:
+            if model_threshold:
+                if score is not None:
+                    threshold = model.threshold[score]
+                else:
+                    threshold = model.threshold[model.scoring[0]]
+
+        if hasattr(model, "kfold") and model.kfold:  # Handle k-fold logic
+            print("\nRunning k-fold model metrics...\n")
+            aggregated_y_true = []
+            aggregated_y_pred = []
+            aggregated_y_prob = []
+
+            for fold_idx, (train, test) in tqdm(
+                enumerate(model.kf.split(X, y), start=1),
+                total=model.kf.get_n_splits(),
+                desc="Processing Folds",
+            ):
+                X_train, X_test = X.iloc[train], X.iloc[test]
+                y_train, y_test = y.iloc[train], y.iloc[test]
+
+                # Fit and predict for this fold
+                test_model.fit(X_train, y_train.values.ravel())
+
+                y_pred_proba = test_model.predict_proba(X_test)[:, 1]
+                y_pred = 1 * (y_pred_proba > threshold)
+                aggregated_y_true.extend(y_test.values.tolist())
+                aggregated_y_pred.extend(y_pred.tolist())
+                aggregated_y_prob.extend(y_pred_proba.tolist())
+        else:
+            aggregated_y_true = y
+            aggregated_y_prob = test_model.predict_proba(X)[:, 1]
+            aggregated_y_pred = 1 * (aggregated_y_prob > threshold)
+        return aggregated_y_true, aggregated_y_prob, aggregated_y_pred, threshold
+
     def summarize_model_performance(
         self,
         pipelines_or_models,
         X,
-        y_true,
+        y,
         model_threshold=None,
         model_titles=None,
         custom_threshold=None,
@@ -797,114 +868,17 @@ class ModelEvaluationMetrics:
             else:
                 name = self._extract_model_name(model)  # Extract detailed name
 
-            if hasattr(model, "kfold") and model.kfold:  # Handle k-fold logic
-                print("\nRunning k-fold model metrics...\n")
-                aggregated_metrics = []
-                aggregated_y_true = []
-                aggregated_y_pred = []
-                aggregated_y_prob = []
-
-                if score is not None:
-                    threshold = model.threshold[score]
-                else:
-                    threshold = model.threshold[model.scoring[0]]
-
-                if threshold == 0:
-                    threshold = 0.5
-
-                test_model = model.test_model
-                for fold_idx, (train, test) in tqdm(
-                    enumerate(model.kf.split(X, y_true), start=1),
-                    total=model.kf.get_n_splits(),
-                    desc="Processing Folds",
-                ):
-                    X_train, X_test = X.iloc[train], X.iloc[test]
-                    y_train, y_test = y_true.iloc[train], y_true.iloc[test]
-
-                    # Fit and predict for this fold
-                    test_model.fit(X_train, y_train.values.ravel())
-
-                    y_pred_proba = test_model.predict_proba(X_test)[:, 1]
-                    y_pred = 1 * (y_pred_proba > threshold)
-                    aggregated_y_true.extend(y_test.values.tolist())
-                    aggregated_y_pred.extend(y_pred.tolist())
-                    aggregated_y_prob.extend(y_pred_proba.tolist())
-
-                tn, fp, fn, tp = confusion_matrix(
-                    aggregated_y_true, aggregated_y_pred
-                ).ravel()
-                return pd.DataFrame(
-                    [
-                        {
-                            "Metric": "Precision/PPV",
-                            "Value": precision_score(
-                                aggregated_y_true, aggregated_y_pred
-                            ),
-                        },
-                        {
-                            "Metric": "Average Precision",
-                            "Value": average_precision_score(
-                                aggregated_y_true, aggregated_y_prob
-                            ),
-                        },
-                        {
-                            "Metric": "Sensitivity",
-                            "Value": recall_score(aggregated_y_true, aggregated_y_pred),
-                        },
-                        {"Metric": "Specificity", "Value": tn / (tn + fp)},
-                        {
-                            "Metric": "AUC ROC",
-                            "Value": roc_auc_score(
-                                aggregated_y_true, aggregated_y_prob
-                            ),
-                        },
-                        {
-                            "Metric": "Brier Score",
-                            "Value": brier_score_loss(
-                                aggregated_y_true, aggregated_y_pred
-                            ),
-                        },
-                    ]
-                )
-
-            # Retrieve the threshold if provided
-            current_threshold = None
-            if model_threshold:
-                current_threshold = (
-                    model_threshold.get(name.strip().lower(), None)
-                    or list(model_threshold.values())[i]
-                    if len(model_threshold) > i
-                    else None
-                )
-            # Determine the threshold to use for metric calculation
-            applied_threshold = (
-                custom_threshold if custom_threshold is not None else 0.5
+            y_true, y_prob, y_pred, threshold = self.get_predictions(
+                model, X, y, model_threshold, custom_threshold, score
             )
-
-            # Get model probabilities
-            if hasattr(model, "predict_proba"):
-                y_proba = model.predict_proba(X)[:, 1]
-            elif hasattr(model, "decision_function"):
-                y_scores = model.decision_function(X)
-                y_proba = 1 / (1 + np.exp(-y_scores))
-            else:
-                raise ValueError(
-                    f"Model {name} does not support probability-based prediction."
-                )
-
-            # Use model's default threshold (0.5) for predictions
-            y_pred = (y_proba >= applied_threshold).astype(int)
 
             # Compute metrics
             precision = precision_score(y_true, y_pred)
             recall = recall_score(y_true, y_pred)  # Sensitivity
-            cm = confusion_matrix(y_true, y_pred)
-            tn, fp, fn, tp = cm.ravel()
-            # specificity = tn / (tn + fp) if (tn + fp) > 0 else 0
             specificity = recall_score(y_true, y_pred, pos_label=0)
-            auc_roc = roc_auc_score(y_true, y_proba)
-            brier = brier_score_loss(y_true, y_proba)
-            avg_precision = average_precision_score(y_true, y_proba)
+            auc_roc = roc_auc_score(y_true, y_prob)
+            brier = brier_score_loss(y_true, y_prob)
+            avg_precision = average_precision_score(y_true, y_prob)
             f1 = f1_score(y_true, y_pred)
 
             # Append metrics for this model
@@ -917,12 +891,8 @@ class ModelEvaluationMetrics:
                 "F1-Score": f1,
                 "AUC ROC": auc_roc,
                 "Brier Score": brier,
+                "Model Threshold": threshold,
             }
-
-            # Only add the threshold if it's provided and no custom_threshold is set
-            if current_threshold is not None and not custom_threshold:
-                model_metrics["Model Threshold"] = current_threshold
-
             metrics_data.append(model_metrics)
 
         # Create a DataFrame
@@ -987,19 +957,62 @@ class ModelEvaluationMetrics:
                 f"Model {name} does not support probability-based prediction."
             )
 
-    def _extract_model_titles(self, models_or_pipelines):
+    def _extract_model_titles(self, models_or_pipelines, model_titles=None):
         """
-        Extract titles from models or pipelines.
+        Extract titles from models or pipelines using an optional external list of model titles.
+
+        Parameters:
+        -----------
+        models_or_pipelines : list
+            A list of model or pipeline objects.
+
+        model_titles : list, optional
+            A list of human-readable model titles to map class names to.
+
+        Returns:
+        --------
+        list
+            A list of extracted or matched model titles.
         """
         titles = []
         for model in models_or_pipelines:
-            if hasattr(model, "named_steps"):  # Pipeline
-                final_model = list(model.named_steps.values())[-1]
-                title = getattr(final_model, "__class__", type(final_model)).__name__
-            else:
-                title = getattr(model, "__class__", type(model)).__name__
-            titles.append(title)
+            try:
+                if hasattr(model, "named_steps"):  # Check if it's a pipeline
+                    final_model = list(model.named_steps.values())[-1]
+                    class_name = final_model.__class__.__name__
+                else:
+                    class_name = model.__class__.__name__
+
+                # If model_titles is provided, attempt to map class_name
+                if model_titles:
+                    matched_title = next(
+                        (title for title in model_titles if class_name in title),
+                        class_name,
+                    )
+                else:
+                    matched_title = (
+                        class_name  # Default to class_name if no titles are provided
+                    )
+
+                titles.append(matched_title)
+            except AttributeError:
+                titles.append("Unknown Model")
+
         return titles
+
+    # def _extract_model_titles(self, models_or_pipelines):
+    #     """
+    #     Extract titles from models or pipelines.
+    #     """
+    #     titles = []
+    #     for model in models_or_pipelines:
+    #         if hasattr(model, "named_steps"):  # Pipeline
+    #             final_model = list(model.named_steps.values())
+    #             title = getattr(final_model, "__class__", type(final_model)).__name__
+    #         else:
+    #             title = getattr(model, "__class__", type(model)).__name__
+    #         titles.append(title)
+    #     return titles
 
     # Helper function to extract detailed model names from pipelines or models
     def _extract_model_name(self, pipeline_or_model):
@@ -1013,7 +1026,7 @@ class ModelEvaluationMetrics:
         self,
         pipelines_or_models,
         X,
-        y_true,
+        y,
         model_titles=None,
         model_threshold=None,
         custom_threshold=None,
@@ -1029,6 +1042,7 @@ class ModelEvaluationMetrics:
         tick_fontsize=10,
         inner_fontsize=10,
         grid=False,  # Added grid option
+        score=None,
         **kwargs,
     ):
         """
@@ -1069,42 +1083,12 @@ class ModelEvaluationMetrics:
             else:
                 name = self._extract_model_name(model)
 
-            # Retrieve the threshold if provided
-            current_threshold = None
-            if model_threshold:
-                current_threshold = (
-                    model_threshold.get(name.strip().lower(), None)
-                    or list(model_threshold.values())[idx]
-                    if len(model_threshold) > idx
-                    else None
-                )
-            # Determine the threshold to use for metric calculation
-            applied_threshold = (
-                custom_threshold  # First priority: custom_threshold
-                if custom_threshold is not None
-                else (
-                    current_threshold  # Second priority: model-specific threshold from model_threshold
-                    if current_threshold is not None
-                    else 0.5
-                )  # Default threshold if neither custom nor model-specific thresholds are provided
+            y_true, y_prob, y_pred, threshold = self.get_predictions(
+                model, X, y, model_threshold, custom_threshold, score
             )
-            if applied_threshold is None:
-                applied_threshold = 0.5
-
-            # Generate predictions
-            if hasattr(model, "predict_proba"):
-                y_proba = model.predict_proba(X)[:, 1]
-            elif hasattr(model, "decision_function"):
-                y_scores = model.decision_function(X)
-                y_proba = 1 / (1 + np.exp(-y_scores))
-            else:
-                raise ValueError(
-                    f"Model {name} does not support probability-based prediction."
-                )
-            y_pred_threshold = (y_proba >= applied_threshold).astype(int)
 
             # Compute confusion matrix
-            cm = confusion_matrix(y_true, y_pred_threshold)
+            cm = confusion_matrix(y_true, y_pred)
             print(f"Confusion Matrix for {name}:")
             print(cm)
 
@@ -1119,7 +1103,7 @@ class ModelEvaluationMetrics:
                 disp.plot(cmap=cmap, ax=ax, colorbar=kwargs.get("show_colorbar", True))
 
             # Adjust title wrapping
-            title = f"Confusion Matrix: {name} (Threshold = {applied_threshold:.2f})"
+            title = f"Confusion Matrix: {name} (Threshold = {threshold:.2f})"
             if text_wrap is not None and isinstance(text_wrap, int):
                 title = "\n".join(textwrap.wrap(title, width=text_wrap))
             ax.set_title(title, fontsize=label_fontsize)
@@ -1284,7 +1268,16 @@ class ModelEvaluationMetrics:
             pipelines_or_models = [pipelines_or_models]
 
         if model_titles is None:
-            model_titles = self._extract_model_titles(pipelines_or_models)
+            model_titles = [
+                self._extract_model_name(model) for model in pipelines_or_models
+            ]
+
+        if model_titles:
+            name = model_titles
+        else:
+            name = self._extract_model_name(model)
+        # if model_titles is None:
+        #     model_titles = self._extract_model_titles(pipelines_or_models)
 
         if isinstance(curve_kwgs, dict):
             curve_styles = [curve_kwgs.get(name, {}) for name in model_titles]
@@ -1313,9 +1306,12 @@ class ModelEvaluationMetrics:
         for idx, (model, name, curve_style) in enumerate(
             zip(pipelines_or_models, model_titles, curve_styles)
         ):
-            y_proba = self._get_model_probabilities(model, X, name)
-            fpr, tpr, _ = roc_curve(y, y_proba)
-            roc_auc = roc_auc_score(y, y_proba)
+            y_true, y_prob, y_pred, threshold = self.get_predictions(
+                model, X, y, None, None, None
+            )
+
+            fpr, tpr, _ = roc_curve(y_true, y_prob)
+            roc_auc = roc_auc_score(y_true, y_prob)
 
             print(f"AUC for {name}: {roc_auc:.{decimal_places}f}")
 
@@ -1529,9 +1525,12 @@ class ModelEvaluationMetrics:
         for idx, (model, name, curve_style) in enumerate(
             zip(pipelines_or_models, model_titles, curve_styles)
         ):
-            y_proba = self._get_model_probabilities(model, X, name)
-            precision, recall, _ = precision_recall_curve(y, y_proba)
-            avg_precision = average_precision_score(y, y_proba)
+            y_true, y_prob, y_pred, threshold = self.get_predictions(
+                model, X, y, None, None, None
+            )
+
+            precision, recall, _ = precision_recall_curve(y_true, y_prob)
+            avg_precision = average_precision_score(y_true, y_prob)
 
             print(f"Average Precision for {name}: {avg_precision:.{decimal_places}f}")
 
@@ -1718,11 +1717,13 @@ class ModelEvaluationMetrics:
         for idx, (model, name, curve_style) in enumerate(
             zip(pipelines_or_models, model_titles, curve_styles)
         ):
-            y_proba = self._get_model_probabilities(model, X, name)
-            prob_true, prob_pred = calibration_curve(y, y_proba, n_bins=bins)
+            y_true, y_prob, y_pred, threshold = self.get_predictions(
+                model, X, y, None, None, None
+            )
+            prob_true, prob_pred = calibration_curve(y_true, y_prob, n_bins=bins)
 
             # Calculate Brier score if enabled
-            brier_score = brier_score_loss(y, y_proba) if show_brier_score else None
+            brier_score = brier_score_loss(y_true, y_prob) if show_brier_score else None
 
             legend_label = f"{name}"
             if show_brier_score:

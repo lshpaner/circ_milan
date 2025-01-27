@@ -85,6 +85,15 @@ mlp:
 	--model-type mlp \
 	--exp-name mlp \
 	2>&1 | tee models/results/mlp.txt
+
+## Make Decision Tree
+.PHONY: dt
+dt: 
+	$(PYTHON_INTERPRETER) \
+	python_scripts/train.py \
+	--model-type dt \
+	--exp-name dt \
+	2>&1 | tee models/results/dt.txt
 		
 ## Make Support Vector Machines
 .PHONY: svm
@@ -106,7 +115,7 @@ nusvc:
 	2>&1 | tee models/results/nusvc.txt
 
 
-all_models: logistic_regression lda mlp svm nusvc
+all_models: logistic_regression lda svm 
 
 ################################################################################
 

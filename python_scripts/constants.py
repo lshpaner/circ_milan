@@ -15,6 +15,6 @@ age = ["Age_years"]
 mlflow_data = "models/mlflow_exp"
 var_index = "patient_id"
 
-outcome = "Functional_Outcomes_Bleeding"
+outcome = "Bleeding_Edema_Outcome"
 
 model_svm = "SVC.pkl"
