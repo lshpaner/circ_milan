@@ -101,6 +101,11 @@ df.rename(
     inplace=True,
 )
 
+functional = df[[col for col in df.columns if "Functional_" in col]]
+
+for column in functional.columns:
+    print(f"\n{functional[column].value_counts()}")
+
 ############################### Spelling Checks ################################
 # In the event that there are any mispelled country names, they will be corrected.
 print("Unique Geographical Origins:")
@@ -111,7 +116,19 @@ print()
 # Correct the spelling for Morocco
 df["Geographical_Origin"] = df["Geographical_Origin"].replace({"Marocco": "Morocco"})
 
-############################### BMI
+############################# Correct Data Types ###############################
+
+df["Functional_Outcomes_Cosmetic_Satisfaction"] = df[
+    "Functional_Outcomes_Cosmetic_Satisfaction"
+].astype("Int64")
+
+# There was one missing value in `Functional_Outcomes_Cosmetic_Satisfaction`
+# this should actually be `0`; imputed as such.
+df["Functional_Outcomes_Cosmetic_Satisfaction"] = df[
+    "Functional_Outcomes_Cosmetic_Satisfaction"
+].fillna(0)
+
+#################################### BMI #######################################
 
 # BMI calculation using height and weight as the original column was empty.
 HealthMetrics.calculate_bmi(
@@ -121,6 +138,12 @@ HealthMetrics.calculate_bmi(
     weight_unit="kg",
     height_unit="m",
 )
+
+# Derive BMI categories
+HealthMetrics.calculate_bmi_category(df)
+
+# Check the results
+print(df[["BMI", "BMI_Category"]].head())
 
 # MAP calculation from systolic and diastolic blood pressure.
 
@@ -137,16 +160,39 @@ HealthMetrics.calculate_map(
     combined_bp_col="Intraop_Mean_Blood_Pressure_mmHg",
 )
 
+df = df[df["Age_years"] >= 18]
+
+# df["MAP_min"] = df["Intraop_MAP"] / df["Surgical_Time_min"]
+
+# df["BMI_Age"] = df["BMI"] / df["Age_years"]
+
+
+############################### Diabetes Prevalance ############################
+
+df["Diabetes"] = (
+    df["Comorbidities"].astype(str).str.contains("DM", case=False).astype(int)
+)
+
+print(f"\n{df['Diabetes'].value_counts()} \n")
+
+################################
+
+
+# df["Genital_Comorbidities"] = (
+#     df["Comorbidities"]
+#     .astype(str)
+#     .str.contains(r"hydrocele|varicocele|LS", case=False)
+#     .astype(int)
+# )
+
+# print(f"\n{df['Genital_Comorbidities'].value_counts()} \n")
+
 ################################# One-Hot Encoding #############################
 
 # one hot encode insurance categories (break them out as separate cols of 0, 1)
 df = df.assign(
     **pd.get_dummies(
-        df[
-            [
-                "Anesthesia_Type",
-            ]
-        ],
+        df[["Anesthesia_Type", "BMI_Category"]],
         dtype=int,
     )
 )
@@ -154,27 +200,27 @@ df = df.assign(
 ############################### Intraop SBP and DBP ############################
 
 # Split the BP values into two columns: Systolic (SBP) and Diastolic (DBP)
-df[["SBP", "DBP"]] = df["Intraop_Mean_Blood_Pressure_mmHg"].str.split(
+df[["Intraop_SBP", "Intraop_DBP"]] = df["Intraop_Mean_Blood_Pressure_mmHg"].str.split(
     "/",
     expand=True,
 )
 
 # Convert the new columns to numeric
-df["SBP"] = pd.to_numeric(df["SBP"])
-df["DBP"] = pd.to_numeric(df["DBP"])
+df["Intraop_SBP"] = pd.to_numeric(df["Intraop_SBP"])
+df["Intraop_DBP"] = pd.to_numeric(df["Intraop_DBP"])
 
 ############################### Comorbidities ##################################
 
-# create a new column for comorbidity flag (1 if comorbidities exist else 0)
-df["Comorbidity_Flag"] = df["Comorbidities"].apply(lambda x: 0 if x == 0 else 1)
+# # create a new column for comorbidity flag (1 if comorbidities exist else 0)
+# df["Comorbidity_Flag"] = df["Comorbidities"].apply(lambda x: 0 if x == 0 else 1)
 
-# replace 0 inside "Comorbidities" column with "None"
-df["Comorbidities"] = (
-    df["Comorbidities"].replace({0: "None Present"}).apply(count_comorbidities)
-)
+# Replace 0 inside "Comorbidities" column with "None"
+# df["Number_of_Comorbidities"] = (
+#     df["Comorbidities"].replace({0: "None Present"}).apply(count_comorbidities)
+# )
 
-print("*" * terminal_width)
-print("Number of Comorbidities and their prevalance: \n")
+# print("*" * terminal_width)
+# print("Number of Comorbidities and their prevalance: \n")
 
 # Calculate value counts and percentages
 value_counts = df["Comorbidities"].value_counts()
@@ -197,9 +243,9 @@ df["Surgical_Technique"] = df["Surgical_Technique"].apply(
 
 ############################ Antibiotic Grouping ###############################
 
-df["Preop_drugs_antibiotic"] = df["Preop_drugs_antibiotic"].apply(
-    lambda x: 1 if x == "Cefazolina" else 0
-)
+# df["Preop_drugs_antibiotic"] = df["Preop_drugs_antibiotic"].apply(
+#     lambda x: 1 if x == "Cefazolina" else 0
+# )
 
 ########################## Check for Missing Values ############################
 print("DataFrame Analysis Report (`dataframe_columns`) \n")
@@ -212,24 +258,10 @@ if df_columns[df_columns["null_total"] >= 1].empty:
 print()
 print("*" * terminal_width)
 
-############################# Correct Data Types ###############################
-
-df["Functional_Outcomes_Cosmetic_Satisfaction"] = df[
-    "Functional_Outcomes_Cosmetic_Satisfaction"
-].astype("Int64")
-
-# There was one missing value in `Functional_Outcomes_Cosmetic_Satisfaction`
-# this should actually be `0`; imputed as such.
-df["Functional_Outcomes_Cosmetic_Satisfaction"] = df[
-    "Functional_Outcomes_Cosmetic_Satisfaction"
-].fillna(0)
-
-
 ########################## Correct Blood Loss Logic ############################
-df["Functional_Outcomes_Bleeding"] = df["Intraoperative_Blood_Loss_ml"].apply(
-    lambda x: 1 if x > 0 else 0
-)
-print(df["Functional_Outcomes_Bleeding"].value_counts())
+# df["Blood_loss_rate_ml_per_min"] = (
+#     df["Intraoperative_Blood_Loss_ml"] / df["Surgical_Time_min"]
+# )
 
 ##################### Zero Variance Inspection and Drops #######################
 
@@ -244,6 +276,7 @@ low_variance_columns = shape_var[
 ].index.to_list()
 print()
 print(f"Dropping the following low variance column(s): {low_variance_columns}")
+print()
 
 # Now, drop these columns from df
 df.drop(columns=low_variance_columns, inplace=True)
@@ -254,23 +287,19 @@ circ_eda = df.copy()
 
 ######################### Dropping Additional Columns ##########################
 
-# Dropping uninformative features like "Birthday"make sv
+# Dropping uninformative features like "Birthday"
 # Dropping Weight since Height was dropped, and BMI will be used instead
-# Dropping "Preoperative Blood Pressure (mmHg)" because it is converted to MAP
 cols_to_drop = [
     "Weight_kg",
-    "Comorbidity_Flag",
-    # "Preop_Blood_Pressure_mmHg",
-    "Intraoperative_Blood_Loss_ml",
     "Cost_of_Procedure_euros",
     "Birthday",
-    # "Anesthesia_Type_lidocaine",
+    "BMI_Category_Normal weight",
+    # "Intraoperative_Blood_Loss_ml",
+    # "Surgical_Time_min",
+    "Anesthesia_Type_lidocaine",
+    "Anesthesia_Type_carbocaine",
     "Intraop_MAP",
-] + [
-    col
-    for col in df.columns
-    if "Functional" in col and "Functional_Outcomes_Bleeding" not in col
-]
+] + [col for col in df.columns if "Preop_" in col]
 
 
 # Prepare the string of columns to drop, each on a new line, in advance

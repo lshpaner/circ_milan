@@ -3,6 +3,7 @@ import numpy as np
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.neighbors import KNeighborsClassifier
@@ -56,8 +57,8 @@ lr_Cs = np.logspace(-4, 0, 5)
 # Structure the parameters similarly to the RF template
 tuned_parameters_lr = [
     {
-        "lr__penalty": lr_penalties[:1],
-        "lr__C": lr_Cs[:1],
+        "lr__penalty": lr_penalties,
+        "lr__C": lr_Cs,
     }
 ]
 
@@ -147,6 +148,42 @@ mlp_definition = {
     "early": False,  # Enable early stopping to prevent overfitting
 }
 
+################################################################################
+############################### Decision Trees #################################
+################################################################################
+
+# Define Decision Tree parameters
+dt_name = "dt"
+
+# Simplified hyperparameters
+dt_max_depth = [None, 10, 20]  # Unbounded, shallow, and medium depths
+dt_min_samples_split = [2, 10]  # Default and a stricter option
+dt_min_samples_leaf = [1, 5]  # Default and larger leaf nodes for regularization
+
+# Define the parameter grid for Decision Trees
+tuned_parameters_dt = [
+    {
+        "dt__max_depth": dt_max_depth,
+        "dt__min_samples_split": dt_min_samples_split,
+        "dt__min_samples_leaf": dt_min_samples_leaf,
+    }
+]
+
+# Define the Decision Tree model
+dt = DecisionTreeClassifier(
+    class_weight="balanced",
+    random_state=rstate,
+)
+
+# Define the Decision Tree model configuration
+dt_definition = {
+    "clc": dt,
+    "estimator_name": dt_name,
+    "tuned_parameters": tuned_parameters_dt,
+    "randomized_grid": False,
+    "early": False,
+}
+
 
 ################################################################################
 ######################### Support Vector Machines ##############################
@@ -155,15 +192,15 @@ mlp_definition = {
 # Define SVM parameters
 svm_name = "svm"
 
-svc_kernel = ["linear", "rbf"][:1]
-# svc_cost = np.logspace(-4, 0, 10).tolist()
-svc_cost = np.logspace(-4, 0, 1).tolist()
-svc_gamma = [0.001, 0.01, 0.1, 0.5, "scale", "auto"][:1]
+svc_kernel = ["linear", "rbf"]
+svc_cost = np.logspace(-4, 2, 10).tolist()
+# svc_cost = np.logspace(-4, 0, 1).tolist()
+svc_gamma = [0.001, 0.01, 0.05, 0.1, 0.2, 0.5, "scale", "auto"]
 
 # Correct parameter name: 'C' instead of 'cost'
 tuned_parameters_svm = [
     {"svm__kernel": svc_kernel, "svm__C": svc_cost, "svm__gamma": svc_gamma}
-][:1]
+]
 
 # Define the SVM model
 svm = SVC(
@@ -189,7 +226,7 @@ nusvc_name = "nusvc"
 
 nusvc_kernel = ["linear", "rbf", "poly", "sigmoid"]  # Common kernels
 nusvc_nu = [0.1, 0.3, 0.5, 0.7, 0.9]  # Fraction of errors and SVs
-nusvc_gamma = [0.001, 0.01, 0.1, 0.5, "scale", "auto"]  # Gamma values
+nusvc_gamma = [0.001, 0.01, 0.05, 0.1, 0.2, 0.5, "scale", "auto"]  # Gamma values
 
 # Parameter grid for NuSVC
 tuned_parameters_nusvc = [
@@ -224,4 +261,5 @@ model_definitions = {
     lr_name: lr_definition,
     lda_name: lda_definition,
     mlp_name: mlp_definition,
+    dt_name: dt_definition,
 }

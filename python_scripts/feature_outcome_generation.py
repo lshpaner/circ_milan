@@ -67,15 +67,6 @@ save_dataframes_to_excel(
 
 ############################ Summarize All Combinations ########################
 
-print()
-# summarize_all_combinations(
-#     df=df,
-#     variables=["Age_years", "Preop_Heart_Rate_bpm"],
-#     data_path=data_path,
-#     data_name="new_test.xlsx",
-# )
-
-
 print("*" * terminal_width)
 print()
 print("Functional Columns in Dataset:")
@@ -99,14 +90,46 @@ for col in df.columns:
 print()
 print("*" * terminal_width)
 
+############################# Functional Outcomes ##############################
+
+# Combine the columns logically
+df[outcome] = (
+    df["Functional_Outcomes_Bleeding"].astype(int)
+    | df["Functional_Outcomes_Edema"].astype(int)
+    | df["Functional_Outcomes_Pain"].astype(int)
+    | df["Functional_Outcomes_Infection"].astype(int)
+)
+
+print(df["Bleeding_Edema_Outcome"].value_counts())
+
+cols_to_drop = [
+    col
+    for col in df.columns
+    if "Functional" in col and "Bleeding_Edema_Outcome" not in col
+]
+
+# Prepare the string of columns to drop, each on a new line, in advance
+columns_to_drop_str = "\n".join(cols_to_drop)
+
+df.drop(columns=cols_to_drop, inplace=True)
+
 ############################# Final Variance Check #############################
 print()
-print("Final Variance Check:")
+print("Final Variance Check: \n")
 print(df.var())
 print()
 
+df[[outcome]]
+
+
+############################## Correlation Matrix ##############################
+print("*" * terminal_width, "\n")
+print("Correlation Matrix:")
+print(f"\n {df.corr()}")
+print("*" * terminal_width, "\n")
 ######################### Feature and Outcome Generation #######################
 
+print("Feature and Outcome Generation: \n")
 X = df[[col for col in df.columns if col != outcome]]
 
 print(f"Feature List: {X.columns.to_list()}\n")
