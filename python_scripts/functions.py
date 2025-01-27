@@ -617,8 +617,9 @@ def log_mlflow_experiment(
     mlflow_data,
     experiment_name,
     model_name,
-    best_params,
-    metrics,
+    best_params=None,
+    metrics=None,
+    model_object=None,
     images={},
 ):
     """
@@ -696,34 +697,39 @@ def log_mlflow_experiment(
     with mlflow.start_run(experiment_id=experiment_id, run_name=model_name):
 
         # log model's best parameters
-        if isinstance(best_params, dict):
-            mlflow.log_params(best_params)
-        else:
-            mlflow.log_param("best_params_unavailable", str(best_params))
-
-        # Extract the row for the current model
-        result = metrics
-        if not result.empty:
-
-            # Log the parameters and metrics
-            for col in result.index:
-                # Sanitize the column name
-                sanitized_name = sanitize_metric_name(col)
-                value = result[col]
-
-                # Check if the value is numeric and not null
-                if is_numeric(value) and pd.notnull(value):
-                    # Log the metric
-                    mlflow.log_metric(sanitized_name, float(value))
-
-            # log model's best parameters
+        if best_params is not None:
             if isinstance(best_params, dict):
                 mlflow.log_params(best_params)
             else:
                 mlflow.log_param("best_params_unavailable", str(best_params))
 
-            for name, image in images.items():
-                mlflow.log_figure(image, name)
+        # Extract the row for the current model
+        if metrics is not None:
+            result = metrics
+            if not result.empty:
+
+                # Log the parameters and metrics
+                for col in result.index:
+                    # Sanitize the column name
+                    sanitized_name = sanitize_metric_name(col)
+                    value = result[col]
+
+                    # Check if the value is numeric and not null
+                    if is_numeric(value) and pd.notnull(value):
+                        # Log the metric
+                        mlflow.log_metric(sanitized_name, float(value))
+
+                # log model's best parameters
+                if isinstance(best_params, dict):
+                    mlflow.log_params(best_params)
+                else:
+                    mlflow.log_param("best_params_unavailable", str(best_params))
+
+                for name, image in images.items():
+                    mlflow.log_figure(image, name)
+
+        if model_object:
+            mlflow.sklearn.log_model(model_object, "model")
 
 
 ################################################################################
