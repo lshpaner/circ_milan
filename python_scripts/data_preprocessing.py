@@ -287,6 +287,12 @@ circ_eda = df.copy()
 
 ######################### Dropping Additional Columns ##########################
 
+df["abnormal_weight"] = (
+    df[[col for col in df.columns if col.startswith("BMI_") and "Normal" not in col]]
+    .any(axis=1)
+    .astype(int)
+)
+
 # Dropping uninformative features like "Birthday"
 # Dropping Weight since Height was dropped, and BMI will be used instead
 cols_to_drop = [

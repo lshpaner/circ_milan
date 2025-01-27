@@ -252,6 +252,14 @@ def main(
         results / f"{str(clc).split('(')[0]}.pkl",
     )
 
+    for m in model_dict:
+        log_mlflow_experiment(
+            mlflow_data=mlflow_data,
+            experiment_name=f"Circ_Milan_{exp_name}",
+            model_name=f"{estimator_name}_{m}_best",
+            model_object=best_model[m],
+        )
+
 
 if __name__ == "__main__":
     app()
