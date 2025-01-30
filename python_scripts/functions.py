@@ -74,6 +74,41 @@ class HealthMetrics:
         pass  # Not storing state in the instance.
 
     @staticmethod
+    def split_bp_column(
+        df,
+        combined_bp_col,
+        systolic_col_name="SBP",
+        diastolic_col_name="DBP",
+    ):
+        """
+        Split a combined blood pressure column in "Systolic/Diastolic" format
+        into separate systolic (SBP) and diastolic (DBP) columns.
+
+        Parameters:
+            df (DataFrame): The pandas DataFrame containing the combined column.
+            combined_bp_col (str): Column name of the combined BP values.
+            systolic_col_name (str): Column name for the new systolic BP values.
+            diastolic_col_name (str): Column name for the new diastolic BP values.
+
+        Returns:
+            None: The DataFrame is updated in place with the new columns.
+        """
+        # Split the combined BP column into two new columns
+        df[[systolic_col_name, diastolic_col_name]] = df[combined_bp_col].str.split(
+            "/", expand=True
+        )
+
+        # Convert the new columns to numeric types
+        df[systolic_col_name] = pd.to_numeric(
+            df[systolic_col_name],
+            errors="coerce",
+        )
+        df[diastolic_col_name] = pd.to_numeric(
+            df[diastolic_col_name],
+            errors="coerce",
+        )
+
+    @staticmethod
     def calculate_bmi_category(
         df,
         bmi_col="BMI",
@@ -768,19 +803,43 @@ class ModelEvaluationMetrics:
                 )
 
     def get_predictions(self, model, X, y, model_threshold, custom_threshold, score):
+        """
+        Get predictions and threshold-adjusted predictions for a given model.
+        Handles both single-model and k-fold cross-validation scenarios.
 
-        test_model = model.test_model
+        Parameters:
+        - model: The model or pipeline object to use for predictions.
+        - X: Features for prediction.
+        - y: True labels.
+        - model_threshold: Predefined threshold for the model.
+        - custom_threshold: User-defined custom threshold (overrides model_threshold).
+        - score: The scoring metric to determine the threshold.
+
+        Returns:
+        - aggregated_y_true: Ground truth labels.
+        - aggregated_y_prob: Predicted probabilities.
+        - aggregated_y_pred: Threshold-adjusted predictions.
+        - threshold: The threshold used for predictions.
+        """
+        # Determine the model to use for predictions
+        test_model = model.test_model if hasattr(model, "test_model") else model
+
+        # Default threshold
         threshold = 0.5
+
+        # Set the threshold based on custom_threshold, model_threshold, or model scoring
         if custom_threshold:
             threshold = custom_threshold
-        else:
-            if model_threshold:
-                if score is not None:
-                    threshold = model.threshold[score]
-                else:
-                    threshold = model.threshold[model.scoring[0]]
+        elif model_threshold:
+            if score is not None:
+                threshold = getattr(model, "threshold", {}).get(score, 0.5)
+            else:
+                threshold = getattr(model, "threshold", {}).get(
+                    getattr(model, "scoring", [0])[0], 0.5
+                )
 
-        if hasattr(model, "kfold") and model.kfold:  # Handle k-fold logic
+        # Handle k-fold logic if the model uses cross-validation
+        if hasattr(model, "kfold") and model.kfold:
             print("\nRunning k-fold model metrics...\n")
             aggregated_y_true = []
             aggregated_y_pred = []
@@ -797,15 +856,29 @@ class ModelEvaluationMetrics:
                 # Fit and predict for this fold
                 test_model.fit(X_train, y_train.values.ravel())
 
-                y_pred_proba = test_model.predict_proba(X_test)[:, 1]
-                y_pred = 1 * (y_pred_proba > threshold)
+                if hasattr(test_model, "predict_proba"):
+                    y_pred_proba = test_model.predict_proba(X_test)[:, 1]
+                    y_pred = (y_pred_proba > threshold).astype(int)
+                else:
+                    # Fallback if predict_proba is not available
+                    y_pred_proba = test_model.predict(X_test)
+                    y_pred = (y_pred > threshold).astype(int)
+
                 aggregated_y_true.extend(y_test.values.tolist())
                 aggregated_y_pred.extend(y_pred.tolist())
                 aggregated_y_prob.extend(y_pred_proba.tolist())
         else:
+            # Single-model scenario
             aggregated_y_true = y
-            aggregated_y_prob = test_model.predict_proba(X)[:, 1]
-            aggregated_y_pred = 1 * (aggregated_y_prob > threshold)
+
+            if hasattr(test_model, "predict_proba"):
+                aggregated_y_prob = test_model.predict_proba(X)[:, 1]
+                aggregated_y_pred = (aggregated_y_prob > threshold).astype(int)
+            else:
+                # Fallback if predict_proba is not available
+                aggregated_y_prob = test_model.predict(X)
+                aggregated_y_pred = (aggregated_y_prob > threshold).astype(int)
+
         return aggregated_y_true, aggregated_y_prob, aggregated_y_pred, threshold
 
     def summarize_model_performance(
@@ -1006,19 +1079,19 @@ class ModelEvaluationMetrics:
 
         return titles
 
-    # def _extract_model_titles(self, models_or_pipelines):
-    #     """
-    #     Extract titles from models or pipelines.
-    #     """
-    #     titles = []
-    #     for model in models_or_pipelines:
-    #         if hasattr(model, "named_steps"):  # Pipeline
-    #             final_model = list(model.named_steps.values())
-    #             title = getattr(final_model, "__class__", type(final_model)).__name__
-    #         else:
-    #             title = getattr(model, "__class__", type(model)).__name__
-    #         titles.append(title)
-    #     return titles
+    def _extract_model_titles(self, models_or_pipelines):
+        """
+        Extract titles from models or pipelines.
+        """
+        titles = []
+        for model in models_or_pipelines:
+            if hasattr(model, "named_steps"):  # Pipeline
+                final_model = list(model.named_steps.values())
+                title = getattr(final_model, "__class__", type(final_model)).__name__
+            else:
+                title = getattr(model, "__class__", type(model)).__name__
+            titles.append(title)
+        return titles
 
     # Helper function to extract detailed model names from pipelines or models
     def _extract_model_name(self, pipeline_or_model):
@@ -1028,7 +1101,7 @@ class ModelEvaluationMetrics:
             ].__class__.__name__  # Final estimator's class name
         return pipeline_or_model.__class__.__name__  # Individual model class name
 
-    def plot_confusion_matrix(
+    def plot_conf_matrix(
         self,
         pipelines_or_models,
         X,
@@ -1049,6 +1122,7 @@ class ModelEvaluationMetrics:
         inner_fontsize=10,
         grid=False,  # Added grid option
         score=None,
+        class_report=False,
         **kwargs,
     ):
         """
@@ -1068,8 +1142,8 @@ class ModelEvaluationMetrics:
                 self._extract_model_name(model) for model in pipelines_or_models
             ]
 
-        if class_labels is None:
-            class_labels = ["Class 0", "Class 1"]
+        # if class_labels is None:
+        #     class_labels = ["Class 0", "Class 1"]
 
         # Setup grid if enabled
         if grid:
@@ -1095,13 +1169,44 @@ class ModelEvaluationMetrics:
 
             # Compute confusion matrix
             cm = confusion_matrix(y_true, y_pred)
-            print(f"Confusion Matrix for {name}:")
-            print(cm)
+            # conf_matrix_df = pd.DataFrame(
+            #     cm, index=["Actual 0", "Actual 1"], columns=["Predicted 0", "Predicted 1"]
+            # )
 
-            # Plot the confusion matrix
-            disp = ConfusionMatrixDisplay(
-                confusion_matrix=cm, display_labels=class_labels
+            # Create confusion matrix DataFrame
+            conf_matrix_df = pd.DataFrame(
+                cm,
+                index=(
+                    [f"Actual {label}" for label in class_labels]
+                    if class_labels
+                    else ["Actual 0", "Actual 1"]
+                ),
+                columns=(
+                    [f"Predicted {label}" for label in class_labels]
+                    if class_labels
+                    else ["Predicted 0", "Predicted 1"]
+                ),
             )
+
+            print(f"Confusion Matrix for {name}: \n")
+            print(f"{conf_matrix_df}\n")
+            if class_report:
+                print(f"Classification Report for {name}: \n")
+                print(classification_report(y_true, y_pred))
+
+            # updated_class_labels = conf_matrix_df.index.tolist()
+            # Plot the confusion matrix
+            # disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=class_labels)
+            # Use ConfusionMatrixDisplay with custom class_labels
+            if class_labels:
+                disp = ConfusionMatrixDisplay(
+                    confusion_matrix=cm,
+                    display_labels=[f"{label}" for label in class_labels],
+                )
+            else:
+                disp = ConfusionMatrixDisplay(
+                    confusion_matrix=cm, display_labels=["0", "1"]
+                )
             if grid:
                 disp.plot(cmap=cmap, ax=ax, colorbar=kwargs.get("show_colorbar", True))
             else:
@@ -1274,14 +1379,17 @@ class ModelEvaluationMetrics:
             pipelines_or_models = [pipelines_or_models]
 
         if model_titles is None:
-            model_titles = [
-                self._extract_model_name(model) for model in pipelines_or_models
-            ]
+            model_titles = self._extract_model_titles(pipelines_or_models)
+
+        # if model_titles is None:
+        #     model_titles = [
+        #         self._extract_model_titles(model) for model in pipelines_or_models
+        #     ]
 
         if model_titles:
             name = model_titles
         else:
-            name = self._extract_model_name(model)
+            name = self._extract_model_titles(model)
         # if model_titles is None:
         #     model_titles = self._extract_model_titles(pipelines_or_models)
 
@@ -1767,7 +1875,10 @@ class ModelEvaluationMetrics:
                 ax.set_ylabel(ylabel, fontsize=label_fontsize)
                 if text_wrap:
                     grid_title = "\n".join(
-                        textwrap.wrap(f"Calibration Curve: {name}", width=text_wrap)
+                        textwrap.wrap(
+                            f"Calibration Curve: {name}",
+                            width=text_wrap,
+                        )
                     )
                 else:
                     grid_title = f"Calibration Curve: {name}"
@@ -1799,7 +1910,10 @@ class ModelEvaluationMetrics:
                 plt.ylabel(ylabel, fontsize=label_fontsize)
                 if text_wrap:
                     title = "\n".join(
-                        textwrap.wrap(f"Calibration Curve: {name}", width=text_wrap)
+                        textwrap.wrap(
+                            f"Calibration Curve: {name}",
+                            width=text_wrap,
+                        )
                     )
                 else:
                     title = f"Calibration Curve: {name}"
@@ -1808,7 +1922,10 @@ class ModelEvaluationMetrics:
                 plt.legend(loc="upper left", fontsize=tick_fontsize)
                 plt.grid(visible=gridlines)
                 self._save_plot(
-                    f"{name}_Calibration", save_plot, image_path_png, image_path_svg
+                    f"{name}_Calibration",
+                    save_plot,
+                    image_path_png,
+                    image_path_svg,
                 )
                 plt.show()
 
@@ -1827,7 +1944,8 @@ class ModelEvaluationMetrics:
             if text_wrap:
                 title = "\n".join(
                     textwrap.wrap(
-                        title or "Calibration Curves: Overlay", width=text_wrap
+                        title or "Calibration Curves: Overlay",
+                        width=text_wrap,
                     )
                 )
             else:
@@ -1837,7 +1955,10 @@ class ModelEvaluationMetrics:
             plt.legend(loc="upper left", fontsize=tick_fontsize)
             plt.grid(visible=gridlines)
             self._save_plot(
-                "Overlay_Calibration", save_plot, image_path_png, image_path_svg
+                "Overlay_Calibration",
+                save_plot,
+                image_path_png,
+                image_path_svg,
             )
             plt.show()
         elif grid:
@@ -1845,7 +1966,10 @@ class ModelEvaluationMetrics:
                 ax.axis("off")
             plt.tight_layout()
             self._save_plot(
-                "Grid_Calibration", save_plot, image_path_png, image_path_svg
+                "Grid_Calibration",
+                save_plot,
+                image_path_png,
+                image_path_svg,
             )
             plt.show()
 

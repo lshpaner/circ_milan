@@ -1,0 +1,608 @@
+..
+
+Sampler None
+
+============================================================
+Bleeding_Edema_Outcome
+============================================================
+
+Pipeline Steps:
+
+┌────────────────────────────────────────────┐
+│ Step 1: preprocess_scaler_StandardScalar   │
+│ MinMaxScaler                               │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 2: preprocess_imputer_Preprocessor    │
+│ SimpleImputer                              │
+└────────────────────────────────────────────┘
+                      │
+                      ▼
+┌────────────────────────────────────────────┐
+│ Step 3: ridge                              │
+│ CalibratedClassifierCV                     │
+└────────────────────────────────────────────┘
+
+# Tuning hyper-parameters for average_precision
+Fitting 10 folds for each of 18 candidates, totalling 180 fits
+_RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/joblib/externals/loky/process_executor.py", line 463, in _process_worker
+    r = call_item()
+        ^^^^^^^^^^^
+  File "/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/joblib/externals/loky/process_executor.py", line 291, in __call__
+    return self.fn(*self.args, **self.kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/joblib/parallel.py", line 589, in __call__
+    return [func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/joblib/parallel.py", line 589, in <listcomp>
+    return [func(*args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/utils/parallel.py", line 136, in __call__
+    return self.function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/model_selection/_validation.py", line 876, in _fit_and_score
+    estimator = estimator.set_params(**clone(parameters, safe=False))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/pipeline.py", line 237, in set_params
+    self._set_params("steps", **kwargs)
+  File "/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/utils/metaestimators.py", line 69, in _set_params
+    super().set_params(**params)
+  File "/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/base.py", line 291, in set_params
+    valid_params[key].set_params(**sub_params)
+  File "/home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/base.py", line 279, in set_params
+    raise ValueError(
+ValueError: Invalid parameter 'base_estimator' for estimator CalibratedClassifierCV(cv=5,
+                       estimator=RidgeClassifier(class_weight='balanced',
+                                                 random_state=222)). Valid parameters are: ['cv', 'ensemble', 'estimator', 'method', 'n_jobs'].
+"""
+
+The above exception was the direct cause of the following exception:
+
+╭─────────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────────╮
+│ /home/lshpaner/Python_Projects/circ_milan/python_scripts/train.py:151 in main                                                                                                            │
+│                                                                                                                                                                                          │
+│   148 │   │   │   ######################### Extract Split Data Subsets #######################                                                                                           │
+│   149 │   │   │   ############################################################################                                                                                           │
+│   150 │   │   │                                                                                                                                                                          │
+│ ❱ 151 │   │   │   model_dict[m].grid_search_param_tuning(X, y[m], f1_beta_tune=True)                                                                                                     │
+│   152 │   │   │                                                                                                                                                                          │
+│   153 │   │   │   ############################################################################                                                                                           │
+│   154                                                                                                                                                                                    │
+│                                                                                                                                                                                          │
+│ ╭─────────────────────────────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────────────────────────────╮ │
+│ │       best_model = {}                                                                                                                                                                │ │
+│ │       best_score = 0                                                                                                                                                                 │ │
+│ │              clc = CalibratedClassifierCV(cv=5,                                                                                                                                      │ │
+│ │                    │   │   │   │   │      estimator=RidgeClassifier(class_weight='balanced',                                                                                         │ │
+│ │                    │   │   │   │   │   │   │   │   │   │   │   │    random_state=222))                                                                                               │ │
+│ │        data_path = PosixPath('data/X.csv')                                                                                                                                           │ │
+│ │       early_stop = False                                                                                                                                                             │ │
+│ │         eda_path = PosixPath('data/circ_eda.csv')                                                                                                                                    │ │
+│ │   estimator_name = 'ridge'                                                                                                                                                           │ │
+│ │         exp_name = 'ridge'                                                                                                                                                           │ │
+│ │    features_path = PosixPath('data/X.parquet')                                                                                                                                       │ │
+│ │      labels_path = PosixPath('data/y.parquet')                                                                                                                                       │ │
+│ │                m = 'Bleeding_Edema_Outcome'                                                                                                                                          │ │
+│ │          metrics = {}                                                                                                                                                                │ │
+│ │       model_dict = {'Bleeding_Edema_Outcome': <model_tuner.model_tuner_utils.Model object at 0x7fbb97792f50>}                                                                        │ │
+│ │       model_type = 'ridge'                                                                                                                                                           │ │
+│ │         pipeline = [('StandardScalar', MinMaxScaler()), ('Preprocessor', SimpleImputer())]                                                                                           │ │
+│ │        rand_grid = False                                                                                                                                                             │ │
+│ │          results = PosixPath('models/results')                                                                                                                                       │ │
+│ │          sampler = None                                                                                                                                                              │ │
+│ │ tuned_parameters = [{'ridge__base_estimator__alpha': [0.1, 1.0, 10.0], 'ridge__base_estimator__solver': ['auto', 'svd', 'cholesky'], 'ridge__base_estimator__tol': [0.0001, 0.001]}] │ │
+│ │                X = │   │   │   Age_years    BMI  ...  Intraop_SBP  Intraop_DBP                                                                                                       │ │
+│ │                    patient_id                    ...                                                                                                                                 │ │
+│ │                    424123959          22  26.17  ...          130           90                                                                                                       │ │
+│ │                    390469576          50  31.14  ...          120           70                                                                                                       │ │
+│ │                    633173792          70  23.88  ...          110           80                                                                                                       │ │
+│ │                    784928164          68  27.64  ...          120           90                                                                                                       │ │
+│ │                    936242280          64  31.18  ...          110           70                                                                                                       │ │
+│ │                    ...               ...    ...  ...          ...          ...                                                                                                       │ │
+│ │                    412065385          22  19.27  ...          130           90                                                                                                       │ │
+│ │                    769873868          56  26.84  ...          110           80                                                                                                       │ │
+│ │                    140411083          19  24.22  ...          120           90                                                                                                       │ │
+│ │                    773951452          21  25.17  ...          140           90                                                                                                       │ │
+│ │                    404354815          23  22.78  ...          130           90                                                                                                       │ │
+│ │                                                                                                                                                                                      │ │
+│ │                    [194 rows x 13 columns]                                                                                                                                           │ │
+│ │                y = │   │   │   Bleeding_Edema_Outcome                                                                                                                                │ │
+│ │                    patient_id                                                                                                                                                        │ │
+│ │                    424123959                        0                                                                                                                                │ │
+│ │                    390469576                        0                                                                                                                                │ │
+│ │                    633173792                        0                                                                                                                                │ │
+│ │                    784928164                        0                                                                                                                                │ │
+│ │                    936242280                        0                                                                                                                                │ │
+│ │                    ...                            ...                                                                                                                                │ │
+│ │                    412065385                        1                                                                                                                                │ │
+│ │                    769873868                        1                                                                                                                                │ │
+│ │                    140411083                        0                                                                                                                                │ │
+│ │                    773951452                        1                                                                                                                                │ │
+│ │                    404354815                        1                                                                                                                                │ │
+│ │                                                                                                                                                                                      │ │
+│ │                    [194 rows x 1 columns]                                                                                                                                            │ │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯ │
+│                                                                                                                                                                                          │
+│ /home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/model_tuner/model_tuner_utils.py:1356 in grid_search_param_tuning                                   │
+│                                                                                                                                                                                          │
+│   1353 │   │   │   │   random_state=self.random_state,                                          ╭─────────────────────────────────── locals ────────────────────────────────────╮        │
+│   1354 │   │   │   )                                                                            │        betas = [1, 2]                                                         │        │
+│   1355 │   │   │                                                                                │ f1_beta_tune = True                                                           │        │
+│ ❱ 1356 │   │   │   self.get_best_score_params(X, y)                                             │         self = <model_tuner.model_tuner_utils.Model object at 0x7fbb97792f50> │        │
+│   1357 │   │   │   #### Threshold tuning for kfold split for each score                         │            X = │   │   │   Age_years    BMI  ...  Intraop_SBP  Intraop_DBP    │        │
+│   1358 │   │   │   if f1_beta_tune:  # tune threshold                                           │                patient_id                    ...                              │        │
+│   1359 │   │   │   │   if isinstance(X, pd.DataFrame) or isinstance(X, pd.Series):              │                424123959          22  26.17  ...          130           90    │        │
+│                                                                                                 │                390469576          50  31.14  ...          120           70    │        │
+│                                                                                                 │                633173792          70  23.88  ...          110           80    │        │
+│                                                                                                 │                784928164          68  27.64  ...          120           90    │        │
+│                                                                                                 │                936242280          64  31.18  ...          110           70    │        │
+│                                                                                                 │                ...               ...    ...  ...          ...          ...    │        │
+│                                                                                                 │                412065385          22  19.27  ...          130           90    │        │
+│                                                                                                 │                769873868          56  26.84  ...          110           80    │        │
+│                                                                                                 │                140411083          19  24.22  ...          120           90    │        │
+│                                                                                                 │                773951452          21  25.17  ...          140           90    │        │
+│                                                                                                 │                404354815          23  22.78  ...          130           90    │        │
+│                                                                                                 │                                                                               │        │
+│                                                                                                 │                [194 rows x 13 columns]                                        │        │
+│                                                                                                 │            y = patient_id                                                     │        │
+│                                                                                                 │                424123959    0                                                 │        │
+│                                                                                                 │                390469576    0                                                 │        │
+│                                                                                                 │                633173792    0                                                 │        │
+│                                                                                                 │                784928164    0                                                 │        │
+│                                                                                                 │                936242280    0                                                 │        │
+│                                                                                                 │                │   │   │   ..                                                 │        │
+│                                                                                                 │                412065385    1                                                 │        │
+│                                                                                                 │                769873868    1                                                 │        │
+│                                                                                                 │                140411083    0                                                 │        │
+│                                                                                                 │                773951452    1                                                 │        │
+│                                                                                                 │                404354815    1                                                 │        │
+│                                                                                                 │                Name: Bleeding_Edema_Outcome, Length: 194, dtype: int64        │        │
+│                                                                                                 ╰───────────────────────────────────────────────────────────────────────────────╯        │
+│                                                                                                                                                                                          │
+│ /home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/model_tuner/model_tuner_utils.py:1787 in get_best_score_params                                      │
+│                                                                                                                                                                                          │
+│   1784 │   │   │   if self.kfold_group is not None:                                                                                                                                      │
+│   1785 │   │   │   │   clf.fit(X, y, groups=self.kfold_group)                                                                                                                            │
+│   1786 │   │   │   else:                                                                                                                                                                 │
+│ ❱ 1787 │   │   │   │   clf.fit(X, y)                                                                                                                                                     │
+│   1788 │   │   │   self.estimator = clf.best_estimator_                                                                                                                                  │
+│   1789 │   │   │   self.test_model = clf.best_estimator_                                                                                                                                 │
+│   1790                                                                                                                                                                                   │
+│                                                                                                                                                                                          │
+│ ╭────────────────────────────────────────────────────────── locals ──────────────────────────────────────────────────────────╮                                                           │
+│ │    clf = GridSearchCV(cv=StratifiedKFold(n_splits=10, random_state=222, shuffle=True),                                     │                                                           │
+│ │          │   │   │    estimator=Pipeline(steps=[('preprocess_scaler_StandardScalar',                                       │                                                           │
+│ │          │   │   │   │   │   │   │   │   │   │   MinMaxScaler()),                                                          │                                                           │
+│ │          │   │   │   │   │   │   │   │   │      ('preprocess_imputer_Preprocessor',                                        │                                                           │
+│ │          │   │   │   │   │   │   │   │   │   │   SimpleImputer()),                                                         │                                                           │
+│ │          │   │   │   │   │   │   │   │   │      ('ridge',                                                                  │                                                           │
+│ │          │   │   │   │   │   │   │   │   │   │   CalibratedClassifierCV(cv=5,                                              │                                                           │
+│ │          │   │   │   │   │   │   │   │   │   │   │   │   │   │   │      estimator=RidgeClassifier(class_weight='balanced', │                                                           │
+│ │          │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │    random_state=222)))]),   │                                                           │
+│ │          │   │   │    n_jobs=2,                                                                                            │                                                           │
+│ │          │   │   │    param_grid=[{'ridge__base_estimator__alpha': [0.1, 1.0, 10.0],                                       │                                                           │
+│ │          │   │   │   │   │   │     'ridge__base_estimator__solver': ['auto', 'svd',                                        │                                                           │
+│ │          │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   'cholesky'],                                          │                                                           │
+│ │          │   │   │   │   │   │     'ridge__base_estimator__tol': [0.0001, 0.001]}],                                        │                                                           │
+│ │          │   │   │    scoring='average_precision', verbose=2)                                                              │                                                           │
+│ │  score = 'average_precision'                                                                                               │                                                           │
+│ │ scorer = 'average_precision'                                                                                               │                                                           │
+│ │   self = <model_tuner.model_tuner_utils.Model object at 0x7fbb97792f50>                                                    │                                                           │
+│ │      X = │   │   │   Age_years    BMI  ...  Intraop_SBP  Intraop_DBP                                                       │                                                           │
+│ │          patient_id                    ...                                                                                 │                                                           │
+│ │          424123959          22  26.17  ...          130           90                                                       │                                                           │
+│ │          390469576          50  31.14  ...          120           70                                                       │                                                           │
+│ │          633173792          70  23.88  ...          110           80                                                       │                                                           │
+│ │          784928164          68  27.64  ...          120           90                                                       │                                                           │
+│ │          936242280          64  31.18  ...          110           70                                                       │                                                           │
+│ │          ...               ...    ...  ...          ...          ...                                                       │                                                           │
+│ │          412065385          22  19.27  ...          130           90                                                       │                                                           │
+│ │          769873868          56  26.84  ...          110           80                                                       │                                                           │
+│ │          140411083          19  24.22  ...          120           90                                                       │                                                           │
+│ │          773951452          21  25.17  ...          140           90                                                       │                                                           │
+│ │          404354815          23  22.78  ...          130           90                                                       │                                                           │
+│ │                                                                                                                            │                                                           │
+│ │          [194 rows x 13 columns]                                                                                           │                                                           │
+│ │      y = patient_id                                                                                                        │                                                           │
+│ │          424123959    0                                                                                                    │                                                           │
+│ │          390469576    0                                                                                                    │                                                           │
+│ │          633173792    0                                                                                                    │                                                           │
+│ │          784928164    0                                                                                                    │                                                           │
+│ │          936242280    0                                                                                                    │                                                           │
+│ │          │   │   │   ..                                                                                                    │                                                           │
+│ │          412065385    1                                                                                                    │                                                           │
+│ │          769873868    1                                                                                                    │                                                           │
+│ │          140411083    0                                                                                                    │                                                           │
+│ │          773951452    1                                                                                                    │                                                           │
+│ │          404354815    1                                                                                                    │                                                           │
+│ │          Name: Bleeding_Edema_Outcome, Length: 194, dtype: int64                                                           │                                                           │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                           │
+│                                                                                                                                                                                          │
+│ /home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/base.py:1473 in wrapper                                                                     │
+│                                                                                                                                                                                          │
+│   1470 │   │   │   │   │   prefer_skip_nested_validation or global_skip_validation                                                                                                       │
+│   1471 │   │   │   │   )                                                                                                                                                                 │
+│   1472 │   │   │   ):                                                                                                                                                                    │
+│ ❱ 1473 │   │   │   │   return fit_method(estimator, *args, **kwargs)                                                                                                                     │
+│   1474 │   │                                                                                                                                                                             │
+│   1475 │   │   return wrapper                                                                                                                                                            │
+│   1476                                                                                                                                                                                   │
+│                                                                                                                                                                                          │
+│ ╭───────────────────────────────────────────────────────────────────── locals ──────────────────────────────────────────────────────────────────────╮                                    │
+│ │                          args = (                                                                                                                 │                                    │
+│ │                                 │   │   │   │   Age_years    BMI  ...  Intraop_SBP  Intraop_DBP                                                   │                                    │
+│ │                                 patient_id                    ...                                                                                 │                                    │
+│ │                                 424123959          22  26.17  ...          130           90                                                       │                                    │
+│ │                                 390469576          50  31.14  ...          120           70                                                       │                                    │
+│ │                                 633173792          70  23.88  ...          110           80                                                       │                                    │
+│ │                                 784928164          68  27.64  ...          120           90                                                       │                                    │
+│ │                                 936242280          64  31.18  ...          110           70                                                       │                                    │
+│ │                                 ...               ...    ...  ...          ...          ...                                                       │                                    │
+│ │                                 412065385          22  19.27  ...          130           90                                                       │                                    │
+│ │                                 769873868          56  26.84  ...          110           80                                                       │                                    │
+│ │                                 140411083          19  24.22  ...          120           90                                                       │                                    │
+│ │                                 773951452          21  25.17  ...          140           90                                                       │                                    │
+│ │                                 404354815          23  22.78  ...          130           90                                                       │                                    │
+│ │                                                                                                                                                   │                                    │
+│ │                                 [194 rows x 13 columns],                                                                                          │                                    │
+│ │                                 │   patient_id                                                                                                    │                                    │
+│ │                                 424123959    0                                                                                                    │                                    │
+│ │                                 390469576    0                                                                                                    │                                    │
+│ │                                 633173792    0                                                                                                    │                                    │
+│ │                                 784928164    0                                                                                                    │                                    │
+│ │                                 936242280    0                                                                                                    │                                    │
+│ │                                 │   │   │   ..                                                                                                    │                                    │
+│ │                                 412065385    1                                                                                                    │                                    │
+│ │                                 769873868    1                                                                                                    │                                    │
+│ │                                 140411083    0                                                                                                    │                                    │
+│ │                                 773951452    1                                                                                                    │                                    │
+│ │                                 404354815    1                                                                                                    │                                    │
+│ │                                 Name: Bleeding_Edema_Outcome, Length: 194, dtype: int64                                                           │                                    │
+│ │                                 )                                                                                                                 │                                    │
+│ │                     estimator = GridSearchCV(cv=StratifiedKFold(n_splits=10, random_state=222, shuffle=True),                                     │                                    │
+│ │                                 │   │   │    estimator=Pipeline(steps=[('preprocess_scaler_StandardScalar',                                       │                                    │
+│ │                                 │   │   │   │   │   │   │   │   │   │   MinMaxScaler()),                                                          │                                    │
+│ │                                 │   │   │   │   │   │   │   │   │      ('preprocess_imputer_Preprocessor',                                        │                                    │
+│ │                                 │   │   │   │   │   │   │   │   │   │   SimpleImputer()),                                                         │                                    │
+│ │                                 │   │   │   │   │   │   │   │   │      ('ridge',                                                                  │                                    │
+│ │                                 │   │   │   │   │   │   │   │   │   │   CalibratedClassifierCV(cv=5,                                              │                                    │
+│ │                                 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │      estimator=RidgeClassifier(class_weight='balanced', │                                    │
+│ │                                 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │    random_state=222)))]),   │                                    │
+│ │                                 │   │   │    n_jobs=2,                                                                                            │                                    │
+│ │                                 │   │   │    param_grid=[{'ridge__base_estimator__alpha': [0.1, 1.0, 10.0],                                       │                                    │
+│ │                                 │   │   │   │   │   │     'ridge__base_estimator__solver': ['auto', 'svd',                                        │                                    │
+│ │                                 │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   'cholesky'],                                          │                                    │
+│ │                                 │   │   │   │   │   │     'ridge__base_estimator__tol': [0.0001, 0.001]}],                                        │                                    │
+│ │                                 │   │   │    scoring='average_precision', verbose=2)                                                              │                                    │
+│ │        global_skip_validation = False                                                                                                             │                                    │
+│ │                        kwargs = {}                                                                                                                │                                    │
+│ │        partial_fit_and_fitted = False                                                                                                             │                                    │
+│ │ prefer_skip_nested_validation = False                                                                                                             │                                    │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                    │
+│                                                                                                                                                                                          │
+│ /home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/model_selection/_search.py:1018 in fit                                                      │
+│                                                                                                                                                                                          │
+│   1015 │   │   │   │                                                                                                                                                                     │
+│   1016 │   │   │   │   return results                                                                                                                                                    │
+│   1017 │   │   │                                                                                                                                                                         │
+│ ❱ 1018 │   │   │   self._run_search(evaluate_candidates)                                                                                                                                 │
+│   1019 │   │   │                                                                                                                                                                         │
+│   1020 │   │   │   # multimetric is determined here because in the case of a callable                                                                                                    │
+│   1021 │   │   │   # self.scoring the return type is only known after calling                                                                                                            │
+│                                                                                                                                                                                          │
+│ ╭───────────────────────────────────────────────────────────────── locals ─────────────────────────────────────────────────────────────────╮                                             │
+│ │ all_candidate_params = []                                                                                                                │                                             │
+│ │     all_more_results = defaultdict(<class 'list'>, {})                                                                                   │                                             │
+│ │              all_out = []                                                                                                                │                                             │
+│ │       base_estimator = Pipeline(steps=[('preprocess_scaler_StandardScalar', MinMaxScaler()),                                             │                                             │
+│ │                        │   │   │   │   ('preprocess_imputer_Preprocessor', SimpleImputer()),                                             │                                             │
+│ │                        │   │   │   │   ('ridge',                                                                                         │                                             │
+│ │                        │   │   │   │    CalibratedClassifierCV(cv=5,                                                                     │                                             │
+│ │                        │   │   │   │   │   │   │   │   │   │   estimator=RidgeClassifier(class_weight='balanced',                        │                                             │
+│ │                        │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │     random_state=222)))])                           │                                             │
+│ │              cv_orig = StratifiedKFold(n_splits=10, random_state=222, shuffle=True)                                                      │                                             │
+│ │            estimator = Pipeline(steps=[('preprocess_scaler_StandardScalar', MinMaxScaler()),                                             │                                             │
+│ │                        │   │   │   │   ('preprocess_imputer_Preprocessor', SimpleImputer()),                                             │                                             │
+│ │                        │   │   │   │   ('ridge',                                                                                         │                                             │
+│ │                        │   │   │   │    CalibratedClassifierCV(cv=5,                                                                     │                                             │
+│ │                        │   │   │   │   │   │   │   │   │   │   estimator=RidgeClassifier(class_weight='balanced',                        │                                             │
+│ │                        │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │     random_state=222)))])                           │                                             │
+│ │ fit_and_score_kwargs = {                                                                                                                 │                                             │
+│ │                        │   'scorer': make_scorer(average_precision_score, response_method=('decision_function', 'predict_proba')),       │                                             │
+│ │                        │   'fit_params': {},                                                                                             │                                             │
+│ │                        │   'score_params': {},                                                                                           │                                             │
+│ │                        │   'return_train_score': False,                                                                                  │                                             │
+│ │                        │   'return_n_test_samples': True,                                                                                │                                             │
+│ │                        │   'return_times': True,                                                                                         │                                             │
+│ │                        │   'return_parameters': False,                                                                                   │                                             │
+│ │                        │   'error_score': nan,                                                                                           │                                             │
+│ │                        │   'verbose': 2                                                                                                  │                                             │
+│ │                        }                                                                                                                 │                                             │
+│ │             n_splits = 10                                                                                                                │                                             │
+│ │             parallel = Parallel(n_jobs=2)                                                                                                │                                             │
+│ │               params = {}                                                                                                                │                                             │
+│ │         refit_metric = 'score'                                                                                                           │                                             │
+│ │              results = {}                                                                                                                │                                             │
+│ │        routed_params = {'estimator': {'fit': {}}, 'splitter': {'split': {'groups': None}}, 'scorer': {'score': {}}}                      │                                             │
+│ │              scorers = make_scorer(average_precision_score, response_method=('decision_function', 'predict_proba'))                      │                                             │
+│ │                 self = GridSearchCV(cv=StratifiedKFold(n_splits=10, random_state=222, shuffle=True),                                     │                                             │
+│ │                        │   │   │    estimator=Pipeline(steps=[('preprocess_scaler_StandardScalar',                                       │                                             │
+│ │                        │   │   │   │   │   │   │   │   │   │   MinMaxScaler()),                                                          │                                             │
+│ │                        │   │   │   │   │   │   │   │   │      ('preprocess_imputer_Preprocessor',                                        │                                             │
+│ │                        │   │   │   │   │   │   │   │   │   │   SimpleImputer()),                                                         │                                             │
+│ │                        │   │   │   │   │   │   │   │   │      ('ridge',                                                                  │                                             │
+│ │                        │   │   │   │   │   │   │   │   │   │   CalibratedClassifierCV(cv=5,                                              │                                             │
+│ │                        │   │   │   │   │   │   │   │   │   │   │   │   │   │   │      estimator=RidgeClassifier(class_weight='balanced', │                                             │
+│ │                        │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │    random_state=222)))]),   │                                             │
+│ │                        │   │   │    n_jobs=2,                                                                                            │                                             │
+│ │                        │   │   │    param_grid=[{'ridge__base_estimator__alpha': [0.1, 1.0, 10.0],                                       │                                             │
+│ │                        │   │   │   │   │   │     'ridge__base_estimator__solver': ['auto', 'svd',                                        │                                             │
+│ │                        │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   'cholesky'],                                          │                                             │
+│ │                        │   │   │   │   │   │     'ridge__base_estimator__tol': [0.0001, 0.001]}],                                        │                                             │
+│ │                        │   │   │    scoring='average_precision', verbose=2)                                                              │                                             │
+│ │                    X = │   │   │   Age_years    BMI  ...  Intraop_SBP  Intraop_DBP                                                       │                                             │
+│ │                        patient_id                    ...                                                                                 │                                             │
+│ │                        424123959          22  26.17  ...          130           90                                                       │                                             │
+│ │                        390469576          50  31.14  ...          120           70                                                       │                                             │
+│ │                        633173792          70  23.88  ...          110           80                                                       │                                             │
+│ │                        784928164          68  27.64  ...          120           90                                                       │                                             │
+│ │                        936242280          64  31.18  ...          110           70                                                       │                                             │
+│ │                        ...               ...    ...  ...          ...          ...                                                       │                                             │
+│ │                        412065385          22  19.27  ...          130           90                                                       │                                             │
+│ │                        769873868          56  26.84  ...          110           80                                                       │                                             │
+│ │                        140411083          19  24.22  ...          120           90                                                       │                                             │
+│ │                        773951452          21  25.17  ...          140           90                                                       │                                             │
+│ │                        404354815          23  22.78  ...          130           90                                                       │                                             │
+│ │                                                                                                                                          │                                             │
+│ │                        [194 rows x 13 columns]                                                                                           │                                             │
+│ │                    y = patient_id                                                                                                        │                                             │
+│ │                        424123959    0                                                                                                    │                                             │
+│ │                        390469576    0                                                                                                    │                                             │
+│ │                        633173792    0                                                                                                    │                                             │
+│ │                        784928164    0                                                                                                    │                                             │
+│ │                        936242280    0                                                                                                    │                                             │
+│ │                        │   │   │   ..                                                                                                    │                                             │
+│ │                        412065385    1                                                                                                    │                                             │
+│ │                        769873868    1                                                                                                    │                                             │
+│ │                        140411083    0                                                                                                    │                                             │
+│ │                        773951452    1                                                                                                    │                                             │
+│ │                        404354815    1                                                                                                    │                                             │
+│ │                        Name: Bleeding_Edema_Outcome, Length: 194, dtype: int64                                                           │                                             │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                             │
+│                                                                                                                                                                                          │
+│ /home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/model_selection/_search.py:1572 in _run_search                                              │
+│                                                                                                                                                                                          │
+│   1569 │                                                                                                                                                                                 │
+│   1570 │   def _run_search(self, evaluate_candidates):                                                                                                                                   │
+│   1571 │   │   """Search all candidates in param_grid"""                                                                                                                                 │
+│ ❱ 1572 │   │   evaluate_candidates(ParameterGrid(self.param_grid))                                                                                                                       │
+│   1573                                                                                                                                                                                   │
+│   1574                                                                                                                                                                                   │
+│   1575 class RandomizedSearchCV(BaseSearchCV):                                                                                                                                           │
+│                                                                                                                                                                                          │
+│ ╭───────────────────────────────────────────────────────── locals ─────────────────────────────────────────────────────────╮                                                             │
+│ │ self = GridSearchCV(cv=StratifiedKFold(n_splits=10, random_state=222, shuffle=True),                                     │                                                             │
+│ │        │   │   │    estimator=Pipeline(steps=[('preprocess_scaler_StandardScalar',                                       │                                                             │
+│ │        │   │   │   │   │   │   │   │   │   │   MinMaxScaler()),                                                          │                                                             │
+│ │        │   │   │   │   │   │   │   │   │      ('preprocess_imputer_Preprocessor',                                        │                                                             │
+│ │        │   │   │   │   │   │   │   │   │   │   SimpleImputer()),                                                         │                                                             │
+│ │        │   │   │   │   │   │   │   │   │      ('ridge',                                                                  │                                                             │
+│ │        │   │   │   │   │   │   │   │   │   │   CalibratedClassifierCV(cv=5,                                              │                                                             │
+│ │        │   │   │   │   │   │   │   │   │   │   │   │   │   │   │      estimator=RidgeClassifier(class_weight='balanced', │                                                             │
+│ │        │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │    random_state=222)))]),   │                                                             │
+│ │        │   │   │    n_jobs=2,                                                                                            │                                                             │
+│ │        │   │   │    param_grid=[{'ridge__base_estimator__alpha': [0.1, 1.0, 10.0],                                       │                                                             │
+│ │        │   │   │   │   │   │     'ridge__base_estimator__solver': ['auto', 'svd',                                        │                                                             │
+│ │        │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   'cholesky'],                                          │                                                             │
+│ │        │   │   │   │   │   │     'ridge__base_estimator__tol': [0.0001, 0.001]}],                                        │                                                             │
+│ │        │   │   │    scoring='average_precision', verbose=2)                                                              │                                                             │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                             │
+│                                                                                                                                                                                          │
+│ /home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/model_selection/_search.py:964 in evaluate_candidates                                       │
+│                                                                                                                                                                                          │
+│    961 │   │   │   │   │   │   )                                                                                                                                                         │
+│    962 │   │   │   │   │   )                                                                                                                                                             │
+│    963 │   │   │   │                                                                                                                                                                     │
+│ ❱  964 │   │   │   │   out = parallel(                                                                                                                                                   │
+│    965 │   │   │   │   │   delayed(_fit_and_score)(                                                                                                                                      │
+│    966 │   │   │   │   │   │   clone(base_estimator),                                                                                                                                    │
+│    967 │   │   │   │   │   │   X,                                                                                                                                                        │
+│                                                                                                                                                                                          │
+│ ╭─────────────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────────────╮                                 │
+│ │ all_candidate_params = []                                                                                                                            │                                 │
+│ │     all_more_results = defaultdict(<class 'list'>, {})                                                                                               │                                 │
+│ │              all_out = []                                                                                                                            │                                 │
+│ │       base_estimator = Pipeline(steps=[('preprocess_scaler_StandardScalar', MinMaxScaler()),                                                         │                                 │
+│ │                        │   │   │   │   ('preprocess_imputer_Preprocessor', SimpleImputer()),                                                         │                                 │
+│ │                        │   │   │   │   ('ridge',                                                                                                     │                                 │
+│ │                        │   │   │   │    CalibratedClassifierCV(cv=5,                                                                                 │                                 │
+│ │                        │   │   │   │   │   │   │   │   │   │   estimator=RidgeClassifier(class_weight='balanced',                                    │                                 │
+│ │                        │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │     random_state=222)))])                                       │                                 │
+│ │     candidate_params = [                                                                                                                             │                                 │
+│ │                        │   {'ridge__base_estimator__alpha': 0.1, 'ridge__base_estimator__solver': 'auto', 'ridge__base_estimator__tol': 0.0001},     │                                 │
+│ │                        │   {'ridge__base_estimator__alpha': 0.1, 'ridge__base_estimator__solver': 'auto', 'ridge__base_estimator__tol': 0.001},      │                                 │
+│ │                        │   {'ridge__base_estimator__alpha': 0.1, 'ridge__base_estimator__solver': 'svd', 'ridge__base_estimator__tol': 0.0001},      │                                 │
+│ │                        │   {'ridge__base_estimator__alpha': 0.1, 'ridge__base_estimator__solver': 'svd', 'ridge__base_estimator__tol': 0.001},       │                                 │
+│ │                        │   {                                                                                                                         │                                 │
+│ │                        │   │   'ridge__base_estimator__alpha': 0.1,                                                                                  │                                 │
+│ │                        │   │   'ridge__base_estimator__solver': 'cholesky',                                                                          │                                 │
+│ │                        │   │   'ridge__base_estimator__tol': 0.0001                                                                                  │                                 │
+│ │                        │   },                                                                                                                        │                                 │
+│ │                        │   {'ridge__base_estimator__alpha': 0.1, 'ridge__base_estimator__solver': 'cholesky', 'ridge__base_estimator__tol': 0.001},  │                                 │
+│ │                        │   {'ridge__base_estimator__alpha': 1.0, 'ridge__base_estimator__solver': 'auto', 'ridge__base_estimator__tol': 0.0001},     │                                 │
+│ │                        │   {'ridge__base_estimator__alpha': 1.0, 'ridge__base_estimator__solver': 'auto', 'ridge__base_estimator__tol': 0.001},      │                                 │
+│ │                        │   {'ridge__base_estimator__alpha': 1.0, 'ridge__base_estimator__solver': 'svd', 'ridge__base_estimator__tol': 0.0001},      │                                 │
+│ │                        │   {'ridge__base_estimator__alpha': 1.0, 'ridge__base_estimator__solver': 'svd', 'ridge__base_estimator__tol': 0.001},       │                                 │
+│ │                        │   ... +8                                                                                                                    │                                 │
+│ │                        ]                                                                                                                             │                                 │
+│ │                   cv = StratifiedKFold(n_splits=10, random_state=222, shuffle=True)                                                                  │                                 │
+│ │              cv_orig = StratifiedKFold(n_splits=10, random_state=222, shuffle=True)                                                                  │                                 │
+│ │ fit_and_score_kwargs = {                                                                                                                             │                                 │
+│ │                        │   'scorer': make_scorer(average_precision_score, response_method=('decision_function', 'predict_proba')),                   │                                 │
+│ │                        │   'fit_params': {},                                                                                                         │                                 │
+│ │                        │   'score_params': {},                                                                                                       │                                 │
+│ │                        │   'return_train_score': False,                                                                                              │                                 │
+│ │                        │   'return_n_test_samples': True,                                                                                            │                                 │
+│ │                        │   'return_times': True,                                                                                                     │                                 │
+│ │                        │   'return_parameters': False,                                                                                               │                                 │
+│ │                        │   'error_score': nan,                                                                                                       │                                 │
+│ │                        │   'verbose': 2                                                                                                              │                                 │
+│ │                        }                                                                                                                             │                                 │
+│ │         more_results = None                                                                                                                          │                                 │
+│ │         n_candidates = 18                                                                                                                            │                                 │
+│ │             n_splits = 10                                                                                                                            │                                 │
+│ │             parallel = Parallel(n_jobs=2)                                                                                                            │                                 │
+│ │              results = {}                                                                                                                            │                                 │
+│ │        routed_params = {'estimator': {'fit': {}}, 'splitter': {'split': {'groups': None}}, 'scorer': {'score': {}}}                                  │                                 │
+│ │                 self = GridSearchCV(cv=StratifiedKFold(n_splits=10, random_state=222, shuffle=True),                                                 │                                 │
+│ │                        │   │   │    estimator=Pipeline(steps=[('preprocess_scaler_StandardScalar',                                                   │                                 │
+│ │                        │   │   │   │   │   │   │   │   │   │   MinMaxScaler()),                                                                      │                                 │
+│ │                        │   │   │   │   │   │   │   │   │      ('preprocess_imputer_Preprocessor',                                                    │                                 │
+│ │                        │   │   │   │   │   │   │   │   │   │   SimpleImputer()),                                                                     │                                 │
+│ │                        │   │   │   │   │   │   │   │   │      ('ridge',                                                                              │                                 │
+│ │                        │   │   │   │   │   │   │   │   │   │   CalibratedClassifierCV(cv=5,                                                          │                                 │
+│ │                        │   │   │   │   │   │   │   │   │   │   │   │   │   │   │      estimator=RidgeClassifier(class_weight='balanced',             │                                 │
+│ │                        │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │    random_state=222)))]),               │                                 │
+│ │                        │   │   │    n_jobs=2,                                                                                                        │                                 │
+│ │                        │   │   │    param_grid=[{'ridge__base_estimator__alpha': [0.1, 1.0, 10.0],                                                   │                                 │
+│ │                        │   │   │   │   │   │     'ridge__base_estimator__solver': ['auto', 'svd',                                                    │                                 │
+│ │                        │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   'cholesky'],                                                      │                                 │
+│ │                        │   │   │   │   │   │     'ridge__base_estimator__tol': [0.0001, 0.001]}],                                                    │                                 │
+│ │                        │   │   │    scoring='average_precision', verbose=2)                                                                          │                                 │
+│ │                    X = │   │   │   Age_years    BMI  ...  Intraop_SBP  Intraop_DBP                                                                   │                                 │
+│ │                        patient_id                    ...                                                                                             │                                 │
+│ │                        424123959          22  26.17  ...          130           90                                                                   │                                 │
+│ │                        390469576          50  31.14  ...          120           70                                                                   │                                 │
+│ │                        633173792          70  23.88  ...          110           80                                                                   │                                 │
+│ │                        784928164          68  27.64  ...          120           90                                                                   │                                 │
+│ │                        936242280          64  31.18  ...          110           70                                                                   │                                 │
+│ │                        ...               ...    ...  ...          ...          ...                                                                   │                                 │
+│ │                        412065385          22  19.27  ...          130           90                                                                   │                                 │
+│ │                        769873868          56  26.84  ...          110           80                                                                   │                                 │
+│ │                        140411083          19  24.22  ...          120           90                                                                   │                                 │
+│ │                        773951452          21  25.17  ...          140           90                                                                   │                                 │
+│ │                        404354815          23  22.78  ...          130           90                                                                   │                                 │
+│ │                                                                                                                                                      │                                 │
+│ │                        [194 rows x 13 columns]                                                                                                       │                                 │
+│ │                    y = patient_id                                                                                                                    │                                 │
+│ │                        424123959    0                                                                                                                │                                 │
+│ │                        390469576    0                                                                                                                │                                 │
+│ │                        633173792    0                                                                                                                │                                 │
+│ │                        784928164    0                                                                                                                │                                 │
+│ │                        936242280    0                                                                                                                │                                 │
+│ │                        │   │   │   ..                                                                                                                │                                 │
+│ │                        412065385    1                                                                                                                │                                 │
+│ │                        769873868    1                                                                                                                │                                 │
+│ │                        140411083    0                                                                                                                │                                 │
+│ │                        773951452    1                                                                                                                │                                 │
+│ │                        404354815    1                                                                                                                │                                 │
+│ │                        Name: Bleeding_Edema_Outcome, Length: 194, dtype: int64                                                                       │                                 │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                 │
+│                                                                                                                                                                                          │
+│ /home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/sklearn/utils/parallel.py:74 in __call__                                                            │
+│                                                                                                                                                                                          │
+│    71 │   │   │   (_with_config(delayed_func, config), args, kwargs)                                                                                                                     │
+│    72 │   │   │   for delayed_func, args, kwargs in iterable                                                                                                                             │
+│    73 │   │   )                                                                                                                                                                          │
+│ ❱  74 │   │   return super().__call__(iterable_with_config)                                                                                                                              │
+│    75                                                                                                                                                                                    │
+│    76                                                                                                                                                                                    │
+│    77 # remove when https://github.com/joblib/joblib/issues/1071 is fixed                                                                                                                │
+│                                                                                                                                                                                          │
+│ ╭─────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────╮                                                         │
+│ │               config = {                                                                                                     │                                                         │
+│ │                        │   'assume_finite': False,                                                                           │                                                         │
+│ │                        │   'working_memory': 1024,                                                                           │                                                         │
+│ │                        │   'print_changed_only': True,                                                                       │                                                         │
+│ │                        │   'display': 'diagram',                                                                             │                                                         │
+│ │                        │   'pairwise_dist_chunk_size': 256,                                                                  │                                                         │
+│ │                        │   'enable_cython_pairwise_dist': True,                                                              │                                                         │
+│ │                        │   'array_api_dispatch': False,                                                                      │                                                         │
+│ │                        │   'transform_output': 'default',                                                                    │                                                         │
+│ │                        │   'enable_metadata_routing': False,                                                                 │                                                         │
+│ │                        │   'skip_parameter_validation': False                                                                │                                                         │
+│ │                        }                                                                                                     │                                                         │
+│ │             iterable = <generator object BaseSearchCV.fit.<locals>.evaluate_candidates.<locals>.<genexpr> at 0x7fbb97907060> │                                                         │
+│ │ iterable_with_config = <generator object Parallel.__call__.<locals>.<genexpr> at 0x7fbb97776640>                             │                                                         │
+│ │                 self = Parallel(n_jobs=2)                                                                                    │                                                         │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                         │
+│                                                                                                                                                                                          │
+│ /home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/joblib/parallel.py:1952 in __call__                                                                 │
+│                                                                                                                                                                                          │
+│   1949 │   │   # dispatch of the tasks to the workers.                                                                                                                                   │
+│   1950 │   │   next(output)                                                                                                                                                              │
+│   1951 │   │                                                                                                                                                                             │
+│ ❱ 1952 │   │   return output if self.return_generator else list(output)                                                                                                                  │
+│   1953 │                                                                                                                                                                                 │
+│   1954 │   def __repr__(self):                                                                                                                                                           │
+│   1955 │   │   return '%s(n_jobs=%s)' % (self.__class__.__name__, self.n_jobs)                                                                                                           │
+│                                                                                                                                                                                          │
+│ ╭───────────────────────────────────────── locals ─────────────────────────────────────────╮                                                                                             │
+│ │ backend_name = 'LokyBackend'                                                             │                                                                                             │
+│ │     iterable = <generator object Parallel.__call__.<locals>.<genexpr> at 0x7fbb97776640> │                                                                                             │
+│ │     iterator = <itertools.islice object at 0x7fbb9775f100>                               │                                                                                             │
+│ │       n_jobs = 2                                                                         │                                                                                             │
+│ │       output = <generator object Parallel._get_outputs at 0x7fbb979b6180>                │                                                                                             │
+│ │ pre_dispatch = 4                                                                         │                                                                                             │
+│ │         self = Parallel(n_jobs=2)                                                        │                                                                                             │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────╯                                                                                             │
+│                                                                                                                                                                                          │
+│ /home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/joblib/parallel.py:1595 in _get_outputs                                                             │
+│                                                                                                                                                                                          │
+│   1592 │   │   │   yield                                                                        ╭────────────────────────────── locals ───────────────────────────────╮                  │
+│   1593 │   │   │                                                                                │    _remaining_outputs = []                                          │                  │
+│   1594 │   │   │   with self._backend.retrieval_context():                                      │ detach_generator_exit = False                                       │                  │
+│ ❱ 1595 │   │   │   │   yield from self._retrieve()                                              │    dispatch_thread_id = 140446163842560                             │                  │
+│   1596 │   │                                                                                    │              iterator = <itertools.islice object at 0x7fbb9775f100> │                  │
+│   1597 │   │   except GeneratorExit:                                                            │          pre_dispatch = 4                                           │                  │
+│   1598 │   │   │   # The generator has been garbage collected before being fully                │                  self = Parallel(n_jobs=2)                          │                  │
+│                                                                                                 ╰─────────────────────────────────────────────────────────────────────╯                  │
+│                                                                                                                                                                                          │
+│ /home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/joblib/parallel.py:1699 in _retrieve                                                                │
+│                                                                                                                                                                                          │
+│   1696 │   │   │   # exception (e.g. `GeneratorExit`), exit the loop and surface the            ╭───────── locals ──────────╮                                                            │
+│   1697 │   │   │   # worker traceback.                                                          │ self = Parallel(n_jobs=2) │                                                            │
+│   1698 │   │   │   if self._aborting:                                                           ╰───────────────────────────╯                                                            │
+│ ❱ 1699 │   │   │   │   self._raise_error_fast()                                                                                                                                          │
+│   1700 │   │   │   │   break                                                                                                                                                             │
+│   1701 │   │   │                                                                                                                                                                         │
+│   1702 │   │   │   # If the next job is not ready for retrieval yet, we just wait for                                                                                                    │
+│                                                                                                                                                                                          │
+│ /home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/joblib/parallel.py:1734 in _raise_error_fast                                                        │
+│                                                                                                                                                                                          │
+│   1731 │   │   # calling get_result. This job might not exists if abort has been                ╭──────────────────────────────────── locals ────────────────────────────────────╮       │
+│   1732 │   │   # called directly or if the generator is gc'ed.                                  │ error_job = <joblib.parallel.BatchCompletionCallBack object at 0x7fbb977b6850> │       │
+│   1733 │   │   if error_job is not None:                                                        │      self = Parallel(n_jobs=2)                                                 │       │
+│ ❱ 1734 │   │   │   error_job.get_result(self.timeout)                                           ╰────────────────────────────────────────────────────────────────────────────────╯       │
+│   1735 │                                                                                                                                                                                 │
+│   1736 │   def _warn_exit_early(self):                                                                                                                                                   │
+│   1737 │   │   """Warn the user if the generator is gc'ed before being consumned."""                                                                                                     │
+│                                                                                                                                                                                          │
+│ /home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/joblib/parallel.py:736 in get_result                                                                │
+│                                                                                                                                                                                          │
+│    733 │   │   │   # We assume that the result has already been retrieved by the                ╭─────────────────────────────────── locals ───────────────────────────────────╮         │
+│    734 │   │   │   # callback thread, and is stored internally. It's just waiting to            │ backend = <joblib._parallel_backends.LokyBackend object at 0x7fbb977d07d0>   │         │
+│    735 │   │   │   # be returned.                                                               │    self = <joblib.parallel.BatchCompletionCallBack object at 0x7fbb977b6850> │         │
+│ ❱  736 │   │   │   return self._return_or_raise()                                               │ timeout = None                                                               │         │
+│    737 │   │                                                                                    ╰──────────────────────────────────────────────────────────────────────────────╯         │
+│    738 │   │   # For other backends, the main thread needs to run the retrieval step.                                                                                                    │
+│    739 │   │   try:                                                                                                                                                                      │
+│                                                                                                                                                                                          │
+│ /home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/joblib/parallel.py:754 in _return_or_raise                                                          │
+│                                                                                                                                                                                          │
+│    751 │   def _return_or_raise(self):                                                          ╭───────────────────────────────── locals ──────────────────────────────────╮            │
+│    752 │   │   try:                                                                             │ self = <joblib.parallel.BatchCompletionCallBack object at 0x7fbb977b6850> │            │
+│    753 │   │   │   if self.status == TASK_ERROR:                                                ╰───────────────────────────────────────────────────────────────────────────╯            │
+│ ❱  754 │   │   │   │   raise self._result                                                                                                                                                │
+│    755 │   │   │   return self._result                                                                                                                                                   │
+│    756 │   │   finally:                                                                                                                                                                  │
+│    757 │   │   │   del self._result                                                                                                                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+ValueError: Invalid parameter 'base_estimator' for estimator CalibratedClassifierCV(cv=5,
+                       estimator=RidgeClassifier(class_weight='balanced',
+                                                 random_state=222)). Valid parameters are: ['cv', 'ensemble', 'estimator', 'method', 'n_jobs'].

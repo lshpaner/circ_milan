@@ -94,7 +94,16 @@ dt:
 	--model-type dt \
 	--exp-name dt \
 	2>&1 | tee models/results/dt.txt
-		
+
+## Make SGDClassifier
+.PHONY: rf
+rf: 
+	$(PYTHON_INTERPRETER) \
+	python_scripts/train.py \
+	--model-type rf \
+	--exp-name rf \
+	2>&1 | tee models/results/rf.txt
+
 ## Make Support Vector Machines
 .PHONY: svm
 svm: 
@@ -115,7 +124,7 @@ nusvc:
 	2>&1 | tee models/results/nusvc.txt
 
 
-all_models: logistic_regression lda svm 
+all_models: logistic_regression sgd svm 
 
 ################################################################################
 
