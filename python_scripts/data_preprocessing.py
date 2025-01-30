@@ -199,15 +199,35 @@ df = df.assign(
 
 ############################### Intraop SBP and DBP ############################
 
-# Split the BP values into two columns: Systolic (SBP) and Diastolic (DBP)
-df[["Intraop_SBP", "Intraop_DBP"]] = df["Intraop_Mean_Blood_Pressure_mmHg"].str.split(
-    "/",
-    expand=True,
+# # Split the BP values into two columns: Systolic (SBP) and Diastolic (DBP)
+# df[["Intraop_SBP", "Intraop_DBP"]] = df["Intraop_Mean_Blood_Pressure_mmHg"].str.split(
+#     "/",
+#     expand=True,
+# )
+
+# # Convert the new columns to numeric
+# df["Intraop_SBP"] = pd.to_numeric(df["Intraop_SBP"])
+# df["Intraop_DBP"] = pd.to_numeric(df["Intraop_DBP"])
+
+
+# Split the combined BP column
+HealthMetrics.split_bp_column(
+    df,
+    combined_bp_col="Intraop_Mean_Blood_Pressure_mmHg",
+    systolic_col_name="Intraop_SBP",
+    diastolic_col_name="Intraop_DBP",
 )
 
-# Convert the new columns to numeric
-df["Intraop_SBP"] = pd.to_numeric(df["Intraop_SBP"])
-df["Intraop_DBP"] = pd.to_numeric(df["Intraop_DBP"])
+# Split the combined BP column
+HealthMetrics.split_bp_column(
+    df,
+    combined_bp_col="Preop_Blood_Pressure_mmHg",
+    systolic_col_name="Preop_SBP",
+    diastolic_col_name="Preop_DBP",
+)
+
+# df["Mean_SBP"] = df[["Preop_SBP", "Intraop_SBP"]].mean(axis=1)
+# df["Mean_DBP"] = df[["Preop_DBP", "Intraop_DBP"]].mean(axis=1)
 
 ############################### Comorbidities ##################################
 
@@ -287,21 +307,16 @@ circ_eda = df.copy()
 
 ######################### Dropping Additional Columns ##########################
 
-df["abnormal_weight"] = (
-    df[[col for col in df.columns if col.startswith("BMI_") and "Normal" not in col]]
-    .any(axis=1)
-    .astype(int)
-)
-
 # Dropping uninformative features like "Birthday"
 # Dropping Weight since Height was dropped, and BMI will be used instead
 cols_to_drop = [
     "Weight_kg",
     "Cost_of_Procedure_euros",
     "Birthday",
-    "BMI_Category_Normal weight",
+    "BMI_Category_Normal_Weight",
     # "Intraoperative_Blood_Loss_ml",
     # "Surgical_Time_min",
+    "Preop_DBP",
     "Anesthesia_Type_lidocaine",
     "Anesthesia_Type_carbocaine",
     "Intraop_MAP",

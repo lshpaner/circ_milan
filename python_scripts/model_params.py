@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 
 from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neural_network import MLPClassifier
@@ -10,6 +11,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 from sklearn.svm import NuSVC
+from sklearn.calibration import CalibratedClassifierCV
 
 
 ################################################################################
@@ -78,36 +80,46 @@ lr_definition = {
 
 
 ################################################################################
-########################### Linear Discriminant Analysis #######################
+############################### SGD Classifier #################################
 ################################################################################
 
-# Define the hyperparameters for LDA
-lda_name = "lda"
+from sklearn.linear_model import SGDClassifier
 
-# Hyperparameters for tuning (if needed, e.g., solver selection or shrinkage)
-lda_parameters = [
+# Define the hyperparameters for SGD Classifier
+sgd_name = "sgd"
+
+# Hyperparameters for tuning
+sgd_parameters = [
     {
-        "lda__solver": [
-            "lsqr",
-            "eigen",
-        ],  # SVD is default; lsqr/eigen support shrinkage
-        "lda__shrinkage": [
-            None,
-            "auto",
-            0.1,
-            0.5,
-        ],  # Only applicable for lsqr/eigen solvers
+        "sgd__loss": [
+            "hinge",
+            "log_loss",
+            "modified_huber",
+            "squared_hinge",
+            "perceptron",
+        ],  # Different loss functions for classification
+        "sgd__penalty": ["l1", "l2", "elasticnet"],  # Regularization options
+        "sgd__alpha": [1e-4, 1e-3, 1e-2],  # Regularization strength
+        "sgd__max_iter": [1000, 2000, 5000],  # Number of iterations
+        "sgd__tol": [1e-3, 1e-4, 1e-5],  # Stopping criteria
+        "sgd__learning_rate": ["constant", "optimal", "invscaling", "adaptive"],
     }
 ]
 
-# Initialize the LDA Classifier
-lda = LinearDiscriminantAnalysis(solver="svd")  # SVD is robust and avoids shrinkage
+# Initialize the SGD Classifier
+sgd = SGDClassifier(
+    loss="hinge",
+    penalty="l2",
+    alpha=1e-4,
+    max_iter=1000,
+    tol=1e-3,
+)
 
-# Define the LDA model setup
-lda_definition = {
-    "clc": lda,
-    "estimator_name": lda_name,
-    "tuned_parameters": lda_parameters,
+# Define the SGD model setup
+sgd_definition = {
+    "clc": sgd,
+    "estimator_name": sgd_name,
+    "tuned_parameters": sgd_parameters,
     "randomized_grid": False,
     "early": False,
 }
@@ -186,13 +198,73 @@ dt_definition = {
 
 
 ################################################################################
+#########################      Random Forest      ##############################
+################################################################################
+
+# from sklearn.ensemble import RandomForestClassifier
+
+# # Define the hyperparameters for Random Forest
+# rf_name = "rf"
+
+# # Hyperparameters for tuning
+# rf_parameters = [
+#     {
+#         "rf__n_estimators": [50, 100, 200],  # Number of trees
+#         "rf__criterion": ["gini", "entropy", "log_loss"],  # Splitting criteria
+#         "rf__max_depth": [None, 10, 20, 30],  # Maximum depth of trees
+#         "rf__min_samples_split": [2, 5, 10],  # Minimum samples required to split
+#         "rf__min_samples_leaf": [1, 2, 4],  # Minimum samples per leaf
+#         "rf__bootstrap": [True, False],  # Bootstrapping for bagging
+#     }
+# ]
+
+# # Initialize the Random Forest Classifier
+# rf = RandomForestClassifier(
+#     n_estimators=100, criterion="gini", max_depth=None, random_state=42
+# )
+
+# # Define the Random Forest model setup
+# rf_definition = {
+#     "clc": rf,
+#     "estimator_name": rf_name,
+#     "tuned_parameters": rf_parameters,
+#     "randomized_grid": False,
+#     "early": False,
+# }
+
+# Define the hyperparameters for Random Forest (trimmed for efficiency)
+rf_name = "rf"
+
+# Reduced hyperparameters for tuning
+rf_parameters = [
+    {
+        "rf__n_estimators": [10, 50],  # Reduce number of trees for speed
+        "rf__max_depth": [None, 10],  # Limit depth to prevent overfitting
+        "rf__min_samples_split": [2, 5],  # Fewer options for splitting
+    }
+]
+
+# Initialize the Random Forest Classifier with a smaller number of trees
+rf = RandomForestClassifier(n_estimators=10, max_depth=None, random_state=42, n_jobs=-1)
+
+# Define the Random Forest model setup
+rf_definition = {
+    "clc": rf,
+    "estimator_name": rf_name,
+    "tuned_parameters": rf_parameters,
+    "randomized_grid": False,
+    "early": False,
+}
+
+
+################################################################################
 ######################### Support Vector Machines ##############################
 ################################################################################
 
 # Define SVM parameters
 svm_name = "svm"
 
-svc_kernel = ["linear", "rbf"]
+svc_kernel = ["linear", "rbf", "poly", "sigmoid"]
 svc_cost = np.logspace(-4, 2, 10).tolist()
 # svc_cost = np.logspace(-4, 0, 1).tolist()
 svc_gamma = [0.001, 0.01, 0.05, 0.1, 0.2, 0.5, "scale", "auto"]
@@ -253,13 +325,15 @@ nusvc_definition = {
     "early": False,  # No early stopping for NuSVC
 }
 
+
 ################################################################################
 
 model_definitions = {
     svm_name: svm_definition,
     nusvc_name: nusvc_definition,
     lr_name: lr_definition,
-    lda_name: lda_definition,
+    sgd_name: sgd_definition,
     mlp_name: mlp_definition,
     dt_name: dt_definition,
+    rf_name: rf_definition,
 }
