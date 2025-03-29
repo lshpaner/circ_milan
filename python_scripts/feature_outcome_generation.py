@@ -12,7 +12,7 @@ from eda_toolkit import (
 
 
 from python_scripts.functions import *  # import custom functions
-from python_scripts.constants import *  # import constants file
+from circ_milan.constants import *  # import constants file
 
 print()
 print(f"This project uses Python {sys.version.split()[0]}.")

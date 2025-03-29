@@ -4,7 +4,7 @@ import numpy as np
 import os
 import sys
 import eda_toolkit
-from eda_toolkit import ensure_directory, dataframe_columns, add_ids
+from eda_toolkit import ensure_directory, dataframe_profiler, add_ids
 
 from circ_milan.constants import *
 from python_scripts.functions import (
@@ -267,7 +267,7 @@ df["Surgical_Technique"] = df["Surgical_Technique"].apply(
 
 ########################## Check for Missing Values ############################
 print("DataFrame Analysis Report (`dataframe_columns`) \n")
-df_columns = dataframe_columns(df, return_df=True)
+df_columns = dataframe_profiler(df, return_df=True)
 
 print(f"DataFrame Analysis:\n {df_columns}")
 print()
