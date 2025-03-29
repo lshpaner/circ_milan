@@ -43,25 +43,25 @@ Grid scores on development set:
 0.815 (+/-0.325) for {'rf__max_depth': 10, 'rf__min_samples_split': 5, 'rf__n_estimators': 10}
 0.846 (+/-0.267) for {'rf__max_depth': 10, 'rf__min_samples_split': 5, 'rf__n_estimators': 50}
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.76it/s]100%|██████████| 2/2 [00:00<00:00,  6.37it/s]100%|██████████| 2/2 [00:00<00:00,  6.26it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.13it/s]100%|██████████| 2/2 [00:00<00:00,  3.38it/s]100%|██████████| 2/2 [00:00<00:00,  3.34it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.36it/s]100%|██████████| 2/2 [00:00<00:00,  6.53it/s]100%|██████████| 2/2 [00:00<00:00,  6.50it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.29it/s]100%|██████████| 2/2 [00:00<00:00,  3.39it/s]100%|██████████| 2/2 [00:00<00:00,  3.37it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.02it/s]100%|██████████| 2/2 [00:00<00:00,  6.19it/s]100%|██████████| 2/2 [00:00<00:00,  6.16it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  2.60it/s]100%|██████████| 2/2 [00:00<00:00,  2.83it/s]100%|██████████| 2/2 [00:00<00:00,  2.79it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.46it/s]100%|██████████| 2/2 [00:00<00:00,  6.78it/s]100%|██████████| 2/2 [00:00<00:00,  6.73it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.53it/s]100%|██████████| 2/2 [00:00<00:00,  3.63it/s]100%|██████████| 2/2 [00:00<00:00,  3.61it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.21it/s]100%|██████████| 2/2 [00:00<00:00,  6.64it/s]100%|██████████| 2/2 [00:00<00:00,  6.57it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.54it/s]100%|██████████| 2/2 [00:00<00:00,  3.48it/s]100%|██████████| 2/2 [00:00<00:00,  3.49it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.56it/s]100%|██████████| 2/2 [00:00<00:00,  6.54it/s]100%|██████████| 2/2 [00:00<00:00,  6.54it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.59it/s]100%|██████████| 2/2 [00:00<00:00,  3.65it/s]100%|██████████| 2/2 [00:00<00:00,  3.64it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.73it/s]100%|██████████| 2/2 [00:00<00:00,  6.01it/s]100%|██████████| 2/2 [00:00<00:00,  5.96it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.16it/s]100%|██████████| 2/2 [00:00<00:00,  3.31it/s]100%|██████████| 2/2 [00:00<00:00,  3.28it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.74it/s]100%|██████████| 2/2 [00:00<00:00,  5.29it/s]100%|██████████| 2/2 [00:00<00:00,  5.35it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.37it/s]100%|██████████| 2/2 [00:00<00:00,  3.38it/s]100%|██████████| 2/2 [00:00<00:00,  3.38it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.33it/s]100%|██████████| 2/2 [00:00<00:00,  5.69it/s]100%|██████████| 2/2 [00:00<00:00,  5.63it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.37it/s]100%|██████████| 2/2 [00:00<00:00,  3.53it/s]100%|██████████| 2/2 [00:00<00:00,  3.50it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.87it/s]100%|██████████| 2/2 [00:00<00:00,  6.21it/s]100%|██████████| 2/2 [00:00<00:00,  6.15it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.41it/s]100%|██████████| 2/2 [00:00<00:00,  3.64it/s]100%|██████████| 2/2 [00:00<00:00,  3.60it/s]
 
 Detailed classification report for rf:
 
@@ -92,7 +92,7 @@ Optimal threshold used: 0.338
 
 Running k-fold model metrics...
 
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:01,  5.46it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:01,  5.65it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:01,  5.62it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:01,  5.59it/s]Processing Folds:  50%|█████     | 5/10 [00:00<00:00,  5.39it/s]Processing Folds:  60%|██████    | 6/10 [00:01<00:00,  5.39it/s]Processing Folds:  70%|███████   | 7/10 [00:01<00:00,  5.26it/s]Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  5.19it/s]Processing Folds:  90%|█████████ | 9/10 [00:01<00:00,  5.18it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  4.93it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  5.22it/s]
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:01,  5.91it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:01,  5.80it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:01,  5.90it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:01,  5.85it/s]Processing Folds:  50%|█████     | 5/10 [00:00<00:00,  5.79it/s]Processing Folds:  60%|██████    | 6/10 [00:01<00:00,  5.71it/s]Processing Folds:  70%|███████   | 7/10 [00:01<00:00,  5.84it/s]Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  5.94it/s]Processing Folds:  90%|█████████ | 9/10 [00:01<00:00,  6.00it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  5.97it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  5.89it/s]
 
 Average Metrics Across All Folds:
               Metric     Value
@@ -107,7 +107,7 @@ Average Metrics Across All Folds:
 
 ================================================================================
 ================================================================================
-Existing Experiment_ID: 562226156008592556
+Existing Experiment_ID: 375135582685733226
 
 Sampler SMOTE(random_state=222)
 
@@ -158,25 +158,25 @@ Grid scores on development set:
 0.763 (+/-0.339) for {'rf__max_depth': 10, 'rf__min_samples_split': 5, 'rf__n_estimators': 10}
 0.808 (+/-0.298) for {'rf__max_depth': 10, 'rf__min_samples_split': 5, 'rf__n_estimators': 50}
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.59it/s]100%|██████████| 2/2 [00:00<00:00,  3.66it/s]100%|██████████| 2/2 [00:00<00:00,  3.65it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.59it/s]100%|██████████| 2/2 [00:00<00:00,  4.93it/s]100%|██████████| 2/2 [00:00<00:00,  4.88it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.38it/s]100%|██████████| 2/2 [00:00<00:00,  3.47it/s]100%|██████████| 2/2 [00:00<00:00,  3.46it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.88it/s]100%|██████████| 2/2 [00:00<00:00,  5.00it/s]100%|██████████| 2/2 [00:00<00:00,  4.98it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.33it/s]100%|██████████| 2/2 [00:00<00:00,  3.41it/s]100%|██████████| 2/2 [00:00<00:00,  3.40it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.49it/s]100%|██████████| 2/2 [00:00<00:00,  5.52it/s]100%|██████████| 2/2 [00:00<00:00,  5.51it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.83it/s]100%|██████████| 2/2 [00:00<00:00,  4.03it/s]100%|██████████| 2/2 [00:00<00:00,  4.00it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.35it/s]100%|██████████| 2/2 [00:00<00:00,  5.69it/s]100%|██████████| 2/2 [00:00<00:00,  5.64it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.98it/s]100%|██████████| 2/2 [00:00<00:00,  4.14it/s]100%|██████████| 2/2 [00:00<00:00,  4.11it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.41it/s]100%|██████████| 2/2 [00:00<00:00,  5.61it/s]100%|██████████| 2/2 [00:00<00:00,  5.58it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.57it/s]100%|██████████| 2/2 [00:00<00:00,  4.48it/s]100%|██████████| 2/2 [00:00<00:00,  4.49it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.20it/s]100%|██████████| 2/2 [00:00<00:00,  4.97it/s]100%|██████████| 2/2 [00:00<00:00,  4.83it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.89it/s]100%|██████████| 2/2 [00:00<00:00,  5.04it/s]100%|██████████| 2/2 [00:00<00:00,  5.01it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.88it/s]100%|██████████| 2/2 [00:00<00:00,  5.82it/s]100%|██████████| 2/2 [00:00<00:00,  5.83it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.85it/s]100%|██████████| 2/2 [00:00<00:00,  5.17it/s]100%|██████████| 2/2 [00:00<00:00,  5.11it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.20it/s]100%|██████████| 2/2 [00:00<00:00,  5.99it/s]100%|██████████| 2/2 [00:00<00:00,  6.02it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.28it/s]100%|██████████| 2/2 [00:00<00:00,  5.40it/s]100%|██████████| 2/2 [00:00<00:00,  5.38it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.82it/s]100%|██████████| 2/2 [00:00<00:00,  5.92it/s]100%|██████████| 2/2 [00:00<00:00,  5.90it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.76it/s]100%|██████████| 2/2 [00:00<00:00,  5.23it/s]100%|██████████| 2/2 [00:00<00:00,  5.15it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.33it/s]100%|██████████| 2/2 [00:00<00:00,  5.98it/s]100%|██████████| 2/2 [00:00<00:00,  5.87it/s]
 Distribution of y values after resampling: Bleeding_Edema_Outcome
 0                         136
 1                         136
@@ -212,169 +212,87 @@ Optimal threshold used: 0.362
 
 Running k-fold model metrics...
 
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:01,  6.37it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:01,  6.47it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:01,  6.52it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00,  6.43it/s]Processing Folds:  50%|█████     | 5/10 [00:00<00:00,  6.37it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00,  6.34it/s]Processing Folds:  70%|███████   | 7/10 [00:01<00:00,  6.33it/s]Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  6.36it/s]Processing Folds:  90%|█████████ | 9/10 [00:01<00:00,  6.38it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  6.35it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  6.37it/s]
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:01,  7.42it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:01,  7.40it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:00,  7.47it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00,  7.48it/s]Processing Folds:  50%|█████     | 5/10 [00:00<00:00,  7.47it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00,  7.56it/s]Processing Folds:  70%|███████   | 7/10 [00:00<00:00,  7.61it/s]Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  7.67it/s]Processing Folds:  90%|█████████ | 9/10 [00:01<00:00,  7.48it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  7.35it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  7.47it/s]
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.3s
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.0s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.0s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.4s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.3s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.3s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.4s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.3s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.0s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.0s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.3s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.3s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
@@ -382,13 +300,95 @@ Running k-fold model metrics...
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.4s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.4s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.3s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
 Average Metrics Across All Folds:
               Metric     Value
 0      Precision/PPV  0.718750
@@ -402,7 +402,7 @@ Average Metrics Across All Folds:
 
 ================================================================================
 ================================================================================
-Existing Experiment_ID: 562226156008592556
+Existing Experiment_ID: 375135582685733226
 
 Sampler ADASYN(random_state=222)
 
@@ -453,25 +453,25 @@ Grid scores on development set:
 0.791 (+/-0.291) for {'rf__max_depth': 10, 'rf__min_samples_split': 5, 'rf__n_estimators': 10}
 0.802 (+/-0.295) for {'rf__max_depth': 10, 'rf__min_samples_split': 5, 'rf__n_estimators': 50}
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.54it/s]100%|██████████| 2/2 [00:00<00:00,  4.85it/s]100%|██████████| 2/2 [00:00<00:00,  4.80it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.28it/s]100%|██████████| 2/2 [00:00<00:00,  3.32it/s]100%|██████████| 2/2 [00:00<00:00,  3.31it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.93it/s]100%|██████████| 2/2 [00:00<00:00,  5.34it/s]100%|██████████| 2/2 [00:00<00:00,  5.27it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.02it/s]100%|██████████| 2/2 [00:00<00:00,  3.34it/s]100%|██████████| 2/2 [00:00<00:00,  3.29it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.32it/s]100%|██████████| 2/2 [00:00<00:00,  5.45it/s]100%|██████████| 2/2 [00:00<00:00,  5.42it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  2.99it/s]100%|██████████| 2/2 [00:00<00:00,  3.25it/s]100%|██████████| 2/2 [00:00<00:00,  3.21it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.95it/s]100%|██████████| 2/2 [00:00<00:00,  6.60it/s]100%|██████████| 2/2 [00:00<00:00,  6.49it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.12it/s]100%|██████████| 2/2 [00:00<00:00,  4.44it/s]100%|██████████| 2/2 [00:00<00:00,  4.39it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.19it/s]100%|██████████| 2/2 [00:00<00:00,  5.79it/s]100%|██████████| 2/2 [00:00<00:00,  5.69it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.64it/s]100%|██████████| 2/2 [00:00<00:00,  5.03it/s]100%|██████████| 2/2 [00:00<00:00,  4.96it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.82it/s]100%|██████████| 2/2 [00:00<00:00,  7.03it/s]100%|██████████| 2/2 [00:00<00:00,  6.99it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.04it/s]100%|██████████| 2/2 [00:00<00:00,  4.63it/s]100%|██████████| 2/2 [00:00<00:00,  4.53it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.42it/s]100%|██████████| 2/2 [00:00<00:00,  5.65it/s]100%|██████████| 2/2 [00:00<00:00,  5.61it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.39it/s]100%|██████████| 2/2 [00:00<00:00,  4.49it/s]100%|██████████| 2/2 [00:00<00:00,  4.47it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.05it/s]100%|██████████| 2/2 [00:00<00:00,  5.03it/s]100%|██████████| 2/2 [00:00<00:00,  5.03it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.83it/s]100%|██████████| 2/2 [00:00<00:00,  3.95it/s]100%|██████████| 2/2 [00:00<00:00,  3.93it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.51it/s]100%|██████████| 2/2 [00:00<00:00,  5.43it/s]100%|██████████| 2/2 [00:00<00:00,  5.44it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.15it/s]100%|██████████| 2/2 [00:00<00:00,  4.44it/s]100%|██████████| 2/2 [00:00<00:00,  4.39it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.55it/s]100%|██████████| 2/2 [00:00<00:00,  6.19it/s]100%|██████████| 2/2 [00:00<00:00,  6.08it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.57it/s]100%|██████████| 2/2 [00:00<00:00,  4.98it/s]100%|██████████| 2/2 [00:00<00:00,  4.91it/s]
 Distribution of y values after resampling: Bleeding_Edema_Outcome
 1                         144
 0                         136
@@ -507,7 +507,7 @@ Optimal threshold used: 0.38799999999999996
 
 Running k-fold model metrics...
 
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:01,  6.56it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:01,  6.80it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:01,  6.89it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00,  6.91it/s]Processing Folds:  50%|█████     | 5/10 [00:00<00:00,  6.96it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00,  6.91it/s]Processing Folds:  70%|███████   | 7/10 [00:01<00:00,  6.94it/s]Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  6.88it/s]Processing Folds:  90%|█████████ | 9/10 [00:01<00:00,  6.60it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  6.50it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  6.73it/s]
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:01,  7.08it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:01,  6.82it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:01,  6.96it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00,  6.71it/s]Processing Folds:  50%|█████     | 5/10 [00:00<00:00,  6.45it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00,  6.59it/s]Processing Folds:  70%|███████   | 7/10 [00:01<00:00,  6.66it/s]Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  6.71it/s]Processing Folds:  90%|█████████ | 9/10 [00:01<00:00,  6.76it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  6.79it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  6.73it/s]
 
 Average Metrics Across All Folds:
               Metric     Value
@@ -522,7 +522,7 @@ Average Metrics Across All Folds:
 
 ================================================================================
 ================================================================================
-Existing Experiment_ID: 562226156008592556
+Existing Experiment_ID: 375135582685733226
 
 Sampler RandomOverSampler(random_state=222)
 
@@ -573,25 +573,25 @@ Grid scores on development set:
 0.760 (+/-0.320) for {'rf__max_depth': 10, 'rf__min_samples_split': 5, 'rf__n_estimators': 10}
 0.805 (+/-0.288) for {'rf__max_depth': 10, 'rf__min_samples_split': 5, 'rf__n_estimators': 50}
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.63it/s]100%|██████████| 2/2 [00:00<00:00,  3.83it/s]100%|██████████| 2/2 [00:00<00:00,  3.80it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.24it/s]100%|██████████| 2/2 [00:00<00:00,  4.71it/s]100%|██████████| 2/2 [00:00<00:00,  4.63it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.66it/s]100%|██████████| 2/2 [00:00<00:00,  3.90it/s]100%|██████████| 2/2 [00:00<00:00,  3.86it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.28it/s]100%|██████████| 2/2 [00:00<00:00,  4.60it/s]100%|██████████| 2/2 [00:00<00:00,  4.54it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.59it/s]100%|██████████| 2/2 [00:00<00:00,  3.68it/s]100%|██████████| 2/2 [00:00<00:00,  3.67it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.91it/s]100%|██████████| 2/2 [00:00<00:00,  4.23it/s]100%|██████████| 2/2 [00:00<00:00,  4.17it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.62it/s]100%|██████████| 2/2 [00:00<00:00,  4.03it/s]100%|██████████| 2/2 [00:00<00:00,  3.96it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.11it/s]100%|██████████| 2/2 [00:00<00:00,  5.65it/s]100%|██████████| 2/2 [00:00<00:00,  5.56it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.26it/s]100%|██████████| 2/2 [00:00<00:00,  4.34it/s]100%|██████████| 2/2 [00:00<00:00,  4.32it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.45it/s]100%|██████████| 2/2 [00:00<00:00,  6.49it/s]100%|██████████| 2/2 [00:00<00:00,  6.31it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.78it/s]100%|██████████| 2/2 [00:00<00:00,  3.76it/s]100%|██████████| 2/2 [00:00<00:00,  3.76it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.43it/s]100%|██████████| 2/2 [00:00<00:00,  6.59it/s]100%|██████████| 2/2 [00:00<00:00,  6.56it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.63it/s]100%|██████████| 2/2 [00:00<00:00,  3.75it/s]100%|██████████| 2/2 [00:00<00:00,  3.73it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.96it/s]100%|██████████| 2/2 [00:00<00:00,  6.26it/s]100%|██████████| 2/2 [00:00<00:00,  6.21it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.84it/s]100%|██████████| 2/2 [00:00<00:00,  3.98it/s]100%|██████████| 2/2 [00:00<00:00,  3.96it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.37it/s]100%|██████████| 2/2 [00:00<00:00,  5.53it/s]100%|██████████| 2/2 [00:00<00:00,  5.50it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.66it/s]100%|██████████| 2/2 [00:00<00:00,  3.82it/s]100%|██████████| 2/2 [00:00<00:00,  3.79it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.35it/s]100%|██████████| 2/2 [00:00<00:00,  5.60it/s]100%|██████████| 2/2 [00:00<00:00,  5.56it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.68it/s]100%|██████████| 2/2 [00:00<00:00,  3.85it/s]100%|██████████| 2/2 [00:00<00:00,  3.82it/s]
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.61it/s]100%|██████████| 2/2 [00:00<00:00,  6.25it/s]100%|██████████| 2/2 [00:00<00:00,  6.14it/s]
 Distribution of y values after resampling: Bleeding_Edema_Outcome
 0                         136
 1                         136
@@ -627,8 +627,8 @@ Optimal threshold used: 0.38
 
 Running k-fold model metrics...
 
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:01,  5.03it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:01,  5.15it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:01,  5.19it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:01,  5.23it/s]Processing Folds:  50%|█████     | 5/10 [00:00<00:00,  5.34it/s]Processing Folds:  60%|██████    | 6/10 [00:01<00:00,  5.39it/s]Processing Folds:  70%|███████   | 7/10 [00:01<00:00,  5.54it/s]Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  5.73it/s]Processing Folds:  90%|█████████ | 9/10 [00:01<00:00,  5.83it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  5.93it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  5.58it/s]
-[31m2025/01/29 10:56:08 WARNING mlflow.models.model: Model logged without a signature and input example. Please set `input_example` parameter when logging the model to auto infer the model signature.[0m
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:01,  7.58it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:01,  7.72it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:00,  7.65it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00,  7.63it/s]Processing Folds:  50%|█████     | 5/10 [00:00<00:00,  5.94it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00,  6.46it/s]Processing Folds:  70%|███████   | 7/10 [00:01<00:00,  6.77it/s]Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  7.09it/s]Processing Folds:  90%|█████████ | 9/10 [00:01<00:00,  7.33it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  7.28it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  7.08it/s]
+[31m2025/02/03 15:03:06 WARNING mlflow.models.model: Model logged without a signature and input example. Please set `input_example` parameter when logging the model to auto infer the model signature.[0m
 
 Average Metrics Across All Folds:
               Metric     Value
@@ -643,16 +643,49 @@ Average Metrics Across All Folds:
 
 ================================================================================
 ================================================================================
-Existing Experiment_ID: 562226156008592556
+Existing Experiment_ID: 375135582685733226
 Object saved!
-Existing Experiment_ID: 562226156008592556
+Existing Experiment_ID: 375135582685733226
 
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
@@ -661,8 +694,6 @@ Existing Experiment_ID: 562226156008592556
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
@@ -673,49 +704,8 @@ Existing Experiment_ID: 562226156008592556
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
@@ -726,10 +716,16 @@ Existing Experiment_ID: 562226156008592556
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
 
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
@@ -737,8 +733,8 @@ Existing Experiment_ID: 562226156008592556
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
@@ -747,21 +743,25 @@ Existing Experiment_ID: 562226156008592556
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
@@ -770,8 +770,8 @@ Existing Experiment_ID: 562226156008592556
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=None, rf__min_samples_split=5, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=10; total time=   0.1s
@@ -780,8 +780,8 @@ Existing Experiment_ID: 562226156008592556
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
 [CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
-[CV] END rf__max_depth=10, rf__min_samples_split=2, rf__n_estimators=50; total time=   0.2s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
+[CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
 [CV] END rf__max_depth=10, rf__min_samples_split=5, rf__n_estimators=10; total time=   0.1s
