@@ -174,7 +174,7 @@ data_prep_preprocessing_training:
 .PHONY: feat_gen_training
 feat_gen_training:
 	$(PYTHON_INTERPRETER) $(PROJECT_DIRECTORY)/preprocessing/feat_gen.py \
-	--input-data-file ./data/processed/df_sans_zero_missing.parquet \
+	--input-data-file ./data/processed/df_sans_zero.parquet \
 	--stage training \
 	--data-path ./data/processed
 
@@ -359,7 +359,7 @@ model_explanations_inference:
 .PHONY: data_prep_preprocessing_inference
 data_prep_preprocessing_inference:
 	$(PYTHON_INTERPRETER) $(PROJECT_DIRECTORY)/preprocessing/preprocessing.py \
-	--input-data-file ./data/raw/df.parquet \
+	--input-data-file ./data/raw/Laser_Circumcision_Excel_31.03.2024.xlsx \
 	--output-data-file ./data/processed/inference/df_inference_process.parquet \
 	--stage inference \
 	--data-path ./data/processed
