@@ -5,11 +5,9 @@ import os
 import sys
 import eda_toolkit
 from eda_toolkit import ensure_directory, dataframe_columns, add_ids
-from tqdm import tqdm
 
-from python_scripts.constants import *
+from circ_milan.constants import *
 from python_scripts.functions import (
-    count_comorbidities,
     HealthMetrics,
 )
 
@@ -232,7 +230,7 @@ HealthMetrics.split_bp_column(
 ############################### Comorbidities ##################################
 
 # # create a new column for comorbidity flag (1 if comorbidities exist else 0)
-# df["Comorbidity_Flag"] = df["Comorbidities"].apply(lambda x: 0 if x == 0 else 1)
+df["Comorbidity_Flag"] = df["Comorbidities"].apply(lambda x: 0 if x == 0 else 1)
 
 # Replace 0 inside "Comorbidities" column with "None"
 # df["Number_of_Comorbidities"] = (
@@ -316,6 +314,7 @@ cols_to_drop = [
     "BMI_Category_Normal_Weight",
     # "Intraoperative_Blood_Loss_ml",
     # "Surgical_Time_min",
+    "Comorbidity_Flag",
     "Preop_DBP",
     "Anesthesia_Type_lidocaine",
     "Anesthesia_Type_carbocaine",

@@ -18,7 +18,7 @@ print(os.path.join(os.pardir))
 sys.path.append(os.path.join(os.pardir))
 sys.path.append(".")
 
-from python_scripts.constants import *
+from circ_milan.constants import *
 
 from python_scripts.model_params import (
     model_definitions,
@@ -32,7 +32,7 @@ from python_scripts.functions import (
     log_mlflow_experiment,
     PlotMetrics,
 )
-from python_scripts.constants import age, mlflow_data
+from circ_milan.constants import age, mlflow_data
 
 app = typer.Typer()
 
@@ -139,7 +139,6 @@ def main(
                 scoring=["average_precision"],
                 random_state=rstate,
                 stratify_y=True,
-                # kfold_group=X["Age_group"],
                 boost_early=early_stop,
                 imbalance_sampler=sampler,
             )

@@ -13,9 +13,6 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from python_scripts.functions import ModelCalculator
 
-
-# from supp_care_pyscripts.constants import *
-
 from model_tuner import *
 import shap
 
