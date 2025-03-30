@@ -1,0 +1,98 @@
+2025-03-29 17:46:18.528 | INFO     | circ_milan.config:<module>:31 - PROJ_ROOT path is: /home/lshpaner/Python_Projects/circ_milan
+rf_under_training
+rf_Bleeding_Edema_Outcome
+Model Threshold Before Threshold Optimization: {'average_precision': 0.46299999999999997}
+╭─────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────╮
+│ /home/lshpaner/Python_Projects/circ_milan/circ_milan/modeling/evaluation.py:79 in main                                   │
+│                                                                                                                          │
+│    76 │   # STEP 5: Find the Optimal Threshold Based on Target Precision                                                 │
+│    77 │   # (defined in config.py under `target_precision`)                                                              │
+│    78 │   ################################################################################                               │
+│ ❱  79 │                                                                                                                  │
+│    80 │   try:                                                                                                           │
+│    81 │   │   print(f"\n Best Threshold and Beta For {outcome}: \n")                                                     │
+│    82 │   │   threshold, beta = find_optimal_threshold_beta(                                                             │
+│                                                                                                                          │
+│ ╭───────────────────────────────────────────── locals ─────────────────────────────────────────────╮                     │
+│ │ estimator_name = 'rf'                                                                            │                     │
+│ │  features_path = PosixPath('/home/lshpaner/Python_Projects/circ_milan/data/processed/X.parquet') │                     │
+│ │    labels_path = PosixPath('data/processed/y_Bleeding_Edema_Outcome.parquet')                    │                     │
+│ │          model = <model_tuner.model_tuner_utils.Model object at 0x7f3420224b10>                  │                     │
+│ │     model_type = 'rf'                                                                            │                     │
+│ │        outcome = 'Bleeding_Edema_Outcome'                                                        │                     │
+│ │  pipeline_type = 'under'                                                                         │                     │
+│ │        scoring = 'average_precision'                                                             │                     │
+│ │              X = │   │   │   Age_years    BMI  ...  Intraop_DBP  Diabetes                        │                     │
+│ │                  patient_id                    ...                                               │                     │
+│ │                  424123959          22  26.17  ...           90         0                        │                     │
+│ │                  390469576          50  31.14  ...           70         0                        │                     │
+│ │                  633173792          70  23.88  ...           80         1                        │                     │
+│ │                  784928164          68  27.64  ...           90         1                        │                     │
+│ │                  936242280          64  31.18  ...           70         1                        │                     │
+│ │                  ...               ...    ...  ...          ...       ...                        │                     │
+│ │                  412065385          22  19.27  ...           90         0                        │                     │
+│ │                  769873868          56  26.84  ...           80         1                        │                     │
+│ │                  140411083          19  24.22  ...           90         0                        │                     │
+│ │                  773951452          21  25.17  ...           90         0                        │                     │
+│ │                  404354815          23  22.78  ...           90         0                        │                     │
+│ │                                                                                                  │                     │
+│ │                  [194 rows x 13 columns]                                                         │                     │
+│ │              y = patient_id                                                                      │                     │
+│ │                  424123959    0                                                                  │                     │
+│ │                  390469576    0                                                                  │                     │
+│ │                  633173792    0                                                                  │                     │
+│ │                  784928164    0                                                                  │                     │
+│ │                  936242280    0                                                                  │                     │
+│ │                  │   │   │   ..                                                                  │                     │
+│ │                  412065385    1                                                                  │                     │
+│ │                  769873868    1                                                                  │                     │
+│ │                  140411083    0                                                                  │                     │
+│ │                  773951452    1                                                                  │                     │
+│ │                  404354815    1                                                                  │                     │
+│ │                  Name: Bleeding_Edema_Outcome, Length: 194, dtype: int64                         │                     │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯                     │
+│                                                                                                                          │
+│ /home/lshpaner/Python_Projects/circ_milan/venv_circ_311/lib/python3.11/site-packages/model_tuner/model_tuner_utils.py:65 │
+│ 7 in get_train_data                                                                                                      │
+│                                                                                                                          │
+│    654 │   ##  based on predefined indices stored in the class attributes            ##                                  │
+│    655 │   ############################################################################                                  │
+│    656 │   def get_train_data(self, X, y):                                                                               │
+│ ❱  657 │   │   return X.loc[self.X_train_index], y.loc[self.y_train_index]                                               │
+│    658 │                                                                                                                 │
+│    659 │   def get_valid_data(self, X, y):                                                                               │
+│    660 │   │   return X.loc[self.X_valid_index], y.loc[self.y_valid_index]                                               │
+│                                                                                                                          │
+│ ╭─────────────────────────────── locals ────────────────────────────────╮                                                │
+│ │ self = <model_tuner.model_tuner_utils.Model object at 0x7f3420224b10> │                                                │
+│ │    X = │   │   │   Age_years    BMI  ...  Intraop_DBP  Diabetes       │                                                │
+│ │        patient_id                    ...                              │                                                │
+│ │        424123959          22  26.17  ...           90         0       │                                                │
+│ │        390469576          50  31.14  ...           70         0       │                                                │
+│ │        633173792          70  23.88  ...           80         1       │                                                │
+│ │        784928164          68  27.64  ...           90         1       │                                                │
+│ │        936242280          64  31.18  ...           70         1       │                                                │
+│ │        ...               ...    ...  ...          ...       ...       │                                                │
+│ │        412065385          22  19.27  ...           90         0       │                                                │
+│ │        769873868          56  26.84  ...           80         1       │                                                │
+│ │        140411083          19  24.22  ...           90         0       │                                                │
+│ │        773951452          21  25.17  ...           90         0       │                                                │
+│ │        404354815          23  22.78  ...           90         0       │                                                │
+│ │                                                                       │                                                │
+│ │        [194 rows x 13 columns]                                        │                                                │
+│ │    y = patient_id                                                     │                                                │
+│ │        424123959    0                                                 │                                                │
+│ │        390469576    0                                                 │                                                │
+│ │        633173792    0                                                 │                                                │
+│ │        784928164    0                                                 │                                                │
+│ │        936242280    0                                                 │                                                │
+│ │        │   │   │   ..                                                 │                                                │
+│ │        412065385    1                                                 │                                                │
+│ │        769873868    1                                                 │                                                │
+│ │        140411083    0                                                 │                                                │
+│ │        773951452    1                                                 │                                                │
+│ │        404354815    1                                                 │                                                │
+│ │        Name: Bleeding_Edema_Outcome, Length: 194, dtype: int64        │                                                │
+│ ╰───────────────────────────────────────────────────────────────────────╯                                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+AttributeError: 'Model' object has no attribute 'X_train_index'

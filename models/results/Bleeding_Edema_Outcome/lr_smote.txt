@@ -1,6 +1,6 @@
-2025-03-29 17:34:21.525 | INFO     | circ_milan.config:<module>:31 - PROJ_ROOT path is: /home/lshpaner/Python_Projects/circ_milan
-2025-03-29 17:34:21.561 | INFO     | __main__:main:106 - Training lr for Bleeding_Edema_Outcome ...
-Sampler None
+2025-03-29 17:34:34.470 | INFO     | circ_milan.config:<module>:31 - PROJ_ROOT path is: /home/lshpaner/Python_Projects/circ_milan
+2025-03-29 17:34:34.502 | INFO     | __main__:main:106 - Training lr for Bleeding_Edema_Outcome ...
+Sampler SMOTE(random_state=222)
 
 Outcome:
 ------------------------------------------------------------
@@ -18,13 +18,23 @@ Pipeline Steps:
                            │
                            ▼
 ┌──────────────────────────────────────────────────────┐
-│ Step 2: lr                                           │
+│ Step 2: resampler                                    │
+│ SMOTE                                                │
+└──────────────────────────────────────────────────────┘
+                           │
+                           ▼
+┌──────────────────────────────────────────────────────┐
+│ Step 3: lr                                           │
 │ LogisticRegression                                   │
 └──────────────────────────────────────────────────────┘
 
 # Tuning hyper-parameters for average_precision
 Fitting 10 folds for each of 5 candidates, totalling 50 fits
 [CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
+[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
 [CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
 [CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
 [CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
@@ -41,16 +51,6 @@ Fitting 10 folds for each of 5 candidates, totalling 50 fits
 [CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
 [CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
 [CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
 [CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
 [CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
 [CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
@@ -62,7 +62,13 @@ Fitting 10 folds for each of 5 candidates, totalling 50 fits
 [CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
 [CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
 [CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
+[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
+[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
+[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
+[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
+[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
+[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
+[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
 [CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
 [CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
 [CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
@@ -76,34 +82,39 @@ Fitting 10 folds for each of 5 candidates, totalling 50 fits
 [CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
 
 Best score/param set found on development set:
-{0.8664633144633143: {'lr__C': 0.1, 'lr__penalty': 'l2'}}
+{0.861628375437199: {'lr__C': 0.1, 'lr__penalty': 'l2'}}
 
 Grid scores on development set:
-0.812 (+/-0.298) for {'lr__C': 0.0001, 'lr__penalty': 'l2'}
-0.815 (+/-0.293) for {'lr__C': 0.001, 'lr__penalty': 'l2'}
-0.833 (+/-0.249) for {'lr__C': 0.01, 'lr__penalty': 'l2'}
-0.866 (+/-0.245) for {'lr__C': 0.1, 'lr__penalty': 'l2'}
-0.855 (+/-0.244) for {'lr__C': 1.0, 'lr__penalty': 'l2'}
+0.786 (+/-0.311) for {'lr__C': 0.0001, 'lr__penalty': 'l2'}
+0.792 (+/-0.312) for {'lr__C': 0.001, 'lr__penalty': 'l2'}
+0.828 (+/-0.254) for {'lr__C': 0.01, 'lr__penalty': 'l2'}
+0.862 (+/-0.247) for {'lr__C': 0.1, 'lr__penalty': 'l2'}
+0.842 (+/-0.232) for {'lr__C': 1.0, 'lr__penalty': 'l2'}
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  7.13it/s]100%|██████████| 1/1 [00:00<00:00,  7.12it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  8.07it/s]100%|██████████| 1/1 [00:00<00:00,  8.05it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  8.65it/s]100%|██████████| 1/1 [00:00<00:00,  8.64it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  7.06it/s]100%|██████████| 1/1 [00:00<00:00,  7.05it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  7.00it/s]100%|██████████| 1/1 [00:00<00:00,  6.99it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  7.41it/s]100%|██████████| 1/1 [00:00<00:00,  7.39it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  7.77it/s]100%|██████████| 1/1 [00:00<00:00,  7.76it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  9.85it/s]100%|██████████| 1/1 [00:00<00:00,  9.83it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  7.90it/s]100%|██████████| 1/1 [00:00<00:00,  7.88it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  8.21it/s]100%|██████████| 1/1 [00:00<00:00,  8.20it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  7.89it/s]100%|██████████| 1/1 [00:00<00:00,  7.88it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  7.86it/s]100%|██████████| 1/1 [00:00<00:00,  7.84it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  8.84it/s]100%|██████████| 1/1 [00:00<00:00,  8.82it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  9.29it/s]100%|██████████| 1/1 [00:00<00:00,  9.27it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  8.80it/s]100%|██████████| 1/1 [00:00<00:00,  8.78it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  8.89it/s]100%|██████████| 1/1 [00:00<00:00,  8.88it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  8.15it/s]100%|██████████| 1/1 [00:00<00:00,  8.14it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  8.21it/s]100%|██████████| 1/1 [00:00<00:00,  8.20it/s]
 Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  8.52it/s]100%|██████████| 1/1 [00:00<00:00,  8.50it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  9.44it/s]100%|██████████| 1/1 [00:00<00:00,  9.42it/s]
+Distribution of y values after resampling: Bleeding_Edema_Outcome
+0                         136
+1                         136
+Name: count, dtype: int64
+
 
 Detailed classification report for lr:
 
@@ -112,46 +123,46 @@ Confusion Matrix Across All 10 Folds for average_precision:
           Predicted:
              Pos   Neg
 --------------------------------------------------------------------------------
-Actual: Pos  42 (tp)   16 (fn)
-        Neg  13 (fp)  123 (tn)
+Actual: Pos  41 (tp)   17 (fn)
+        Neg  12 (fp)  124 (tn)
 --------------------------------------------------------------------------------
 
 Classification Report Averaged Across All Folds for average_precision:
               precision    recall  f1-score   support
 
-           0       0.88      0.90      0.89       136
-           1       0.76      0.72      0.74        58
+           0       0.88      0.91      0.90       136
+           1       0.77      0.71      0.74        58
 
     accuracy                           0.85       194
-   macro avg       0.82      0.81      0.82       194
+   macro avg       0.83      0.81      0.82       194
 weighted avg       0.85      0.85      0.85       194
 
 --------------------------------------------------------------------------------
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Optimal threshold used: 0.496
+Optimal threshold used: 0.471
 
 Running k-fold model metrics...
 
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  50%|█████     | 5/10 [00:00<00:00, 49.23it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 46.51it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 46.87it/s]
-[31m2025/03/29 17:34:32 WARNING mlflow.models.model: Model logged without a signature and input example. Please set `input_example` parameter when logging the model to auto infer the model signature.[0m
-2025-03-29 17:34:32.038 | SUCCESS  | __main__:main:212 - Modeling training complete.
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  50%|█████     | 5/10 [00:00<00:00, 42.05it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 42.80it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 42.66it/s]
+[31m2025/03/29 17:34:45 WARNING mlflow.models.model: Model logged without a signature and input example. Please set `input_example` parameter when logging the model to auto infer the model signature.[0m
+2025-03-29 17:34:45.321 | SUCCESS  | __main__:main:212 - Modeling training complete.
 
 Average Metrics Across All Folds:
               Metric     Value
-0      Precision/PPV  0.763636
-1  Average Precision  0.825892
-2        Sensitivity  0.724138
-3        Specificity  0.904412
-4            AUC ROC  0.903651
-5        Brier Score  0.126882
+0      Precision/PPV  0.773585
+1  Average Precision  0.832887
+2        Sensitivity  0.706897
+3        Specificity  0.911765
+4            AUC ROC  0.901116
+5        Brier Score  0.118480
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-Experiment 'Bleeding_Edema_Outcome_model' does not exist. Creating a new one.
-No runs found with run_name 'lr_orig_training' in experiment 'Bleeding_Edema_Outcome_model'. Creating a new run.
-Starting New Run_ID: 954ede42e16940d3898a6c902994cb00 for lr_orig_training
+Using Existing Experiment_ID: 132942270062857191
+No runs found with run_name 'lr_smote_training' in experiment 'Bleeding_Edema_Outcome_model'. Creating a new run.
+Starting New Run_ID: b6d5f34536c84a789ca62a4bb6973dd4 for lr_smote_training
 Experiment_ID for model lr and parameters: 132942270062857191
-experiment_id=132942270062857191, run_id=954ede42e16940d3898a6c902994cb00
+experiment_id=132942270062857191, run_id=b6d5f34536c84a789ca62a4bb6973dd4
 Parameters and model logged successfully in MLflow.

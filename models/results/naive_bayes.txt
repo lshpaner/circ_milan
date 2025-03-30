@@ -1,738 +1,0 @@
-..
-            Age_years    BMI  ...  SBP  DBP
-patient_id                    ...          
-738111507           5  31.40  ...  120   80
-424123959          22  26.17  ...  130   90
-390469576          50  31.14  ...  120   70
-633173792          70  23.88  ...  110   80
-784928164          68  27.64  ...  120   90
-...               ...    ...  ...  ...  ...
-412065385          22  19.27  ...  130   90
-769873868          56  26.84  ...  110   80
-140411083          19  24.22  ...  120   90
-773951452          21  25.17  ...  140   90
-404354815          23  22.78  ...  130   90
-
-[202 rows x 11 columns]
-y:            Functional_Outcomes_Bleeding
-patient_id                              
-738111507                              0
-424123959                              0
-390469576                              0
-633173792                              0
-784928164                              0
-...                                  ...
-412065385                              1
-769873868                              0
-140411083                              0
-773951452                              1
-404354815                              1
-
-[202 rows x 1 columns]
-
-Sampler None
-
-Circumcision Outcome Columns:
-['Functional_Outcomes_Bleeding']
-********************************************************************************
-
-
-============================================================
-Functional_Outcomes_Bleeding
-============================================================
-
-Pipeline Steps:
-
-┌────────────────────────────────────────────┐
-│ Step 1: preprocess_scaler_StandardScalar   │
-│ StandardScaler                             │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 2: preprocess_imputer_Preprocessor    │
-│ SimpleImputer                              │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 3: nb                                 │
-│ GaussianNB                                 │
-└────────────────────────────────────────────┘
-
-# Tuning hyper-parameters for average_precision
-Fitting 10 folds for each of 1 candidates, totalling 10 fits
-
-Best score/param set found on development set:
-{0.34888351844234194: {'nb__priors': None}}
-
-Grid scores on development set:
-0.349 (+/-0.130) for {'nb__priors': None}
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 23.98it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 21.97it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 22.14it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 23.84it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 20.85it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 24.67it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.53it/s]100%|██████████| 2/2 [00:00<00:00,  7.39it/s]100%|██████████| 2/2 [00:00<00:00,  7.41it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.05it/s]100%|██████████| 2/2 [00:00<00:00,  7.04it/s]100%|██████████| 2/2 [00:00<00:00,  7.04it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 25.00it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 18.54it/s]100%|██████████| 2/2 [00:00<00:00, 18.51it/s]
-
-Detailed classification report for nb:
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  4 (tp)   0 (fn)
-        Neg  8 (fp)   7 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.99      0.46      0.62       156
-           1       0.35      0.98      0.51        46
-
-    accuracy                           0.57       202
-   macro avg       0.67      0.72      0.57       202
-weighted avg       0.84      0.57      0.60       202
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
---------------------------------------------------------------------------------
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  0 (tp)   3 (fn)
-        Neg  1 (fp)  14 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.80      0.93      0.86       156
-           1       0.45      0.20      0.27        46
-
-    accuracy                           0.76       202
-   macro avg       0.62      0.56      0.57       202
-weighted avg       0.72      0.76      0.72       202
-
---------------------------------------------------------------------------------
-
-Detailed classification report for nb:
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  4 (tp)   0 (fn)
-        Neg  8 (fp)   7 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.99      0.46      0.62       156
-           1       0.35      0.98      0.51        46
-
-    accuracy                           0.57       202
-   macro avg       0.67      0.72      0.57       202
-weighted avg       0.84      0.57      0.60       202
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
-
-Running k-fold model metrics...
-
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:00, 16.69it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00, 16.92it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00, 17.25it/s]Processing Folds:  80%|████████  | 8/10 [00:00<00:00, 16.07it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 16.55it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 16.61it/s]
-
-Average Metrics Across All Folds:
-              Metric     Value
-0      Precision/PPV  0.354424
-1  Average Precision  0.348884
-2        Sensitivity  1.000000
-3        Specificity  0.450000
-4            AUC ROC  0.645458
-5        Brier Score  0.426133
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-Optimal threshold used: 0.0
-
-================================================================================
-nb_Functional_Outcomes_Bleeding
-Precision/PPV        0.344
-Average Precision    0.430
-Sensitivity          0.978
-Specificity          0.449
-AUC ROC              0.758
-Brier Score          0.428
-Name: nb, dtype: float64
-<function log_mlflow_experiment at 0x7f1b45b08180>
-New Experiment_ID: 905068343823228516
-
-Sampler SMOTE(random_state=222)
-
-Circumcision Outcome Columns:
-['Functional_Outcomes_Bleeding']
-********************************************************************************
-
-
-============================================================
-Functional_Outcomes_Bleeding
-============================================================
-
-Pipeline Steps:
-
-┌────────────────────────────────────────────┐
-│ Step 1: preprocess_scaler_StandardScalar   │
-│ StandardScaler                             │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 2: preprocess_imputer_Preprocessor    │
-│ SimpleImputer                              │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 3: resampler                          │
-│ SMOTE                                      │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 4: nb                                 │
-│ GaussianNB                                 │
-└────────────────────────────────────────────┘
-
-# Tuning hyper-parameters for average_precision
-Fitting 10 folds for each of 1 candidates, totalling 10 fits
-
-Best score/param set found on development set:
-{0.4243393134643134: {'nb__priors': None}}
-
-Grid scores on development set:
-0.424 (+/-0.194) for {'nb__priors': None}
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 15.42it/s]100%|██████████| 2/2 [00:00<00:00, 15.40it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 20.39it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 22.64it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 23.04it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 22.59it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 23.00it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.86it/s]100%|██████████| 2/2 [00:00<00:00,  7.81it/s]100%|██████████| 2/2 [00:00<00:00,  7.81it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.08it/s]100%|██████████| 2/2 [00:00<00:00,  7.55it/s]100%|██████████| 2/2 [00:00<00:00,  7.47it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 16.72it/s]100%|██████████| 2/2 [00:00<00:00, 16.68it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 24.44it/s]
-
-Detailed classification report for nb:
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  4 (tp)   0 (fn)
-        Neg  8 (fp)   7 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.96      0.46      0.62       156
-           1       0.34      0.93      0.50        46
-
-    accuracy                           0.57       202
-   macro avg       0.65      0.70      0.56       202
-weighted avg       0.82      0.57      0.59       202
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
---------------------------------------------------------------------------------
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  0 (tp)   4 (fn)
-        Neg  1 (fp)  14 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.77      0.90      0.83       156
-           1       0.24      0.11      0.15        46
-
-    accuracy                           0.72       202
-   macro avg       0.51      0.50      0.49       202
-weighted avg       0.65      0.72      0.68       202
-
---------------------------------------------------------------------------------
-
-Detailed classification report for nb:
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  4 (tp)   0 (fn)
-        Neg  8 (fp)   7 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.96      0.46      0.62       156
-           1       0.34      0.93      0.50        46
-
-    accuracy                           0.57       202
-   macro avg       0.65      0.70      0.56       202
-weighted avg       0.82      0.57      0.59       202
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
-
-Running k-fold model metrics...
-
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:00, 13.92it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00, 14.15it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00, 13.41it/s]Processing Folds:  80%|████████  | 8/10 [00:00<00:00, 13.55it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 13.62it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 13.65it/s]
-
-Average Metrics Across All Folds:
-              Metric     Value
-0      Precision/PPV  0.342317
-1  Average Precision  0.424339
-2        Sensitivity  0.935000
-3        Specificity  0.456667
-4            AUC ROC  0.710250
-5        Brier Score  0.424163
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-Optimal threshold used: 0.382
-
-================================================================================
-nb_Functional_Outcomes_Bleeding
-Precision/PPV        0.364
-Average Precision    0.432
-Sensitivity          0.957
-Specificity          0.506
-AUC ROC              0.763
-Brier Score          0.380
-Name: nb, dtype: float64
-<function log_mlflow_experiment at 0x7f1b45b08180>
-Existing Experiment_ID: 905068343823228516
-
-Sampler ADASYN(random_state=222)
-
-Circumcision Outcome Columns:
-['Functional_Outcomes_Bleeding']
-********************************************************************************
-
-
-============================================================
-Functional_Outcomes_Bleeding
-============================================================
-
-Pipeline Steps:
-
-┌────────────────────────────────────────────┐
-│ Step 1: preprocess_scaler_StandardScalar   │
-│ StandardScaler                             │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 2: preprocess_imputer_Preprocessor    │
-│ SimpleImputer                              │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 3: resampler                          │
-│ ADASYN                                     │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 4: nb                                 │
-│ GaussianNB                                 │
-└────────────────────────────────────────────┘
-
-# Tuning hyper-parameters for average_precision
-Fitting 10 folds for each of 1 candidates, totalling 10 fits
-
-Best score/param set found on development set:
-{0.40946725496725495: {'nb__priors': None}}
-
-Grid scores on development set:
-0.409 (+/-0.198) for {'nb__priors': None}
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 22.51it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 18.90it/s]100%|██████████| 2/2 [00:00<00:00, 18.85it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 22.92it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 22.58it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 22.86it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 22.56it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.25it/s]100%|██████████| 2/2 [00:00<00:00,  6.93it/s]100%|██████████| 2/2 [00:00<00:00,  6.82it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.23it/s]100%|██████████| 2/2 [00:00<00:00,  7.23it/s]100%|██████████| 2/2 [00:00<00:00,  7.23it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 22.51it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 19.06it/s]100%|██████████| 2/2 [00:00<00:00, 19.02it/s]
-
-Detailed classification report for nb:
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  4 (tp)   0 (fn)
-        Neg  8 (fp)   7 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.96      0.46      0.62       156
-           1       0.34      0.93      0.49        46
-
-    accuracy                           0.56       202
-   macro avg       0.65      0.69      0.56       202
-weighted avg       0.82      0.56      0.59       202
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
---------------------------------------------------------------------------------
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  0 (tp)   4 (fn)
-        Neg  1 (fp)  14 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.78      0.90      0.83       156
-           1       0.27      0.13      0.18        46
-
-    accuracy                           0.72       202
-   macro avg       0.53      0.51      0.50       202
-weighted avg       0.66      0.72      0.68       202
-
---------------------------------------------------------------------------------
-
-Detailed classification report for nb:
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  4 (tp)   0 (fn)
-        Neg  8 (fp)   7 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.96      0.46      0.62       156
-           1       0.34      0.93      0.49        46
-
-    accuracy                           0.56       202
-   macro avg       0.65      0.69      0.56       202
-weighted avg       0.82      0.56      0.59       202
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
-
-Running k-fold model metrics...
-
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:00, 12.59it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00, 12.12it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00, 12.52it/s]Processing Folds:  80%|████████  | 8/10 [00:00<00:00, 12.54it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 12.63it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 12.54it/s]
-
-Average Metrics Across All Folds:
-              Metric     Value
-0      Precision/PPV  0.352757
-1  Average Precision  0.409467
-2        Sensitivity  0.980000
-3        Specificity  0.456667
-4            AUC ROC  0.695875
-5        Brier Score  0.430069
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-Optimal threshold used: 0.099
-
-================================================================================
-nb_Functional_Outcomes_Bleeding
-Precision/PPV        0.346
-Average Precision    0.414
-Sensitivity          0.978
-Specificity          0.455
-AUC ROC              0.762
-Brier Score          0.426
-Name: nb, dtype: float64
-<function log_mlflow_experiment at 0x7f1b45b08180>
-Existing Experiment_ID: 905068343823228516
-
-Sampler RandomOverSampler(random_state=222)
-
-Circumcision Outcome Columns:
-['Functional_Outcomes_Bleeding']
-********************************************************************************
-
-
-============================================================
-Functional_Outcomes_Bleeding
-============================================================
-
-Pipeline Steps:
-
-┌────────────────────────────────────────────┐
-│ Step 1: preprocess_scaler_StandardScalar   │
-│ StandardScaler                             │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 2: preprocess_imputer_Preprocessor    │
-│ SimpleImputer                              │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 3: resampler                          │
-│ RandomOverSampler                          │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 4: nb                                 │
-│ GaussianNB                                 │
-└────────────────────────────────────────────┘
-
-# Tuning hyper-parameters for average_precision
-Fitting 10 folds for each of 1 candidates, totalling 10 fits
-
-Best score/param set found on development set:
-{0.34854224860107214: {'nb__priors': None}}
-
-Grid scores on development set:
-0.349 (+/-0.165) for {'nb__priors': None}
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 22.87it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 23.80it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 20.26it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 23.68it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 20.12it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 23.88it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.63it/s]100%|██████████| 2/2 [00:00<00:00,  7.55it/s]100%|██████████| 2/2 [00:00<00:00,  7.55it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.71it/s]100%|██████████| 2/2 [00:00<00:00,  7.62it/s]100%|██████████| 2/2 [00:00<00:00,  7.63it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 21.79it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 23.35it/s]
-
-Detailed classification report for nb:
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  4 (tp)   0 (fn)
-        Neg  8 (fp)   7 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.97      0.46      0.62       156
-           1       0.34      0.96      0.50        46
-
-    accuracy                           0.57       202
-   macro avg       0.66      0.71      0.56       202
-weighted avg       0.83      0.57      0.59       202
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
---------------------------------------------------------------------------------
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  1 (tp)   3 (fn)
-        Neg  1 (fp)  13 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.80      0.89      0.84       156
-           1       0.41      0.26      0.32        46
-
-    accuracy                           0.75       202
-   macro avg       0.61      0.58      0.58       202
-weighted avg       0.71      0.75      0.73       202
-
---------------------------------------------------------------------------------
-
-Detailed classification report for nb:
-
-Confusion Matrix Average Across 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos  4 (tp)   0 (fn)
-        Neg  8 (fp)   7 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.97      0.46      0.62       156
-           1       0.34      0.96      0.50        46
-
-    accuracy                           0.57       202
-   macro avg       0.66      0.71      0.56       202
-weighted avg       0.83      0.57      0.59       202
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
-
-Running k-fold model metrics...
-
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:00, 15.51it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00, 15.64it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00, 14.68it/s]Processing Folds:  80%|████████  | 8/10 [00:00<00:00, 14.82it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 14.91it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 14.97it/s]
-
-Average Metrics Across All Folds:
-              Metric     Value
-0      Precision/PPV  0.354424
-1  Average Precision  0.348542
-2        Sensitivity  1.000000
-3        Specificity  0.450000
-4            AUC ROC  0.644750
-5        Brier Score  0.431123
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-Optimal threshold used: 0.0
-
-================================================================================
-nb_Functional_Outcomes_Bleeding
-Precision/PPV        0.348
-Average Precision    0.376
-Sensitivity          1.000
-Specificity          0.449
-AUC ROC              0.734
-Brier Score          0.426
-Name: nb, dtype: float64
-<function log_mlflow_experiment at 0x7f1b45b08180>
-Existing Experiment_ID: 905068343823228516
-Object saved!
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s
-[CV] END ....................................nb__priors=None; total time=   0.0s

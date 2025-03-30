@@ -1,653 +1,0 @@
-..
-
-Sampler None
-
-============================================================
-Bleeding_Edema_Outcome
-============================================================
-
-Pipeline Steps:
-
-┌────────────────────────────────────────────┐
-│ Step 1: preprocess_scaler_StandardScalar   │
-│ MinMaxScaler                               │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 2: preprocess_imputer_Preprocessor    │
-│ SimpleImputer                              │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 3: lr                                 │
-│ LogisticRegression                         │
-└────────────────────────────────────────────┘
-
-# Tuning hyper-parameters for average_precision
-Fitting 10 folds for each of 5 candidates, totalling 50 fits
-
-Best score/param set found on development set:
-{0.834021312021312: {'lr__C': 1.0, 'lr__penalty': 'l2'}}
-
-Grid scores on development set:
-0.781 (+/-0.295) for {'lr__C': 0.0001, 'lr__penalty': 'l2'}
-0.781 (+/-0.295) for {'lr__C': 0.001, 'lr__penalty': 'l2'}
-0.793 (+/-0.311) for {'lr__C': 0.01, 'lr__penalty': 'l2'}
-0.806 (+/-0.290) for {'lr__C': 0.1, 'lr__penalty': 'l2'}
-0.834 (+/-0.214) for {'lr__C': 1.0, 'lr__penalty': 'l2'}
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  9.70it/s]100%|██████████| 2/2 [00:00<00:00, 10.48it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 10.24it/s]100%|██████████| 2/2 [00:00<00:00, 10.23it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.98it/s]100%|██████████| 2/2 [00:00<00:00,  8.54it/s]100%|██████████| 2/2 [00:00<00:00,  8.60it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.24it/s]100%|██████████| 2/2 [00:00<00:00, 11.23it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.91it/s]100%|██████████| 2/2 [00:00<00:00,  9.18it/s]100%|██████████| 2/2 [00:00<00:00,  9.13it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.78it/s]100%|██████████| 2/2 [00:00<00:00,  9.64it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.41it/s]100%|██████████| 2/2 [00:00<00:00, 11.40it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.87it/s]100%|██████████| 2/2 [00:00<00:00, 11.86it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.48it/s]100%|██████████| 2/2 [00:00<00:00,  7.87it/s]100%|██████████| 2/2 [00:00<00:00,  7.95it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.96it/s]100%|██████████| 2/2 [00:00<00:00, 11.95it/s]
-
-Detailed classification report for lr:
-
-Confusion Matrix Across All 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos 51 (tp)   7 (fn)
-        Neg 42 (fp)  94 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.93      0.69      0.79       136
-           1       0.55      0.88      0.68        58
-
-    accuracy                           0.75       194
-   macro avg       0.74      0.79      0.73       194
-weighted avg       0.82      0.75      0.76       194
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
-Optimal threshold used: 0.47800000000000004
-
-Running k-fold model metrics...
-
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00, 53.72it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 54.17it/s]
-
-Average Metrics Across All Folds:
-              Metric     Value
-0      Precision/PPV  0.548387
-1  Average Precision  0.779868
-2        Sensitivity  0.879310
-3        Specificity  0.691176
-4            AUC ROC  0.890974
-5        Brier Score  0.149765
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-================================================================================
-================================================================================
-Existing Experiment_ID: 837143143123835128
-
-Sampler SMOTE(random_state=222)
-
-============================================================
-Bleeding_Edema_Outcome
-============================================================
-
-Pipeline Steps:
-
-┌────────────────────────────────────────────┐
-│ Step 1: preprocess_scaler_StandardScalar   │
-│ MinMaxScaler                               │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 2: preprocess_imputer_Preprocessor    │
-│ SimpleImputer                              │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 3: resampler                          │
-│ SMOTE                                      │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 4: lr                                 │
-│ LogisticRegression                         │
-└────────────────────────────────────────────┘
-
-# Tuning hyper-parameters for average_precision
-Fitting 10 folds for each of 5 candidates, totalling 50 fits
-
-Best score/param set found on development set:
-{0.8575866355866356: {'lr__C': 1.0, 'lr__penalty': 'l2'}}
-
-Grid scores on development set:
-0.765 (+/-0.281) for {'lr__C': 0.0001, 'lr__penalty': 'l2'}
-0.765 (+/-0.281) for {'lr__C': 0.001, 'lr__penalty': 'l2'}
-0.772 (+/-0.288) for {'lr__C': 0.01, 'lr__penalty': 'l2'}
-0.806 (+/-0.295) for {'lr__C': 0.1, 'lr__penalty': 'l2'}
-0.858 (+/-0.241) for {'lr__C': 1.0, 'lr__penalty': 'l2'}
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.44it/s]100%|██████████| 2/2 [00:00<00:00,  7.38it/s]100%|██████████| 2/2 [00:00<00:00,  7.38it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  8.24it/s]100%|██████████| 2/2 [00:00<00:00,  8.39it/s]100%|██████████| 2/2 [00:00<00:00,  8.36it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.32it/s]100%|██████████| 2/2 [00:00<00:00,  6.02it/s]100%|██████████| 2/2 [00:00<00:00,  6.06it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.59it/s]100%|██████████| 2/2 [00:00<00:00,  7.74it/s]100%|██████████| 2/2 [00:00<00:00,  7.71it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.73it/s]100%|██████████| 2/2 [00:00<00:00,  6.04it/s]100%|██████████| 2/2 [00:00<00:00,  6.13it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.31it/s]100%|██████████| 2/2 [00:00<00:00,  6.94it/s]100%|██████████| 2/2 [00:00<00:00,  6.83it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.50it/s]100%|██████████| 2/2 [00:00<00:00,  6.98it/s]100%|██████████| 2/2 [00:00<00:00,  7.05it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.95it/s]100%|██████████| 2/2 [00:00<00:00,  7.49it/s]100%|██████████| 2/2 [00:00<00:00,  7.40it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.58it/s]100%|██████████| 2/2 [00:00<00:00,  6.60it/s]100%|██████████| 2/2 [00:00<00:00,  6.59it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  7.91it/s]100%|██████████| 2/2 [00:00<00:00,  7.88it/s]100%|██████████| 2/2 [00:00<00:00,  7.88it/s]
-Distribution of y values after resampling: Bleeding_Edema_Outcome
-0                         136
-1                         136
-Name: count, dtype: int64
-
-
-Detailed classification report for lr:
-
-Confusion Matrix Across All 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos 52 (tp)   6 (fn)
-        Neg 39 (fp)  97 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.94      0.71      0.81       136
-           1       0.57      0.90      0.70        58
-
-    accuracy                           0.77       194
-   macro avg       0.76      0.80      0.75       194
-weighted avg       0.83      0.77      0.78       194
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
-Optimal threshold used: 0.43900000000000006
-
-Running k-fold model metrics...
-
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00, 30.95it/s]Processing Folds:  80%|████████  | 8/10 [00:00<00:00, 28.47it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 29.02it/s]
-
-Average Metrics Across All Folds:
-              Metric     Value
-0      Precision/PPV  0.571429
-1  Average Precision  0.809445
-2        Sensitivity  0.896552
-3        Specificity  0.713235
-4            AUC ROC  0.900355
-5        Brier Score  0.137036
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-================================================================================
-================================================================================
-Existing Experiment_ID: 837143143123835128
-
-Sampler ADASYN(random_state=222)
-
-============================================================
-Bleeding_Edema_Outcome
-============================================================
-
-Pipeline Steps:
-
-┌────────────────────────────────────────────┐
-│ Step 1: preprocess_scaler_StandardScalar   │
-│ MinMaxScaler                               │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 2: preprocess_imputer_Preprocessor    │
-│ SimpleImputer                              │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 3: resampler                          │
-│ ADASYN                                     │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 4: lr                                 │
-│ LogisticRegression                         │
-└────────────────────────────────────────────┘
-
-# Tuning hyper-parameters for average_precision
-Fitting 10 folds for each of 5 candidates, totalling 50 fits
-
-Best score/param set found on development set:
-{0.8594461186961186: {'lr__C': 1.0, 'lr__penalty': 'l2'}}
-
-Grid scores on development set:
-0.769 (+/-0.262) for {'lr__C': 0.0001, 'lr__penalty': 'l2'}
-0.769 (+/-0.262) for {'lr__C': 0.001, 'lr__penalty': 'l2'}
-0.776 (+/-0.266) for {'lr__C': 0.01, 'lr__penalty': 'l2'}
-0.825 (+/-0.295) for {'lr__C': 0.1, 'lr__penalty': 'l2'}
-0.859 (+/-0.240) for {'lr__C': 1.0, 'lr__penalty': 'l2'}
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  2.01it/s]100%|██████████| 2/2 [00:00<00:00,  2.83it/s]100%|██████████| 2/2 [00:00<00:00,  2.67it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.69it/s]100%|██████████| 2/2 [00:00<00:00,  4.00it/s]100%|██████████| 2/2 [00:00<00:00,  3.95it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  2.55it/s]100%|██████████| 2/2 [00:00<00:00,  2.77it/s]100%|██████████| 2/2 [00:00<00:00,  2.73it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  2.70it/s]100%|██████████| 2/2 [00:00<00:00,  2.81it/s]100%|██████████| 2/2 [00:00<00:00,  2.79it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  2.52it/s]100%|██████████| 2/2 [00:00<00:00,  2.14it/s]100%|██████████| 2/2 [00:00<00:00,  2.19it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.04it/s]100%|██████████| 2/2 [00:00<00:00,  3.26it/s]100%|██████████| 2/2 [00:00<00:00,  3.22it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.15it/s]100%|██████████| 2/2 [00:00<00:00,  3.55it/s]100%|██████████| 2/2 [00:00<00:00,  3.48it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.29it/s]100%|██████████| 2/2 [00:00<00:00,  4.08it/s]100%|██████████| 2/2 [00:00<00:00,  4.11it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  1.92it/s]100%|██████████| 2/2 [00:00<00:00,  2.18it/s]100%|██████████| 2/2 [00:00<00:00,  2.13it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  2.71it/s]100%|██████████| 2/2 [00:00<00:00,  2.95it/s]100%|██████████| 2/2 [00:00<00:00,  2.91it/s]
-Distribution of y values after resampling: Bleeding_Edema_Outcome
-1                         144
-0                         136
-Name: count, dtype: int64
-
-
-Detailed classification report for lr:
-
-Confusion Matrix Across All 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-             Pos   Neg
---------------------------------------------------------------------------------
-Actual: Pos  51 (tp)    7 (fn)
-        Neg  25 (fp)  111 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.94      0.82      0.87       136
-           1       0.67      0.88      0.76        58
-
-    accuracy                           0.84       194
-   macro avg       0.81      0.85      0.82       194
-weighted avg       0.86      0.84      0.84       194
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
-Optimal threshold used: 0.4800000000000001
-
-Running k-fold model metrics...
-
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:00, 26.21it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00, 27.25it/s]Processing Folds:  90%|█████████ | 9/10 [00:00<00:00, 26.70it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 26.97it/s]
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.1s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.1s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.1s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.1s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-Average Metrics Across All Folds:
-              Metric     Value
-0      Precision/PPV  0.671053
-1  Average Precision  0.784995
-2        Sensitivity  0.879310
-3        Specificity  0.816176
-4            AUC ROC  0.892622
-5        Brier Score  0.142171
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-================================================================================
-================================================================================
-Existing Experiment_ID: 837143143123835128
-
-Sampler RandomOverSampler(random_state=222)
-
-============================================================
-Bleeding_Edema_Outcome
-============================================================
-
-Pipeline Steps:
-
-┌────────────────────────────────────────────┐
-│ Step 1: preprocess_scaler_StandardScalar   │
-│ MinMaxScaler                               │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 2: preprocess_imputer_Preprocessor    │
-│ SimpleImputer                              │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 3: resampler                          │
-│ RandomOverSampler                          │
-└────────────────────────────────────────────┘
-                      │
-                      ▼
-┌────────────────────────────────────────────┐
-│ Step 4: lr                                 │
-│ LogisticRegression                         │
-└────────────────────────────────────────────┘
-
-# Tuning hyper-parameters for average_precision
-Fitting 10 folds for each of 5 candidates, totalling 50 fits
-
-Best score/param set found on development set:
-{0.8403680208680209: {'lr__C': 1.0, 'lr__penalty': 'l2'}}
-
-Grid scores on development set:
-0.743 (+/-0.215) for {'lr__C': 0.0001, 'lr__penalty': 'l2'}
-0.734 (+/-0.225) for {'lr__C': 0.001, 'lr__penalty': 'l2'}
-0.756 (+/-0.233) for {'lr__C': 0.01, 'lr__penalty': 'l2'}
-0.784 (+/-0.257) for {'lr__C': 0.1, 'lr__penalty': 'l2'}
-0.840 (+/-0.225) for {'lr__C': 1.0, 'lr__penalty': 'l2'}
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.40it/s]100%|██████████| 2/2 [00:00<00:00,  4.35it/s]100%|██████████| 2/2 [00:00<00:00,  4.35it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.84it/s]100%|██████████| 2/2 [00:00<00:00,  4.89it/s]100%|██████████| 2/2 [00:00<00:00,  4.88it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  3.63it/s]100%|██████████| 2/2 [00:00<00:00,  3.58it/s]100%|██████████| 2/2 [00:00<00:00,  3.59it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.36it/s]100%|██████████| 2/2 [00:00<00:00,  4.49it/s]100%|██████████| 2/2 [00:00<00:00,  4.47it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.25it/s]100%|██████████| 2/2 [00:00<00:00,  4.09it/s]100%|██████████| 2/2 [00:00<00:00,  4.11it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.50it/s]100%|██████████| 2/2 [00:00<00:00,  5.17it/s]100%|██████████| 2/2 [00:00<00:00,  5.21it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  5.96it/s]100%|██████████| 2/2 [00:00<00:00,  5.87it/s]100%|██████████| 2/2 [00:00<00:00,  5.88it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.36it/s]100%|██████████| 2/2 [00:00<00:00,  6.45it/s]100%|██████████| 2/2 [00:00<00:00,  6.43it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  4.55it/s]100%|██████████| 2/2 [00:00<00:00,  4.43it/s]100%|██████████| 2/2 [00:00<00:00,  4.45it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:00<00:00,  6.36it/s]100%|██████████| 2/2 [00:00<00:00,  5.88it/s]100%|██████████| 2/2 [00:00<00:00,  5.94it/s]
-Distribution of y values after resampling: Bleeding_Edema_Outcome
-0                         136
-1                         136
-Name: count, dtype: int64
-
-
-Detailed classification report for lr:
-
-Confusion Matrix Across All 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-            Pos  Neg
---------------------------------------------------------------------------------
-Actual: Pos 52 (tp)   6 (fn)
-        Neg 40 (fp)  96 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.94      0.71      0.81       136
-           1       0.57      0.90      0.69        58
-
-    accuracy                           0.76       194
-   macro avg       0.75      0.80      0.75       194
-weighted avg       0.83      0.76      0.77       194
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
-Optimal threshold used: 0.477
-
-Running k-fold model metrics...
-
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00, 39.97it/s]Processing Folds:  80%|████████  | 8/10 [00:00<00:00, 37.50it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 38.00it/s]
-[31m2025/02/03 14:59:20 WARNING mlflow.models.model: Model logged without a signature and input example. Please set `input_example` parameter when logging the model to auto infer the model signature.[0m
-
-Average Metrics Across All Folds:
-              Metric     Value
-0      Precision/PPV  0.565217
-1  Average Precision  0.780707
-2        Sensitivity  0.896552
-3        Specificity  0.705882
-4            AUC ROC  0.890847
-5        Brier Score  0.146002
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-================================================================================
-================================================================================
-Existing Experiment_ID: 837143143123835128
-Object saved!
-Existing Experiment_ID: 837143143123835128
-
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.1s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.1s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.1s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s

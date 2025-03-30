@@ -1,0 +1,112 @@
+2025-03-29 17:27:55.134 | INFO     | circ_milan.config:<module>:31 - PROJ_ROOT path is: /home/lshpaner/Python_Projects/circ_milan
+2025-03-29 17:27:55.173 | INFO     | __main__:main:106 - Training lr for Bleeding_Edema_Outcome ...
+Sampler None
+
+Outcome:
+------------------------------------------------------------
+
+============================================================
+Bleeding_Edema_Outcome
+============================================================
+
+Pipeline Steps:
+
+┌──────────────────────────────────────────────────────┐
+│ Step 1: preprocess_column_transformer_Preprocessor   │
+│ ColumnTransformer                                    │
+└──────────────────────────────────────────────────────┘
+                           │
+                           ▼
+┌──────────────────────────────────────────────────────┐
+│ Step 2: feature_selection_RFE                        │
+│ RFE                                                  │
+└──────────────────────────────────────────────────────┘
+                           │
+                           ▼
+┌──────────────────────────────────────────────────────┐
+│ Step 3: lr                                           │
+│ LogisticRegression                                   │
+└──────────────────────────────────────────────────────┘
+
+# Tuning hyper-parameters for average_precision
+Fitting 10 folds for each of 5 candidates, totalling 50 fits
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.3s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.2s
+[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.3s
+[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.3s
+[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.3s
+[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.3s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.3s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.3s
+[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.3s
+[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.3s
+[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.3s
+[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.3s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.3s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.3s
+[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.3s
+[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.3s
+[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.3s
+[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.3s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.3s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.3s
+[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.3s
+[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.3s
+[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.3s
+[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.3s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.3s
+[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.3s
+[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.3s
+[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.3s
+[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.3s
+[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.4s
+[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.3s
+[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.3s
+
+Best score/param set found on development set:
+{0.8632700670788906: {'lr__C': 1.0, 'lr__penalty': 'l2'}}
+
+Grid scores on development set:
+0.844 (+/-0.256) for {'lr__C': 0.0001, 'lr__penalty': 'l2'}
+0.844 (+/-0.256) for {'lr__C': 0.001, 'lr__penalty': 'l2'}
+0.847 (+/-0.239) for {'lr__C': 0.01, 'lr__penalty': 'l2'}
+0.858 (+/-0.243) for {'lr__C': 0.1, 'lr__penalty': 'l2'}
+0.863 (+/-0.233) for {'lr__C': 1.0, 'lr__penalty': 'l2'}
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  4.51it/s]100%|██████████| 1/1 [00:00<00:00,  4.50it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  3.72it/s]100%|██████████| 1/1 [00:00<00:00,  3.71it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  3.14it/s]100%|██████████| 1/1 [00:00<00:00,  3.14it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  4.82it/s]100%|██████████| 1/1 [00:00<00:00,  4.82it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  5.51it/s]100%|██████████| 1/1 [00:00<00:00,  5.50it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  3.25it/s]100%|██████████| 1/1 [00:00<00:00,  3.25it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  5.16it/s]100%|██████████| 1/1 [00:00<00:00,  5.15it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  5.41it/s]100%|██████████| 1/1 [00:00<00:00,  5.41it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  5.73it/s]100%|██████████| 1/1 [00:00<00:00,  5.72it/s]
+Fitting model with best params and tuning for best threshold ...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  4.62it/s]100%|██████████| 1/1 [00:00<00:00,  4.62it/s]

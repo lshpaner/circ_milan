@@ -14,7 +14,7 @@ PROJECT_DIRECTORY = circ_milan
 
 # Define variables for looping
 OUTCOMES = Bleeding_Edema_Outcome
-PIPELINES = orig smote under orig_rfe smote_rfe under_rfe
+PIPELINES = orig smote adasyn under 
 SCORING = average_precision
 PRETRAINED ?= 0  # 0 if you want to train the models, 1 if calibrate pretrained
 

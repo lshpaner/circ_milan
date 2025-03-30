@@ -1,0 +1,66 @@
+2025-03-29 17:48:12.328 | INFO     | circ_milan.config:<module>:31 - PROJ_ROOT path is: /home/lshpaner/Python_Projects/circ_milan
+[31m2025/03/29 17:48:17 WARNING mlflow.models.model: Model logged without a signature and input example. Please set `input_example` parameter when logging the model to auto infer the model signature.[0m
+rf_smote_training
+rf_Bleeding_Edema_Outcome
+Model Threshold Before Threshold Optimization: {'average_precision': 0.394}
+
+ Best Threshold and Beta For Bleeding_Edema_Outcome: 
+
+Could not find optimal threshold for the precision of 0.5
+name 'y_valid' is not defined
+Using Existing Experiment_ID: 132942270062857191
+Found Run_ID: 757aa99ebc3d425d96fbdec31d283b75 for run_name 'rf_smote_training' in experiment 'Bleeding_Edema_Outcome_model'
+Experiment_ID for model None and parameters: 132942270062857191
+experiment_id=132942270062857191, run_id=757aa99ebc3d425d96fbdec31d283b75
+Parameters and model logged successfully in MLflow.
+Model Threshold After Threshold Optimization: {'average_precision': 0.394}
+K-Fold
+
+Detailed classification report for rf:
+
+Confusion Matrix Across All 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+             Pos   Neg
+--------------------------------------------------------------------------------
+Actual: Pos  47 (tp)   11 (fn)
+        Neg  12 (fp)  124 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.92      0.91      0.92       136
+           1       0.80      0.81      0.80        58
+
+    accuracy                           0.88       194
+   macro avg       0.86      0.86      0.86       194
+weighted avg       0.88      0.88      0.88       194
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Optimal threshold used: 0.394
+
+Running k-fold model metrics...
+
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:01,  5.88it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:01,  6.04it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:01,  5.90it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:01,  5.81it/s]Processing Folds:  50%|█████     | 5/10 [00:00<00:00,  5.74it/s]Processing Folds:  60%|██████    | 6/10 [00:01<00:00,  5.79it/s]Processing Folds:  70%|███████   | 7/10 [00:01<00:00,  5.98it/s]Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  6.24it/s]Processing Folds:  90%|█████████ | 9/10 [00:01<00:00,  6.40it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  6.41it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  6.12it/s]
+2025-03-29 17:49:01.056 | SUCCESS  | __main__:main:155 - Modeling evaluation complete.
+
+Average Metrics Across All Folds:
+              Metric     Value
+0      Precision/PPV  0.796610
+1  Average Precision  0.761922
+2        Sensitivity  0.810345
+3        Specificity  0.911765
+4            AUC ROC  0.878043
+5        Brier Score  0.109939
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+Empty DataFrame
+Columns: [rf]
+Index: []
+Using Existing Experiment_ID: 132942270062857191
+Found Run_ID: 757aa99ebc3d425d96fbdec31d283b75 for run_name 'rf_smote_training' in experiment 'Bleeding_Edema_Outcome_model'
