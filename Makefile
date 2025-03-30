@@ -13,10 +13,8 @@ PROJECT_DIRECTORY = circ_milan
 ############################## Training Globals ################################
 
 # Define variables for looping
-# OUTCOMES = ISDEATHDATElead6mo ISDEATHDATElead1yr
-OUTCOMES = income
-# PIPELINES = orig smote under orig_rfe smote_rfe under_rfe
-PIPELINES = orig under
+OUTCOMES = Bleeding_Edema_Outcome
+PIPELINES = orig smote under orig_rfe smote_rfe under_rfe
 SCORING = average_precision
 PRETRAINED ?= 0  # 0 if you want to train the models, 1 if calibrate pretrained
 
@@ -125,6 +123,10 @@ clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
+.PHONY: mlflow_ui
+mlflow_ui:
+	mlflow ui --backend-store-uri mlruns --host 0.0.0.0 --port 5501
+
 #################################################################################
 # PROJECT RULES                                                                 #
 #################################################################################
@@ -218,39 +220,23 @@ train_random_forest:
 		done; \
 	done
 
-train_xgboost:
+train_svm:
 	@echo "Pretrained is set to: $(PRETRAINED)"
 	@for outcome in $(OUTCOMES); do \
 		for pipeline in $(PIPELINES); do \
 			mkdir -p models/results/$$outcome; \
 			"$(PYTHON_INTERPRETER)" $(PROJECT_DIRECTORY)/modeling/train.py \
-				--model-type xgb \
+				--model-type svm \
 				--pipeline-type "$$pipeline" \
 				--labels-path ./data/processed/y_$$outcome.parquet \
 				--outcome "$$outcome" \
 				--pretrained "$(PRETRAINED)" \
 				--scoring "$(SCORING)" \
-				2>&1 | tee models/results/$$outcome/xgb_$$pipeline$$( [ "$(PRETRAINED)" -eq 1 ] && echo "_prefit" ).txt; \
+				2>&1 | tee models/results/$$outcome/svm_$$pipeline$$( [ "$(PRETRAINED)" -eq 1 ] && echo "_prefit" ).txt; \
 		done; \
 	done
 
-train_catboost:
-	@echo "Pretrained is set to: $(PRETRAINED)"
-	@for outcome in $(OUTCOMES); do \
-		for pipeline in $(PIPELINES); do \
-			mkdir -p models/results/$$outcome; \
-			"$(PYTHON_INTERPRETER)" $(PROJECT_DIRECTORY)/modeling/train.py \
-				--model-type cat \
-				--pipeline-type "$$pipeline" \
-				--labels-path ./data/processed/y_$$outcome.parquet \
-				--outcome "$$outcome" \
-				--pretrained "$(PRETRAINED)" \
-				--scoring "$(SCORING)" \
-				2>&1 | tee models/results/$$outcome/cat_$$pipeline$$( [ "$(PRETRAINED)" -eq 1 ] && echo "_prefit" ).txt; \
-		done; \
-	done
-
-train_all_models: train_logistic_regression train_random_forest train_xgboost train_catboost
+train_all_models: train_logistic_regression train_random_forest train_svm
 
 ################################################################################
 ############################## Model Evaluation ################################
@@ -282,15 +268,15 @@ eval_random_forest:
 	done
 
 # Loop through each outcome for XGBoost
-eval_xgboost:
+eval_svm:
 	@for outcome in $(OUTCOMES); do \
 		for pipeline in $(PIPELINES); do \
 			$(PYTHON_INTERPRETER) $(PROJECT_DIRECTORY)/modeling/evaluation.py \
-			--model-type xgb \
+			--model-type svm \
 			--pipeline-type $$pipeline \
 			--labels-path ./data/processed/y_$$outcome.parquet \
 			--outcome $$outcome \
-			--scoring $(SCORING) 2>&1 | tee models/eval/$$outcome/xgb_eval_$$pipeline.txt; \
+			--scoring $(SCORING) 2>&1 | tee models/eval/$$outcome/svm_eval_$$pipeline.txt; \
 		done; \
 	done
 
