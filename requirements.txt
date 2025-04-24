@@ -3,6 +3,7 @@ eda_toolkit==0.0.16
 -e .
 loguru==0.7.3
 mlflow==2.19.0
+model_metrics==0.0.3a
 model_tuner==0.0.29b1
 openpyxl==3.1.5
 python-dotenv==1.0.1
