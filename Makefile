@@ -14,15 +14,16 @@ PROJECT_DIRECTORY = circ_milan
 
 # Define variables for looping
 OUTCOMES = Bleeding_Edema_Outcome
-PIPELINES = orig smote adasyn under 
+PIPELINES = orig smote over 
+# PIPELINES = smote 
 SCORING = average_precision
 PRETRAINED ?= 0  # 0 if you want to train the models, 1 if calibrate pretrained
 
 ############################# Production Globals ###############################
 
 # Model outcome variable used in production 
-EXPLAN_OUTCOME = income # explainer outcome variable
-PROD_OUTCOME = income # production outcome variable
+EXPLAN_OUTCOME = Bleeding_Edema_Outcome # explainer outcome variable
+PROD_OUTCOME = Bleeding_Edema_Outcome # production outcome variable
 
 
 # ------------------------------------------------------------------------------
@@ -280,20 +281,18 @@ eval_svm:
 		done; \
 	done
 
-# Loop through each outcome for CatBoost
-eval_catboost:
-	@for outcome in $(OUTCOMES); do \
-		for pipeline in $(PIPELINES); do \
-			$(PYTHON_INTERPRETER) $(PROJECT_DIRECTORY)/modeling/evaluation.py \
-			--model-type cat \
-			--pipeline-type $$pipeline \
-			--labels-path ./data/processed/y_$$outcome.parquet \
-			--outcome $$outcome \
-			--scoring $(SCORING) 2>&1 | tee models/eval/$$outcome/cat_eval_$$pipeline.txt; \
-		done; \
-	done
 
-eval_all_models: eval_logistic_regression eval_random_forest eval_xgboost eval_catboost
+eval_all_models: eval_logistic_regression eval_random_forest eval_svm 
+
+################################################################################
+########## Preprocessing, Feature Generation, Training and Evaluation ##########
+################################################################################
+
+# This pipeline is to run consecutively the full preprocessing, training, and 
+# evaluation pipeline in one command
+
+preproc_train_eval: preproc_pipeline train_all_models eval_all_models
+
 
 ################################################################################
 #################### Best Model Explainer and Explanations #####################
@@ -303,8 +302,9 @@ eval_all_models: eval_logistic_regression eval_random_forest eval_xgboost eval_c
 model_explainer:
 	@for outcome in $(EXPLAN_OUTCOME); do \
 		$(PYTHON_INTERPRETER) $(PROJECT_DIRECTORY)/modeling/explainer.py \
+			--input-data-file ./data/processed/X.parquet \
 			--outcome $$outcome \
-			--metric-name "valid Average Precision" \
+			--metric-name "K-Fold Average Precision" \
 			--mode max; \
 	done
 
@@ -315,7 +315,7 @@ model_explanations_training:
 			--features-path ./data/processed/X.parquet \
 			--labels-path ./data/processed/y_$$outcome.parquet \
 			--outcome $$outcome \
-			--metric-name "valid Average Precision" \
+			--metric-name "K-Fold Average Precision" \
 			--mode max \
 			--top-n 5 \
 			--shap-val-flag 1 \
@@ -330,7 +330,7 @@ model_explanations_inference:
 		$(PYTHON_INTERPRETER) $(PROJECT_DIRECTORY)/modeling/explanations_inference.py \
 			--features-path ./data/processed/inference/X.parquet \
 			--outcome $$outcome \
-			--metric-name "valid Average Precision" \
+			--metric-name "K-Fold Average Precision" \
 			--mode max \
 			--top-n 5 \
 			--shap-val-flag 1 \
@@ -364,7 +364,7 @@ predict:
 			--input-data-file data/processed/inference/X.parquet \
 			--predictions-path ./data/processed/inference/predictions_$$outcome.csv \
 			--outcome $$outcome \
-			--metric-name "valid Average Precision" \
+			--metric-name "K-Fold Average Precision" \
 			--mode max; \
 	done
 

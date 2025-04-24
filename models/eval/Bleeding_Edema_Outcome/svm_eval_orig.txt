@@ -1,0 +1,65 @@
+2025-04-23 22:33:10.604 | INFO     | circ_milan.config:<module>:30 - PROJ_ROOT path is: /home/lshpaner/Python_Projects/circ_milan
+[31m2025/04/23 22:33:13 WARNING mlflow.models.model: Model logged without a signature and input example. Please set `input_example` parameter when logging the model to auto infer the model signature.[0m
+svm_orig_training
+svm_Bleeding_Edema_Outcome
+Model Threshold Before Threshold Optimization: {'average_precision': 0.238}
+Using Existing Experiment_ID: 849533074301396881
+Found Run_ID: e99151a22e1046e2a4bf4a08b562759c for run_name 'svm_orig_training' in experiment 'Bleeding_Edema_Outcome_model'
+Experiment_ID for model None and parameters: 849533074301396881
+experiment_id=849533074301396881, run_id=e99151a22e1046e2a4bf4a08b562759c
+Parameters and model logged successfully in MLflow.
+Model Threshold After Threshold Optimization: {'average_precision': 0.238}
+K-Fold
+
+Detailed classification report for svm:
+
+Confusion Matrix Across All 10 Folds for average_precision:
+--------------------------------------------------------------------------------
+          Predicted:
+             Pos   Neg
+--------------------------------------------------------------------------------
+Actual: Pos  50 (tp)    8 (fn)
+        Neg  19 (fp)  117 (tn)
+--------------------------------------------------------------------------------
+
+Classification Report Averaged Across All Folds for average_precision:
+              precision    recall  f1-score   support
+
+           0       0.94      0.86      0.90       136
+           1       0.72      0.86      0.79        58
+
+    accuracy                           0.86       194
+   macro avg       0.83      0.86      0.84       194
+weighted avg       0.87      0.86      0.86       194
+
+--------------------------------------------------------------------------------
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Optimal threshold used: 0.238
+
+Running k-fold model metrics...
+
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  70%|███████   | 7/10 [00:00<00:00, 65.30it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 60.73it/s]
+2025-04-23 22:33:16.776 | SUCCESS  | __main__:main:124 - Modeling evaluation complete.
+
+Average Metrics Across All Folds:
+              Metric     Value
+0      Precision/PPV  0.724638
+1  Average Precision  0.831899
+2        Sensitivity  0.862069
+3        Specificity  0.860294
+4            AUC ROC  0.906567
+5        Brier Score  0.105185
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+                            svm
+K-Fold Precision/PPV      0.725
+K-Fold Average Precision  0.832
+K-Fold Sensitivity        0.862
+K-Fold Specificity        0.860
+K-Fold AUC ROC            0.907
+K-Fold Brier Score        0.105
+Using Existing Experiment_ID: 849533074301396881
+Found Run_ID: e99151a22e1046e2a4bf4a08b562759c for run_name 'svm_orig_training' in experiment 'Bleeding_Edema_Outcome_model'

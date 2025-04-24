@@ -1,168 +1,53 @@
-2025-03-29 17:34:46.434 | INFO     | circ_milan.config:<module>:31 - PROJ_ROOT path is: /home/lshpaner/Python_Projects/circ_milan
-2025-03-29 17:34:46.463 | INFO     | __main__:main:106 - Training lr for Bleeding_Edema_Outcome ...
-Sampler ADASYN(random_state=222)
-
-Outcome:
-------------------------------------------------------------
-
-============================================================
-Bleeding_Edema_Outcome
-============================================================
-
-Pipeline Steps:
-
-┌──────────────────────────────────────────────────────┐
-│ Step 1: preprocess_column_transformer_Preprocessor   │
-│ ColumnTransformer                                    │
-└──────────────────────────────────────────────────────┘
-                           │
-                           ▼
-┌──────────────────────────────────────────────────────┐
-│ Step 2: resampler                                    │
-│ ADASYN                                               │
-└──────────────────────────────────────────────────────┘
-                           │
-                           ▼
-┌──────────────────────────────────────────────────────┐
-│ Step 3: lr                                           │
-│ LogisticRegression                                   │
-└──────────────────────────────────────────────────────┘
-
-# Tuning hyper-parameters for average_precision
-Fitting 10 folds for each of 5 candidates, totalling 50 fits
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END .......................lr__C=0.0001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END ........................lr__C=0.001, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END .........................lr__C=0.01, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=0.1, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-[CV] END ..........................lr__C=1.0, lr__penalty=l2; total time=   0.0s
-
-Best score/param set found on development set:
-{0.8521083638583639: {'lr__C': 0.1, 'lr__penalty': 'l2'}}
-
-Grid scores on development set:
-0.818 (+/-0.304) for {'lr__C': 0.0001, 'lr__penalty': 'l2'}
-0.815 (+/-0.300) for {'lr__C': 0.001, 'lr__penalty': 'l2'}
-0.831 (+/-0.262) for {'lr__C': 0.01, 'lr__penalty': 'l2'}
-0.852 (+/-0.237) for {'lr__C': 0.1, 'lr__penalty': 'l2'}
-0.840 (+/-0.231) for {'lr__C': 1.0, 'lr__penalty': 'l2'}
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  3.55it/s]100%|██████████| 1/1 [00:00<00:00,  3.55it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  4.24it/s]100%|██████████| 1/1 [00:00<00:00,  4.24it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  3.26it/s]100%|██████████| 1/1 [00:00<00:00,  3.26it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  3.62it/s]100%|██████████| 1/1 [00:00<00:00,  3.62it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  3.57it/s]100%|██████████| 1/1 [00:00<00:00,  3.56it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  4.34it/s]100%|██████████| 1/1 [00:00<00:00,  4.33it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  3.85it/s]100%|██████████| 1/1 [00:00<00:00,  3.84it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  3.97it/s]100%|██████████| 1/1 [00:00<00:00,  3.96it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  3.78it/s]100%|██████████| 1/1 [00:00<00:00,  3.78it/s]
-Fitting model with best params and tuning for best threshold ...
-  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  3.88it/s]100%|██████████| 1/1 [00:00<00:00,  3.87it/s]
-Distribution of y values after resampling: Bleeding_Edema_Outcome
-1                         143
-0                         136
-Name: count, dtype: int64
-
-
-Detailed classification report for lr:
-
-Confusion Matrix Across All 10 Folds for average_precision:
---------------------------------------------------------------------------------
-          Predicted:
-             Pos   Neg
---------------------------------------------------------------------------------
-Actual: Pos  42 (tp)   16 (fn)
-        Neg  13 (fp)  123 (tn)
---------------------------------------------------------------------------------
-
-Classification Report Averaged Across All Folds for average_precision:
-              precision    recall  f1-score   support
-
-           0       0.88      0.90      0.89       136
-           1       0.76      0.72      0.74        58
-
-    accuracy                           0.85       194
-   macro avg       0.82      0.81      0.82       194
-weighted avg       0.85      0.85      0.85       194
-
---------------------------------------------------------------------------------
-The model is trained on the full development set.
-The scores are computed on the full evaluation set.
-
-Optimal threshold used: 0.514
-
-Running k-fold model metrics...
-
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00, 39.09it/s]Processing Folds:  90%|█████████ | 9/10 [00:00<00:00, 40.09it/s]Processing Folds: 100%|██████████| 10/10 [00:00<00:00, 39.56it/s]
-[31m2025/03/29 17:35:00 WARNING mlflow.models.model: Model logged without a signature and input example. Please set `input_example` parameter when logging the model to auto infer the model signature.[0m
-2025-03-29 17:35:00.628 | SUCCESS  | __main__:main:212 - Modeling training complete.
-
-Average Metrics Across All Folds:
-              Metric     Value
-0      Precision/PPV  0.763636
-1  Average Precision  0.821240
-2        Sensitivity  0.724138
-3        Specificity  0.904412
-4            AUC ROC  0.899975
-5        Brier Score  0.128698
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-Using Existing Experiment_ID: 132942270062857191
-No runs found with run_name 'lr_adasyn_training' in experiment 'Bleeding_Edema_Outcome_model'. Creating a new run.
-Starting New Run_ID: a1aa16a1685540dd9f0975494076671e for lr_adasyn_training
-Experiment_ID for model lr and parameters: 132942270062857191
-experiment_id=132942270062857191, run_id=a1aa16a1685540dd9f0975494076671e
-Parameters and model logged successfully in MLflow.
+2025-03-30 00:35:11.290 | INFO     | circ_milan.config:<module>:30 - PROJ_ROOT path is: /home/lshpaner/Python_Projects/circ_milan
+╭─────────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────────╮
+│ /home/lshpaner/Python_Projects/circ_milan/circ_milan/modeling/train.py:61 in main                                                                                                        │
+│                                                                                                                                                                                          │
+│    58 │                                                                                                                                                                                  │
+│    59 │   clc = model_definitions[model_type]["clc"]                                                                                                                                     │
+│    60 │   estimator_name = model_definitions[model_type]["estimator_name"]                                                                                                               │
+│ ❱  61 │   pipeline_steps = pipelines[pipeline_type]["pipeline"]                                                                                                                          │
+│    62 │   sampler = pipelines[pipeline_type]["sampler"]                                                                                                                                  │
+│    63 │   feature_selection = pipelines[pipeline_type]["feature_selection"]                                                                                                              │
+│    64                                                                                                                                                                                    │
+│                                                                                                                                                                                          │
+│ ╭───────────────────────────────────────────── locals ─────────────────────────────────────────────╮                                                                                     │
+│ │            clc = LogisticRegression(class_weight='balanced', n_jobs=2, random_state=222)         │                                                                                     │
+│ │ estimator_name = 'lr'                                                                            │                                                                                     │
+│ │  features_path = PosixPath('/home/lshpaner/Python_Projects/circ_milan/data/processed/X.parquet') │                                                                                     │
+│ │    labels_path = PosixPath('data/processed/y_Bleeding_Edema_Outcome.parquet')                    │                                                                                     │
+│ │     model_type = 'lr'                                                                            │                                                                                     │
+│ │        outcome = 'Bleeding_Edema_Outcome'                                                        │                                                                                     │
+│ │  pipeline_type = 'adasyn'                                                                        │                                                                                     │
+│ │     pretrained = 0                                                                               │                                                                                     │
+│ │        scoring = 'average_precision'                                                             │                                                                                     │
+│ │              X = │   │   │   Age_years    BMI  ...  Intraop_DBP  Diabetes                        │                                                                                     │
+│ │                  patient_id                    ...                                               │                                                                                     │
+│ │                  424123959          22  26.17  ...           90         0                        │                                                                                     │
+│ │                  390469576          50  31.14  ...           70         0                        │                                                                                     │
+│ │                  633173792          70  23.88  ...           80         1                        │                                                                                     │
+│ │                  784928164          68  27.64  ...           90         1                        │                                                                                     │
+│ │                  936242280          64  31.18  ...           70         1                        │                                                                                     │
+│ │                  ...               ...    ...  ...          ...       ...                        │                                                                                     │
+│ │                  412065385          22  19.27  ...           90         0                        │                                                                                     │
+│ │                  769873868          56  26.84  ...           80         1                        │                                                                                     │
+│ │                  140411083          19  24.22  ...           90         0                        │                                                                                     │
+│ │                  773951452          21  25.17  ...           90         0                        │                                                                                     │
+│ │                  404354815          23  22.78  ...           90         0                        │                                                                                     │
+│ │                                                                                                  │                                                                                     │
+│ │                  [194 rows x 13 columns]                                                         │                                                                                     │
+│ │              y = patient_id                                                                      │                                                                                     │
+│ │                  424123959    0                                                                  │                                                                                     │
+│ │                  390469576    0                                                                  │                                                                                     │
+│ │                  633173792    0                                                                  │                                                                                     │
+│ │                  784928164    0                                                                  │                                                                                     │
+│ │                  936242280    0                                                                  │                                                                                     │
+│ │                  │   │   │   ..                                                                  │                                                                                     │
+│ │                  412065385    1                                                                  │                                                                                     │
+│ │                  769873868    1                                                                  │                                                                                     │
+│ │                  140411083    0                                                                  │                                                                                     │
+│ │                  773951452    1                                                                  │                                                                                     │
+│ │                  404354815    1                                                                  │                                                                                     │
+│ │                  Name: Bleeding_Edema_Outcome, Length: 194, dtype: int64                         │                                                                                     │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                                     │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+KeyError: 'adasyn'

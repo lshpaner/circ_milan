@@ -1,19 +1,14 @@
-2025-03-29 17:47:21.984 | INFO     | circ_milan.config:<module>:31 - PROJ_ROOT path is: /home/lshpaner/Python_Projects/circ_milan
-[31m2025/03/29 17:47:25 WARNING mlflow.models.model: Model logged without a signature and input example. Please set `input_example` parameter when logging the model to auto infer the model signature.[0m
+2025-04-23 22:31:00.562 | INFO     | circ_milan.config:<module>:30 - PROJ_ROOT path is: /home/lshpaner/Python_Projects/circ_milan
+[31m2025/04/23 22:31:03 WARNING mlflow.models.model: Model logged without a signature and input example. Please set `input_example` parameter when logging the model to auto infer the model signature.[0m
 rf_orig_training
 rf_Bleeding_Edema_Outcome
-Model Threshold Before Threshold Optimization: {'average_precision': 0.312}
-
- Best Threshold and Beta For Bleeding_Edema_Outcome: 
-
-Could not find optimal threshold for the precision of 0.5
-name 'y_valid' is not defined
-Using Existing Experiment_ID: 132942270062857191
-Found Run_ID: 94e7f925e8914d269eb24752635e1b1e for run_name 'rf_orig_training' in experiment 'Bleeding_Edema_Outcome_model'
-Experiment_ID for model None and parameters: 132942270062857191
-experiment_id=132942270062857191, run_id=94e7f925e8914d269eb24752635e1b1e
+Model Threshold Before Threshold Optimization: {'average_precision': 0.34500000000000003}
+Using Existing Experiment_ID: 849533074301396881
+Found Run_ID: bf99c31ad0694f78af597cd9bb14c5be for run_name 'rf_orig_training' in experiment 'Bleeding_Edema_Outcome_model'
+Experiment_ID for model None and parameters: 849533074301396881
+experiment_id=849533074301396881, run_id=bf99c31ad0694f78af597cd9bb14c5be
 Parameters and model logged successfully in MLflow.
-Model Threshold After Threshold Optimization: {'average_precision': 0.312}
+Model Threshold After Threshold Optimization: {'average_precision': 0.34500000000000003}
 K-Fold
 
 Detailed classification report for rf:
@@ -23,44 +18,48 @@ Confusion Matrix Across All 10 Folds for average_precision:
           Predicted:
              Pos   Neg
 --------------------------------------------------------------------------------
-Actual: Pos  48 (tp)   10 (fn)
-        Neg  13 (fp)  123 (tn)
+Actual: Pos  47 (tp)   11 (fn)
+        Neg  14 (fp)  122 (tn)
 --------------------------------------------------------------------------------
 
 Classification Report Averaged Across All Folds for average_precision:
               precision    recall  f1-score   support
 
            0       0.92      0.90      0.91       136
-           1       0.79      0.83      0.81        58
+           1       0.77      0.81      0.79        58
 
-    accuracy                           0.88       194
-   macro avg       0.86      0.87      0.86       194
-weighted avg       0.88      0.88      0.88       194
+    accuracy                           0.87       194
+   macro avg       0.84      0.85      0.85       194
+weighted avg       0.87      0.87      0.87       194
 
 --------------------------------------------------------------------------------
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Optimal threshold used: 0.312
+Optimal threshold used: 0.34500000000000003
 
 Running k-fold model metrics...
 
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:01,  5.74it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:01,  5.87it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:01,  5.75it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:01,  5.82it/s]Processing Folds:  50%|█████     | 5/10 [00:00<00:00,  5.68it/s]Processing Folds:  60%|██████    | 6/10 [00:01<00:00,  5.65it/s]Processing Folds:  70%|███████   | 7/10 [00:01<00:00,  5.61it/s]Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  5.64it/s]Processing Folds:  90%|█████████ | 9/10 [00:01<00:00,  5.69it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  5.79it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  5.73it/s]
-2025-03-29 17:48:04.713 | SUCCESS  | __main__:main:155 - Modeling evaluation complete.
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:01,  5.56it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:01,  5.56it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:01,  5.60it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:01,  5.60it/s]Processing Folds:  50%|█████     | 5/10 [00:00<00:00,  5.64it/s]Processing Folds:  60%|██████    | 6/10 [00:01<00:00,  5.70it/s]Processing Folds:  70%|███████   | 7/10 [00:01<00:00,  5.78it/s]Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  5.90it/s]Processing Folds:  90%|█████████ | 9/10 [00:01<00:00,  5.82it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  5.84it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  5.75it/s]
+2025-04-23 22:31:52.785 | SUCCESS  | __main__:main:124 - Modeling evaluation complete.
 
 Average Metrics Across All Folds:
               Metric     Value
-0      Precision/PPV  0.786885
-1  Average Precision  0.768367
-2        Sensitivity  0.827586
-3        Specificity  0.904412
-4            AUC ROC  0.884255
-5        Brier Score  0.104112
+0      Precision/PPV  0.770492
+1  Average Precision  0.722507
+2        Sensitivity  0.810345
+3        Specificity  0.897059
+4            AUC ROC  0.880261
+5        Brier Score  0.109191
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-Empty DataFrame
-Columns: [rf]
-Index: []
-Using Existing Experiment_ID: 132942270062857191
-Found Run_ID: 94e7f925e8914d269eb24752635e1b1e for run_name 'rf_orig_training' in experiment 'Bleeding_Edema_Outcome_model'
+                             rf
+K-Fold Precision/PPV      0.770
+K-Fold Average Precision  0.723
+K-Fold Sensitivity        0.810
+K-Fold Specificity        0.897
+K-Fold AUC ROC            0.880
+K-Fold Brier Score        0.109
+Using Existing Experiment_ID: 849533074301396881
+Found Run_ID: bf99c31ad0694f78af597cd9bb14c5be for run_name 'rf_orig_training' in experiment 'Bleeding_Edema_Outcome_model'
