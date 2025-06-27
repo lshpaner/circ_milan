@@ -148,12 +148,15 @@ clean_dir:
 create_folders:
 # Create data subdirectories
 	mkdir -p data/external data/interim data/processed data/raw data/processed/inference
-	mkdir -p "$(PROJECT_NAME)/modeling" "$(PROJECT_NAME)/preprocessing"
+	mkdir -p models/results models/eval
+	mkdir -p modeling preprocessing
 	touch data/interim/.gitkeep
 	touch data/processed/.gitkeep
 	touch data/processed/inference/.gitkeep
-	touch "$(PROJECT_NAME)/modeling/__init__.py"
-	touch "$(PROJECT_NAME)/preprocessing/__init__.py"
+	touch models/results/.gitkeep
+	touch models/eval/.gitkeep
+	touch /modeling/__init__.py
+	touch /preprocessing/__init__.py
 
 # Create models subdirectories for each outcome
 	@for outcome in $(OUTCOMES); do \
