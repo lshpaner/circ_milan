@@ -7,7 +7,7 @@ PYTHON_VERSION = 3.11
 PYTHON_INTERPRETER = python
 VENV_DIR = venv_circ_311
 CONDA_ENV_NAME = conda_circ_311
-PROJECT_DIRECTORY = circ_milan
+PROJECT_DIRECTORY = .
 
 
 ############################## Training Globals ################################
@@ -197,6 +197,7 @@ train_logistic_regression:
 			"$(PYTHON_INTERPRETER)" $(PROJECT_DIRECTORY)/modeling/train.py \
 				--model-type lr \
 				--pipeline-type "$$pipeline" \
+				--features-path ./data/processed/X.parquet \
 				--labels-path ./data/processed/y_$$outcome.parquet \
 				--outcome "$$outcome" \
 				--pretrained "$(PRETRAINED)" \
@@ -213,6 +214,7 @@ train_random_forest:
 			"$(PYTHON_INTERPRETER)" $(PROJECT_DIRECTORY)/modeling/train.py \
 				--model-type rf \
 				--pipeline-type "$$pipeline" \
+				--features-path ./data/processed/X.parquet \
 				--labels-path ./data/processed/y_$$outcome.parquet \
 				--outcome "$$outcome" \
 				--pretrained "$(PRETRAINED)" \
@@ -229,6 +231,7 @@ train_svm:
 			"$(PYTHON_INTERPRETER)" $(PROJECT_DIRECTORY)/modeling/train.py \
 				--model-type svm \
 				--pipeline-type "$$pipeline" \
+				--features-path ./data/processed/X.parquet \
 				--labels-path ./data/processed/y_$$outcome.parquet \
 				--outcome "$$outcome" \
 				--pretrained "$(PRETRAINED)" \
@@ -249,6 +252,7 @@ eval_logistic_regression:
 			$(PYTHON_INTERPRETER) $(PROJECT_DIRECTORY)/modeling/evaluation.py \
 			--model-type lr \
 			--pipeline-type $$pipeline \
+			--features-path ./data/processed/X.parquet \
 			--labels-path ./data/processed/y_$$outcome.parquet \
 			--outcome $$outcome \
 			--scoring $(SCORING) 2>&1 | tee models/eval/$$outcome/lr_eval_$$pipeline.txt; \
@@ -262,6 +266,7 @@ eval_random_forest:
 			$(PYTHON_INTERPRETER) $(PROJECT_DIRECTORY)/modeling/evaluation.py \
 			--model-type rf \
 			--pipeline-type $$pipeline \
+			--features-path ./data/processed/X.parquet \
 			--labels-path ./data/processed/y_$$outcome.parquet \
 			--outcome $$outcome \
 			--scoring $(SCORING) 2>&1 | tee models/eval/$$outcome/rf_eval_$$pipeline.txt; \
@@ -275,6 +280,7 @@ eval_svm:
 			$(PYTHON_INTERPRETER) $(PROJECT_DIRECTORY)/modeling/evaluation.py \
 			--model-type svm \
 			--pipeline-type $$pipeline \
+			--features-path ./data/processed/X.parquet \
 			--labels-path ./data/processed/y_$$outcome.parquet \
 			--outcome $$outcome \
 			--scoring $(SCORING) 2>&1 | tee models/eval/$$outcome/svm_eval_$$pipeline.txt; \

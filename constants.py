@@ -8,14 +8,11 @@ preproc_filename = "circ_preproc.csv"
 patient_id = "patient_id"
 
 dependent_var = "Functional_Outcomes_Bleeding"
-rstate = 222
 
 age = ["Age_years"]
 
 mlflow_data = "models/mlflow_exp"
 var_index = "patient_id"
-
-outcome = "Bleeding_Edema_Outcome"
 
 model_svm = "SVC.pkl"
 
@@ -49,19 +46,18 @@ cat_vars = []
 ########################## Variable/DataFrame Constants ########################
 ################################################################################
 
-var_index = "ID"  # id index
-patient_id = "patient_id"
+var_index = "patient_id"  # id index
 age = "age"  # age
 age_bin = ""  # bin of ages for stratification only
 main_df = "df.parquet"  # main dataframe file name
 
 miss_col_thresh = 60  # missingness threshold tolerated for zero-var cols
 perc_below_indiv = f"perc_below_{miss_col_thresh}_indiv"
+shape_var_thresh = 0.02  # low variance threshold
 miss_row_thresh = 0.5  # missingness threshold (rows) tolerated based on dev. set
 percent_miss = "percentage_missing"  # new col for percentage missing in rows
 miss_indicator = "missing_indicator"  # indicator for percentage missing (0,1)
 
-capital_gain = "capital-gain"
 ################################################################################
 
 # The below artificat name is used for preprocessing alone
@@ -82,4 +78,4 @@ shap_artifacts_data = "./mlruns/explainer"
 ################################################################################
 ############################### Target Outcome #################################
 
-target_outcome = "income"
+target_outcome = "Bleeding_Edema_Outcome"

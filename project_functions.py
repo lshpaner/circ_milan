@@ -1,30 +1,11 @@
-################################################################################
-######################### Import Requisite Libraries ###########################
-################################################################################
-
 import pandas as pd
-
-################################################################################
-############################## Data Conversions ################################
-################################################################################
-
-
-# Function to count comorbidities
-def count_comorbidities(row):
-    """
-    Counts the number of comorbidities in a given string.
-
-    Parameters:
-        row (str): A string of comma-separated comorbidities or a placeholder
-        for none.
-
-    Returns:
-        int: Count of comorbidities. Returns 0 if no comorbidities are present.
-    """
-
-    if row == "0" or row == "None Present" or row.strip() == "":
-        return 0
-    return len(row.split(", "))
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.svm import SVC
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import FunctionTransformer
 
 
 class HealthMetrics:
@@ -171,3 +152,130 @@ class HealthMetrics:
 
         # MAP calculation formula: diastolic + (systolic - diastolic) / 3
         df[map_col_name] = round(diastolic + (systolic - diastolic) / 3, 2)
+
+
+################################################################################
+
+
+def plot_svm_decision_boundary_2d(
+    X,
+    y,
+    feature_pair=("feature_1", "feature_2"),
+    figsize=(8, 6),
+    grid_density=100,
+    C=100,
+    gamma="auto",
+    kernel="rbf",
+    title=None,
+    image_path_svg=None,
+    image_path_png=None,
+    margin=False,
+):
+    # Step 1: Extract just the 2 features
+    X_pair = X[list(feature_pair)].copy()
+
+    # Step 2: Encode categorical features if needed
+    preprocessor = ColumnTransformer(
+        transformers=[
+            (
+                "num",
+                StandardScaler(),
+                [col for col in feature_pair if pd.api.types.is_numeric_dtype(X[col])],
+            ),
+            (
+                "cat",
+                Pipeline(
+                    [
+                        (
+                            "label_enc",
+                            FunctionTransformer(
+                                lambda x: LabelEncoder().fit_transform(x.squeeze()),
+                                validate=False,
+                            ),
+                        ),
+                        ("scale", StandardScaler()),
+                    ]
+                ),
+                [
+                    col
+                    for col in feature_pair
+                    if not pd.api.types.is_numeric_dtype(X[col])
+                ],
+            ),
+        ],
+        remainder="drop",
+        verbose_feature_names_out=False,
+    )
+
+    # Step 3: Fit transformer and transform X
+    X_transformed = preprocessor.fit_transform(X_pair)
+
+    # Step 4: Encode y if needed
+    if isinstance(y, pd.DataFrame):
+        y = y.squeeze()  # convert (n,1) -> (n,)
+    y_encoded = LabelEncoder().fit_transform(y)
+
+    # Step 5: Train a fresh SVC
+    svc = SVC(C=C, gamma=gamma, kernel=kernel, probability=True)
+    svc.fit(X_transformed, y_encoded)
+
+    # Step 6: Plotting
+    plt.figure(figsize=figsize)
+    x_min, x_max = X_transformed[:, 0].min() - 1, X_transformed[:, 0].max() + 1
+    y_min, y_max = X_transformed[:, 1].min() - 1, X_transformed[:, 1].max() + 1
+    xx, yy = np.meshgrid(
+        np.linspace(x_min, x_max, grid_density), np.linspace(y_min, y_max, grid_density)
+    )
+    grid = np.c_[xx.ravel(), yy.ravel()]
+    Z = svc.decision_function(grid).reshape(xx.shape)
+
+    plt.contourf(
+        xx,
+        yy,
+        Z,
+        levels=np.linspace(Z.min(), Z.max(), 10),
+        cmap=plt.cm.coolwarm,
+        alpha=0.6,
+    )
+    plt.contour(xx, yy, Z, colors="k", levels=[0], linestyles=["-"])
+
+    if margin:
+        # plot the ±1 margins
+        plt.contour(
+            xx,
+            yy,
+            Z,
+            levels=[-1, 1],
+            colors=["#0000FF", "#950714"],
+            linestyles=["--", "--"],
+            linewidths=2,
+        )
+
+    plt.scatter(
+        X_transformed[:, 0],
+        X_transformed[:, 1],
+        c=y_encoded,
+        cmap=plt.cm.coolwarm,
+        edgecolors="k",
+    )
+    plt.scatter(
+        svc.support_vectors_[:, 0],
+        svc.support_vectors_[:, 1],
+        s=100,
+        facecolors="none",
+        edgecolors="k",
+        linewidth=1.5,
+        label="Support Vectors",
+    )
+
+    plt.xlabel(feature_pair[0])
+    plt.ylabel(feature_pair[1])
+    plt.title(title or f"SVM Decision Boundary: {feature_pair[0]} vs {feature_pair[1]}")
+    plt.legend(loc="best")
+    plt.tight_layout()
+    # Save plot if requested
+    if image_path_png:
+        plt.savefig(image_path_png, format="png", bbox_inches="tight")
+    if image_path_svg:
+        plt.savefig(image_path_svg, format="svg", bbox_inches="tight")
+    plt.show()
