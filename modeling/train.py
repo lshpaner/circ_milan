@@ -1,0 +1,220 @@
+from pathlib import Path
+
+import typer
+from loguru import logger
+import pandas as pd
+from model_tuner import Model
+
+################################################################################
+# Step 1. Import Configurations and Constants
+################################################################################
+
+from config import (
+    PROCESSED_DATA_DIR,
+    model_definitions,
+    rstate,
+    pipelines,
+    numerical_cols,
+    categorical_cols,
+)
+from functions import (
+    clean_feature_selection_params,
+    mlflow_log_parameters_model,
+    adjust_preprocessing_pipeline,
+    mlflow_load_model,
+)
+
+app = typer.Typer()
+
+################################################################################
+# Step 2. Define CLI Arguments with Default Values
+################################################################################
+
+
+@app.command()
+def main(
+    # ---- REPLACE DEFAULT PATHS AS APPROPRIATE ---
+    model_type: str = "lr",
+    pipeline_type: str = "orig",
+    outcome: str = "default_outcome",
+    features_path: Path = PROCESSED_DATA_DIR / "X.parquet",
+    labels_path: Path = PROCESSED_DATA_DIR / "y_income.parquet",
+    scoring: str = "average_precision",
+    pretrained: int = 0,
+    # -----------------------------------------
+):
+
+    ################################################################################
+    # Step 3. Load Feature and Label Datasets
+    ################################################################################
+
+    X = pd.read_parquet(features_path)  # read in X
+    y = pd.read_parquet(labels_path)  # read in y
+    y = y.squeeze()  # coerce into a series
+
+    ################################################################################
+    # Step 4. Retrieve Model and Pipeline Configurations
+    ################################################################################
+
+    clc = model_definitions[model_type]["clc"]
+    estimator_name = model_definitions[model_type]["estimator_name"]
+    pipeline_steps = pipelines[pipeline_type]["pipeline"]
+    sampler = pipelines[pipeline_type]["sampler"]
+    feature_selection = pipelines[pipeline_type]["feature_selection"]
+
+    # Set the parameters
+    tuned_parameters = model_definitions[model_type]["tuned_parameters"]
+    randomized_grid = model_definitions[model_type]["randomized_grid"]
+    n_iter = model_definitions[model_type]["n_iter"]
+    early_stop = model_definitions[model_type]["early"]
+
+    print("Sampler", sampler)
+
+    calibrate = True
+    kfold = True
+
+    ################################################################################
+    # Step 5. Clean up pipeline
+    # Step 5a. Clean up tuned_parameters by removing feature selection keys if
+    # RFE isn't in the pipeline
+    ################################################################################
+    clean_feature_selection_params(pipeline_steps, tuned_parameters)
+
+    # Step 5b. Adjust preproc. pipe. to skip imputer and scaler for 'rf', 'xgb', 'cat'
+
+    pipeline_steps = adjust_preprocessing_pipeline(
+        model_type,
+        pipeline_steps,
+        numerical_cols,
+        categorical_cols,
+        sampler=sampler,
+    )
+
+    ################################################################################
+    # Step 6. Printing Outcome
+    ################################################################################
+
+    print()
+    print(f"Outcome:")
+    print("-" * 60)
+    print()
+    print("=" * 60)
+    print(f"{outcome}")
+    print("=" * 60)
+
+    ################################################################################
+    # Step 7. Define and Initialize the Model Pipeline
+    ################################################################################
+
+    logger.info(f"Training {estimator_name} for {outcome} ...")
+
+    if pretrained:
+
+        print("Loading Pretrained Model...")
+        model = mlflow_load_model(
+            experiment_name=f"{outcome}_model",
+            run_name=f"{estimator_name}_{pipeline_type}_training",
+            model_name=f"{estimator_name}_{outcome}",
+        )
+
+    else:
+        model = Model(
+            pipeline_steps=pipeline_steps,
+            name=estimator_name,
+            model_type="classification",
+            estimator_name=estimator_name,
+            calibrate=calibrate,
+            estimator=clc,
+            kfold=kfold,
+            grid=tuned_parameters,
+            n_jobs=5,
+            randomized_grid=randomized_grid,
+            n_iter=n_iter,
+            scoring=[scoring],
+            random_state=rstate,
+            stratify_y=True,
+            boost_early=early_stop,
+            imbalance_sampler=sampler,
+            feature_selection=feature_selection,
+        )
+
+        ############################################################################
+        # Step 8. Perform Hyperparameter Tuning
+        ############################################################################
+
+        model.grid_search_param_tuning(X, y, f1_beta_tune=True)
+
+    ################################################################################
+    # Step 9. Train the Model
+    ################################################################################
+
+    # Boosting algorithms like XGBoost and CatBoost benefit from validation data
+    # during training to optimize early stopping and prevent overfitting.
+    # Hence, we explicitly provide the validation dataset in the `fit` method
+    # for these models. For other models, validation data is not required at this
+    # stage.
+
+    if not pretrained:
+        if model_type in {"xgb", "cat"}:
+            model.fit(
+                X,
+                y,
+                validation_data=(X, y),
+                score=scoring,
+            )
+        else:
+            model.fit(
+                X,
+                y,
+                score=scoring,
+            )
+
+    ################################################################################
+    # Step 10. Calibrate the Model If Necessary
+    ################################################################################
+
+    # ## If we need to update isotonic method
+    # model.calibration_method = "isotonic"
+
+    if model.calibrate:
+        model.calibrateModel(X, y, score=scoring)
+
+    ################################################################################
+    # Step 11. See Results in Terminal and Store Model in MLFlow
+    ################################################################################
+
+    # see the results printed to the terminal for reference
+    model.return_metrics(
+        X=X,
+        y=y,
+        optimal_threshold=True,
+        print_threshold=True,
+        model_metrics=True,
+    )
+    if pretrained:
+        mlflow_log_parameters_model(
+            experiment_name=f"{outcome}_model",
+            run_name=f"{estimator_name}_{pipeline_type}_training",
+            model_name=f"{estimator_name}_{outcome}",
+            model=model,
+        )
+
+    else:
+        mlflow_log_parameters_model(
+            model_type=model_type,
+            n_iter=n_iter,
+            kfold=kfold,
+            outcome=outcome,
+            experiment_name=f"{outcome}_model",
+            run_name=f"{estimator_name}_{pipeline_type}_training",
+            model_name=f"{estimator_name}_{outcome}",
+            model=model,
+            hyperparam_dict=model.best_params_per_score[scoring],
+        )
+
+    logger.success("Modeling training complete.")
+    # -----------------------------------------
+
+
+if __name__ == "__main__":
+    app()

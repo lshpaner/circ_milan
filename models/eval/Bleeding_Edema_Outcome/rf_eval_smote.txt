@@ -1,12 +1,12 @@
-2025-04-23 22:31:55.977 | INFO     | circ_milan.config:<module>:30 - PROJ_ROOT path is: /home/lshpaner/Python_Projects/circ_milan
-[31m2025/04/23 22:31:59 WARNING mlflow.models.model: Model logged without a signature and input example. Please set `input_example` parameter when logging the model to auto infer the model signature.[0m
+2025-06-27 00:07:28.975 | INFO     | config:<module>:30 - PROJ_ROOT path is: /home/lshpaner/Python_Projects
+[31m2025/06/27 00:07:31 WARNING mlflow.models.model: Model logged without a signature and input example. Please set `input_example` parameter when logging the model to auto infer the model signature.[0m
 rf_smote_training
 rf_Bleeding_Edema_Outcome
 Model Threshold Before Threshold Optimization: {'average_precision': 0.31799999999999995}
-Using Existing Experiment_ID: 849533074301396881
-Found Run_ID: d5baeda4999a48788a09423c3f9a6ae0 for run_name 'rf_smote_training' in experiment 'Bleeding_Edema_Outcome_model'
-Experiment_ID for model None and parameters: 849533074301396881
-experiment_id=849533074301396881, run_id=d5baeda4999a48788a09423c3f9a6ae0
+Using Existing Experiment_ID: 452642104975561062
+Found Run_ID: d18ee7233d0f40ae968e57b596b75ac7 for run_name 'rf_smote_training' in experiment 'Bleeding_Edema_Outcome_model'
+Experiment_ID for model None and parameters: 452642104975561062
+experiment_id=452642104975561062, run_id=d18ee7233d0f40ae968e57b596b75ac7
 Parameters and model logged successfully in MLflow.
 Model Threshold After Threshold Optimization: {'average_precision': 0.31799999999999995}
 K-Fold
@@ -40,8 +40,8 @@ Optimal threshold used: 0.31799999999999995
 
 Running k-fold model metrics...
 
-Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:01,  6.73it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:01,  6.36it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:01,  6.56it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00,  6.66it/s]Processing Folds:  50%|█████     | 5/10 [00:00<00:00,  6.65it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00,  6.69it/s]Processing Folds:  70%|███████   | 7/10 [00:01<00:00,  6.74it/s]Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  6.80it/s]Processing Folds:  90%|█████████ | 9/10 [00:01<00:00,  6.96it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  6.93it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  6.77it/s]
-2025-04-23 22:32:31.488 | SUCCESS  | __main__:main:124 - Modeling evaluation complete.
+Processing Folds:   0%|          | 0/10 [00:00<?, ?it/s]Processing Folds:  10%|█         | 1/10 [00:00<00:01,  6.00it/s]Processing Folds:  20%|██        | 2/10 [00:00<00:01,  5.99it/s]Processing Folds:  30%|███       | 3/10 [00:00<00:01,  6.09it/s]Processing Folds:  40%|████      | 4/10 [00:00<00:00,  6.06it/s]Processing Folds:  50%|█████     | 5/10 [00:00<00:00,  6.01it/s]Processing Folds:  60%|██████    | 6/10 [00:00<00:00,  6.00it/s]Processing Folds:  70%|███████   | 7/10 [00:01<00:00,  5.85it/s]Processing Folds:  80%|████████  | 8/10 [00:01<00:00,  5.86it/s]Processing Folds:  90%|█████████ | 9/10 [00:01<00:00,  5.87it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  5.85it/s]Processing Folds: 100%|██████████| 10/10 [00:01<00:00,  5.92it/s]
+2025-06-27 00:08:09.844 | SUCCESS  | __main__:main:124 - Modeling evaluation complete.
 
 Average Metrics Across All Folds:
               Metric     Value
@@ -61,5 +61,5 @@ K-Fold Sensitivity        0.828
 K-Fold Specificity        0.853
 K-Fold AUC ROC            0.887
 K-Fold Brier Score        0.105
-Using Existing Experiment_ID: 849533074301396881
-Found Run_ID: d5baeda4999a48788a09423c3f9a6ae0 for run_name 'rf_smote_training' in experiment 'Bleeding_Edema_Outcome_model'
+Using Existing Experiment_ID: 452642104975561062
+Found Run_ID: d18ee7233d0f40ae968e57b596b75ac7 for run_name 'rf_smote_training' in experiment 'Bleeding_Edema_Outcome_model'
