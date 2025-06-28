@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: mlflow-service
+    env: docker
+    plan: free
+    region: oregon
+    dockerfilePath: Dockerfile
+    autoDeploy: true
+    ports:
+      - port: 10000
+        protocol: http
