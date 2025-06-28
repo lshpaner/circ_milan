@@ -1,23 +1,21 @@
 FROM python:3.10-slim
 
-# Install dependencies
+# Install required system tools and MLflow
 RUN apt-get update && apt-get install -y wget unzip curl && \
     pip install mlflow
 
 # Set working directory
 WORKDIR /app
 
-# Download and unzip your mlruns zip file
+# Download and extract the zipped mlruns folder
 RUN wget https://www.leonshpaner.com/files/mlruns.zip && \
     unzip mlruns.zip && \
     rm mlruns.zip
 
-# Optional: move your experiment folder to mlruns/0 so MLflow UI shows it
-RUN mkdir -p mlruns/0 && \
-    cp -r mlruns/models/452642104975561062/* mlruns/0/
-
+# Expose MLflow port
 EXPOSE 10000
 
+# Start MLflow server using the unzipped mlruns directory
 CMD ["mlflow", "server", \
      "--backend-store-uri", "sqlite:///mlflow.db", \
      "--default-artifact-root", "./mlruns", \
