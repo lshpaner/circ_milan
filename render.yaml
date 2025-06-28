@@ -6,6 +6,3 @@ services:
     region: oregon
     dockerfilePath: Dockerfile
     autoDeploy: true
-    ports:
-      - port: 10000
-        protocol: http
