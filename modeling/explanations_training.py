@@ -169,11 +169,11 @@ def main(
     import numpy as np
     from sklearn.base import clone
 
-    # STEP 12a: pull out your preprocessing+selection and your estimator
+    # STEP 12a: pull out the preprocessing+selection and the estimator
     preproc = model.get_preprocessing_and_feature_selection_pipeline()
     clf = model.estimator._final_estimator  # or model.estimator.steps[-1][1]
 
-    # STEP 12b: build a fresh pipeline for CV (so we don’t clobber your loaded one)
+    # STEP 12b: build a fresh pipeline for CV (so we don’t clobber the loaded one)
     from sklearn.pipeline import Pipeline
 
     cv_pipe = Pipeline(
@@ -202,11 +202,13 @@ def main(
         y_proba_oof[test_idx] = probs
         y_pred_oof[test_idx] = preds
 
-    # STEP 12d: aggregate your confusion
+    # STEP 12d: aggregate the confusion matrix
+    # Note: this is the same as the confusion matrix for the entire holdout set
+    # since we are using OOF predictions
     tn, fp, fn, tp = confusion_matrix(y_holdout, y_pred_oof).ravel()
     print(f"Aggregated (10-fold) TP @0.24 = {tp}")  # should be 50
 
-    # now stick those OOF flags back into your DataFrame
+    # now stick those OOF flags back into the  DataFrame
     shap_df["y_pred_proba"] = y_proba_oof
     shap_df["y_pred"] = y_pred_oof
     shap_df["TP"] = ((y_holdout == 1) & (y_pred_oof == 1)).astype(int)

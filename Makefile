@@ -324,7 +324,7 @@ model_explanations_training:
 			--features-path ./data/processed/X.parquet \
 			--labels-path ./data/processed/y_$$outcome.parquet \
 			--outcome $$outcome \
-			--metric-name "K-Fold Average Precision" \
+			--metric-name "K-Fold AUC ROC" \
 			--mode max \
 			--top-n 5 \
 			--shap-val-flag 1 \
@@ -339,7 +339,7 @@ model_explanations_inference:
 		$(PYTHON_INTERPRETER) $(PROJECT_DIRECTORY)/modeling/explanations_inference.py \
 			--features-path ./data/processed/inference/X.parquet \
 			--outcome $$outcome \
-			--metric-name "K-Fold Average Precision" \
+			--metric-name "K-Fold AUC ROC" \
 			--mode max \
 			--top-n 5 \
 			--shap-val-flag 1 \
