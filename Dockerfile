@@ -1,20 +1,20 @@
-FROM python:3.11-slim
+# Use a slim Python base
+FROM python:3.10-slim
 
+# Set working directory
 WORKDIR /app
 
-# Install dependencies
+# Copy only requirements first (to take advantage of Docker caching)
 COPY requirements.txt .
+
+# Install requirements
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy code and mlruns folder
+# Copy everything else
 COPY . .
 
-# Expose MLflow UI port
+# Expose port
 EXPOSE 5000
 
-# Launch MLflow UI pointing to your local mlruns
-CMD ["mlflow", "server", \
-     "--backend-store-uri", "file:/app/mlruns", \
-     "--default-artifact-root", "file:/app/mlruns", \
-     "--host", "0.0.0.0", \
-     "--port", "5000"]
+# Run the MLflow server
+CMD ["mlflow", "server", "--backend-store-uri", "file:/app/mlruns", "--default-artifact-root", "file:/app/mlruns", "--host", "0.0.0.0", "--port", "5000",]
