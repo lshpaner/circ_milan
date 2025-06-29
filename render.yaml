@@ -2,6 +2,6 @@ services:
   - type: web
     name: mlflow-circ-milan
     env: docker
-    plan: free  # or starter if you need more memory
+    plan: free
     region: oregon
     autoDeploy: true
