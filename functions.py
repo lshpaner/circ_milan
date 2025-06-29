@@ -1511,7 +1511,8 @@ def mlflow_log_parameters_model(
     """
 
     abs_mlflow_data = os.path.abspath(mlflow_models_data)
-    mlflow.set_tracking_uri(f"file://{abs_mlflow_data}")
+    # mlflow.set_tracking_uri(f"file://{abs_mlflow_data}")
+    mlflow.set_tracking_uri("https://mlflow-circ-milan.onrender.com")
 
     # Set or create the experiment_id for the model and parameters
     experiment_id = set_or_create_experiment(experiment_name)
@@ -1574,7 +1575,8 @@ def mlflow_load_model(
         abs_mlflow_data = os.path.abspath(mlflow_models_data)
     else:
         abs_mlflow_data = os.path.abspath(mlruns_location)
-    mlflow.set_tracking_uri(f"file://{abs_mlflow_data}")
+    # mlflow.set_tracking_uri(f"file://{abs_mlflow_data}")
+    mlflow.set_tracking_uri("https://mlflow-circ-milan.onrender.com")
 
     # Query MLflow to find the latest run_id for the given run_name in the
     # experiment (for models)
@@ -1637,7 +1639,8 @@ def log_mlflow_metrics(
 
     # Set the tracking URI to the specified mlflow_data location
     abs_mlflow_data = os.path.abspath(mlflow_models_data)  # Use models path
-    mlflow.set_tracking_uri(f"file://{abs_mlflow_data}")
+    # mlflow.set_tracking_uri(f"file://{abs_mlflow_data}")
+    mlflow.set_tracking_uri("https://mlflow-circ-milan.onrender.com")
 
     # Set or create the experiment_id for the model and parameters
     experiment_id = set_or_create_experiment(experiment_name)
@@ -1682,7 +1685,8 @@ def find_best_model(
         abs_mlflow_data = os.path.abspath(mlflow_models_data)
     else:
         abs_mlflow_data = os.path.abspath(mlruns_location)
-    mlflow.set_tracking_uri(f"file://{abs_mlflow_data}")
+    # mlflow.set_tracking_uri(f"file://{abs_mlflow_data}")
+    mlflow.set_tracking_uri("https://mlflow-circ-milan.onrender.com")
 
     experiment = mlflow.get_experiment_by_name(experiment_name)
     if not experiment:
