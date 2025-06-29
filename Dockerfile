@@ -1,20 +1,22 @@
-# Use a slim Python base
-FROM python:3.10-slim
+FROM python:3.11-slim
 
-# Set working directory
+# Set working directory inside container
 WORKDIR /app
 
-# Copy only requirements first (to take advantage of Docker caching)
+# Copy requirements first
 COPY requirements.txt .
 
-# Install requirements
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy everything else
+# Now copy the rest of the code
 COPY . .
+
+# Set environment variables (optional for MLflow)
+ENV MLFLOW_TRACKING_URI=http://localhost:5000
 
 # Expose port
 EXPOSE 5000
 
-# Run the MLflow server
-CMD ["mlflow", "server", "--backend-store-uri", "file:/app/mlruns", "--default-artifact-root", "file:/app/mlruns", "--host", "0.0.0.0", "--port", "5000",]
+# Launch MLflow tracking server
+CMD ["mlflow", "server", "--host", "0.0.0.0", "--port", "5000", "--backend-store-uri", "file:/app/mlruns"]
