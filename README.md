@@ -4,13 +4,34 @@
 
 ---
 
-## 📌 Project Overview
+## Table of Contents
+
+- [Project Overview](#project-overview)  
+- [Project Structure](#project-structure)  
+- [Installation](#installation)  
+- [Makefile Commands](#makefile-commands)  
+  - [Environment Setup](#environment-setup)  
+  - [Preprocessing & Feature Gen](#preprocessing--feature-gen)  
+  - [Training](#training)  
+  - [Evaluation](#evaluation)  
+  - [Explainability](#explainability)  
+  - [Inference](#inference)  
+- [Modeling Details](#modeling-details)  
+- [MLflow Tracking](#mlflow-tracking)  
+- [Notebooks](#notebooks)  
+- [Notes](#notes)  
+- [Reproducibility](#reproducibility)  
+- [Authors & Contacts](#authors--contacts)  
+- [License](#license)  
+
+
+## Project Overview
 
 This repository contains the full data science pipeline for preprocessing, modeling, evaluating, and explaining clinical outcomes related to laser circumcision procedures. It focuses specifically on predicting the `Bleeding_Edema_Outcome` complication using multiple supervised learning approaches. The workflow includes data cleaning, feature engineering, model training with different sampling strategies, evaluation, and SHAP-based explainability.
 
 ---
 
-## 🧱 Project Structure
+## Project Structure
 
 ```text
 circ_milan/
@@ -69,7 +90,7 @@ circ_milan/
 
 ---
 
-## 🔧 Installation
+## Installation
 
 1. **Clone the repo**  
     ```bash
@@ -96,7 +117,7 @@ circ_milan/
 
 ---
 
-## ⚙️ Makefile Commands
+## Makefile Commands
 
 | Command                         | Description                                                    |
 |---------------------------------|----------------------------------------------------------------|
@@ -117,7 +138,7 @@ To list available commands:
 make help
 ```
 
-## 🔍 Modeling Details
+## Modeling Details
 
 - **Outcome**: `Bleeding_Edema_Outcome`
 - **Sampling Pipelines**:  
@@ -131,7 +152,7 @@ make help
 - **Metric**: `average_precision`
 - **Explainability**: SHAP feature attributions via `explainer.py`
 
-## 📊 MLflow Tracking
+## MLflow Tracking
 
 All runs, parameters, and metrics are tracked with MLflow.
 
@@ -141,20 +162,20 @@ Launch UI:
 make mlflow_ui
 ```
 
-## 📝 Notebooks
+## Notebooks
 
 - `circ_milan_eda.ipynb` – Exploratory Data Analysis  
 - `circ_milan_model_results.ipynb` – Model performance visuals  
 - `circ_milan_model_explanations.ipynb` – SHAP visualizations  
 - `post_modeling_eda.ipynb` – Further diagnostics  
 
-## 🔐 Notes
+## Notes
 
 - SHAP outputs and model artifacts are in `data/processed/` and `models/`  
 - Inference predictions are saved to  
   `./data/processed/inference/predictions_Bleeding_Edema_Outcome.csv`  
 
-## 🧪 Reproducibility
+## Reproducibility
 
 Run the full pipeline with:
 
@@ -162,12 +183,12 @@ Run the full pipeline with:
 make preproc_train_eval
 ```
 
-## 📎 Authors & Contacts
+## Authors & Contacts
 
 - **Leonid Shpaner, M.S.**, Data Scientist | Adjunct Professor  
 - **Giuseppe Saitta, M.D.**, Medical Consultant (data provider and clinical insights)
 
-## 📄 License
+## License
 
 Research and educational use only, all rights reserved unless stated otherwise
 
