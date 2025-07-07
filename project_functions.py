@@ -439,9 +439,7 @@ def plot_svm_decision_surface_3d_plotly(
     gamma="auto",
     kernel="rbf",
     title="SVM Decision Surface",
-    figsize=(10, 8),
     show_support_vectors=True,
-    zlim=None,
     html_path=None,
 ):
     # PREPROCESS and TRAIN
@@ -624,7 +622,7 @@ def plot_svm_decision_surface_3d_plotly(
             html_path,
             include_plotlyjs="cdn",
             full_html=True,
-            default_height=950,  # match your layout.height
+            default_height=950,  # match layout.height
             default_width="100%",
             config=config,
         )
