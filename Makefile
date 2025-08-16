@@ -327,6 +327,7 @@ model_explanations_training:
 			--metric-name "K-Fold AUC ROC" \
 			--mode max \
 			--top-n 5 \
+			--hold-out "kfold" \
 			--shap-val-flag 1 \
 			--explanations-path ./data/processed/shap_predictions_$$outcome.csv; \
 	done
@@ -379,7 +380,7 @@ predict:
 
 
 .PHONY: preproc_pipeline_inf
-preproc_pipeline_inf: data_prep_preprocessing_inference feat_gen_inference
+preproc_pipeline_inf: data_prep_preprocessing_inference feat_gen_inference predict
 #################################################################################
 # Self Documenting Commands                                                     #
 #################################################################################

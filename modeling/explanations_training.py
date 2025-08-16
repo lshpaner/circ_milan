@@ -57,6 +57,9 @@ def main(
 
     # Load best model and assign it to variable called model
     model = mlflow_load_model(experiment_name, run_name, model_name)
+    # Retrieve the model's threshold
+    model_threshold = next(iter(model.threshold.values()))
+    print(f"Model Threshold = {model_threshold}")
 
     ################################################################################
     # STEP 4: Load Processed Data (Features & Labels)
@@ -195,9 +198,9 @@ def main(
         # fit on this fold
         cv_pipe.fit(X_tr, y_tr)
 
-        # predict probs + threshold >0.24
+        # predict probs + threshold > model_threshold
         probs = cv_pipe.predict_proba(X_te)[:, 1]
-        preds = (probs > 0.24).astype(int)
+        preds = (probs > model_threshold).astype(int)
 
         y_proba_oof[test_idx] = probs
         y_pred_oof[test_idx] = preds
@@ -206,7 +209,7 @@ def main(
     # Note: this is the same as the confusion matrix for the entire holdout set
     # since we are using OOF predictions
     tn, fp, fn, tp = confusion_matrix(y_holdout, y_pred_oof).ravel()
-    print(f"Aggregated (10-fold) TP @0.24 = {tp}")  # should be 50
+    print(f"Aggregated (10-fold) TP @{model_threshold} = {tp}")  # should be 50
 
     # now stick those OOF flags back into the  DataFrame
     shap_df["y_pred_proba"] = y_proba_oof
