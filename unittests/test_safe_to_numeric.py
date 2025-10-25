@@ -1,4 +1,4 @@
-from circ_milan.functions import safe_to_numeric
+from functions import safe_to_numeric
 import pandas as pd
 
 

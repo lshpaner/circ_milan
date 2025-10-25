@@ -1,5 +1,5 @@
 import pandas as pd
-from circ_milan.functions import compare_dataframes
+from functions import compare_dataframes
 
 # Helper function to capture print output
 from io import StringIO

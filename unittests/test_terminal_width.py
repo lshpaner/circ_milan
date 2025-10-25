@@ -2,7 +2,7 @@ import pytest
 import subprocess
 from unittest import mock
 
-from circ_milan.functions import get_true_terminal_width
+from functions import get_true_terminal_width
 
 
 def test_get_true_terminal_width_success():

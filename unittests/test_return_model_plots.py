@@ -2,7 +2,7 @@ import pytest
 from unittest import mock
 import numpy as np
 
-from circ_milan.functions import return_model_plots
+from functions import return_model_plots
 
 
 @pytest.fixture
@@ -42,7 +42,7 @@ def test_return_model_plots(mock_model, sample_inputs, mock_plotter):
     """Test that return_model_plots correctly calls PlotMetrics and returns expected output."""
     estimator_name = "RandomForest"
 
-    with mock.patch("circ_milan.functions.PlotMetrics", return_value=mock_plotter):
+    with mock.patch("functions.PlotMetrics", return_value=mock_plotter):
         result = return_model_plots(
             sample_inputs, mock_model, estimator_name, scoring="accuracy"
         )

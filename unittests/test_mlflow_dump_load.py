@@ -1,7 +1,7 @@
 import pickle
 from sklearn.linear_model import LogisticRegression
 from unittest.mock import patch, MagicMock, mock_open
-from circ_milan.functions import (
+from functions import (
     set_or_create_experiment,
     start_new_run,
     mlflow_dumpArtifact,
@@ -74,10 +74,10 @@ def test_mlflow_dumpArtifact_existing_run():
         patch("mlflow.set_experiment"),
         patch("mlflow.set_tracking_uri"),
         patch(
-            "circ_milan.functions.get_run_id_by_name",
+            "functions.get_run_id_by_name",
             return_value="test_run_id",
         ),
-        patch("circ_milan.functions.start_new_run") as mock_start_new,
+        patch("functions.start_new_run") as mock_start_new,
     ):
         mlflow_dumpArtifact(
             experiment_name,
@@ -118,8 +118,8 @@ def test_mlflow_dumpArtifact_with_artifact_run_id():
         ),
         patch("mlflow.set_experiment"),
         patch("mlflow.set_tracking_uri"),
-        patch("circ_milan.functions.get_run_id_by_name") as mock_get_run_id,
-        patch("circ_milan.functions.start_new_run") as mock_start_new,
+        patch("functions.get_run_id_by_name") as mock_get_run_id,
+        patch("functions.start_new_run") as mock_start_new,
     ):
         # Set the attribute before the call to mimic the function's behavior
         mlflow_dumpArtifact.artifacts_run_id = specific_run_id
@@ -273,14 +273,14 @@ def test_get_run_id_by_name_existing():
     # Patch at the module level where the function is defined
     with (
         patch(
-            "circ_milan.functions.MlflowClient",
+            "functions.MlflowClient",
             autospec=True,
         ) as mock_client_class,
         patch(
-            "circ_milan.functions.mlflow.get_experiment_by_name",
+            "functions.mlflow.get_experiment_by_name",
             return_value=MagicMock(experiment_id="123"),
         ) as mock_get_exp,
-        patch("circ_milan.functions.start_new_run") as mock_start_new,
+        patch("functions.start_new_run") as mock_start_new,
     ):
         mock_client_instance = mock_client_class.return_value
         mock_client_instance.search_runs.return_value = [mock_run]
@@ -304,16 +304,14 @@ def test_get_run_id_by_name_create_new():
     # Patch at the module level where the function is defined
     with (
         patch(
-            "circ_milan.functions.MlflowClient",
+            "functions.MlflowClient",
             autospec=True,
         ) as mock_client_class,
         patch(
-            "circ_milan.functions.mlflow.get_experiment_by_name",
+            "functions.mlflow.get_experiment_by_name",
             return_value=MagicMock(experiment_id="123"),
         ) as mock_get_exp,
-        patch(
-            "circ_milan.functions.start_new_run", return_value=new_run_id
-        ) as mock_start_new,
+        patch("functions.start_new_run", return_value=new_run_id) as mock_start_new,
     ):
         mock_client_instance = mock_client_class.return_value
         mock_client_instance.search_runs.return_value = []

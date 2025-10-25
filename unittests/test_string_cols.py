@@ -1,4 +1,4 @@
-from circ_milan.functions import clean_dataframe
+from functions import clean_dataframe
 import pandas as pd
 
 

@@ -2,7 +2,7 @@ from sklearn.feature_selection import RFE
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 
-from circ_milan.functions import clean_feature_selection_params
+from functions import clean_feature_selection_params
 
 
 def test_clean_feature_selection_params_with_rfe():

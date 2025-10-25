@@ -3,17 +3,15 @@ from unittest import mock
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from circ_milan.functions import log_mlflow_metrics
+from functions import log_mlflow_metrics
 
 
 @pytest.fixture
 def mock_mlflow():
     with (
         mock.patch("mlflow.set_tracking_uri") as mock_set_tracking_uri,
-        mock.patch(
-            "circ_milan.functions.set_or_create_experiment"
-        ) as mock_set_or_create,
-        mock.patch("circ_milan.functions.get_run_id_by_name") as mock_get_run_id,
+        mock.patch("functions.set_or_create_experiment") as mock_set_or_create,
+        mock.patch("functions.get_run_id_by_name") as mock_get_run_id,
         mock.patch("mlflow.start_run") as mock_start_run,
         mock.patch("mlflow.log_metric") as mock_log_metric,
         mock.patch("mlflow.log_figure") as mock_log_figure,

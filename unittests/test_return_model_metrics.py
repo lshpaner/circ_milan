@@ -3,7 +3,7 @@ from unittest import mock
 import pandas as pd
 import numpy as np
 
-from circ_milan.functions import return_model_metrics
+from functions import return_model_metrics
 
 
 @pytest.fixture
@@ -89,6 +89,7 @@ def test_return_model_metrics_single_input(mock_model):
         optimal_threshold=True,
         print_threshold=True,
         model_metrics=True,
+        return_dict=False,
     )
 
     assert isinstance(result, pd.DataFrame)
@@ -134,7 +135,7 @@ def test_return_model_metrics_different_metrics_per_input(
     Test when return_metrics returns different metrics for different inputs.
     """
 
-    def side_effect(X, y, optimal_threshold, print_threshold, model_metrics):
+    def side_effect(X, y, optimal_threshold, print_threshold, model_metrics, **kwargs):
         if np.array_equal(X, sample_inputs["train"][0]):
             return {"accuracy": 0.9124, "f1": 0.8876}
         else:

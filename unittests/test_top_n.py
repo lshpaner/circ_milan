@@ -1,4 +1,4 @@
-from circ_milan.functions import top_n
+from functions import top_n
 import pandas as pd
 
 

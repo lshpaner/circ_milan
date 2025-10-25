@@ -7,7 +7,7 @@ from sklearn.feature_selection import RFE
 from sklearn.linear_model import LogisticRegression
 from imblearn.over_sampling import SMOTE
 
-from circ_milan.functions import adjust_preprocessing_pipeline
+from functions import adjust_preprocessing_pipeline
 
 
 # Fixtures
