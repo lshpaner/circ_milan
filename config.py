@@ -26,7 +26,7 @@ from functions import mlflow_loadArtifact
 load_dotenv()
 
 # Paths
-PROJ_ROOT = Path(__file__).resolve().parents[1]
+PROJ_ROOT = Path(__file__).resolve().parents[0]
 logger.info(f"PROJ_ROOT path is: {PROJ_ROOT}")
 
 DATA_DIR = PROJ_ROOT / "data"
