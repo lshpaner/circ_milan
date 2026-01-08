@@ -38,7 +38,7 @@ app = typer.Typer()
 
 @app.command()
 def main(
-    input_data_file: str = "./data/raw/df.parquet",
+    input_data_file: str = "./data/raw/Laser_Circumcision_Excel_31.03.2024.xlsx",
     output_eda_file: str = "./data/processed/circ_eda.parquet",
     output_data_file: str = "./data/processed/df_sans_zero.parquet",
     stage: str = "training",
@@ -437,6 +437,8 @@ def main(
         low_variance_list = shape_var[
             shape_var["Shape_Var"] < shape_var_thresh
         ].index.to_list()
+
+        print(f"\nLow variance columns identified: {low_variance_list}\n")
 
         ########################################################################
         # Step 18. Save and Log Low Variance Columns List
