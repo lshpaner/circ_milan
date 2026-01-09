@@ -9,7 +9,6 @@ from sklearn.preprocessing import MinMaxScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 
 from sklearn.pipeline import Pipeline
-from sklearn.impute import SimpleImputer
 from imblearn.over_sampling import SMOTE
 from imblearn.over_sampling import RandomOverSampler
 from sklearn.linear_model import LogisticRegression
@@ -86,14 +85,12 @@ numerical_cols = [col for col in X_columns_list if col not in categorical_cols]
 
 numerical_transformer = Pipeline(
     steps=[
-        ("scaler", MinMaxScaler()),
-        ("imputer", SimpleImputer(strategy="mean")),
+        ("scaler", MinMaxScaler())
     ]
 )
 
 categorical_transformer = Pipeline(
     steps=[
-        ("imputer", SimpleImputer(strategy="constant", fill_value="missing")),
         ("encoder", OneHotEncoder(handle_unknown="ignore")),
     ]
 )
