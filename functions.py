@@ -15,6 +15,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.impute import SimpleImputer
+from sklearn.model_selection import StratifiedKFold
+from sklearn.base import clone
 from imblearn.over_sampling import SMOTE
 from sklearn.feature_selection import RFE
 
@@ -27,6 +29,10 @@ from sklearn.metrics import (
     roc_auc_score,
     brier_score_loss,
     precision_recall_curve,
+    precision_score,
+    average_precision_score,
+    recall_score,
+    f1_score,
 )
 
 from sklearn.calibration import calibration_curve
@@ -1873,3 +1879,221 @@ def crosstab_plot(
             )
 
     plt.show()
+
+################################################################################
+######################### Out of Fold Prediction Function ######################
+################################################################################
+
+
+def evaluate_kfold_oof(
+    model,
+    X,
+    y,
+    threshold=0.5,
+    n_splits=10,
+    shuffle=True,
+    random_state=222,
+):
+    """
+    Generate out-of-fold true labels, predicted probabilities,
+    and threshold-based predictions for CV-consistent evaluation.
+
+    Returns Pandas Series with original indices preserved so that
+    downstream bootstrap resampling by index remains valid.
+    """
+
+    if not isinstance(threshold, (float, int)):
+        raise TypeError("threshold must be a scalar float.")
+
+    if not hasattr(model.estimator, "predict_proba"):
+        raise ValueError("Model must implement predict_proba().")
+
+    # Ensure 1D target with original index
+    y_vec = y.squeeze()
+
+    cv = StratifiedKFold(
+        n_splits=n_splits,
+        shuffle=shuffle,
+        random_state=random_state,
+    )
+
+    # IMPORTANT: use Pandas Series to preserve indices
+    y_true_oof = pd.Series(index=y_vec.index, dtype=int)
+    y_prob_oof = pd.Series(index=y_vec.index, dtype=float)
+    y_pred_oof = pd.Series(index=y_vec.index, dtype=int)
+
+    for train_idx, test_idx in cv.split(X, y_vec):
+        fold_model = clone(model.estimator)
+
+        fold_model.fit(X.iloc[train_idx], y_vec.iloc[train_idx])
+
+        probas = fold_model.predict_proba(X.iloc[test_idx])[:, 1]
+
+        y_prob_oof.iloc[test_idx] = probas
+        y_pred_oof.iloc[test_idx] = (probas >= threshold).astype(int)
+        y_true_oof.iloc[test_idx] = y_vec.iloc[test_idx]
+
+    return {
+        "y_true_oof": y_true_oof,
+        "y_prob_oof": y_prob_oof,
+        "y_pred_oof": y_pred_oof,
+        "threshold": threshold,
+    }
+
+################################################################################
+######################## Bootstrap Prediction Functions ########################
+################################################################################
+
+
+def specificity_score(y_true, y_pred):
+    tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
+    return tn / (tn + fp)
+
+
+def get_metric_registry():
+    """
+    Returns a dictionary mapping metric names to callables.
+
+    All metric functions must have signature:
+        fn(y_true, y_prob, y_pred)
+    """
+    return {
+        "precision": lambda yt, yp, yhat: precision_score(yt, yhat, zero_division=0),
+        "average_precision": lambda yt, yp, yhat: average_precision_score(yt, yp),
+        "recall": lambda yt, yp, yhat: recall_score(yt, yhat),
+        "specificity": lambda yt, yp, yhat: specificity_score(yt, yhat),
+        "f1_weighted": lambda yt, yp, yhat: f1_score(yt, yhat),
+        "roc_auc": lambda yt, yp, yhat: roc_auc_score(yt, yp),
+        "brier_score": lambda yt, yp, yhat: brier_score_loss(yt, yp),
+    }
+
+
+def bootstrap_metric_ci(
+    y_true,
+    y_prob,
+    y_pred,
+    metric,
+    n_bootstrap,
+    rng,
+    pbar,
+    metric_registry,
+):
+    metric_fn = metric_registry[metric]
+    n = len(y_true)
+
+    scores = np.empty(n_bootstrap, dtype=float)
+
+    for i in range(n_bootstrap):
+        idx = rng.integers(0, n, size=n)
+        scores[i] = metric_fn(
+            y_true[idx],
+            y_prob[idx],
+            y_pred[idx],
+        )
+        pbar.update(1)
+
+    return np.percentile(scores, [2.5, 97.5])
+
+
+def evaluate_model_performance(
+    y_true_oof,
+    y_prob_oof,
+    y_pred_oof,
+    metrics,
+    n_bootstrap,
+    rng,
+    pbar,
+    metric_registry,
+):
+    rows = []
+
+    y_true = np.asarray(y_true_oof)
+    y_prob = np.asarray(y_prob_oof)
+    y_pred = np.asarray(y_pred_oof)
+
+    for metric in metrics:
+        if metric not in metric_registry:
+            raise ValueError(f"Unknown metric: {metric}")
+
+        metric_fn = metric_registry[metric]
+
+        point = metric_fn(y_true, y_prob, y_pred)
+
+        ci_low, ci_high = bootstrap_metric_ci(
+            y_true=y_true,
+            y_prob=y_prob,
+            y_pred=y_pred,
+            metric=metric,
+            n_bootstrap=n_bootstrap,
+            rng=rng,
+            pbar=pbar,
+            metric_registry=metric_registry,
+        )
+
+        rows.append({
+            "Metric": metric.replace("_", " ").title(),
+            "Point Estimate": round(point, 3),
+            "95% CI": f"{ci_low:.3f}–{ci_high:.3f}",
+        })
+
+    return rows
+
+
+def build_multimodel_performance_table(
+    y_true_oof,
+    models_dict,
+    metrics=None,
+    n_bootstrap=1000,
+    random_state=222,
+):
+    rng = np.random.default_rng(random_state)
+    metric_registry = get_metric_registry()
+
+    DEFAULT_METRICS = [
+    "precision",
+    "average_precision",
+    "recall",
+    "specificity",
+    "f1_weighted",
+    "roc_auc",
+    "brier_score",
+]
+
+
+    if metrics is None:
+        metrics = DEFAULT_METRICS
+
+    total_steps = (
+        len(models_dict)
+        * len(metrics)
+        * n_bootstrap
+    )
+
+    all_rows = []
+
+    with tqdm(
+        total=total_steps,
+        desc="Bootstrapping metrics",
+        unit="resample",
+    ) as pbar:
+
+        for model_name, data in models_dict.items():
+            rows = evaluate_model_performance(
+                y_true_oof=y_true_oof,
+                y_prob_oof=data["y_prob"],
+                y_pred_oof=data["y_pred"],
+                metrics=metrics,
+                n_bootstrap=n_bootstrap,
+                rng=rng,
+                pbar=pbar,
+                metric_registry=metric_registry,
+            )
+
+            for r in rows:
+                r["Model"] = model_name
+                all_rows.append(r)
+
+    df = pd.DataFrame(all_rows)
+    return df[["Model", "Metric", "Point Estimate", "95% CI"]]
+
+############################# End of functions.py ##############################

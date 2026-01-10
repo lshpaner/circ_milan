@@ -154,3 +154,7 @@ images/
 */.doctrees/
 
 docs/.doctrees/
+
+/.quarto/
+/lib
+**/*.quarto_ipynb
