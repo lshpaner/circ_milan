@@ -190,7 +190,5 @@ make preproc_train_eval
 
 ## License
 
-## License
-
 This project is licensed under the [MIT License](https://github.com/lshpaner/circ_milan/blob/main/LICENSE). Research and educational use only, all rights reserved unless stated. otherwise
 
