@@ -110,6 +110,7 @@ celerybeat-schedule
 # Environments
 .env
 .venv
+*venv/
 env/
 venv/
 venvpy37/
