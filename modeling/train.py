@@ -1,5 +1,4 @@
 from pathlib import Path
-
 import typer
 from loguru import logger
 import pandas as pd
@@ -43,7 +42,6 @@ def main(
     pretrained: int = 0,
     # -----------------------------------------
 ):
-
     ################################################################################
     # Step 3. Load Feature and Label Datasets
     ################################################################################

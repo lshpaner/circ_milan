@@ -84,8 +84,8 @@ def main(
     # ---- REPLACE DEFAULT PATHS AS APPROPRIATE ----
     input_data_file: Path = PROCESSED_DATA_DIR_INFER / "X.parquet",
     predictions_path: Path = "predictions.csv",
-    outcome: str = "outcome",
-    metric_name: str = "valid AUC ROC",  # Metric to select the best model
+    outcome: str = "Bleeding_Edema_Outcome",
+    metric_name: str = "K-Fold Average Precision",  # Metric to select the best model
     mode: str = "max",  # max for metrics where higher is better, min otherwise
     # -----------------------------------------
 ):

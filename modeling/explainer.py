@@ -26,8 +26,8 @@ app = typer.Typer()
 def main(
     # ---- REPLACE DEFAULT PATHS AS APPROPRIATE ----
     input_data_file: str = "./data/processed/X.parquet",
-    outcome: str = "default_outcome",
-    metric_name: str = "valid AUC ROC",  # Metric to select the best model
+    outcome: str = "Bleeding_Edema_Outcome",
+    metric_name: str = "K-Fold Average Precision",  # Metric to select the best model
     mode: str = "max",  # max for metrics where higher is better, min otherwise
     # -----------------------------------------
 ):

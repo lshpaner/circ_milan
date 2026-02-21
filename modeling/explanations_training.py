@@ -26,10 +26,10 @@ app = typer.Typer()
 
 @app.command()
 def main(
-    outcome: str = "default_outcome",
+    outcome: str = "Bleeding_Edema_Outcome",
     features_path: Path = PROCESSED_DATA_DIR / "X.parquet",
-    labels_path: Path = PROCESSED_DATA_DIR / "y_income.parquet",
-    metric_name: str = "valid AUC ROC",  # Metric to select the best model
+    labels_path: Path = PROCESSED_DATA_DIR / "y_Bleeding_Edema_Outcome.parquet",
+    metric_name: str = "K-Fold Average Precision",  # Metric to select the best model
     mode: str = "max",  # max for metrics where higher is better, min otherwise
     explanations_path: Path = "",
     shap_val_flag: int = 1,  # flag for whether or not to print vals next to feats.

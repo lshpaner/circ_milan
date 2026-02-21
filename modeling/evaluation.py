@@ -29,9 +29,9 @@ def main(
     # ---- REPLACE DEFAULT PATHS AS APPROPRIATE ----
     model_type: str = "lr",
     pipeline_type: str = "orig",
-    outcome: str = "default_outcome",
+    outcome: str = "Bleeding_Edema_Outcome",
     features_path: Path = PROCESSED_DATA_DIR / "X.parquet",
-    labels_path: Path = PROCESSED_DATA_DIR / "y_income.parquet",
+    labels_path: Path = PROCESSED_DATA_DIR / "y_Bleeding_Edema_Outcome.parquet",
     scoring: str = "average_precision",
     # -----------------------------------------
 ):
