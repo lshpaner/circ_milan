@@ -11,7 +11,7 @@ import sys
 
 from model_tuner.pickleObjects import dumpObjects  # import pickling scripts
 
-from constants import (
+from core.constants import (
     var_index,
     shape_var_thresh,
     target_outcome,
@@ -20,7 +20,7 @@ from constants import (
 )
 
 # import all user-defined functions and constants
-from functions import (
+from core.functions import (
     terminal_width,
     mlflow_dumpArtifact,
     mlflow_loadArtifact,

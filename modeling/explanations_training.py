@@ -5,15 +5,15 @@ from pathlib import Path
 import typer
 import pandas as pd
 
-from functions import mlflow_loadArtifact, mlflow_load_model
+from core.functions import mlflow_loadArtifact, mlflow_load_model
 from modeling.predict import find_best_model
-from constants import (
+from core.constants import (
     shap_artifact_name,
     shap_run_name,
     shap_artifacts_data,
 )
 
-from config import (
+from core.config import (
     PROCESSED_DATA_DIR,
 )
 

@@ -9,7 +9,7 @@ from model_tuner import Model
 # Step 1. Import Configurations and Constants
 ################################################################################
 
-from config import (
+from core.config import (
     PROCESSED_DATA_DIR,
     model_definitions,
     rstate,
@@ -17,7 +17,7 @@ from config import (
     numerical_cols,
     categorical_cols,
 )
-from functions import (
+from core.functions import (
     clean_feature_selection_params,
     mlflow_log_parameters_model,
     adjust_preprocessing_pipeline,

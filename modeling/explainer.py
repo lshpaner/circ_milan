@@ -7,13 +7,13 @@
 import pandas as pd
 import typer
 import shap
-from functions import (
+from core.functions import (
     mlflow_load_model,
     mlflow_dumpArtifact,
 )
 
 from modeling.predict import find_best_model
-from constants import (
+from core.constants import (
     shap_artifact_name,
     shap_artifacts_data,
     shap_run_name,

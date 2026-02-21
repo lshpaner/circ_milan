@@ -4,7 +4,7 @@ from loguru import logger
 import pandas as pd
 
 # Import supportive care functions and constants
-from functions import (
+from core.functions import (
     mlflow_load_model,
     return_model_metrics,
     return_model_plots,
@@ -12,7 +12,7 @@ from functions import (
     mlflow_log_parameters_model,
 )
 
-from config import (
+from core.config import (
     PROCESSED_DATA_DIR,
     model_definitions,
 )

@@ -7,8 +7,8 @@ PYTHON_VERSION = 3.11
 PYTHON_INTERPRETER = python
 VENV_DIR = venv_circ_311
 CONDA_ENV_NAME = conda_circ_311
-PROJECT_DIRECTORY = .
-
+MAKEFILE_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+PROJECT_DIRECTORY := $(abspath $(MAKEFILE_DIR))
 
 ############################## Training Globals ################################
 
@@ -150,13 +150,17 @@ create_folders:
 	mkdir -p data/external data/interim data/processed data/raw data/processed/inference
 	mkdir -p models/results models/eval
 	mkdir -p modeling preprocessing
+	mkdir -p core
+
 	touch data/interim/.gitkeep
 	touch data/processed/.gitkeep
 	touch data/processed/inference/.gitkeep
 	touch models/results/.gitkeep
 	touch models/eval/.gitkeep
-	touch /modeling/__init__.py
-	touch /preprocessing/__init__.py
+
+	touch modeling/__init__.py
+	touch preprocessing/__init__.py
+	touch core/__init__.py
 
 # Create models subdirectories for each outcome
 	@for outcome in $(OUTCOMES); do \

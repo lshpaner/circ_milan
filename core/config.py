@@ -15,11 +15,11 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 
-from constants import (
+from core.constants import (
     exp_artifact_name,
     preproc_run_name,
 )
-from functions import mlflow_loadArtifact
+from core.functions import mlflow_loadArtifact
 
 # Load environment variables from .env file if it exists
 load_dotenv()
@@ -83,11 +83,7 @@ numerical_cols = [col for col in X_columns_list if col not in categorical_cols]
 ############################### Transformers ###################################
 ################################################################################
 
-numerical_transformer = Pipeline(
-    steps=[
-        ("scaler", MinMaxScaler())
-    ]
-)
+numerical_transformer = Pipeline(steps=[("scaler", MinMaxScaler())])
 
 categorical_transformer = Pipeline(
     steps=[

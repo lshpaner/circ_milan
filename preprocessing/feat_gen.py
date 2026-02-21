@@ -6,9 +6,9 @@ import os
 import pandas as pd
 import typer
 
-from functions import mlflow_dumpArtifact, mlflow_loadArtifact
+from core.functions import mlflow_dumpArtifact, mlflow_loadArtifact
 
-from constants import (
+from core.constants import (
     var_index,
     exp_artifact_name,
     preproc_run_name,

@@ -38,7 +38,7 @@ from sklearn.metrics import (
 from sklearn.calibration import calibration_curve
 from tqdm import tqdm
 
-from constants import (
+from core.constants import (
     mlflow_artifacts_data,
     mlflow_models_data,
 )
@@ -1880,6 +1880,7 @@ def crosstab_plot(
 
     plt.show()
 
+
 ################################################################################
 ######################### Out of Fold Prediction Function ######################
 ################################################################################
@@ -1939,6 +1940,7 @@ def evaluate_kfold_oof(
         "y_pred_oof": y_pred_oof,
         "threshold": threshold,
     }
+
 
 ################################################################################
 ######################## Bootstrap Prediction Functions ########################
@@ -2030,11 +2032,13 @@ def evaluate_model_performance(
             metric_registry=metric_registry,
         )
 
-        rows.append({
-            "Metric": metric.replace("_", " ").title(),
-            "Point Estimate": round(point, 3),
-            "95% CI": f"{ci_low:.3f}–{ci_high:.3f}",
-        })
+        rows.append(
+            {
+                "Metric": metric.replace("_", " ").title(),
+                "Point Estimate": round(point, 3),
+                "95% CI": f"{ci_low:.3f}–{ci_high:.3f}",
+            }
+        )
 
     return rows
 
@@ -2050,24 +2054,19 @@ def build_multimodel_performance_table(
     metric_registry = get_metric_registry()
 
     DEFAULT_METRICS = [
-    "precision",
-    "average_precision",
-    "recall",
-    "specificity",
-    "f1_weighted",
-    "roc_auc",
-    "brier_score",
-]
-
+        "precision",
+        "average_precision",
+        "recall",
+        "specificity",
+        "f1_weighted",
+        "roc_auc",
+        "brier_score",
+    ]
 
     if metrics is None:
         metrics = DEFAULT_METRICS
 
-    total_steps = (
-        len(models_dict)
-        * len(metrics)
-        * n_bootstrap
-    )
+    total_steps = len(models_dict) * len(metrics) * n_bootstrap
 
     all_rows = []
 
@@ -2095,5 +2094,6 @@ def build_multimodel_performance_table(
 
     df = pd.DataFrame(all_rows)
     return df[["Model", "Metric", "Point Estimate", "95% CI"]]
+
 
 ############################# End of functions.py ##############################

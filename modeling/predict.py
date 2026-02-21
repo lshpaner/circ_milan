@@ -11,9 +11,9 @@ import mlflow
 import pandas as pd
 import os
 
-from constants import mlflow_models_data
-from config import PROCESSED_DATA_DIR_INFER
-from functions import mlflow_load_model
+from core.constants import mlflow_models_data
+from core.config import PROCESSED_DATA_DIR_INFER
+from core.functions import mlflow_load_model
 
 app = typer.Typer()
 
