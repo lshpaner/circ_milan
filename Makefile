@@ -124,6 +124,9 @@ clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
+
+setup_dir_venv: create_folders create_conda_env create_venv activate_venv 
+
 .PHONY: mlflow_ui
 mlflow_ui:
 	mlflow ui --backend-store-uri mlruns --host 0.0.0.0 --port 5501

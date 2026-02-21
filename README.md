@@ -1,194 +1,418 @@
+
 # Machine Learning-Based Predictions of Postoperative Outcomes in Adult Male Circumcision
 
-<img src="https://github.com/lshpaner/circ_milan/blob/main/assets/CUT_MD_logo.svg" width="300" style="border: none; outline: none; box-shadow: none;" oncontextmenu="return false;">
+<img src="https://github.com/lshpaner/circ_milan/blob/main/assets/CUT_MD_logo.svg" width="300">
 
 ---
 
 ## Table of Contents
 
-- [Project Overview](#project-overview)  
-- [Project Structure](#project-structure)  
-- [Installation](#installation)  
-- [Makefile Commands](#makefile-commands)  
-  - [Environment Setup](#environment-setup)  
-  - [Preprocessing & Feature Gen](#preprocessing--feature-gen)  
-  - [Training](#training)  
-  - [Evaluation](#evaluation)  
-  - [Explainability](#explainability)  
-  - [Inference](#inference)  
-- [Modeling Details](#modeling-details)  
-- [MLflow Tracking](#mlflow-tracking)  
-- [Notebooks](#notebooks)  
-- [Notes](#notes)  
-- [Reproducibility](#reproducibility)  
-- [Authors & Contacts](#authors--contacts)  
-- [License](#license)  
+- [Project Overview](#project-overview)
+- [Data Access Requirement](#data-access-requirement)
+- [Project Structure](#project-structure)
+- [Python & Environment Requirements](#python--environment-requirements)
+- [Pipeline Execution Guide](#pipeline-execution-guide)
+  - [Step 1: Setup Directories & Environment](#step-1-setup-directories--environment)
+  - [Step 2: Preprocessing & Feature Generation](#step-2-preprocessing--feature-generation)
+  - [Step 3: Training](#step-3-training)
+  - [Step 4: Evaluation](#step-4-evaluation)
+  - [Full Pipeline in One Command](#full-pipeline-in-one-command)
+  - [Explainability](#explainability)
+  - [Inference / Production](#inference--production)
+- [Modeling Details](#modeling-details)
+- [MLflow Tracking](#mlflow-tracking)
+- [Artifacts & Outputs](#artifacts--outputs)
+- [Reproducibility](#reproducibility)
+- [Authors & Contacts](#authors--contacts)
+- [License](#license)
 
+---
 
 ## Project Overview
 
-This repository contains the full data science pipeline for preprocessing, modeling, evaluating, and explaining clinical outcomes related to laser circumcision procedures. It focuses specifically on predicting the `Bleeding_Edema_Outcome` complication using multiple supervised learning approaches. The workflow includes data cleaning, feature engineering, model training with different sampling strategies, evaluation, and SHAP-based explainability.
+This repository contains the complete machine learning pipeline for preprocessing, modeling, evaluating, and explaining postoperative outcomes related to laser circumcision procedures.
+
+Primary supervised learning target:
+
+- `Bleeding_Edema_Outcome`
+
+The workflow includes:
+
+- Raw data preprocessing
+- Feature engineering
+- Model training across multiple sampling strategies
+- Model evaluation
+- SHAP-based explainability
+- Inference pipeline for production use
+- MLflow experiment tracking
+
+---
+
+## Data Access Requirement
+
+The dataset used in this repository is **not publicly distributed**.
+
+To reproduce results:
+
+1. Obtain the dataset directly from the authors with permission.
+2. Place the raw Excel file into:
+
+```
+data/raw/Laser_Circumcision_Excel_31.03.2024.xlsx
+```
+
+No pipeline step will function until this file is present.
 
 ---
 
 ## Project Structure
 
-```text
+```
 circ_milan/
-├── assets/                         # Slide decks and static visuals
-│   ├── CUT_MD.svg
-│   └── my_slides.html
-├── data/                           # Datasets at different stages
-│   ├── external/                   # Original source files
-│   ├── raw/                        # Raw ingested data
-│   │   └── Laser_Circumcision_Excel_31.03.2024.xlsx
-│   ├── interim/                    # Intermediate cleaned files
-│   └── processed/                  # Final data for modeling
-│       ├── training/               # Training features and labels
-│       │   ├── X.parquet
-│       │   └── y_Bleeding_Edema_Outcome.parquet
-│       └── inference/              # Inference features and outputs
-│           ├── df_inference_process.parquet
-│           └── X.parquet
-├── images/                         # Exported plots and figures
-│   └── figures/
-├── mlruns/                         # MLflow tracking server backend logs
-├── preprocessing/                  # Data cleaning & feature engineering
-│   ├── __init__.py
-│   ├── preprocessing.py            # Cleans raw data and saves interim/processed
-│   └── feat_gen.py                 # Generates model-ready feature sets
-├── modeling/                       # Modeling & explainability scripts
-│   ├── __init__.py
-│   ├── train.py                    # Train LR, RF, SVM with sampling pipelines
-│   ├── evaluation.py               # Evaluate model performance
-│   ├── explainer.py                # Select best model & build SHAP explainer
-│   ├── explanations_training.py    # Compute SHAP values on training data
-│   ├── explanations_inference.py   # Compute SHAP values on inference data
-│   └── predict.py                  # Run production predictions
-├── models/                         # Stored model artifacts & metrics
-│   ├── results/                    # Logs & metrics per outcome
-│   │   └── Bleeding_Edema_Outcome/
-│   └── eval/                       # Evaluation reports per outcome
-│       └── Bleeding_Edema_Outcome/
-├── notebooks/                      # Jupyter notebooks for analysis & reporting
-│   ├── circ_milan_eda.ipynb
-│   ├── circ_milan_model_artifacts_dash.ipynb
-│   ├── circ_milan_model_results.ipynb
-│   ├── circ_milan_model_explanations.ipynb
-│   └── post_modeling_eda.ipynb
-├── unittests/                      # Unit tests for core modules
-├── config.py                       # Central configuration settings
-├── constants.py                    # Global constants
-├── functions.py                    # General helper functions
-├── project_functions.py            # Project-specific utilities
-├── requirements.txt                # Python dependencies
-├── setup.py                        # Packaging/install script
-├── Makefile                        # Automates setup, training, evaluation, inference
-└── README.md                       # Project overview and usage instructions
-
+├── core/
+│   ├── config.py          # All hyperparameters and configuration
+│   ├── constants.py
+│   └── functions.py
+├── data/
+│   ├── raw/
+│   ├── interim/
+│   ├── processed/
+│   │   └── inference/
+├── mlruns/                # MLflow tracking
+├── preprocessing/
+│   ├── init_project.py
+│   ├── create_folders.py
+│   ├── preprocessing.py
+│   └── feat_gen.py
+├── modeling/
+│   ├── train.py
+│   ├── evaluation.py
+│   ├── explainer.py
+│   ├── explanations_training.py
+│   ├── explanations_inference.py
+│   └── predict.py
+├── models/
+├── notebooks/
+├── Makefile
+└── requirements.txt
 ```
 
 ---
 
-## Installation
+## Python & Environment Requirements
 
-1. **Clone the repo**  
-    ```bash
-    git clone https://github.com/your-username/circ_milan.git
-    cd circ_milan
-    ```
+This project requires **Python 3.11**.
 
-2. **Create environment**  
-   - **Conda**:  
-     ```bash
-     conda create -n conda_circ_311 python=3.11
-     conda activate conda_circ_311
-     ```  
-   - **venv**:  
-     ```bash
-     python -m venv venv_circ_311
-     source venv_circ_311/bin/activate
-     ```
+The Makefile does NOT automatically create environments.
+It prints instructions and prepares structure only.
 
-3. **Install dependencies**  
-    ```bash
-    pip install -r requirements.txt
-    ```
+### Option A: Conda (Recommended)
+
+```
+conda create -n conda_circ_311 python=3.11
+conda activate conda_circ_311
+pip install -r requirements.txt
+```
+
+### Option B: venv (Must Piggyback Off Python 3.11)
+
+The venv must inherit a Python 3.11 interpreter.
+
+You MUST already be inside a Python 3.11 environment, such as the conda environment above.
+
+```
+conda activate conda_circ_311
+python -m venv venv_circ_311
+source venv_circ_311/bin/activate
+pip install -r requirements.txt
+```
+
+If you are not using Python 3.11, this will create the wrong interpreter.
 
 ---
 
-## Makefile Commands
+# Pipeline Execution Guide
 
-| Command                         | Description                                                    |
-|---------------------------------|----------------------------------------------------------------|
-| `make create_venv`              | Create a virtual environment                                   |
-| `make requirements`             | Install dependencies                                           |
-| `make preproc_pipeline`         | Run preprocessing + feature generation for training            |
-| `make train_all_models`         | Train LR, RF, and SVM models                                   |
-| `make eval_all_models`          | Evaluate all trained models                                    |
-| `make preproc_train_eval`       | Full pipeline: preprocessing → training → evaluation           |
-| `make model_explaining_training`| Run SHAP explainability on training data                       |
-| `make preproc_pipeline_inf`     | Run preprocessing + feature generation for inference           |
-| `make predict`                  | Run inference and output predictions                           |
-| `make mlflow_ui`                | Launch MLflow UI on port 5501                                  |
+You may use Make (recommended) or run scripts manually.
 
-To list available commands:
+---
 
-```bash
-make help
+## Step 1: Setup Directories & Environment
+
+Run:
+
+```
+make setup_dir_venv
+make requirements
 ```
 
-## Modeling Details
+This:
 
-- **Outcome**: `Bleeding_Edema_Outcome`
-- **Sampling Pipelines**:  
-  - `orig` (original)  
-  - `smote` (Synthetic Minority Oversampling)  
-  - `over` (Random Oversampling)
-- **Models**:  
-  - Logistic Regression (`lr`)  
-  - Random Forest (`rf`)  
-  - Support Vector Machine (`svm`)
-- **Metric**: `average_precision`
-- **Explainability**: SHAP feature attributions via `explainer.py`
+- Creates project folder structure
+- Initializes required directories
+- Prints environment instructions
+- Does NOT auto-activate environments
 
-## MLflow Tracking
+Manual equivalent:
 
-All runs, parameters, and metrics are tracked with MLflow.
-
-Launch UI:
-
-```bash
-make mlflow_ui
+```
+python preprocessing/init_project.py
+python preprocessing/create_folders.py
 ```
 
-## Notebooks
+---
 
-- `circ_milan_eda.ipynb` – Exploratory Data Analysis  
-- `circ_milan_model_results.ipynb` – Model performance visuals  
-- `circ_milan_model_explanations.ipynb` – SHAP visualizations  
-- `post_modeling_eda.ipynb` – Further diagnostics  
+## Step 2: Preprocessing & Feature Generation
 
-## Notes
+Recommended:
 
-- SHAP outputs and model artifacts are in `data/processed/` and `models/`  
-- Inference predictions are saved to  
-  `./data/processed/inference/predictions_Bleeding_Edema_Outcome.csv`  
+```
+make preproc_pipeline
+```
 
-## Reproducibility
+Manual:
 
-Run the full pipeline with:
+```
+python preprocessing/preprocessing.py --stage training
+python preprocessing/feat_gen.py --stage training
+```
 
-```bash
+Artifacts produced:
+
+- Saved locally in `data/processed/`
+- Logged to MLflow under `mlruns/`
+
+---
+
+## Step 3: Training
+
+Supported models:
+
+- `lr`  (Logistic Regression)
+- `rf`  (Random Forest)
+- `svm` (Support Vector Machine)
+
+Sampling pipelines:
+
+- `orig`
+- `smote`
+- `over`
+
+All hyperparameters are stored inside:
+
+```
+core/config.py
+```
+
+Recommended:
+
+```
+make train_all_models
+```
+
+Manual example:
+
+```
+python modeling/train.py   --model-type lr   --pipeline-type orig   --features-path ./data/processed/X.parquet   --labels-path ./data/processed/y_Bleeding_Edema_Outcome.parquet   --outcome Bleeding_Edema_Outcome
+```
+
+---
+
+## Step 4: Evaluation
+
+Recommended:
+
+```
+make eval_all_models
+```
+
+Manual example:
+
+```
+python modeling/evaluation.py   --model-type lr   --pipeline-type orig   --features-path ./data/processed/X.parquet   --labels-path ./data/processed/y_Bleeding_Edema_Outcome.parquet   --outcome Bleeding_Edema_Outcome
+```
+
+Evaluation results saved to:
+
+```
+models/eval/
+```
+
+Metrics also logged to MLflow.
+
+---
+
+## Full Pipeline in One Command
+
+Run:
+
+```
 make preproc_train_eval
 ```
 
+This executes:
+
+- preproc_pipeline
+- train_all_models
+- eval_all_models
+
+### Why Use Make?
+
+Make:
+
+- Automatically loops over models and pipelines
+- Injects correct arguments
+- Keeps configuration centralized
+- Prevents manual errors
+- Improves reproducibility
+
+---
+
+## Explainability
+
+Best model selection:
+
+```
+make model_explainer
+```
+
+SHAP on training data:
+
+```
+make model_explanations_training
+```
+
+Combined:
+
+```
+make model_explaining_training
+```
+
+SHAP on inference data:
+
+```
+make model_explanations_inference
+```
+
+SHAP outputs stored in:
+
+```
+data/processed/
+data/processed/inference/
+```
+
+---
+
+## Inference / Production
+
+Run:
+
+```
+make preproc_pipeline_inf
+```
+
+This executes:
+
+- preprocessing in inference mode
+- feature generation in inference mode
+- prediction
+
+Predictions saved to:
+
+```
+data/processed/inference/predictions_Bleeding_Edema_Outcome.csv
+```
+
+---
+
+## Modeling Details
+
+Outcome:
+
+- Bleeding_Edema_Outcome
+
+Models:
+
+- Logistic Regression
+- Random Forest
+- Support Vector Machine
+
+Metric:
+
+- average_precision
+
+Hyperparameters centralized in:
+
+```
+core/config.py
+```
+
+---
+
+## MLflow Tracking
+
+All preprocessing, training, evaluation, and artifacts are logged to:
+
+```
+mlruns/
+```
+
+Launch UI:
+
+```
+make mlflow_ui
+```
+
+Then open:
+
+```
+http://localhost:5501
+```
+
+---
+
+## Artifacts & Outputs
+
+Generated artifacts include:
+
+- Cleaned datasets
+- Feature matrices
+- Trained models
+- Evaluation metrics
+- SHAP values
+- Inference predictions
+
+Stored in:
+
+- `data/processed/`
+- `models/`
+- `mlruns/`
+
+---
+
+## Reproducibility
+
+To fully reproduce the full pipeline:
+
+```
+make setup_dir_venv
+make requirements
+make preproc_train_eval
+make model_explaining_training
+```
+
+---
+
 ## Authors & Contacts
 
-- **Leonid Shpaner, M.S.**, Data Scientist | Adjunct Professor  
-- **Giuseppe Saitta, M.D.**, Medical Consultant (data provider and clinical insights)
+Leonid Shpaner, M.S.  
+Data Scientist | Adjunct Professor  
+
+Giuseppe Saitta, M.D.  
+Medical Consultant, Data Provider  
+
+---
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/lshpaner/circ_milan/blob/main/LICENSE). Research and educational use only, all rights reserved unless stated. otherwise
-
+MIT License.
