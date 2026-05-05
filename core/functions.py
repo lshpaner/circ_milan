@@ -36,11 +36,14 @@ from sklearn.metrics import (
 )
 
 from sklearn.calibration import calibration_curve
+from model_tuner import loadObjects
 from tqdm import tqdm
 
 from core.constants import (
     mlflow_artifacts_data,
     mlflow_models_data,
+    target_outcome,
+    EXPERIMENT_NAME,
 )
 
 
@@ -1721,6 +1724,39 @@ def find_best_model(
     # Extract estimator name
     estimator_name = run_name.split("_")[0]
     return run_name, estimator_name
+
+
+# ----------------------------------------------------------------------
+# helpers
+# ----------------------------------------------------------------------
+
+mlflow.set_tracking_uri("../mlruns/models")  # set URI FIRST
+client = MlflowClient()  # then create client
+exp = client.get_experiment_by_name(EXPERIMENT_NAME)
+
+if exp is None:
+    raise ValueError(
+        f"experiment '{EXPERIMENT_NAME}' not found at {mlflow.get_tracking_uri()}"
+    )
+
+
+def latest_run_id(run_name):
+    runs = client.search_runs(
+        experiment_ids=[exp.experiment_id],
+        filter_string=f"tags.mlflow.runName = '{run_name}'",
+        order_by=["attributes.start_time DESC"],
+        max_results=1,
+    )
+    if not runs:
+        raise ValueError(f"no run found for run name '{run_name}'")
+    return runs[0].info.run_id
+
+
+def load_model_from_mlflow(run_name, algo):
+    run_id = latest_run_id(run_name)
+    artifact_uri = f"runs:/{run_id}/{algo}_{target_outcome}/model.pkl"
+    local_path = mlflow.artifacts.download_artifacts(artifact_uri)
+    return loadObjects(local_path)
 
 
 #################################################################################

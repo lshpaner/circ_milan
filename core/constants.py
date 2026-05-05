@@ -25,8 +25,15 @@ model_svm = "SVC.pkl"
 model_output = "model_output"  # model output path
 
 ################################################################################
+############################### Target Outcome #################################
+
+target_outcome = "Bleeding_Edema_Outcome"
+
+################################################################################
 ############################# Mlflow Variables #################################
 ################################################################################
+
+EXPERIMENT_NAME = f"{target_outcome}_model"
 
 mlflow_artifacts_data = "./mlruns/preprocessing"
 mlflow_models_data = "./mlruns/models"
@@ -73,9 +80,3 @@ artifact_name = "preprocessing"
 shap_artifact_name = "explainer"
 shap_run_name = "explainer"
 shap_artifacts_data = "./mlruns/explainer"
-
-
-################################################################################
-############################### Target Outcome #################################
-
-target_outcome = "Bleeding_Edema_Outcome"
